@@ -94,7 +94,7 @@
                                 foreach($user_type as $userTypeName){
                                     if($userTypeName['parent']==0){
                                     ?>
-                                if()    
+                                
                       <option value="<?php echo $userTypeName['id']; ?>"><?php echo $userTypeName['user_role_type'];?></option>
                       
                     
@@ -372,7 +372,47 @@ $(document).ready(function(){
         $('body').find('#add-row-form').ajaxForm(options);
     
 })
+/* get child level */
+  $(document).ready(function(){
+             var base_url = $('body').find('#base_url').val();
+             $('#typeparent').hide();
+                $("#cd-type").change(function(){
+                var id=$(this).val();
+                
+                var dataString = 'id='+ id;
 
+                $.ajax
+                ({
+                type: "POST",
+                url: base_url+"get_child_user_level",
+                data: dataString,
+               
+                cache: false,
+                success: function(html)
+                {    
+                   var $select = $('#cd-type-parent'); 
+                   if(html!=''){
+                      
+                        $('#typeparent').show();
+                        $select.find('option').remove();  
+                        var jo = $.parseJSON(html);
+    
+                        $.each(jo, function (i, val) {
+
+                             $select.append('<option value=' + val.id + '>' + val.user_role_type + '</option>');
+
+                        });
+                        
+                      }else{
+                         
+                          $('#typeparent').hide(); 
+                     }
+                }
+                });
+
+        });
+
+});
 </script>
     
 <style>

@@ -59,6 +59,7 @@ $route['admin'] = 'admin/dashboard';
 $route['customers'] = 'admin/customers';
 $route['customer_list'] = 'admin/customers/get_customers';
 $route['add_customer'] = 'admin/customers/add_customer';
+$route['get_child_user_level'] = 'admin/customers/get_child_user_level';
 
 
 

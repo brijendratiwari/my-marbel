@@ -216,5 +216,13 @@ class Customers extends CI_Controller {
         }
        
     }
+   function get_child_user_level(){
+      $id=$this->input->post('id');
+      $result=$this->Customer->getChildUserLevel($id);
+      if($result!=''){
+          
+          echo json_encode($result);
+      }
+   } 
 
 }

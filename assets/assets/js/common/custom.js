@@ -34,3 +34,48 @@ $(document).ready(function(){
     
     
 })
+
+   // JavaScript Document
+
+        startList = function() {
+        if (document.all&&document.getElementById) {
+        navRoot = document.getElementById("nav");
+        for (i=0; i<navRoot.childNodes.length; i++) {
+        node = navRoot.childNodes[i];
+        if (node.nodeName=="LI") {
+        node.onmouseover=function() {
+        this.className+=" over";
+          }
+          node.onmouseout=function() {
+          this.className=this.className.replace(" over", "");
+           }
+           }
+          }
+         }
+        }
+window.onload=startList;
+$(function(){
+          // Your event
+        $('.child-li').click(function(){
+               // Get the ID for the element that was clicked
+               var childId = $(this).attr('id');
+               var parentId = $(this).parents('li').attr('id');
+               $('input[name="cd-type"').val(childId);
+                $('input[name="cd-parent"').val(parentId);
+                $("#parentlevel").html($('#'+parentId).clone().children().remove().end().text());
+                $("#childlevel").html($(this).text());
+          });
+           $('.parent-li').on('click',function(){
+            if($(this).children().length == 0){
+                  
+                   var currentId = $(this).attr('id');
+                 $('input[name="cd-type"').val(currentId);
+                 $('input[name="cd-parent"').val(currentId);
+                  $("#parentlevel").html($(this).text());
+                    $("#childlevel").html($(this).text());
+              }
+              
+          })
+       
+     });
+  
