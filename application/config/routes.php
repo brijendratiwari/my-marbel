@@ -59,6 +59,13 @@ $route['admin'] = 'admin/dashboard';
 $route['customers'] = 'admin/customers';
 $route['customer_list'] = 'admin/customers/get_customers';
 $route['add_customer'] = 'admin/customers/add_customer';
+$route['edit_customer'] = 'admin/customers/edit_customer';
+$route['edit_customer/(:num)'] = 'admin/customers/edit_customer/$1';
+$route['deleteCustomer/(:num)'] = 'admin/customers/delete_customer/$1';
+
+
+
+
 $route['get_child_user_level'] = 'admin/customers/get_child_user_level';
 
 

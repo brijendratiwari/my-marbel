@@ -79,7 +79,7 @@ class Customers extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'], $val['notes'], '<a href="#" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="#" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i></a>');
+            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'], $val['notes'], '<a href="edit_customer/'.$val['id'].'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteCustomer('.$val['id'].')" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i></a>');
         }
 
         echo json_encode($output);
@@ -224,5 +224,41 @@ class Customers extends CI_Controller {
           echo json_encode($result);
       }
    } 
+  public function edit_customer($id=false) {
+  
+        if($id){
+            $first_name=$this->input->post('cd-first_name');
+            $last_name=$this->input->post('cd-last_name');
+            $this->data['page'] = 'Edit Customers';
+            $this->data['title'] = 'Edit Customers';
+            if($this->input->post()){
+                
+                $this->Customer->updateCustomer($id);
+                $this->session->set_flashdata('success','User ' . $first_name . ' ' . $last_name . ' has been updated');
+                redirect('edit_customer/'.$id);
+            }
+            $this->data['customer']=$this->Customer->getCustomers($id);
+            $this->data['user_type'] = $this->Customer->getUserType();
+            $this->load->template('admin/edit_customer', $this->data);
+        }
+        else
+        {
+            redirect('customers');
+        }
+  }
+  
+  
+  /* delet customer */
+  
+  public function delete_customer($id = false){
 
+     if($id){
+         
+         $this->Customer->deleteCustomer($id);
+         $this->session->set_flashdata('success','User has been deleted');
+         redirect('customers');
+     }      
+      
+  }
+  
 }

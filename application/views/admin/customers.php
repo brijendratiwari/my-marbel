@@ -1,9 +1,15 @@
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
+                    <?php  if($this->session->flashdata('success')){?>
+                    <div class="col-lg-6">
+    
+                        <div class="pull-left alert alert-success hidden message"><?php echo $this->session->flashdata('success');?></div>
+                    </div> 
+                        <?php }?>
                 <div class="col-lg-6">
     
-           <div id="userSuccess" class="pull-left alert alert-success hidden message"></div>
+                    <div id="userSuccess" class="pull-left alert alert-success hidden message"></div>
                  </div>   
                     <div  class="col-lg-4 page-header pull-right"><button class="btn btn-success" data-toggle="modal" data-target="#usersModal">Add New Customer</button></div>
                 </div>
@@ -370,12 +376,11 @@ $(document).ready(function(){
             }
         };
         $('body').find('#add-row-form').ajaxForm(options);
-    
-})
-/* get child level */
-  $(document).ready(function(){
-             var base_url = $('body').find('#base_url').val();
-             $('#typeparent').hide();
+        
+        
+        
+        /* get child level */
+         $('#typeparent').hide();
                 $("#cd-type").change(function(){
                 var id=$(this).val();
                 
@@ -411,8 +416,20 @@ $(document).ready(function(){
                 });
 
         });
+    
+})
 
-});
+  function deleteCustomer(id){
+      
+       if (confirm('Are you sure you want to delete?'))
+        {
+            window.location.href = "<?php echo base_url() ?>deleteCustomer/" + id;
+        }
+      
+  }
+
+
+
 </script>
     
 <style>

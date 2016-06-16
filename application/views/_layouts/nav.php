@@ -18,7 +18,7 @@
                             <a href="javascript:;"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
                         </li>
                         <li>
-                            <a href="customers"><i class="fa fa-users fa-fw"></i> Customers</a>
+                            <a href="<?php echo base_url('index.php/customers'); ?>"><i class="fa fa-users fa-fw"></i> Customers</a>
                         </li>
                         <li>
                             <a href="javascript:;"><i class="fa fa-bar-chart-o fa-fw"></i> Orders</a>
