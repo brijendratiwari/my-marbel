@@ -61,6 +61,9 @@ $route['customer_list'] = 'admin/customers/get_customers';
 $route['add_customer'] = 'admin/customers/add_customer';
 
 
+$route['orders'] = 'admin/orders';
+$route['order_list'] = 'admin/orders/get_orders';
+$route['add_order'] = 'admin/orders/add_order';
 
 
 $route['forgot_password']='login/forgot_password';
