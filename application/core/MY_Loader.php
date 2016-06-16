@@ -17,7 +17,7 @@ class MY_Loader extends CI_Loader {
 
         $this->view('_layouts/header', $vars);
         $this->view('_layouts/nav',$vars);
-        $this->view('_layouts/base',$vars);
+//        $this->view('_layouts/base',$vars);
         $this->view($template_name, $vars);
         $this->view('_layouts/footer', $vars);
     }

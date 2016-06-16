@@ -1,39 +1,58 @@
-<section id="main-content">
-  <section class="wrapper" style="padding-top:20px;">
-    <?php 
-    $error=$this->session->flashdata('error');
-    $success=$this->session->flashdata('success');
-    if ($success!='') {
-        echo '<div id="error" class="alert alert-success"><p>'.$success.'</p></div>';
-      }
-      if($error!=''){
-          
-           echo '<div id="error" class="alert alert-danger"><p>'.$error.'</p></div>';
-      }
-    ?>
-    <div id="msg" class="alert" style="display: none;"></div>
-    <div class="row-fluid" style="text-align:center;">
-      <button type="button" class="btn btn-success m-b-sm" data-toggle="modal" data-target="#usersModal" style="margin: 0 auto;">Add New Customer</button>
-    </div>
-    <table id="customers" class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <td></td>
-          <td>Email</td>
-          <td>First Name</td>
-          <td>Last Name</td>
-          <td>Last Activity</td>
-          <td>Phone Number</td>
-          <td>Notes</td>
-          <td></td>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </section>
+<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="col-lg-6">
+    
+           <div id="userSuccess" class="pull-left alert alert-success hidden message"></div>
+                 </div>   
+                    <div  class="col-lg-4 page-header pull-right"><button class="btn btn-success" data-toggle="modal" data-target="#usersModal">Add New Customer</button></div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Customers List
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <table class="table table-striped table-bordered table-hover" id="customer-data" style="width:100% !important;">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Last Activity</th>
+                                            <th>Phone Number</th>
+                                            <th>Notes</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+            <!-- /.row -->
+           
+        </div>
 
-  <form id="add-row-form" action="" method="POST">
+
+
+<!--Customer modal ..-->
+
+<form id="add-row-form" action="<?php echo base_url('index.php/add_customer') ?>" method="POST">
     <div class="modal fade" id="usersModal" tabindex="-1" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);display: none;">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -45,20 +64,24 @@
             <div class="form-group" style="height:30px">
               <div class="row-fluid">
                 <div class="col-md-6">
-                  <input type="text" name="cd-first" class="form-control" placeholder="First Name" required="">
+                  <input type="text" name="cd-first" class="form-control" placeholder="First Name">
+                  <span id="cd-first" class="text-danger hidden"></span>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" name="cd-last" class="form-control" placeholder="Last Name" required="">
+                  <input type="text" name="cd-last" class="form-control" placeholder="Last Name">
+                  <span id="cd-last" class="text-danger hidden"></span>
                 </div>
               </div>
             </div>
             <div class="form-group" style="height:30px">
               <div class="row-fluid">
                 <div class="col-md-6">
-                  <input type="text" name="cd-email" class="form-control" placeholder="Email" required="">
+                  <input type="text" name="cd-email" class="form-control" placeholder="Email">
+                  <span id="cd-email" class="text-danger hidden"></span>
                 </div>
                 <div class="col-md-6">
                   <input type="password" name="cd-password" class="form-control" placeholder="Password">
+                  <span id="cd-password" class="text-danger hidden"></span>
                 </div>
               </div>
             </div>
@@ -84,6 +107,7 @@
                   
                 <div class="col-md-6">
                   <input class="form-control" type="text" placeholder="Phone Number" name="cd-phone" id="cd-phone" <?php if (isset($error) && $error > 0) { echo 'value="'.$phone.'"'; } ?>>
+                  <span id="cd-phone" class="text-danger hidden"></span>
                 </div>
               
               </div>
@@ -279,68 +303,120 @@
             <button type="submit" id="add-row" class="btn btn-success">Add</button>
           </div>
         </div>
+      <div class="checkout_loader hidden" id="form_loader">
+        <div class="overlay new_loader"></div>
+        <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/assets/images/chekout-loading.gif'); ?>" /></div>
+       </div>
       </div>
+        
+
+        
     </div>
   </form>
-</section>
+
+<!-- // Customer modal ..-->
+
+
+
+
 <script>
+
+$(document).ready(function(){
     
-    $(document).ready(function () {
-
-        var userTable = $('#customers').DataTable({
-            "iDisplayLength": 50,
-            "order": [[ 1, "asc" ]],
-            processing: true,
-            serverSide: true,
-            select: true,
-            ajax: {
-                url: "/datatables/customers",
-                type: "POST", 
+      var base_url = $('body').find('#base_url').val();
+    
+        // Script for validate and submit remind form by AJAX...
+        var options = {
+            beforeSerialize: function () {
+                // return false to cancel submit 
+                $('body').find('#usersModal #form_loader').removeClass('hidden');
             },
-            language: { "search": ""},
-            columns: [
-            { data: null, render: function(data, type, row) {
-              return '<a href="edit-customer?id='+data.id+'"><i class="fa fa-pencil"></i></a>';
-          }},
-          { data: "email" },  
-          { data: "first_name" },
-          { data: "last_name" },
-          { data: "last_activity" },
-          { data: null, render: function( data, type, row) {
-              var html = '';
-              console.log(data);
-              if (! data.phone) { return 'Empty'; }
-              if (data.phone.length > 10) {
-                html = '+'+data.phone.substring(0, data.phone.length - 10)+' ';
-                data.phone = data.phone.substring(data.phone.length - 10);
+            url: base_url+'add_customer',
+            success: function (data) {
+                var err = $.parseJSON(data);
+                if (err.result == false) {
+                    $('body').find('#usersModal #form_loader').addClass('hidden');
+                    $(err.error).each(function (index, value) {
+                        $.each(value, function (index2, msg) {
+                            $("#usersModal #" + index2).text(msg);
+                            $("#usersModal #" + index2).removeClass('hidden');
+                        });
+                    });
+                }
+                else {
+                    $('body').find('#usersModal #form_loader').addClass('hidden');
+                    if (err.success) {
+
+                        $('body').find('#usersModal input select').each(function () {
+
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        $("#userSuccess").text(err.success);
+                        $("#userSuccess").removeClass('hidden');
+                        
+                         setTimeout(function () {
+                            $('body').find('#usersModal').modal('hide');
+                        }, 1000)
+                  }
+                    else {
+                        $('body').find('#usersModal input select').each(function () {
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        setTimeout(function () {
+                            $('body').find('#usersModal').modal('hide');
+                        }, 1000)
+                    }
+                }
             }
-            return '<span class="phone">'+html + data.phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3")+'</span>';
-        }},
-        { data: "notes" },
-        { data: null, render: function( data, type, row) {
-          return '<a href="#" class="trash" data-pk="'+data.id+'" data-email="'+data.email+'"><i class="fa fa-trash-o"></i></a>';
-      }}
-      ],
-      drawCallback: function( settings ) {
-          $('#customers td a.trash').on('click', function (e) {
-            e.stopPropagation(); 
-            var email = $(this).attr('data-email');
-            $.post( '/datatables/u_customers', {name:'remove_id', value:$(this).attr('data-pk'), pk:$(this).attr('data-pk')})
-            .done(function( data ) {
-                userTable.draw();
-                $('#msg').addClass('alert-success').removeClass('alert-warning').html('User '+email+' was removed').fadeIn();
-                setTimeout(function(){
-                    $('#msg').fadeOut();
-                }, 2500);
-            });
-        });
-      }});
+        };
+        $('body').find('#add-row-form').ajaxForm(options);
+    
+})
 
-$('div.dataTables_length select').addClass('form-control');
-$('div.dataTables_length select').attr({'style': "display:inline;padding:0px;width:inherit;"});
-$('div.dataTables_filter input').addClass('form-control');
-$('div.dataTables_filter input').attr({'placeholder': "Search..."});
-$('div.dataTables_wrapper').css({'width': "99%"});
-
-});
 </script>
+    
+<style>
+    
+    .message {
+    margin: 40px 0 20px;
+}
+
+ .new_loader {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 99;
+    }
+    .new_loader_img {
+        background: rgba(0,0,0,0.5);
+        top:35%;
+        left: 0;
+        right: 0;
+        position: fixed;
+        text-align: center;
+        z-index: 99;
+        width: 140px;
+        height: 120px;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        margin: 0 auto;
+    }
+    .new_loader_img img {
+        top: 25px;
+        z-index: 999;
+        width: 70px;
+        position: relative;
+    }
+
+    
+    .overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background: rgba(0, 0, 0, .3);
+}
+</style>

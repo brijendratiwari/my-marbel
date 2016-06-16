@@ -53,5 +53,14 @@ $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = 'admin/dashboard';
+
+
+
 $route['customers'] = 'admin/customers';
+$route['customer_list'] = 'admin/customers/get_customers';
+$route['add_customer'] = 'admin/customers/add_customer';
+
+
+
+
 $route['forgot_password']='login/forgot_password';
