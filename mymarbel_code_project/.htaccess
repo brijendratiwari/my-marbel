@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+RewriteRule ^index$ index.php?page=login
+RewriteRule ^login$ index.php?page=login
+RewriteRule ^logout$ logout.php
+RewriteRule ^lost-password$ index.php?page=lost-password
+RewriteRule ^reset-password/(.*)/(.*)$ index.php?page=reset-password&email=$1&lost_password_code=$2 
+RewriteRule ^ajax/(.*)$ includes/ajax/$1.php [L,QSA]
+RewriteRule ^datatables/(.*)$ includes/data/datatables/$1.php [L,QSA]
+RewriteRule ^admin/(.*)$ index.php?section=admin&page=$1 [L,QSA]
+RewriteRule ^customer/(.*)$ index.php?section=customer&page=$1 [L,QSA]
+RewriteRule ^shopify/processor$ includes/shopify/processor.php [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^\.]+)$ index.php?page=$1 [L,QSA,NC]
+
+</IfModule>
