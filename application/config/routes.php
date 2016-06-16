@@ -69,6 +69,9 @@ $route['deleteCustomer/(:num)'] = 'admin/customers/delete_customer/$1';
 $route['get_child_user_level'] = 'admin/customers/get_child_user_level';
 
 
+$route['orders'] = 'admin/orders';
+$route['order_list'] = 'admin/orders/get_orders';
+$route['add_order'] = 'admin/orders/add_order';
 
 
 $route['forgot_password']='login/forgot_password';

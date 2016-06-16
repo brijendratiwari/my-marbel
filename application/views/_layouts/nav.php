@@ -21,7 +21,7 @@
                             <a href="<?php echo base_url('index.php/customers'); ?>"><i class="fa fa-users fa-fw"></i> Customers</a>
                         </li>
                         <li>
-                            <a href="javascript:;"><i class="fa fa-bar-chart-o fa-fw"></i> Orders</a>
+                            <a href="orders"><i class="fa fa-bar-chart-o fa-fw"></i> Orders</a>
                         </li>
                         <li>
                             <a href="javascript:;"><i class="fa fa-shopping-cart fa-fw"></i> Shipping</a>
