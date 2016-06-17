@@ -1427,6 +1427,7 @@ function getOrders($user_id, $db) {
 		return $out; 
 	} 
      function isLoginSessionExpired() {
+         $login_session_duration=0;
         if(isset($_SESSION['marbel_user']['type']) && $_SESSION['marbel_user']['type']=='admin')
 	$login_session_duration = 12*60*60; 
         if(isset($_SESSION['marbel_user']['type']) && $_SESSION['marbel_user']['type']=='employee')

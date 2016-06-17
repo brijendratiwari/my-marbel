@@ -159,8 +159,8 @@ class Customers extends CI_Controller {
                 'parent_type' => $parent_type,
                 'type' => $type,
                 'parent_type' => $phone,
-                'parent_type' => $email_second,
-                'parent_type' => $bio,
+                'email_secondary' => $email_second,
+                'bio' => $bio,
                 'height' => $height,
                 'weight' => $weight,
                 'company' => $company,
@@ -170,7 +170,7 @@ class Customers extends CI_Controller {
                 'state_or_region' => $state_region,
                 'postal_code' => $postal_code,
                 'country' => $country,
-                'parent_type' => $accepts_marketing,
+                'accepts' => $accepts_marketing,
                 'alias' => $alias,
                 'privacy_setting' => $privacy_setting,
                 'units' => $units,
@@ -260,5 +260,27 @@ class Customers extends CI_Controller {
      }      
       
   }
-  
+ public function edit_profile(){
+     
+      $this->form_validation->set_rules('cd-email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('cd-phone', 'Phone', 'trim|required');
+        $this->form_validation->set_rules('cd-first', 'FirstName', 'trim|required');
+        $this->form_validation->set_rules('cd-last', 'LastName', 'trim|required');
+        $this->form_validation->set_rules('cd-password', 'Password', 'trim|required');
+
+        //run validation on form input
+        if ($this->form_validation->run() == FALSE) {
+            //validation fails
+            $this->form_validation->set_error_delimiters('', '');
+            $error = $this->form_validation->error_array();
+            $result['result'] = false;
+            $result['error'] = $error;
+            echo json_encode($result);
+            die;
+        }else{
+            $session=$this->session->userdata('marbel_user');
+            $this->Customer->updateProfile($session['user_id']);
+            
+        }
+ }
 }

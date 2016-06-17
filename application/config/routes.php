@@ -77,3 +77,12 @@ $route['delete_order/(:num)'] = 'admin/orders/delete_order/$1';
 
 
 $route['forgot_password']='login/forgot_password';
+
+$route['profile'] = 'admin/profile';
+$route['edit_profile'] = 'admin/customers/edit_profile';
+
+$route['shipping']='admin/shipping';
+$route['shipping_list']='admin/shipping/get_shipping';
+
+$route['shipped']='admin/shipped';
+$route['shipped_list']='admin/shipped/get_shipped';
