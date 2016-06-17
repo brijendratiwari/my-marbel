@@ -272,12 +272,12 @@
                             <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-12">
-                                        <textarea class="notes" class="form-control" name="cd-notes" id="cd-notes" placeholder="Add notes to this user"><?php echo $customer['notes']; ?></textarea>
+                                        <textarea style="max-height: 90px; height: 71px; width: 684px;" class="notes" class="form-control" name="cd-notes" id="cd-notes" placeholder="Add notes to this user"><?php echo $customer['notes']; ?></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="row-fluid">
-                                <div class="col-md-12 form-group">
+                                <div class="form-group">
                                     <div class="col-md-3">
                                         <a href="/new-service?id=<?php echo $customer['id']; ?>" class="btn btn-primary btn-lg outline text-center" >Add Service Record</a>
                                     </div>
@@ -292,6 +292,7 @@
 
            
         </div>
+</div>
 <style>
     /* add cee for custome menu user on edit customer*/
  .menu-drop-down h1{

@@ -100,7 +100,7 @@ class Customers_model extends CI_Model {
             'address_two'=>$this->input->post('cd-address-two'),
             'city'=>$this->input->post('cd-city'),
             'state_or_region'=>$this->input->post('cd-state-region'),
-            'postal_code'=>$this->input->post('cd-postal-codel'),
+            'postal_code'=>$this->input->post('cd-postal-code'),
             'country'=>$this->input->post('cd-country'),
             'accepts'=>$this->input->post('cd-accepts-marketing'),
             'alias'=>$this->input->post('cd-alias'),
