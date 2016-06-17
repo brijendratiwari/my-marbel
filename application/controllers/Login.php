@@ -15,7 +15,7 @@ class Login extends CI_Controller {
                 $this->data['title']='Login';
                 $this->load->view('login',$this->data); 
                 }else{
-                  redirect('admin');  
+                  redirect('customers');  
                 }
             
 	}
