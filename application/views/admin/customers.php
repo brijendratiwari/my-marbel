@@ -4,7 +4,7 @@
                     <?php  if($this->session->flashdata('success')){?>
                     <div class="col-lg-6">
     
-                        <div class="pull-left alert alert-success hidden message"><?php echo $this->session->flashdata('success');?></div>
+                        <div class="pull-left alert alert-success message"><?php echo $this->session->flashdata('success');?></div>
                     </div> 
                         <?php }?>
                 <div class="col-lg-6">
