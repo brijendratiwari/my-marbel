@@ -2,6 +2,20 @@
             <div class="row">
                 <div class="col-lg-12">
                 <div class="col-lg-6">
+                    
+                    <?php if($this->session->flashdata('success')){ ?>
+                    
+                    <div class="pull-left alert alert-success message">
+                        <?php echo $this->session->flashdata('success');?>
+                    </div>
+                    <?php } ?>
+                    
+                    <?php if($this->session->flashdata('error')){ ?>
+                    
+                    <div class="pull-left alert alert-danger message">
+                        <?php echo $this->session->flashdata('error');?>
+                    </div>
+                    <?php } ?>
     
            <div id="orderSuccess" class="pull-left alert alert-success hidden message"></div>
            <div id="orderError" class="pull-left alert alert-danger hidden message"></div>
@@ -283,6 +297,18 @@ $(document).ready(function(){
     
 })
 
+
+/* js function for delete order */
+
+  function deleteOrder(order_number){
+      
+      
+       if (confirm('Are you sure you want to delete?'))
+        {
+            window.location.href = "<?php echo base_url() ?>delete_order/" + order_number;
+        }
+      
+  }
 </script>
     
 <style>
