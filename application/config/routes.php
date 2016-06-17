@@ -72,6 +72,8 @@ $route['get_child_user_level'] = 'admin/customers/get_child_user_level';
 $route['orders'] = 'admin/orders';
 $route['order_list'] = 'admin/orders/get_orders';
 $route['add_order'] = 'admin/orders/add_order';
+$route['edit_order/(:num)'] = 'admin/orders/edit_order/$1';
+$route['delete_order/(:num)'] = 'admin/orders/delete_order/$1';
 
 
 $route['forgot_password']='login/forgot_password';

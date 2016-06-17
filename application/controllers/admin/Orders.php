@@ -81,7 +81,7 @@ class Orders extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['order_number'], date('M j, Y', $val['order_date']), $val['first_name'], $val['last_name'], $val['order_status'], $val['tracking_number'], $val['order_total'], '<a href="#" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="#" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
+            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['order_number'], date('M j, Y', $val['order_date']), $val['first_name'], $val['last_name'], $val['order_status'], $val['tracking_number'], $val['order_total'], '<a href="' . base_url('index.php/edit_order/' . $val['order_number'] . '') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteOrder('.$val['order_number'].')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
         }
 
         echo json_encode($output);
@@ -110,8 +110,7 @@ class Orders extends CI_Controller {
             die;
         } else {
 
-            die('work in progress.... !!!');
-            
+
             $email = $this->input->post('cd-email');
             $order_number = $this->input->post('cd-number');
             $delivery_address = $this->input->post('cd-address');
@@ -133,9 +132,10 @@ class Orders extends CI_Controller {
             $main_serial_number = $this->input->post('cd-main-serial');
             $tracking_number = $this->input->post('cd-tracking');
             $notes = $this->input->post('cd-notes');
-            $priority = $this->input->post('cd-priority');
+//            $priority = $this->input->post('cd-priority');
+            $priority = 3;
             $order_total = 0;
-            
+
             $response = $this->Orders->save_order($email, $order_number, $delivery_address, $delivery_address_2, $city, $state, $zip, $country, $order_total, $status, $invoice_url, $date, $est_ship_date, $est_ship_location, $product, $wheel_color, $wheel_size, $firmware_version, $deck_serial_number, $main_serial_number, $tracking_number, $notes, $priority);
 
             if ($response == 0) {
@@ -144,14 +144,14 @@ class Orders extends CI_Controller {
                 echo json_encode($result);
                 die;
             }
-            if($response == 1){
+            if ($response == 1) {
                 $result['result'] = FALSE;
                 $result['failed'] = 'Email address not found!!';
                 echo json_encode($result);
                 die;
             }
-            
-            if($response == 2){
+
+            if ($response == 2) {
                 $result['result'] = FALSE;
                 $result['failed'] = 'Order number exist!!';
                 echo json_encode($result);
@@ -165,6 +165,107 @@ class Orders extends CI_Controller {
     protected function getCountries() {
         $jsonStr = file_get_contents(base_url() . "/assets/assets/countries.json");
         return json_decode($jsonStr, true);
+    }
+
+    /* get order for edit by order id .... */
+
+    public function edit_order($order_id = FALSE) {
+
+        if ($order_id) {
+
+            $data['page'] = 'Orders';
+            $data['title'] = 'Orders';
+
+            if ($this->input->post()) {
+
+
+
+                $this->form_validation->set_rules('cd-wheel_color', 'Whell Color', 'trim|required');
+                //run validation on form input
+                if ($this->form_validation->run() == FALSE) {
+
+                    $data['countries'] = $this->getCountries();
+                    $data['order'] = $this->Orders->getOrder($order_id);
+                    /* get recent order log ... */
+                    $data['recentOrderLog'] = $this->Orders->getRecentOrderLog($order_id);
+                    /* get customer details ... */
+                    $data['customer'] = $this->Orders->getCustomer($data['order'][0]['user_id']);
+                    $data['order_id'] = $order_id;
+                    $this->load->template('admin/edit_order', $data);
+                } else {
+
+
+                    /* update order */
+
+                    $order_number = $this->input->post('cd-order_number');
+                    $delivery_address = $this->input->post('cd-address');
+                    $delivery_address_2 = $this->input->post('cd-address2');
+                    $city = $this->input->post('cd-city');
+                    $state = $this->input->post('cd-state');
+                    $zip = $this->input->post('cd-zip');
+                    $country = $this->input->post('cd-country');
+                    $wheel_color = $this->input->post('cd-wheel_color');
+                    $wheel_size = $this->input->post('cd-wheel_size');
+                    $product = $this->input->post('cd-product');
+                    $order_total = $this->input->post('cd-order_total');
+                    $shipping_cost = $this->input->post('cd-shipping_cost');
+                    $order_status = $this->input->post('cd-order_status');
+                    $invoice_url = $this->input->post('cd-invoice_url');
+                    $est_ship_date = $this->input->post('cd-est_ship_date');
+                    $est_ship_location = $this->input->post('cd-est_ship_location');
+                    $firmware_version = $this->input->post('cd-firmware_version');
+                    $deck_serial_number = $this->input->post('cd-deck_serial_number');
+                    $main_serial_number = $this->input->post('cd-main_serial_number');
+                    $tracking_number = $this->input->post('cd-tracking_number');
+                    $notes = $this->input->post('cd-notes');
+                    $priority = $this->input->post('cd-priority');
+                    $user_id = $this->input->post('cd-userid');
+
+                    $response = $this->Orders->adminUpdateOrder($user_id, $order_id, $order_number, $delivery_address, $delivery_address_2, $city, $state, $zip, $country, $wheel_color, $wheel_size, $product, $order_total, $shipping_cost, $order_status, $invoice_url, $est_ship_date, $est_ship_location, $firmware_version, $deck_serial_number, $main_serial_number, $tracking_number, $notes, $priority);
+
+                    if ($response) {
+                        $this->session->set_flashdata('success', 'Order was updated successfully!!');
+                        redirect('edit_order/' . $order_id . '');
+                    } else {
+                        $this->session->set_flashdata('error', 'Order not update,try again!!');
+                        redirect('edit_order/' . $order_id . '');
+                    }
+                }
+            } else {
+
+                $data['countries'] = $this->getCountries();
+                $data['order'] = $this->Orders->getOrder($order_id);
+                /* get recent order log ... */
+                $data['recentOrderLog'] = $this->Orders->getRecentOrderLog($order_id);
+                /* get customer details ... */
+                $data['customer'] = $this->Orders->getCustomer($data['order'][0]['user_id']);
+                $data['order_id'] = $order_id;
+                $this->load->template('admin/edit_order', $data);
+            }
+        } else {
+            redirect('orders');
+        }
+    }
+
+    /* remove order */
+
+    public function delete_order($order_number = FALSE) {
+
+        if ($order_number) {
+
+            $response = $this->Orders->deleteOrder($order_number);
+
+            if ($response) {
+                $this->session->set_flashdata('success', 'Order was deleted successfully!!');
+                redirect('orders');
+            } else {
+                $this->session->set_flashdata('error', 'Order not delete,try again!!');
+                redirect('orders');
+            }
+        }else{
+            
+            redirect('orders');
+        }
     }
 
 }
