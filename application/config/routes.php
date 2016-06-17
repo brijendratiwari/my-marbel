@@ -75,3 +75,7 @@ $route['add_order'] = 'admin/orders/add_order';
 
 
 $route['forgot_password']='login/forgot_password';
+
+$route['profile'] = 'admin/profile';
+$route['edit_profile'] = 'admin/customers/edit_profile';
+

@@ -137,4 +137,87 @@ class Customers_model extends CI_Model {
          $this->db->delete('m_user_auth');
        
     }
+    
+   function updateProfile($id){
+       
+       if ( $this->input->post()) {
+            $first_name=$this->input->post('cd-first');
+            $last_name=$this->input->post('cd-last');
+            $password = $this->input->post('cd-password');
+            if ($this->input->post('cd-type-parent') != '') {
+                $type = $this->input->post('cd-type-parent');
+                $parent_type = $this->input->post('cd-type');
+            } else {
+                $type = $this->input->post('cd-type');
+                $parent_type = $this->input->post('cd-type');
+            }
+             
+           
+            $data_update = array(
+                'email' => $this->input->post('cd-email'),
+                'first_name' => $this->input->post('cd-first'),
+                'last_name' => $this->input->post('cd-last'),
+                'parent_type' => $parent_type,
+                'type' => $type,
+                'phone' => $this->input->post('cd-phone'),
+                'bio' => $this->input->post('cd-bio'),
+                'height' => $this->input->post('cd-height'),
+                'weight' =>$this->input->post('cd-weight'),
+                'company' => $this->input->post('cd-company'),
+                'address_one' => $this->input->post('cd-address-one'),
+                'address_two' => $this->input->post('cd-address-two'),
+                'city' =>$this->input->post('cd-city'),
+                'state_or_region' =>$this->input->post('cd-state-region'),
+                'postal_code' => $this->input->post('cd-postal-code'),
+                'country' => $this->input->post('cd-country'),
+                'accepts' => $this->input->post('cd-accepts-marketing'),
+                'privacy_setting' => $this->input->post('cd-privacy-setting'),
+                'units' => $this->input->post('cd-units'),
+                'range_alarm' => $this->input->post('cd-rangealarm'),
+                'notifications' => $this->input->post('cd-notifications-rides'),
+                'primary_riding_style' => $this->input->post('cd-primary-riding-style'),
+                'safety_brake' => $this->input->post('cd-safety-brake'),
+                'preferred_braking_force' => $this->input->post('cd-preferred-braking-force'),
+                'reverse_turned' => $this->input->post('cd-reverse-turned'),
+                'locked_settings' => $this->input->post('cd-locked-settings'),
+                'terrain' => $this->input->post('cd-terrain'),
+                
+                'last_activity' => time(),
+                'register_date' => time()
+            );
+
+                $this->db->where('id',$id); 
+                $this->db->update('m_users', $data_update);
+                if($this->db->affected_rows()>0){
+                    if ($password != '') {
+                         
+                        
+                         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+                         $password = hash('sha512', $password . $random_salt);
+                         $user_auth = array('password' => $password, 'salt' => $random_salt);
+                         $this->db->where('user_id',$id); 
+                         $this->db->update('m_user_auth', $user_auth);
+
+
+                    }
+                    $result['result'] = TRUE;
+                    $result['success'] = $first_name . ' ' . $last_name . ' was Updated successfully';
+                    echo json_encode($result);
+                    die;
+                }else 
+                {
+                    
+                    $result['result'] = FALSE;
+                    $result['error'] = $first_name . ' ' . $last_name . '.<br />Unknown Error';
+                    echo json_encode($result);
+                    die;
+
+                }
+                
+            }
+                    $result['result'] = FALSE;
+                    $result['error'] = $first_name . ' ' . $last_name . '.<br />Unknown Error';
+                    echo json_encode($result);
+                    die;
+   }
 }

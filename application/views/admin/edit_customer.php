@@ -89,7 +89,7 @@
                             <div class="row-fluid">
                                 <div class="col-md-12">
                                     <div class="col-md-12 form-group">
-                                        <input type="text" class="form-control" name="cd-password" id="cd-password" placeholder="Enter a new password">
+                                        <input type="password" class="form-control" name="cd-password" id="cd-password" placeholder="Enter a new password">
                                     </div>
                                 </div>
                             </div>

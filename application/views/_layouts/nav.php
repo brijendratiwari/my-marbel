@@ -1,7 +1,7 @@
  <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                 <p class="centered">
-                  <a href="profile">
+                  <a href="<?php echo base_url('index.php/profile');?>">
                 <img class="img-circle" width="60" src="/assets/img/ui-sam.jpg">
                 </a>
                 </p>
@@ -21,7 +21,7 @@
                             <a href="<?php echo base_url('index.php/customers'); ?>"><i class="fa fa-users fa-fw"></i> Customers</a>
                         </li>
                         <li>
-                            <a href="orders"><i class="fa fa-bar-chart-o fa-fw"></i> Orders</a>
+                            <a href="<?php echo base_url('index.php/orders');?>"><i class="fa fa-bar-chart-o fa-fw"></i> Orders</a>
                         </li>
                         <li>
                             <a href="javascript:;"><i class="fa fa-shopping-cart fa-fw"></i> Shipping</a>

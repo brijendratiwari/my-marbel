@@ -285,48 +285,4 @@ $(document).ready(function(){
 
 </script>
     
-<style>
-    
-    .message {
-    margin: 40px 0 20px;
-}
 
- .new_loader {
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        z-index: 99;
-    }
-    .new_loader_img {
-        background: rgba(0,0,0,0.5);
-        top:35%;
-        left: 0;
-        right: 0;
-        position: fixed;
-        text-align: center;
-        z-index: 99;
-        width: 140px;
-        height: 120px;
-        border-radius: 10px;
-        -moz-border-radius: 10px;
-        -webkit-border-radius: 10px;
-        margin: 0 auto;
-    }
-    .new_loader_img img {
-        top: 25px;
-        z-index: 999;
-        width: 70px;
-        position: relative;
-    }
-
-    
-    .overlay{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-	background: rgba(0, 0, 0, .3);
-}
-</style>
