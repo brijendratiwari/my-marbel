@@ -1,4 +1,4 @@
-<script type="application/javascript">
+<script>
   $(document).ready(function () {
     $('#finished').DataTable({
       "iDisplayLength": 50,

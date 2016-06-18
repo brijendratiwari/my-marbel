@@ -87,12 +87,12 @@ $(document).ready(function(){
         ]}
         );
     
-       /* shipping list datatable... */
+       /* shipped list datatable... */
     
      $("#shipped-data").dataTable({
-//              "oLanguage": {
-//            "sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
-//         "ordering": false,
+        //"oLanguage": {
+        //"sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
+        //"ordering": false,
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": base_url + "shipped_list", "bDeferRender": true,
@@ -109,8 +109,76 @@ $(document).ready(function(){
             {"sClass": "hidden-phone", "aTargets": [5],"bSortable": false },
             
             
-        ]}
-        ); 
+        ]}); 
+    
+     /* finished list datatable... */
+    
+     $("#finished-data").dataTable({
+        //"oLanguage": {
+        //"sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
+        //"ordering": false,
+        "bProcessing": true,
+        "bServerSide": true,
+        "sAjaxSource": base_url + "services_list?status=finished", "bDeferRender": true,
+        "aLengthMenu": [[50, 100, -1], [50, 100,200, $("#sAll").val()]],
+        "sPaginationType": "numbers",
+        "iDisplayLength": 50,
+        "bDestroy": true, //!!!--- for remove data table warning.
+        "aoColumnDefs": [
+            {"aTargets": [0]},
+            {"sClass": " aligncenter", "aTargets": [1]},
+            {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
+            {"sClass": "hidden-phone", "aTargets": [3]},
+            {"sClass": "hidden-phone", "aTargets": [4]},
+            {"sClass": "hidden-phone", "aTargets": [5],"bSortable": false },
+            
+            
+        ]}); 
+       /* inhouse list datatable... */
+    $("#inhouse-data").dataTable({
+        //"oLanguage": {
+        //"sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
+        //"ordering": false,
+        "bProcessing": true,
+        "bServerSide": true,
+        "sAjaxSource": base_url + "services_list?status=inhouse", "bDeferRender": true,
+        "aLengthMenu": [[50, 100, -1], [50, 100,200, $("#sAll").val()]],
+        "sPaginationType": "numbers",
+        "iDisplayLength": 50,
+        "bDestroy": true, //!!!--- for remove data table warning.
+        "aoColumnDefs": [
+            {"aTargets": [0]},
+            {"sClass": " aligncenter", "aTargets": [1]},
+            {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
+            {"sClass": "hidden-phone", "aTargets": [3]},
+            {"sClass": "hidden-phone", "aTargets": [4]},
+            {"sClass": "hidden-phone", "aTargets": [5]},
+            {"sClass": "hidden-phone", "aTargets": [6],"bSortable": false },
+            
+            
+        ]}); 
+    /* pending list datatable... */
+     $("#pending-data").dataTable({
+        //"oLanguage": {
+        //"sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
+        //"ordering": false,
+        "bProcessing": true,
+        "bServerSide": true,
+        "sAjaxSource": base_url + "services_list?status=pending", "bDeferRender": true,
+        "aLengthMenu": [[50, 100, -1], [50, 100,200, $("#sAll").val()]],
+        "sPaginationType": "numbers",
+        "iDisplayLength": 50,
+        "bDestroy": true, //!!!--- for remove data table warning.
+        "aoColumnDefs": [
+            {"aTargets": [0]},
+            {"sClass": " aligncenter", "aTargets": [1]},
+            {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
+            {"sClass": "hidden-phone", "aTargets": [3]},
+            {"sClass": "hidden-phone", "aTargets": [4]},
+            {"sClass": "hidden-phone", "aTargets": [5],"bSortable": false },
+            
+            
+        ]}); 
 })
 
    // JavaScript Document

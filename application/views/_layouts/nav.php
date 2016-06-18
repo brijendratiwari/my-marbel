@@ -21,13 +21,13 @@
                             <a href="<?php echo base_url('index.php/customers'); ?>"><i class="fa fa-users fa-fw"></i> Customers</a>
                         </li>
                         <li>
-      <a href="<?php echo base_url('index.php/orders');?>"><i class="fa fa-bar-chart-o fa-fw"></i> Orders</a>
+                            <a href="<?php echo base_url('index.php/orders');?>"><i class="fa fa-bar-chart-o fa-fw"></i> Orders</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url('index.php/shipping');?>"><i class="fa fa-shopping-cart fa-fw"></i> Shipping</a>
                         </li>
                         <li>
-                            <a href="javascript:;"><i class="fa fa-bar-chart fa-fw"></i> Service</a>
+                            <a href="<?php echo base_url('index.php/services?status=pending')?>"><i class="fa fa-bar-chart fa-fw"></i> Service</a>
                         </li>
                         <li>
                             <a href="javascript:;"><i class="fa fa-envelope fa-fw"></i> Email</a>

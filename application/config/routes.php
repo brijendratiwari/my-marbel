@@ -86,3 +86,8 @@ $route['shipping_list']='admin/shipping/get_shipping';
 
 $route['shipped']='admin/shipped';
 $route['shipped_list']='admin/shipped/get_shipped';
+
+$route['services']='admin/services';
+$route['services_list']='admin/services/get_services';
+$route['new_services/(:num)/(:num)']='admin/services/new_services/$1/$2';
+
