@@ -20,7 +20,7 @@
            <div id="orderSuccess" class="pull-left alert alert-success hidden message"></div>
            <div id="orderError" class="pull-left alert alert-danger hidden message"></div>
                  </div>   
-                    <div  class="col-lg-4 page-header pull-right"><button class="btn btn-success" data-toggle="modal" data-target="#ordersModal">Add New Order</button></div>
+                    <div  class="col-lg-6 page-header text-right"><button class="btn btn-success" data-toggle="modal" data-target="#ordersModal">Add New Order</button></div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -157,10 +157,10 @@
 							</div>
 							<div class="row-fluid">
 								<div class="col-md-4">
-									<input name="cd-date" type="date" class="form-control" placeholder="Order Date" />   
+									<input name="cd-date" type="text" id="order_date" class="form-control" placeholder="Order Date" />   
 								</div>
 								<div class="col-md-4">
-									<input name="cd-est-ship-date" type="date" class="form-control" placeholder="Estimated Ship Date" />   
+									<input name="cd-est-ship-date" type="text" id="est_ship_date" class="form-control" placeholder="Estimated Ship Date" />   
 								</div>
 								<div class="col-md-4">
 									<input name="cd-est-ship-location" type="text" class="form-control" placeholder="Estimated Ship Location" />   
@@ -229,7 +229,7 @@
 				</div>
                                <div class="checkout_loader hidden" id="form_loader">
                                     <div class="overlay new_loader"></div>
-                                    <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/assets/images/chekout-loading.gif'); ?>" /></div>
+                                    <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/images/chekout-loading.gif'); ?>" /></div>
                                    </div>
                             
 			</div>
@@ -294,7 +294,11 @@ $(document).ready(function(){
             }
         };
         $('body').find('#add-row-form').ajaxForm(options);
-    
+        
+        
+        /* date picker */
+          $('#order_date').datepicker({'format' : 'yyyy-mm-dd' });
+            $('#est_ship_date').datepicker({'format' : 'yyyy-mm-dd' });
 })
 
 

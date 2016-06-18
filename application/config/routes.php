@@ -91,3 +91,6 @@ $route['services']='admin/services';
 $route['services_list']='admin/services/get_services';
 $route['new_services/(:num)/(:num)']='admin/services/new_services/$1/$2';
 
+
+$route['email']='admin/email';
+$route['send_email']='admin/email/send_email';

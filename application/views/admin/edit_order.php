@@ -314,3 +314,15 @@
 			</div>
         
 </div>
+    
+    <script>
+
+$(document).ready(function(){
+   
+        /* date picker */
+            $('#cd-est_ship_date').datepicker({
+                
+                'format' : 'yyyy-mm-dd' 
+            });
+})
+</script>
