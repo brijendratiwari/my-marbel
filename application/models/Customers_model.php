@@ -139,7 +139,7 @@ class Customers_model extends CI_Model {
     }
     
    function updateProfile($id){
-       
+
        if ( $this->input->post()) {
             $first_name=$this->input->post('cd-first');
             $last_name=$this->input->post('cd-last');
@@ -151,7 +151,16 @@ class Customers_model extends CI_Model {
                 $type = $this->input->post('cd-type');
                 $parent_type = $this->input->post('cd-type');
             }
-             
+            $profile = NULL; 
+            if(isset($_FILES)){
+                
+                $filename = explode('.',$_FILES['cd-profile']['name']);
+                
+                $profile =  $first_name.'.'.$filename[1];
+                
+                move_uploaded_file($_FILES['cd-profile']['tmp_name'],__DIR__.'/../../assets/assets/profile-imgs/'.  basename($profile));
+                
+            }
            
             $data_update = array(
                 'email' => $this->input->post('cd-email'),
@@ -181,6 +190,7 @@ class Customers_model extends CI_Model {
                 'reverse_turned' => $this->input->post('cd-reverse-turned'),
                 'locked_settings' => $this->input->post('cd-locked-settings'),
                 'terrain' => $this->input->post('cd-terrain'),
+                'user_profile_pic' => $profile,
                 
                 'last_activity' => time(),
                 'register_date' => time()

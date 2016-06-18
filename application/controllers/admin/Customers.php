@@ -261,8 +261,8 @@ class Customers extends CI_Controller {
       
   }
  public function edit_profile(){
-     
-      $this->form_validation->set_rules('cd-email', 'Email', 'trim|required|valid_email');
+
+        $this->form_validation->set_rules('cd-email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('cd-phone', 'Phone', 'trim|required');
         $this->form_validation->set_rules('cd-first', 'FirstName', 'trim|required');
         $this->form_validation->set_rules('cd-last', 'LastName', 'trim|required');

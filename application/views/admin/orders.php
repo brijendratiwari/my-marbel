@@ -157,10 +157,10 @@
 							</div>
 							<div class="row-fluid">
 								<div class="col-md-4">
-									<input name="cd-date" type="date" class="form-control" placeholder="Order Date" />   
+									<input name="cd-date" type="text" id="order_date" class="form-control" placeholder="Order Date" />   
 								</div>
 								<div class="col-md-4">
-									<input name="cd-est-ship-date" type="date" class="form-control" placeholder="Estimated Ship Date" />   
+									<input name="cd-est-ship-date" type="text" id="est_ship_date" class="form-control" placeholder="Estimated Ship Date" />   
 								</div>
 								<div class="col-md-4">
 									<input name="cd-est-ship-location" type="text" class="form-control" placeholder="Estimated Ship Location" />   
@@ -294,7 +294,11 @@ $(document).ready(function(){
             }
         };
         $('body').find('#add-row-form').ajaxForm(options);
-    
+        
+        
+        /* date picker */
+          $('#order_date').datepicker({'format' : 'yyyy-mm-dd' });
+            $('#est_ship_date').datepicker({'format' : 'yyyy-mm-dd' });
 })
 
 

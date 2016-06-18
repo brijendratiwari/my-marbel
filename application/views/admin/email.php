@@ -36,10 +36,10 @@
                 </select>
             </div>
             <div class="col-md-6 form-group">
-                <input type="date" class="form-control" name="custom_filters.start_date">
+                <input type="text" id='start_date' placeholder="Start Date" class="form-control" name="custom_filters.start_date">
             </div>
             <div class="col-md-6 form-group">
-                <input type="date" class="form-control" name="custom_filters.end_date">
+                <input type="text" id='end_date' placeholder="End Date" class="form-control" name="custom_filters.end_date">
             </div>
             <div class="col-md-offset-10 col-md-2 form-group">
                 <input class="btn btn-success" type="submit"> 
@@ -128,5 +128,9 @@
         var postForm = function () {
             var content = $('textarea[name="content"]').html($('.summernote').code());
         }
+        
+        
+            $('#start_date').datepicker({'format' : 'yyyy-mm-dd' });
+            $('#end_date').datepicker({'format' : 'yyyy-mm-dd' });
     });
 </script>

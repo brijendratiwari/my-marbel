@@ -39,6 +39,9 @@
     
     <!-- Summer note CSS -->
     <link href="/assets/assets/js/summernote-master/summernote.css" rel="stylesheet">
+  
+    <!-- datepicker CSS -->
+    <link href="/assets/assets/js/summernote-master/bootstrap-datepicker.min.css" rel="stylesheet">
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -62,6 +65,9 @@
     
     <!-- form JavaScript -->
     <script src="/assets/assets/js/summernote-master/summernote.min.js"></script>
+    
+    <!-- datepicker JavaScript -->
+    <script src="/assets/assets/js/bootstrap-datepicker.min.js"></script>
 
     <div id="wrapper">
     <!-- Navigation -->
