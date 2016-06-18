@@ -49,6 +49,18 @@ body {
     padding: 3px;
     font-size: 13px;
 }
+#shipping-data td, #customer-data th{
+    padding: 3px;
+    font-size: 13px;
+}
+#shipped-data td, #customer-data th{
+    padding: 3px;
+    font-size: 13px;
+}
+#order-data td, #customer-data th{
+    padding: 3px;
+    font-size: 13px;
+}
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;
