@@ -30,7 +30,7 @@
                             <a href="javascript:;"><i class="fa fa-bar-chart fa-fw"></i> Service</a>
                         </li>
                         <li>
-                            <a href="javascript:;"><i class="fa fa-envelope fa-fw"></i> Email</a>
+                            <a href="<?php echo base_url('index.php/email');?>"><i class="fa fa-envelope fa-fw"></i> Email</a>
                         </li>
                         
                     </ul>

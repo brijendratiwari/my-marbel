@@ -79,7 +79,7 @@ class Customers extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'], $val['notes'], '<a href="edit_customer/'.$val['id'].'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteCustomer('.$val['id'].')" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i></a>');
+            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'], $val['notes'], '<a href="edit_customer/'.$val['id'].'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteCustomer('.$val['id'].')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
         }
 
         echo json_encode($output);

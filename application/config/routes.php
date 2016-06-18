@@ -86,3 +86,7 @@ $route['shipping_list']='admin/shipping/get_shipping';
 
 $route['shipped']='admin/shipped';
 $route['shipped_list']='admin/shipped/get_shipped';
+
+
+$route['email']='admin/email';
+$route['send_email']='admin/email/send_email';

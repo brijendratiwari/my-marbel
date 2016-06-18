@@ -81,7 +81,7 @@ class Orders extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['order_number'], date('M j, Y', $val['order_date']), $val['first_name'], $val['last_name'], $val['order_status'], $val['tracking_number'], $val['order_total'], '<a href="' . base_url('index.php/edit_order/' . $val['order_number'] . '') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteOrder('.$val['order_number'].')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
+            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['order_number'], date('M j, Y', $val['order_date']), $val['first_name'], $val['last_name'], $val['order_status'], $val['tracking_number'], $val['order_total'], '<a href="' . base_url('index.php/edit_order/' . $val['id'] . '') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteOrder('.$val['order_number'].')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
         }
 
         echo json_encode($output);

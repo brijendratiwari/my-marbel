@@ -36,6 +36,10 @@
     <!-- Custom Fonts -->
     <link href="/assets/assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    
+    <!-- Summer note CSS -->
+    <link href="/assets/assets/js/summernote-master/summernote.css" rel="stylesheet">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -54,6 +58,10 @@
     
     <!-- form JavaScript -->
     <script src="/assets/assets/js/jquery.form.min.js"></script>
+    
+    
+    <!-- form JavaScript -->
+    <script src="/assets/assets/js/summernote-master/summernote.min.js"></script>
 
     <div id="wrapper">
     <!-- Navigation -->
@@ -79,10 +87,8 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-<!--                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="<?php echo base_url('index.php/profile'); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>-->
                         <li class="divider"></li>
                         <li><a href="/login/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>

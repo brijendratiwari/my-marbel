@@ -20,7 +20,7 @@
            <div id="orderSuccess" class="pull-left alert alert-success hidden message"></div>
            <div id="orderError" class="pull-left alert alert-danger hidden message"></div>
                  </div>   
-                    <div  class="col-lg-4 page-header pull-right"><button class="btn btn-success" data-toggle="modal" data-target="#ordersModal">Add New Order</button></div>
+                    <div  class="col-lg-6 page-header text-right"><button class="btn btn-success" data-toggle="modal" data-target="#ordersModal">Add New Order</button></div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

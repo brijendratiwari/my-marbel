@@ -1,13 +1,12 @@
  <!-- Page Content -->
         <div id="page-wrapper">
-            <div class="container-fluid">
                 <div class="row">
                 <div class="col-lg-12">
                 <div class="col-lg-6">
                 <div id="userSuccess" class="pull-left alert alert-success hidden message"></div>        
                 <div class="pull-left alert alert-danger hidden message" id="userError"></div>
                  </div>   
-                    <div class="col-lg-4 page-header pull-right"><button data-target="#usersModal" data-toggle="modal" class="btn btn-success">Edit Profile</button></div>
+                    <div class="col-lg-6 page-header text-right"><button data-target="#usersModal" data-toggle="modal" class="btn btn-success">Edit Profile</button></div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -17,10 +16,14 @@
                         
                         
                         <!--user info page-->
-                          <div class="col-md-9 col-md-offset-1 user-info" style="padding-top:100px;">
-                            <div class="col-md-6 left-info-section">
+                          <div class="col-md-offset-1 user-info">
+                            <div class="col-md-6">
+                            <div class="col-md-12">
                              <img alt="140x140" class="img-circle" data-src="holder.js/140x140" style="width: 140px; height: 140px; float: left;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTUzYTg2ZDE2MyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NTNhODZkMTYzIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQzLjUiIHk9Ijc0LjgiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
-                              <h2><?php echo (!empty($user_info['first_name']))?$user_info['first_name']." ".$user_info['last_name']:"";?></h2>
+                             </div>
+                                <div class='clearfix'></div>
+                            <div class="col-md-12 text-left">
+                                <h3><?php echo (!empty($user_info['first_name']))?$user_info['first_name']." ".$user_info['last_name']:"";?></h3></div>
 
                               <div class="clearfix"></div>
                                 <div class="panel panel-default">
@@ -52,7 +55,6 @@
                                     </div>
                                 </div>
 
-<!--                        <button class="btn btn-default btn-small" style="border:none"><span class="glyphicon glyphicon-plus-sign"></span> Add note</button>-->
                             </div>
                             <div class="col-md-6 right-info-section">
 
@@ -106,8 +108,7 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
+          
         </div>
         <!-- /#page-wrapper -->
         
