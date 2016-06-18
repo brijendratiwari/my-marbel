@@ -229,7 +229,7 @@
 				</div>
                                <div class="checkout_loader hidden" id="form_loader">
                                     <div class="overlay new_loader"></div>
-                                    <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/assets/images/chekout-loading.gif'); ?>" /></div>
+                                    <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/images/chekout-loading.gif'); ?>" /></div>
                                    </div>
                             
 			</div>

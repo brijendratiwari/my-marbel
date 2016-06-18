@@ -158,7 +158,7 @@ class Customers_model extends CI_Model {
                 
                 $profile =  $first_name.'.'.$filename[1];
                 
-                move_uploaded_file($_FILES['cd-profile']['tmp_name'],__DIR__.'/../../assets/assets/profile-imgs/'.  basename($profile));
+                move_uploaded_file($_FILES['cd-profile']['tmp_name'],__DIR__.'/../../assets/profile-imgs/'.  basename($profile));
                 
             }
            

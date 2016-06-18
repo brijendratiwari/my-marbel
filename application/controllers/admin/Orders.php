@@ -163,7 +163,7 @@ class Orders extends CI_Controller {
     /* get countries from json file */
 
     protected function getCountries() {
-        $jsonStr = file_get_contents(base_url() . "/assets/assets/countries.json");
+        $jsonStr = file_get_contents(base_url() . "/assets/countries.json");
         return json_decode($jsonStr, true);
     }
 
