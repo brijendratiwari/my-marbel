@@ -13,7 +13,7 @@
         <div class="col-md-6 alert alert-success">
             <?php echo $this->session->flashdata('success');  ?>
         </div>
-       <?php } ?>
+       <?php }?>
 
        <div class="row-fluid">
 			<div class="col-md-12">
@@ -29,7 +29,7 @@
 			<div class="row-fluid">
 				<div class="col-md-12">
 					<div class="col-md-3">
-						<select name="order_number">
+						<select name="order_number" class="form-control">
 							<?php 
 								foreach ($orders as $o) {
 									echo '<option value="'.$o['id'].'"'.(isset($orderId) && $orderId == $o['order_number'] ? ' selected="true"' : '').'>Order #'.$o['order_number']."</option>";
@@ -38,22 +38,23 @@
 						</select>
 					</div>
 					<div class="col-md-3">
-						<select name="product">
+						<select name="product" class="form-control">
 							<option value="Marbel Board">Product: Marbel Board</option>
 						</select>
 					</div>
 					<div class="col-md-3">
-						<select name="admin_id">
+						<select name="admin_id" class="form-control">
 							<option value="">Requires Response from: None</option>
+                                                        
 							<?php 
 								foreach ($admins as $a) {
-									echo '<option value="'.$a['user_id'].'"'.(isset($service) && $service['suggested_response_admin'] == $a['user_id'] ? ' selected="true"' : '').'>Requires Response from '.$a['first_name'].' '.$a['last_name'].' ['.$a['email'].']</option>';
+									echo '<option value="'.$a['id'].'"'.(isset($service) && $service['suggested_response_admin'] == $a['id'] ? ' selected="true"' : '').'>Requires Response from '.$a['first_name'].' '.$a['last_name'].' ['.$a['email'].']</option>';
 								}
 							?>
 						</select>
 					</div>
 					<div class="col-md-3">
-						<input type="text" name="tracking_in" placeholder="Tracking Number" <?php if (isset($service)) { echo 'value="'.$service['tracking_in'].'"'; } ?>/>
+						<input type="text" name="tracking_in" placeholder="Tracking Number" <?php if (isset($service)) { echo 'value="'.$service['tracking_in'].'"'; } ?> class="form-control"/>
 					</div>
 				</div>
 			</div>
@@ -67,7 +68,7 @@
             <div class="row-fluid">
 				<div class="col-md-12">
 					<div class="col-md-3">
-						<select name="type">
+						<select name="type" class="form-control">
 							<option value="">Service Type: None</option>
 							<option value="warrenty"<?php if (isset($service) && strcmp($service['type'], 'warrenty') == 0 ) { echo ' selected="true"'; } ?>>Service Type: Warrenty</option>
 							<option value="service"<?php if (isset($service) && strcmp($service['type'], 'service') == 0 ) { echo ' selected="true"'; } ?>>Service Type: Service</option>
@@ -75,7 +76,7 @@
 						</select>
 					</div>
 					<div class="col-md-3">
-						<select name="status">
+						<select name="status" class="form-control">
 							<option value="">Service Status: None</option>
 							<option value="pending"<?php if (isset($service) && strcmp($service['status'], 'pending') == 0 ) { echo ' selected="true"'; } ?>>Service Status: Pending</option>
 							<option value="inhouse"<?php if (isset($service) && strcmp($service['status'], 'inhouse') == 0 ) { echo ' selected="true"'; } ?>>Service Status: In House</option>
@@ -85,7 +86,7 @@
 						</select>
 					</div>
 					<div class="col-md-3">
-						<select name="priority">
+						<select name="priority" class="form-control">
 							<option value="1"<?php if (isset($service) && $service['priority'] == 1 ) { echo ' selected="true"'; } ?>>Priority: Highest</option>
 							<option value="2"<?php if (isset($service) && $service['priority'] == 2 ) { echo ' selected="true"'; } ?>>Priority: High</option>
 							<option value="3"<?php if (isset($service) && $service['priority'] == 3 ) { echo ' selected="true"'; } ?>>Priority: Medium</option>
@@ -94,7 +95,7 @@
 						</select>
 					</div>
 					<div class="col-md-3">
-						<input type="date" name="due_date" placeholder="Due Date" <?php if (isset($service)) { echo ' value="'.date('Y-m-d',$service['due_date']).'"'; } ?>/>
+						<input type="date" name="due_date" placeholder="Due Date" <?php if (isset($service)) { echo ' value="'.date('Y-m-d',$service['due_date']).'"'; } ?> class="form-control"/>
 					</div>
 				</div>
 			</div>
@@ -111,17 +112,17 @@
 			<div class="row-fluid">
 				<div class="col-md-12">
 					<div class="col-md-6">
-						<textarea name="issue" placeholder="Input customer reported issue here"><?php if (isset($service)) { echo $service['issue']; } ?></textarea>
+						<textarea class="form-control" name="issue" placeholder="Input customer reported issue here"><?php if (isset($service)) { echo $service['issue']; } ?></textarea>
 					</div>
 					<div class="col-md-6">
-						<textarea name="response" placeholder="Awaiting initial response..."><?php if (isset($service)) { echo $service['suggested_response']; } ?></textarea>
+						<textarea class="form-control" name="response" placeholder="Awaiting initial response..."><?php if (isset($service)) { echo $service['suggested_response']; } ?></textarea>
 					</div>
 				</div>
 			</div>
 			<div class="row-fluid">
 				<div class="col-md-12">
 					<div class="col-md-offset-9 col-md-3">
-						<input type="submit" name="cd-submit" class="btn btn-primary btn-lg outline text-center" value="Save Changes">
+						<input   type="submit" name="cd-submit" class="btn btn-primary btn-lg outline text-center" value="Save Changes">
 					</div>
 				</div>
 			</div>
