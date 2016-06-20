@@ -49,17 +49,59 @@ body {
     padding: 3px;
     font-size: 13px;
 }
-#shipping-data td, #customer-data th{
+#shipping-data td, #shipping-data th{
     padding: 3px;
     font-size: 13px;
 }
-#shipped-data td, #customer-data th{
+#shipped-data td, #shipped-data th{
     padding: 3px;
     font-size: 13px;
 }
-#order-data td, #customer-data th{
+#order-data td, #order-data th{
     padding: 3px;
     font-size: 13px;
+}
+#pending-data td, #pending-data th{
+    padding: 3px;
+    font-size: 13px;
+}
+#inhouse-data td, #inhouse-data th{
+    padding: 3px;
+    font-size: 13px;
+}
+#finished-data td, #finished-data th{
+    padding: 3px;
+    font-size: 13px;
+}
+.btn.btn-custom {
+    background-color: #00aeef;
+    color: #ffffff;
+    border-radius: 0;
+}
+.tab-active {
+    color: #000000 !important;
+}
+#cssmenu label {
+    background: #e9e9e9 none repeat scroll 0 0;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    float: right;
+    font-size: 14px;
+    /*margin: 15px 0 15px 15px;*/
+    padding: 8px;
+    text-align: right;
+    display: block;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+}
+.menu-drop-down #cssmenu ul#nav {
+    padding: 0;
+    text-align: center;
+}
+#cssmenu:hover label {
+    background: none;
+    border: none;
 }
 @media(min-width:768px) {
     #page-wrapper {

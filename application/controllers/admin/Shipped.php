@@ -66,10 +66,19 @@ class Shipped extends CI_Controller {
             #echo $this->db->last_query(); die;
         }
 
-        $this->db->select('*');
-        $this->db->from('m_orders');
-        $total_record = $this->db->count_all_results();
-//        $total_record = $this->db->count_all('master_subscriber');
+        $this->Shipped->db->select('*');
+        $this->Shipped->db->from('m_orders');
+         $this->Shipped->Shipped->db->join("m_users", "m_orders.user_id = m_users.id", "LEFT");
+            $this->Shipped->db->join("(SELECT order_id, date as shipped_date FROM `m_order_logs` WHERE notes LIKE '%to \"shipped\"%' ORDER BY date DESC ) mol", "mol.order_id = m_orders.id", "LEFT");
+                   if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
+            $words = $_GET['sSearch'];
+            for ($i = 0; $i < count($col_sort); $i++) {
+
+                $this->Shipped->db->or_like($col_sort[$i], $words, "both");
+            }
+        }
+        $total_record = $this->Shipped->db->count_all_results();
+     
         $output = array(
             "sEcho" => intval($_GET['sEcho']),
             "iTotalRecords" => $total_record,
@@ -83,7 +92,7 @@ class Shipped extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', $val['order_date']),$val['tracking_number'],date('M j, Y',strtotime($val['shipped_date'])), '<a href="'.base_url('index.php/edit_order/' . $val['id']).'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+            $output['aaData'][] = array("DT_RowId" => $val['id'],$val['id'], $val['first_name'], $val['last_name'], date('M j, Y', $val['order_date']),$val['tracking_number'],date('M j, Y',strtotime($val['shipped_date'])), '<a href="'.base_url('index.php/edit_order/' . $val['id']).'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
         }
 
         echo json_encode($output);

@@ -3,7 +3,7 @@
     
     
     <div class="row">
-
+<div class="col-md-12" style="margin-top:10px"><a class='btn btn-sm btn-default' href="javascript:history.back();">Go Back</a></div>
        <?php if($this->session->flashdata('error')){ ?>
         <div class="col-md-6 alert alert-danger">
             <?php echo $this->session->flashdata('error');  ?>
@@ -254,7 +254,7 @@
                     <div class="row-fluid">
                         <div class="col-md-12">
                             <div class="col-md-offset-9 col-md-3">
-                                <input type="submit" name="cd-submit" class="btn btn-primary btn-lg outline text-center" value="Save Changes">
+                                <input type="submit" name="cd-submit" class="btn btn-custom btn-lg" value="Save Changes">
                             </div>
                         </div>
                     </div>
@@ -289,7 +289,7 @@
     </div>
         
         
-        <div class="col-md-12" style="background-color: #fafafa;;">
+        <div class="col-md-12" style="background-color: #fafafa;margin-bottom:5%">
 				<h3 style="border-bottom: 1px solid #aaa;"><small><span>Order Update Log</span></small></h3>
 				<?php 
                                 if(!empty($recentOrderLog)){

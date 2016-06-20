@@ -15,9 +15,9 @@ if ($this->input->get('status', TRUE)) {
            <div id="orderError" class="pull-left alert alert-danger hidden message"></div>
                  </div>   
                     <div  class="col-lg-4 page-header pull-right">
-                        <a href="?status=pending" class="btn btn-success m-b-sm">Pending</a>
-			<a href="?status=inhouse" class="btn btn-success m-b-sm">In House</a>
-			<a href="?status=finished" class="btn btn-success m-b-sm">Finished</a>
+                        <a href="?status=pending" class="btn btn-custom <?php if($this->input->get('status') == 'pending'){ echo 'tab-active';} ?>">Pending</a>
+			<a href="?status=inhouse" class="btn btn-custom <?php if($this->input->get('status') == 'inhouse'){ echo 'tab-active';} ?>">In House</a>
+			<a href="?status=finished" class="btn btn-custom <?php if($this->input->get('status') == 'finished'){ echo 'tab-active';} ?>">Finished</a>
                   </div>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -27,7 +27,11 @@ if ($this->input->get('status', TRUE)) {
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Service List
+                            Service List (<?php 
+                                if($this->input->get('status') == 'pending'){ echo 'Pending data';} 
+                                if($this->input->get('status') == 'inhouse'){ echo 'Inhouse data';}
+                                if($this->input->get('status') == 'finished'){ echo 'Finished data';}
+                            ?>)
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
