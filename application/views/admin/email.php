@@ -42,7 +42,7 @@
                 <input type="text" id='end_date' placeholder="End Date" class="form-control" name="custom_filters.end_date">
             </div>
             <div class="col-md-offset-10 col-md-2 form-group">
-                <input class="btn btn-success" type="submit"> 
+                <input class="btn btn-custom" type="submit"> 
             </div>
         </form>
 
@@ -84,7 +84,7 @@
             </div>
 
             <div class="col-md-offset-10 col-md-2 form-group">
-                <input class="btn btn-success" type="submit"> 
+                <input class="btn btn-custom" type="submit"> 
             </div>
         </form>
 
@@ -114,7 +114,7 @@
             </div>
 
             <div class="col-md-offset-10 col-md-2 form-group">
-                <input class="btn btn-success" type="submit"> 
+                <input class="btn btn-custom" type="submit"> 
             </div>
         </form>
     </div>
