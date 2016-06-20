@@ -10,9 +10,12 @@ if ($this->input->get('status', TRUE)) {
             <div class="row">
                 <div class="col-lg-12">
                 <div class="col-lg-6">
-    
-           <div id="orderSuccess" class="pull-left alert alert-success hidden message"></div>
-           <div id="orderError" class="pull-left alert alert-danger hidden message"></div>
+    <?php if($this->session->flashdata('success')){ ?>
+           <div class="pull-left alert alert-success message"><?php echo $this->session->flashdata('success'); ?></div>
+    <?php } ?>
+    <?php if($this->session->flashdata('error')){ ?>
+           <div class="pull-left alert alert-danger message"><?php echo $this->session->flashdata('error'); ?></div>
+    <?php } ?>
                  </div>   
                     <div  class="col-lg-4 page-header pull-right">
                         <a href="?status=pending" class="btn btn-custom <?php if($this->input->get('status') == 'pending'){ echo 'tab-active';} ?>">Pending</a>
