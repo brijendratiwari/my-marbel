@@ -171,7 +171,7 @@ class Services extends CI_Controller {
     public function delete_services($id=false,$param=false) {
 
         $this->Services->deleteService($id);
-        $this->session->set_flashdata('success', 'Deleted the service record for service id ' . $_GET['id']);
+        $this->session->set_flashdata('success', 'Deleted the service record for service id ' .$id);
         if($param=='fn')
         redirect('services?status=finished');
         

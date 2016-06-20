@@ -4,6 +4,8 @@
 
     <div class="row">
 
+        <div class="col-md-12" style="margin-top:10px;"><a class="btn btn-sm btn-default" href="javascript:history.back()">Go Back</a></div>
+        
         <?php if ($this->session->flashdata('error')) { ?>
             <div class="col-md-6 alert alert-danger">
                 <?php echo $this->session->flashdata('error'); ?>
@@ -25,14 +27,7 @@
                     <h1 style="padding: 0">
                         <span style="float: left">Edit Service Record: <small>for <?php echo $service['customer']['first_name'] . ' ' . $service['customer']['last_name'] ?>.</small></span>  <span style="float: right">Created on: <small><?php echo date('F j, Y', $service['date']); ?></small></span>
                     </h1>
-                    <!-- Just a spacer to make it look a little nicer -->
-                    <div class="row-fluid">
-                        <div class="col-md-12">
-                            <hr />
-                            <br />
-                        </div>
-                    </div>
-                    <div class="row-fluid">
+                  
                         <div class="col-md-12">
                             <div class="col-md-3">
                                 <span>Order: #<small><?php echo'<a href="'.base_url('index.php/edit_order/' . $service['order_id'] . '').'"> '.(isset($service['order']['order_number'])?$service['order']['order_number']:'Not found').'</a>'; ?></small></span>
@@ -47,16 +42,9 @@
                                 <input type="text" class="form-control" name="cd-tracking-out" value="<?php echo $service['tracking_out'] ?>" placeholder="Outbound Tracking #"/>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Just a spacer to make it look a little nicer -->
-                    <div class="row-fluid">
-                        <div class="col-md-12">
-                            <br />
-                        </div>
-                    </div>
+                  
 
-                    <div class="row-fluid">
                         <div class="col-md-12">
                             <div class="col-md-3">Service Type: 
                                 <p class="cd-select">
@@ -118,16 +106,7 @@
             } ?>"/></p>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Just a spacer to make it look a little nicer -->
-                    <div class="row-fluid">
-                        <div class="col-md-12">
-                            <br />
-                        </div>
-                    </div>
-
-                    <div class="row-fluid">
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <span>Customer Reported Issues: <small>Created on <?php echo date('M j, Y, g:i a', $service['date']); ?></small></span>
@@ -136,9 +115,7 @@
                                 <span>Suggested Response: <?php if ($service['suggested_response_date'] > 0): ?><small>by <?php echo $service['suggested_response_admin']['first_name'] . ' ' . $service['suggested_response_admin']['last_name'] . ' on ' . date('M j, Y, g:i a', $service['suggested_response_date']); ?></small><?php endif; ?></span>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row-fluid">
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <p><textarea class="issue form-control" name="cd-issue" id="cd-issue" placeholder="Reported Issues"><?php echo $service['issue']; ?></textarea></p>
@@ -147,17 +124,9 @@
                                 <p><textarea class="response form-control" name="cd-response" id="cd-response" placeholder="Suggested Issues / Response"><?php echo $service['suggested_response']; ?></textarea></p>
                             </div>
                         </div>
-                    </div>
 
 
-                    <!-- Just a spacer to make it look a little nicer -->
-                    <div class="row-fluid">
-                        <div class="col-md-12">
-                            <br />
-                        </div>
-                    </div>
 
-                    <div class="row-fluid">
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <span>Check In Report:</span>
@@ -166,22 +135,14 @@
                                 <span>In The Box:</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row-fluid">
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <p><textarea class="diagnostic_response form-control" name="cd-diagnostic_response" id="cd-diagnostic_response" placeholder="Diagnostic Notes"><?php echo $service['diagnostic_response']; ?></textarea></p>
                             </div>
                             <div class="col-md-6">
 
-                                <!-- Just a spacer to make it look a little nicer -->
-                                <div class="row-fluid">
-                                    <div class="col-md-6">
-                                        <br />
-                                    </div>
-                                </div>
+                              
 
-                                <div class="row-fluid">
                                     <div class="col-md-12">
                                         <div class="col-md-4">
                                             <span>Board: <input type="checkbox" name="included_parts[]" value="board" <?php if (in_array('board', $service['included_parts'])) {
@@ -199,8 +160,6 @@
             } ?>/></span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row-fluid">
                                     <div class="col-md-12">
                                         <div class="col-md-4">
                                             <span>Manual: <input type="checkbox" name="included_parts[]" value="manual" <?php if (in_array('manual', $service['included_parts'])) {
@@ -218,16 +177,9 @@
             } ?>/></span>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Just a spacer to make it look a little nicer -->
-                                <div class="row-fluid">
-                                    <div class="col-md-6">
-                                        <br />
-                                    </div>
-                                </div>
+                                
 
-                                <div class="row-fluid">
                                     <div class="col-md-12">
                                         <div class="col-md-6">
                                             <select name="included_parts[]" class="form-control">
@@ -252,13 +204,8 @@
                                     </div>
                                 </div>
 
-                                <div class="row-fluid">
-                                    <div class="col-md-6">
-                                        <br />
-                                    </div>
-                                </div>
+                              
 
-                                <div class="row-fluid">
                                     <div class="col-md-12">
                                      
                                         <span>Test Ride: <input type="checkbox" name="test_ride" <?php if ($service['test_ride_complete'] == 1) {
@@ -267,28 +214,17 @@
                                 echo 'by ' . $service['test_ride_admin_id']['first_name'] . ' ' . $service['test_ride_admin_id']['last_name'] . ' on ' . date('M j, Y g:i a', $service['test_ride_date']);
                             } ?></span>
                                     </div>
-                                </div>
                             </div>
-                        </div>
-                    </div>
 
 
-                    <!--just for spacing to make it look a little nicer -->
-                    <div class="row-fluid">
-                        <div class="col-md-12">
-                            <br />
-                        </div>
-                    </div>
+               
 
-                    <div class="row-fluid">
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <span>Service Items:</span>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row-fluid">
                         <div class="col-md-12">
                             <input type="hidden" id="service_item_count" name="service_item_count" value="<?php echo sizeof($service['services']); ?>" />
                             <div id="service_items">
@@ -303,7 +239,7 @@
 											      <div class="col-md-12">
 											        <div class="col-md-6">
 											          <div class="col-md-12">
-											            <select name="service_name_' . $i . '">
+											            <select class="form-control" name="service_name_' . $i . '">
 											              <option value="">Please select a service option</option>
 											              <option value="replace_drive_system" ' . (strcmp($ss['name'], 'replace_drive_system') == 0 ? 'selected="true"' : '') . '>Replaced Drive System</option>
 											              <option value="deck_replaced" ' . (strcmp($ss['name'], 'deck_replaced') == 0 ? 'selected="true"' : '') . '>Deck Replaced $350.00</option>
@@ -333,13 +269,13 @@
 											        </div>
 											        <div class="col-md-6">
 											          <div class="col-md-4">
-											            <div class="col-md-5">Qty:</div><div class="col-md-7"><input class="col-md-12" type="text" name="service_qty_' . $i . '" value="' . $ss['quantity'] . '" /></div>
+											            <div class="col-md-5">Qty:</div><div class="col-md-7"><input class="col-md-12 form-control" type="text" name="service_qty_' . $i . '" value="' . $ss['quantity'] . '" /></div>
 											          </div>  
 											          <div class="col-md-4">
-											            <div class="col-md-5">Rate:</div><div class="col-md-7"><input class="col-md-12" type="text" name="service_rate_' . $i . '" value="' . $ss['rate'] . '" /></div>
+											            <div class="col-md-5">Rate:</div><div class="col-md-7"><input class="col-md-12 form-control" type="text" name="service_rate_' . $i . '" value="' . $ss['rate'] . '" /></div>
 											          </div>  
 											          <div class="col-md-4">
-											            <div class="col-md-5">Amount:</div><div class="col-md-7"><input class="col-md-12" type="text" name="service_amt_' . $i . '" value="' . $ss['amount'] . '" /></div>
+											            <div class="col-md-5">Amount:</div><div class="col-md-7"><input class="col-md-12 form-control" type="text" name="service_amt_' . $i . '" value="' . $ss['amount'] . '" /></div>
 											          </div>  
 											        </div>
 											      </div>
@@ -348,15 +284,15 @@
 											      <div class="col-md-12" style="margin: 10px 0 20px 0;">
 											        <div class="col-md-6">
 											          <div class="col-md-12">
-											            <input type="text" name="service_description_' . $i . '"  value="' . $ss['description'] . '"/>
+											            <input class="form-control" type="text" name="service_description_' . $i . '"  value="' . $ss['description'] . '"/>
 											          </div>
 											        </div>
 											        <div class="col-md-6">
 											          <div class="col-md-4">
-											            <div class="col-md-5">Discount:</div><div class="col-md-7"><input class="col-md-12" type="text" name="service_discount_' . $i . '"  value="' . $ss['discount'] . '"/></div>
+											            <div class="col-md-5">Discount:</div><div class="col-md-7"><input class="col-md-12 form-control" type="text" name="service_discount_' . $i . '"  value="' . $ss['discount'] . '"/></div>
 											          </div>
 											          <div class="col-md-8">
-											            <div class="col-md-4">Finished:</div><div class="col-md-12"><input type="checkbox" name="service_finish_' . $i . '" ' . ($ss['complete'] ? 'checked="true"' : '') . '/> ' . ($ss['complete'] == true ? ' by ' . $ss['admin_name'] . ' on ' . date('M j, Y g:i a', $ss['complete_date']) : '') . '</div>
+											            <div class="col-md-4">Finished:</div><div class="col-md-12"><input class="form-control" type="checkbox" name="service_finish_' . $i . '" ' . ($ss['complete'] ? 'checked="true"' : '') . '/> ' . ($ss['complete'] == true ? ' by ' . $ss['admin_name'] . ' on ' . date('M j, Y g:i a', $ss['complete_date']) : '') . '</div>
 											          </div>
 											        </div>
 											      </div>
@@ -367,23 +303,14 @@
                                 ?>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row-fluid">
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <a href="#" onClick="return false;" id="add_service_item"><span style="font-size:40px;">+</span></a>
                             </div>
                         </div>
-                    </div>
 
-                    <!--just for spacing to make it look a little nicer -->
-                    <div class="row-fluid">
-                        <div class="col-md-12">
-                            <br />
-                        </div>
-                    </div>
-                    <div class="row-fluid">
+                
                         <div class="col-md-12" style="margin-top: 50px;">
                             <div class="col-md-6">
                                 <span>Service Notes:</span>
@@ -392,8 +319,6 @@
                                 <span>Notes to Customer:</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row-fluid">
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <p><textarea class="notes form-control" name="cd-notes" id="cd-notes" placeholder="Service Notes"><?php echo $service['notes']; ?></textarea></p>
@@ -404,7 +329,6 @@
                                              Again, thank you for the faith you've placed in us. If there's anything else we can do, just let us know."><?php echo $service['customer_notes']; ?></textarea></p>
                             </div>
                         </div>
-                    </div>
 
 
 
@@ -477,12 +401,12 @@
 
                     <div class="row-fluid">
                         <div class="col-md-12">
-                            <div class="col-md-3">
+                            <div class="col-md-3 form-group">
 <!--                                <input type="submit" name="cd-delete" class="btn btn-primary btn-lg outline text-center" value="Delete Record">-->
-                                <a class="btn btn-primary btn-lg outline text-center"  onclick="return confirm('Are you sure to delete the service!')" href="<?php echo base_url('index.php/delete_services/'.$service['id'].'/'.$param);?>">Delete Record</a>
+                                <a class="btn btn-custom btn-lg"  onclick="return confirm('Are you sure to delete the service!')" href="<?php echo base_url('index.php/delete_services/'.$service['id'].'/'.$param);?>">Delete Record</a>
                             </div>
                             <div class="col-md-offset-6 col-md-3">
-                                <input type="submit" name="cd-submit" class="btn btn-primary btn-lg outline text-center" value="Save Changes">
+                                <input type="submit" name="cd-submit" class="btn btn-custom btn-lg" value="Save Changes">
                             </div>
                         </div>
                     </div>
