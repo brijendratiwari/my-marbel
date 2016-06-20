@@ -11,7 +11,6 @@
                     }
                     ?>
                     <form class="cd-form floating-labels" style="max-width: 100%; width: 100%;margin: 0px;" method="POST" action="">
-                        <fieldset>
                             <input type="hidden" name="cd-type" value="<?php echo $customer['type'];?>">
                             <input type="hidden" name="cd-parent" value="<?php echo $customer['parent_type'];?>">
                             <input type="hidden" name="cd-user_id" value="<?php echo $customer['id']; ?>" />
@@ -43,8 +42,6 @@
                                 </span>
                             </h1>
                                 </div>
-                            <div class="row-fluid">
-                            <div class="row-fluid">
                                 <div class="col-md-12">
                                     <?php if(isset($customer['user_profile_pic']) && !empty($customer['user_profile_pic'])){?>
                                         <img alt="140x140" class="img-circle" data-src="<?php echo  $customer['user_profile_pic'];?>" style="width: 140px; height: 140px; float: left;"  data-holder-rendered="true">
@@ -53,9 +50,6 @@
                                     <img alt="140x140" class="img-circle" data-src="holder.js/140x140" style="width: 140px; height: 140px; float: left;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTUzYTg2ZDE2MyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NTNhODZkMTYzIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQzLjUiIHk9Ijc0LjgiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
                                     <?php }?>
                                 </div>
-                            </div>
-                            </div>
-                            <div class="row-fluid">
                                 <div class="col-md-12">
                                     <div class="col-md-6">User:
                                         <p id="parentlevel"><?php echo $customer['parent_name']?>
@@ -64,9 +58,7 @@
                                         <p id="childlevel"><?php echo $customer['child_name']?>
                                     </div>
                                 </div>
-                            </div>
                             
-                            <div class="row-fluid">
                                 <div class="col-md-12">
                                     <div class="col-md-6  form-group">
                                         <input type="text" class="form-control" name="cd-first_name" id="cd-first_name" value="<?php echo $customer['first_name']; ?>" placeholder="First Name">
@@ -75,8 +67,6 @@
                                         <input type="text" class="form-control" name="cd-last_name" id="cd-last_name" value="<?php echo $customer['last_name']; ?>" placeholder="Last Name">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row-fluid">
                                 <div class="col-md-12">
                                     <div class="col-md-6 form-group">
                                         <input type="text" class="form-control" name="cd-email" id="cd-email" value="<?php echo $customer['email']; ?>" placeholder="Email">
@@ -85,16 +75,12 @@
                                         <input type="text" class="form-control" name="cd-phone" id="cd-phone" value="<?php echo $customer['phone']; ?>" placeholder="Phone">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row-fluid">
                                 <div class="col-md-12">
                                     <div class="col-md-12 form-group">
                                         <input type="password" class="form-control" name="cd-password" id="cd-password" placeholder="Enter a new password">
                                     </div>
                                 </div>
-                            </div>
                             <!--add new column for users-->
-                             <div class="row-fluid">
                                 <div class="col-md-12">
                                     <div class="col-md-6 form-group">
                                         <input type="text" class="form-control" name="cd-email-second" id="cd-email-second"  placeholder="Email Secondary" value="<?php echo $customer['email_secondary']; ?>">
@@ -103,8 +89,6 @@
                                         <input type="text" class="form-control" name="cd-bio" id="cd-email-second"  placeholder="Bio" value="<?php echo $customer['bio']; ?>">
                                     </div>
                                 </div>
-                            </div>
-                             <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <input type="text" class="form-control" name="cd-weight" id="cd-weight"  placeholder="Weight" value="<?php echo $customer['weight']; ?>">
@@ -113,8 +97,6 @@
                                         <input type="text" class="form-control" name="cd-height" id="cd-height"  placeholder="Height" value="<?php echo $customer['height']; ?>">
                                     </div>
                                 </div>
-                            </div>
-                             <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <input type="text" class="form-control" name="cd-company" id="cd-company"  placeholder="Company" value="<?php echo $customer['company']; ?>">
@@ -123,8 +105,6 @@
                                         <input type="text" class="form-control" name="cd-address-one" id="cd-address-one"  placeholder="Address One" value="<?php echo $customer['address_one']; ?>">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <input type="text" class="form-control" name="cd-address-two" id="cd-address-two"  placeholder="Address Two" value="<?php echo $customer['address_two']; ?>">
@@ -133,8 +113,6 @@
                                         <input type="text" class="form-control" name="cd-city" id="cd-city"  placeholder="City" value="<?php echo $customer['city']; ?>">
                                     </div>
                                 </div>
-                            </div>
-                             <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <input type="text" class="form-control" name="cd-state-region" id="cd-state-region"  placeholder="State/Region" value="<?php echo $customer['state_or_region']; ?>">
@@ -143,8 +121,6 @@
                                         <input type="text" class="form-control" name="cd-postal-code" id="cd-postal-code"  placeholder="Postal Code" value="<?php echo $customer['postal_code']; ?>">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <input type="text" class="form-control" name="cd-country" id="cd-country"  placeholder="Country" value="<?php echo $customer['country']; ?>">
@@ -157,8 +133,6 @@
                                            </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <input type="text" class="form-control" name="cd-alias" id="cd-alias"  placeholder="Alias" value="<?php echo $customer['alias']; ?>">
@@ -172,8 +146,6 @@
                                         
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <select id="cd-units" class="form-control" name="cd-units">
@@ -193,8 +165,6 @@
                                         
                                     </div>
                                 </div>
-                            </div>
-                             <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <select id="cd-notifications-rides" class="form-control" name="cd-notifications-rides">
@@ -208,8 +178,6 @@
                                         
                                     </div>
                                 </div>
-                            </div>
-                             <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <select id="cd-safety-brake" class="form-control" name="cd-safety-brake">
@@ -223,8 +191,6 @@
                                         
                                     </div>
                                 </div>
-                            </div>
-                               <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <select id="cd-reverse-turned" class="form-control" name="cd-reverse-turned" >
@@ -238,8 +204,6 @@
                                         
                                     </div>
                                 </div>
-                            </div>
-                             <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <input type="text" class="form-control" name="cd-twitter-handle" id="cd-twitter-handle"  placeholder="Twitter Handle" value="<?php echo $customer['twitter_handle']; ?>">
@@ -249,8 +213,6 @@
                                         
                                     </div>
                                 </div>
-                            </div>
-                             <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <input type="text" class="form-control" name="cd-instagram-handle" id="cd-instagram-handle"  placeholder="Instagram Handle" value="<?php echo $customer['instagram_handle']; ?>">
@@ -260,33 +222,25 @@
                                         
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-12">
                                         <input type="text" class="form-control" name="cd-terrain" id="cd-terrain" placeholder="Terrain" value="<?php echo $customer['terrain']; ?>">
                                     </div>
                                 </div>
-                            </div>
                             <!--end here-->
-                            <div class="row-fluid">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-12">
                                         <textarea style="max-height: 90px; height: 71px; width: 684px;" class="notes" class="form-control" name="cd-notes" id="cd-notes" placeholder="Add notes to this user"><?php echo $customer['notes']; ?></textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row-fluid">
-                                <div class="form-group">
-                                    <div class="col-md-3">
+                                <div class="col-md-12">
+                                    <div class="col-md-3 form-group">
                                         <a href="/new-service?id=<?php echo $customer['id']; ?>" class="btn btn-primary btn-lg outline text-center" >Add Service Record</a>
                                     </div>
-                                    <div class="col-md-offset-6 col-md-3">
+                                    <div class="col-md-3 form-group">
                                         <input type="submit" name="cd-submit" class="btn btn-primary btn-lg outline text-center" value="Save Changes">
                                     </div>
                                 </div>
-                            </div>
-                        </fieldset>
                     </form>
                 </div>
 

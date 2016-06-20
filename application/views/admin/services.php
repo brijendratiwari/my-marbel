@@ -27,7 +27,11 @@ if ($this->input->get('status', TRUE)) {
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Service List
+                            Service List (<?php 
+                                if($this->input->get('status') == 'pending'){ echo 'Pending data';} 
+                                if($this->input->get('status') == 'inhouse'){ echo 'Inhouse data';}
+                                if($this->input->get('status') == 'finished'){ echo 'Finished data';}
+                            ?>)
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
