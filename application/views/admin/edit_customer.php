@@ -235,10 +235,10 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-3 form-group">
-                                        <a href="/new-service?id=<?php echo $customer['id']; ?>" class="btn btn-primary btn-lg outline text-center" >Add Service Record</a>
+                                        <a href="/new-service?id=<?php echo $customer['id']; ?>" class="btn btn-custom btn-lg" >Add Service Record</a>
                                     </div>
                                     <div class="col-md-3 form-group">
-                                        <input type="submit" name="cd-submit" class="btn btn-primary btn-lg outline text-center" value="Save Changes">
+                                        <input type="submit" name="cd-submit" class="btn btn-custom btn-lg" value="Save Changes">
                                     </div>
                                 </div>
                     </form>
