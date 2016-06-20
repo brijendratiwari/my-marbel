@@ -16,7 +16,7 @@ $(document).ready(function(){
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": base_url + "customer_list", "bDeferRender": true,
-        "aLengthMenu": [[50, 100, -1], [50, 100,'All', $("#sAll").val()]],
+        "aLengthMenu": [[10,20,50, 100, -1], [10,20,50, 100,'All', $("#sAll").val()]],
         "sPaginationType": "numbers",
         "iDisplayLength": 50,
         "bDestroy": true, //!!!--- for remove data table warning.
@@ -44,7 +44,7 @@ $(document).ready(function(){
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": base_url + "order_list", "bDeferRender": true,
-        "aLengthMenu": [[50, 100, -1], [50, 100,'All', $("#sAll").val()]],
+        "aLengthMenu": [[10,20,50, 100, -1], [10,20,50, 100,'All', $("#sAll").val()]],
         "sPaginationType": "numbers",
         "iDisplayLength": 50,
         "bDestroy": true, //!!!--- for remove data table warning.
@@ -70,7 +70,7 @@ $(document).ready(function(){
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": base_url + "shipping_list", "bDeferRender": true,
-        "aLengthMenu": [[50, 100, -1], [50, 100,'All', $("#sAll").val()]],
+         "aLengthMenu": [[10,20,50, 100, -1], [10,20,50, 100,'All', $("#sAll").val()]],
         "sPaginationType": "numbers",
         "iDisplayLength": 50,
         "bDestroy": true, //!!!--- for remove data table warning.
@@ -99,7 +99,7 @@ $(document).ready(function(){
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": base_url + "shipped_list", "bDeferRender": true,
-        "aLengthMenu": [[50, 100, -1], [50, 100,'All', $("#sAll").val()]],
+         "aLengthMenu": [[10,20,50, 100, -1], [10,20,50, 100,'All', $("#sAll").val()]],
         "sPaginationType": "numbers",
         "iDisplayLength": 50,
         "bDestroy": true, //!!!--- for remove data table warning.
@@ -124,7 +124,7 @@ $(document).ready(function(){
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": base_url + "services_list?status=finished", "bDeferRender": true,
-        "aLengthMenu": [[50, 100, -1], [50, 100,'All', $("#sAll").val()]],
+         "aLengthMenu": [[10,20,50, 100, -1], [10,20,50, 100,'All', $("#sAll").val()]],
         "sPaginationType": "numbers",
         "iDisplayLength": 50,
         "bDestroy": true, //!!!--- for remove data table warning.
@@ -146,7 +146,7 @@ $(document).ready(function(){
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": base_url + "services_list?status=inhouse", "bDeferRender": true,
-        "aLengthMenu": [[50, 100, -1], [50, 100,'All', $("#sAll").val()]],
+         "aLengthMenu": [[10,20,50, 100, -1], [10,20,50, 100,'All', $("#sAll").val()]],
         "sPaginationType": "numbers",
         "iDisplayLength": 50,
         "bDestroy": true, //!!!--- for remove data table warning.
@@ -169,7 +169,7 @@ $(document).ready(function(){
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": base_url + "services_list?status=pending", "bDeferRender": true,
-        "aLengthMenu": [[50, 100, -1], [50, 100,'All', $("#sAll").val()]],
+         "aLengthMenu": [[10,20,50, 100, -1], [10,20,50, 100,'All', $("#sAll").val()]],
         "sPaginationType": "numbers",
         "iDisplayLength": 50,
         "bDestroy": true, //!!!--- for remove data table warning.
