@@ -3,6 +3,7 @@
             
             <div class="row">
                 
+                <div class="col-md-12" style="margin-top:10px"><a class='btn btn-sm btn-default' href="<?php echo base_url('index.php/customers'); ?>">Go Back</a></div>
                   
                 <div class="col-md-12 menu-drop-down">
                     <?php

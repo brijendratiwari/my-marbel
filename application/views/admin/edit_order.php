@@ -3,7 +3,7 @@
     
     
     <div class="row">
-
+<div class="col-md-12" style="margin-top:10px"><a class='btn btn-sm btn-default' href="javascript:history.back();">Go Back</a></div>
        <?php if($this->session->flashdata('error')){ ?>
         <div class="col-md-6 alert alert-danger">
             <?php echo $this->session->flashdata('error');  ?>
