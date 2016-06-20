@@ -81,6 +81,28 @@ body {
 .tab-active {
     color: #000000 !important;
 }
+#cssmenu label {
+    background: #e9e9e9 none repeat scroll 0 0;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    float: right;
+    font-size: 14px;
+    margin: 15px 0 15px 15px;
+    padding: 8px;
+    text-align: right;
+    display: block;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+}
+.menu-drop-down #cssmenu ul#nav {
+    padding: 0;
+    text-align: center;
+}
+#cssmenu:hover label {
+    background: none;
+    border: none;
+}
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;

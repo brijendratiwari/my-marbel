@@ -34,7 +34,7 @@
                                        ?>
                                         
                                         <div id='cssmenu'>
-                                            <label>Users </label>
+                                            <label>Users <span class="caret"></span></label>
                                         <?php 
                                      
                                         echo buildMenu(0, $menu,0); ?>
