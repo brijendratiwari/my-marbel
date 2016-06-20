@@ -6,7 +6,7 @@
                 <div id="userSuccess" class="pull-left alert alert-success hidden message"></div>        
                 <div class="pull-left alert alert-danger hidden message" id="userError"></div>
                  </div>   
-                    <div class="col-lg-6 page-header text-right"><button data-target="#usersModal" data-toggle="modal" class="btn btn-success">Edit Profile</button></div>
+                    <div class="col-lg-6 page-header text-right"><button data-target="#usersModal" data-toggle="modal" class="btn btn-custom">Edit Profile</button></div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

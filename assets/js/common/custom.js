@@ -21,13 +21,14 @@ $(document).ready(function(){
         "iDisplayLength": 50,
         "bDestroy": true, //!!!--- for remove data table warning.
         "aoColumnDefs": [
-            {"aTargets": [0]},
+            {"aTargets": [0],"sClass":"hidden"},
             {"sClass": " aligncenter", "aTargets": [1]},
             {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
             {"sClass": "hidden-phone", "aTargets": [3]},
             {"sClass": "hidden-phone", "aTargets": [4]},
             {"sClass": "hidden-phone", "aTargets": [5]},
-            {"sClass": "hidden-phone text-center", "aTargets": [6],"bSortable": false },
+            {"sClass": "hidden-phone", "aTargets": [6]},
+            {"sClass": "hidden-phone text-center", "aTargets": [7],"bSortable": false },
             
         ]}
         );
@@ -48,14 +49,15 @@ $(document).ready(function(){
         "iDisplayLength": 50,
         "bDestroy": true, //!!!--- for remove data table warning.
         "aoColumnDefs": [
-            {"aTargets": [0]},
+            {"aTargets": [0],"sClass": "hidden"},
             {"sClass": " aligncenter", "aTargets": [1]},
             {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
             {"sClass": "hidden-phone", "aTargets": [3]},
             {"sClass": "hidden-phone", "aTargets": [4]},
             {"sClass": "hidden-phone", "aTargets": [5]},
             {"sClass": "hidden-phone", "aTargets": [6]},
-            {"sClass": "hidden-phone text-center", "aTargets": [7],"bSortable": false },
+            {"sClass": "hidden-phone", "aTargets": [7]},
+            {"sClass": "hidden-phone text-center", "aTargets": [8],"bSortable": false },
             
         ]}
         );
@@ -73,7 +75,7 @@ $(document).ready(function(){
         "iDisplayLength": 50,
         "bDestroy": true, //!!!--- for remove data table warning.
         "aoColumnDefs": [
-            {"aTargets": [0]},
+            {"aTargets": [0],"sClass": "hidden"},
             {"sClass": " aligncenter", "aTargets": [1]},
             {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
             {"sClass": "hidden-phone", "aTargets": [3]},
@@ -82,7 +84,8 @@ $(document).ready(function(){
             {"sClass": "hidden-phone", "aTargets": [6]},
             {"sClass": "hidden-phone", "aTargets": [7]},
             {"sClass": "hidden-phone", "aTargets": [8]},
-            {"sClass": "hidden-phone text-center", "aTargets": [9],"bSortable": false },
+            {"sClass": "hidden-phone", "aTargets": [9]},
+            {"sClass": "hidden-phone text-center", "aTargets": [10],"bSortable": false },
             
         ]}
         );
@@ -101,12 +104,13 @@ $(document).ready(function(){
         "iDisplayLength": 50,
         "bDestroy": true, //!!!--- for remove data table warning.
         "aoColumnDefs": [
-            {"aTargets": [0]},
+            {"aTargets": [0],"sClass": "hidden",},
             {"sClass": " aligncenter", "aTargets": [1]},
             {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
             {"sClass": "hidden-phone", "aTargets": [3]},
             {"sClass": "hidden-phone", "aTargets": [4]},
-            {"sClass": "hidden-phone", "aTargets": [5],"bSortable": false },
+            {"sClass": "hidden-phone", "aTargets": [5]},
+            {"sClass": "hidden-phone text-center", "aTargets": [6],"bSortable": false },
             
             
         ]}); 
@@ -130,7 +134,7 @@ $(document).ready(function(){
             {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
             {"sClass": "hidden-phone", "aTargets": [3]},
             {"sClass": "hidden-phone", "aTargets": [4]},
-            {"sClass": "hidden-phone", "aTargets": [5],"bSortable": false },
+            {"sClass": "hidden-phone text-center", "aTargets": [5],"bSortable": false },
             
             
         ]}); 
@@ -153,7 +157,7 @@ $(document).ready(function(){
             {"sClass": "hidden-phone", "aTargets": [3]},
             {"sClass": "hidden-phone", "aTargets": [4]},
             {"sClass": "hidden-phone", "aTargets": [5]},
-            {"sClass": "hidden-phone", "aTargets": [6],"bSortable": false },
+            {"sClass": "hidden-phone text-center", "aTargets": [6],"bSortable": false },
             
             
         ]}); 
@@ -175,7 +179,7 @@ $(document).ready(function(){
             {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
             {"sClass": "hidden-phone", "aTargets": [3]},
             {"sClass": "hidden-phone", "aTargets": [4]},
-            {"sClass": "hidden-phone", "aTargets": [5],"bSortable": false },
+            {"sClass": "hidden-phone text-center", "aTargets": [5],"bSortable": false },
             
             
         ]}); 

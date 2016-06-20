@@ -49,17 +49,37 @@ body {
     padding: 3px;
     font-size: 13px;
 }
-#shipping-data td, #customer-data th{
+#shipping-data td, #shipping-data th{
     padding: 3px;
     font-size: 13px;
 }
-#shipped-data td, #customer-data th{
+#shipped-data td, #shipped-data th{
     padding: 3px;
     font-size: 13px;
 }
-#order-data td, #customer-data th{
+#order-data td, #order-data th{
     padding: 3px;
     font-size: 13px;
+}
+#pending-data td, #pending-data th{
+    padding: 3px;
+    font-size: 13px;
+}
+#inhouse-data td, #inhouse-data th{
+    padding: 3px;
+    font-size: 13px;
+}
+#finished-data td, #finished-data th{
+    padding: 3px;
+    font-size: 13px;
+}
+.btn.btn-custom {
+    background-color: #00aeef;
+    color: #ffffff;
+    border-radius: 0;
+}
+.tab-active {
+    color: #000000 !important;
 }
 @media(min-width:768px) {
     #page-wrapper {

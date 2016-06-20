@@ -32,7 +32,7 @@ class Customers extends CI_Controller {
         $str_point = 0;
 
 
-        $col_sort = array("id", "email", "first_name", "last_name", "type", "register_date", "last_activity", "phone", "notes");
+        $col_sort = array("id","email", "first_name", "last_name","last_activity", "phone", "notes");
 
         $order_by = "id";
         $temp = 'asc';
@@ -42,7 +42,7 @@ class Customers extends CI_Controller {
             $temp = $_GET['sSortDir_0'] === 'asc' ? 'asc' : 'desc';
             $order_by = $col_sort[$index];
         }
-        $this->Customer->db->select("id,email,first_name,last_name,type,register_date,last_activity,phone,notes");
+        $this->Customer->db->select("id,email,first_name,last_name,last_activity,phone,notes");
 
         if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
             $words = $_GET['sSearch'];
@@ -64,8 +64,15 @@ class Customers extends CI_Controller {
 
         $this->db->select('*');
         $this->db->from('m_users');
-        $total_record = $this->db->count_all_results();
-//        $total_record = $this->db->count_all('master_subscriber');
+         if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
+            $words = $_GET['sSearch'];
+            for ($i = 0; $i < count($col_sort); $i++) {
+
+                $this->Customer->db->or_like($col_sort[$i], $words, "both");
+            }
+        }
+        $total_record = $this->Customer->db->count_all_results();
+
         $output = array(
             "sEcho" => intval($_GET['sEcho']),
             "iTotalRecords" => $total_record,
@@ -79,7 +86,7 @@ class Customers extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'], $val['notes'], '<a href="edit_customer/'.$val['id'].'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteCustomer('.$val['id'].')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
+            $output['aaData'][] = array("DT_RowId" => $val['id'],$val['id'], $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'], $val['notes'], '<a href="edit_customer/'.$val['id'].'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteCustomer('.$val['id'].')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
         }
 
         echo json_encode($output);

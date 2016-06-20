@@ -6,7 +6,7 @@
            <div id="orderError" class="pull-left alert alert-danger hidden message"></div>
                  </div>   
                 
-                <div  class="col-lg-7 text-left form-group page-header"><a class='btn btn-sm btn-success' href="<?php echo base_url('index.php/shipping'); ?>">Shipping Orders</a></div>
+                <div  class="col-lg-7 text-left form-group page-header"><a class='btn btn-sm btn-custom' href="<?php echo base_url('index.php/shipping'); ?>">Shipping Orders</a></div>
 
             </div>
             <!-- /.row -->
@@ -23,6 +23,7 @@
 			<thead>
 				<tr>
 					
+					<th>#</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Order Date</th>

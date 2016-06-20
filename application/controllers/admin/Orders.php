@@ -32,7 +32,7 @@ class Orders extends CI_Controller {
         $str_point = 0;
 
 
-        $col_sort = array("m_orders.id", "m_orders.order_number", "m_orders.order_date", "m_users.first_name", "m_users.last_name", "m_orders.order_status", "m_orders.est_ship_date", "m_orders.tracking_number", "m_orders.order_total");
+        $col_sort = array("m_orders.id", "m_orders.order_number", "m_orders.order_date", "m_users.first_name", "m_users.last_name", "m_orders.order_status", "m_orders.tracking_number", "m_orders.order_total");
 
         $order_by = "m_orders.id";
         $temp = 'asc';
@@ -42,7 +42,7 @@ class Orders extends CI_Controller {
             $temp = $_GET['sSortDir_0'] === 'asc' ? 'asc' : 'desc';
             $order_by = $col_sort[$index];
         }
-        $this->Orders->db->select("m_orders.id,m_orders.order_number,m_orders.order_date,m_users.first_name,m_users.last_name,m_orders.order_status,m_orders.est_ship_date,m_orders.tracking_number,m_orders.order_total");
+        $this->Orders->db->select("m_orders.id,m_orders.order_number,m_orders.order_date,m_users.first_name,m_users.last_name,m_orders.order_status,m_orders.tracking_number,m_orders.order_total");
 
         if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
             $words = $_GET['sSearch'];
@@ -64,10 +64,17 @@ class Orders extends CI_Controller {
             $records = $this->Orders->db->get("m_orders");
         }
 
-        $this->db->select('*');
-        $this->db->from('m_orders');
-        $total_record = $this->db->count_all_results();
-//        $total_record = $this->db->count_all('master_subscriber');
+        $this->Orders->db->select('*');
+        $this->Orders->db->from('m_orders');
+         $this->Orders->db->join("m_users", "m_orders.user_id = m_users.id", "LEFT");
+        if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
+            $words = $_GET['sSearch'];
+            for ($i = 0; $i < count($col_sort); $i++) {
+
+                $this->Orders->db->or_like($col_sort[$i], $words, "both");
+            }
+        }
+        $total_record = $this->Orders->db->count_all_results();
         $output = array(
             "sEcho" => intval($_GET['sEcho']),
             "iTotalRecords" => $total_record,
@@ -81,7 +88,7 @@ class Orders extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['order_number'], date('M j, Y', $val['order_date']), $val['first_name'], $val['last_name'], $val['order_status'], $val['tracking_number'], $val['order_total'], '<a href="' . base_url('index.php/edit_order/' . $val['id'] . '') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteOrder('.$val['order_number'].')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
+            $output['aaData'][] = array("DT_RowId" => $val['id'],$val['id'], $val['order_number'], date('M j, Y', $val['order_date']), $val['first_name'], $val['last_name'], $val['order_status'], $val['tracking_number'], $val['order_total'], '<a href="' . base_url('index.php/edit_order/' . $val['id'] . '') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteOrder('.$val['order_number'].')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
         }
 
         echo json_encode($output);

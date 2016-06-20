@@ -26,7 +26,7 @@ class Shipping extends CI_Controller {
         $str_point = 0;
 
 
-        $col_sort = array("m_orders.id",  "m_users.first_name", "m_users.last_name", "m_orders.order_date", "m_orders.est_ship_date", "m_orders.est_ship_date", "m_users.last_activity", "m_orders.order_status","m_orders.wheel_color","m_orders.wheel_size","m_orders.priority");
+        $col_sort = array("m_orders.id",  "m_users.first_name", "m_users.last_name", "m_orders.order_date","m_orders.est_ship_date", "m_users.last_activity", "m_orders.order_status","m_orders.wheel_color","m_orders.wheel_size","m_orders.priority");
 
         $order_by = "m_orders.id";
         $temp = 'asc';
@@ -72,10 +72,17 @@ class Shipping extends CI_Controller {
             #echo $this->db->last_query(); die;
         }
 
-        $this->db->select('*');
-        $this->db->from('m_orders');
-        $total_record = $this->db->count_all_results();
-//        $total_record = $this->db->count_all('master_subscriber');
+        $this->Shipping->db->select('*');
+        $this->Shipping->db->from('m_orders');
+        $this->Shipping->db->join("m_users", "m_orders.user_id = m_users.id", "LEFT");
+          if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
+            $words = $_GET['sSearch'];
+            for ($i = 0; $i < count($col_sort); $i++) {
+
+                $this->Shipping->db->or_like($col_sort[$i], $words, "both");
+            }
+        }
+        $total_record = $this->Shipping->db->count_all_results();
         $output = array(
             "sEcho" => intval($_GET['sEcho']),
             "iTotalRecords" => $total_record,
@@ -89,7 +96,7 @@ class Shipping extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', $val['order_date']), date('M j, Y',$val['est_ship_date']), Date('M j, Y',$val['last_activity']), $val['order_status'], $val['wheel_color'], $val['wheel_size'],$val['priority'], '<a href="'.base_url('index.php/edit_order/' . $val['id']).'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+            $output['aaData'][] = array("DT_RowId" => $val['id'],$val['id'], $val['first_name'], $val['last_name'], date('M j, Y', $val['order_date']), date('M j, Y',$val['est_ship_date']), Date('M j, Y',$val['last_activity']), $val['order_status'], $val['wheel_color'], $val['wheel_size'],$val['priority'], '<a href="'.base_url('index.php/edit_order/' . $val['id']).'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
         }
 
         echo json_encode($output);
