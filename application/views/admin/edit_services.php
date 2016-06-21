@@ -29,16 +29,16 @@
                     </h1>
                   
                         <div class="col-md-12">
-                            <div class="col-md-3">
+                            <div class="col-md-3 form-group">
                                 <span>Order: #<small><?php echo'<a href="'.base_url('edit_order/' . $service['order_id'] . '').'"> '.(isset($service['order']['order_number'])?$service['order']['order_number']:'Not found').'</a>'; ?></small></span>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 form-group">
                                 <span>Service: #<small><?php echo $service['id']; ?></small></span>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 form-group">
                                 <span>Inbound: <small><?php echo '<a href="http://wwwapps.ups.com/WebTracking/processRequest?HTMLVersion=5.0&Requester=NES&AgreeToTermsAndConditions=yes&loc=en_US&tracknum=' . $service['tracking_in'] . '" target="_blank">' . $service['tracking_in'] . '</a>'; ?></small></span>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 form-group">
                                 <input type="text" class="form-control" name="cd-tracking-out" value="<?php echo $service['tracking_out'] ?>" placeholder="Outbound Tracking #"/>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                   
 
                         <div class="col-md-12">
-                            <div class="col-md-3">Service Type: 
+                            <div class="col-md-3 form-group">Service Type: 
                                 <p class="cd-select">
                                     <select class="cd-type form-control" name="cd-type" id="cd-type">
                                         <option <?php if (strcmp($service['type'], 'warrenty') == 0) {
@@ -61,7 +61,7 @@
                                     </select>
                                 </p>
                             </div>
-                            <div class="col-md-3">Service Status:
+                            <div class="col-md-3 form-group">Service Status:
                                 <p class="cd-select"> 
                                     <select class="cd-status form-control" name="cd-status" id="cd-status">
                                         <option <?php if (strcmp($service['status'], 'pending') == 0) {
@@ -81,7 +81,7 @@
             } ?> value="shipped">Shipped</option>
                                     </select></p>										
                             </div>
-                            <div class="col-md-3">Priority:
+                            <div class="col-md-3 form-group">Priority:
                                 <p class="cd-select"> 
                                     <select class="cd-priority form-control" name="cd-priority" id="cd-priority" >
                                         <option <?php if ($service['priority'] == 1) {
@@ -101,26 +101,26 @@
             } ?> value="5">Lowest</option>
                                     </select></p>					
                             </div>
-                            <div class="col-md-3">Due: <p><input type="date" name="cd-due" id="cd-due" class="form-control" style="padding:9px" value="<?php if ($service['due_date'] > 0) {
+                            <div class="col-md-3 form-group">Due: <p><input type="date" name="cd-due" id="cd-due" class="form-control" style="padding:9px" value="<?php if ($service['due_date'] > 0) {
                 echo date("Y-m-d", $service['due_date']);
             } ?>"/></p>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="col-md-6">
+                            <div class="col-md-6 form-group">
                                 <span>Customer Reported Issues: <small>Created on <?php echo date('M j, Y, g:i a', $service['date']); ?></small></span>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 form-group">
                                 <span>Suggested Response: <?php if ($service['suggested_response_date'] > 0): ?><small>by <?php echo $service['suggested_response_admin']['first_name'] . ' ' . $service['suggested_response_admin']['last_name'] . ' on ' . date('M j, Y, g:i a', $service['suggested_response_date']); ?></small><?php endif; ?></span>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="col-md-6">
+                            <div class="col-md-6 form-group">
                                 <p><textarea class="issue form-control" name="cd-issue" id="cd-issue" placeholder="Reported Issues"><?php echo $service['issue']; ?></textarea></p>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 form-group">
                                 <p><textarea class="response form-control" name="cd-response" id="cd-response" placeholder="Suggested Issues / Response"><?php echo $service['suggested_response']; ?></textarea></p>
                             </div>
                         </div>
@@ -128,15 +128,15 @@
 
 
                         <div class="col-md-12">
-                            <div class="col-md-6">
+                            <div class="col-md-6 form-group">
                                 <span>Check In Report:</span>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 form-group">
                                 <span>In The Box:</span>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-6">
+                            <div class="col-md-6 form-group">
                                 <p><textarea class="diagnostic_response form-control" name="cd-diagnostic_response" id="cd-diagnostic_response" placeholder="Diagnostic Notes"><?php echo $service['diagnostic_response']; ?></textarea></p>
                             </div>
                             <div class="col-md-6">
@@ -144,23 +144,23 @@
                               
 
                                     <div class="col-md-12">
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 form-group">
                                             <span>Board: <input type="checkbox" name="included_parts[]" value="board" <?php if (in_array('board', $service['included_parts'])) {
                 echo "checked=\"true\"";
             } ?>/></span>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 form-group">
                                             <span>Remote: <input type="checkbox" name="included_parts[]" value="remote" <?php if (in_array('remote', $service['included_parts'])) {
                 echo "checked=\"true\"";
             } ?>/></span>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 form-group">
                                             <span>Charger: <input type="checkbox" name="included_parts[]" value="charger" <?php if (in_array('charger', $service['included_parts'])) {
                 echo "checked=\"true\"";
             } ?>/></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 form-group">
                                         <div class="col-md-4">
                                             <span>Manual: <input type="checkbox" name="included_parts[]" value="manual" <?php if (in_array('manual', $service['included_parts'])) {
                 echo "checked=\"true\"";
@@ -180,7 +180,7 @@
 
                                 
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 form-group">
                                         <div class="col-md-6">
                                             <select name="included_parts[]" class="form-control">
                                                 <option value="black" <?php if (in_array('black', $service['included_parts'])) {
@@ -206,7 +206,7 @@
 
                               
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 form-group">
                                      
                                         <span>Test Ride: <input type="checkbox" name="test_ride" <?php if ($service['test_ride_complete'] == 1) {
                                 echo "checked=\"true\"";
@@ -219,7 +219,7 @@
 
                
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 form-group">
                             <div class="col-md-6">
                                 <span>Service Items:</span>
                             </div>
@@ -232,72 +232,57 @@
                                 if ($service['services']) {
                                     #echo "<pre>"; print_r($service['services']); die;
                                     foreach ($service['services'] as $i => $ss) {
-                                       
-                                        echo '
+                                       ?>
 											<div class="service_item">
-											    <div class="row-fluid">
 											      <div class="col-md-12">
 											        <div class="col-md-6">
 											          <div class="col-md-12">
-											            <select class="form-control" name="service_name_' . $i . '">
+											            <select class="form-control" name="service_name_<?php echo $i ?>">
 											              <option value="">Please select a service option</option>
-											              <option value="replace_drive_system" ' . (strcmp($ss['name'], 'replace_drive_system') == 0 ? 'selected="true"' : '') . '>Replaced Drive System</option>
-											              <option value="deck_replaced" ' . (strcmp($ss['name'], 'deck_replaced') == 0 ? 'selected="true"' : '') . '>Deck Replaced $350.00</option>
-											              <option value="nose_replaced" ' . (strcmp($ss['name'], 'nose_replaced') == 0 ? 'selected="true"' : '') . '>Nose Replaced $99</option>
-											              <option value="rear_bumper_replaced" ' . (strcmp($ss['name'], 'rear_bumper_replaced') == 0 ? 'selected="true"' : '') . '>Rear Bumper Replaced $15</option>
-											              <option value="griptape_replaced" ' . (strcmp($ss['name'], 'griptape_replaced') == 0 ? 'selected="true"' : '') . '>Griptape Replaced $29.99</option>
-											              <option value="electronic_circut_replaced" ' . (strcmp($ss['name'], 'electronic_circut_replaced') == 0 ? 'selected="true"' : '') . '>Marbel Electronic Circuit Replaced $340.00</option>
-											              <option value="battery_system_replaced" ' . (strcmp($ss['name'], 'battery_system_replaced') == 0 ? 'selected="true"' : '') . '>Battery System Replaced $320.00</option>
-											              <option value="phase_wire_repair" ' . (strcmp($ss['name'], 'phase_wire_repair') == 0 ? 'selected="true"' : '') . '>Phase Wire Check/Repair $29.99</option>
-											              <option value="drive_system_tuned" ' . (strcmp($ss['name'], 'drive_system_tuned') == 0 ? 'selected="true"' : '') . '>Drive System Tuned $29.99</option>
-											              <option value="full_drive_system_replaced" ' . (strcmp($ss['name'], 'full_drive_system_replaced') == 0 ? 'selected="true"' : '') . '>Full Drive System Replaced $195</option>
-											              <option value="drive_belt_replaced" ' . (strcmp($ss['name'], 'drive_belt_replaced') == 0 ? 'selected="true"' : '') . '>Drive Belt Replaced $15</option>
-											              <option value="motor_replaced" ' . (strcmp($ss['name'], 'motor_replaced') == 0 ? 'selected="true"' : '') . '>Motor Replaced $85.00</option>
-											              <option value="motor_position_sensor_replaced" ' . (strcmp($ss['name'], 'motor_position_sensor_replaced') == 0 ? 'selected="true"' : '') . '>Motor Position Sensor Replaced $45.00</option>
-											              <option value="belt_cover_replaced" ' . (strcmp($ss['name'], 'belt_cover_replaced') == 0 ? 'selected="true"' : '') . '>Belt Cover Replaced $29.99</option>
-											              <option value="fan_cap_check_repaired" ' . (strcmp($ss['name'], 'fan_cap_check_repaired') == 0 ? 'selected="true"' : '') . '>Fan Cap Check/Repaired $0</option>
-											              <option value="76mm_wheel_replaced" ' . (strcmp($ss['name'], '76mm_wheel_replaced') == 0 ? 'selected="true"' : '') . '>76mm Wheel Replaced (single) $12.50</option>
-											              <option value="100mm_wheel_replaced" ' . (strcmp($ss['name'], '100mm_wheel_replaced') == 0 ? 'selected="true"' : '') . '>100mm Wheel Replaced (single) $18.75</option>
-											              <option value="bearings_replaced" ' . (strcmp($ss['name'], 'bearings_replaced') == 0 ? 'selected="true"' : '') . '>Bearings Replaced $24.95</option>
-											              <option value="spacers_replaced" ' . (strcmp($ss['name'], 'spacers_replaced') == 0 ? 'selected="true"' : '') . '>Spacers Replaced $2</option>
-											              <option value="remote_repaired" ' . (strcmp($ss['name'], 'remote_repaired') == 0 ? 'selected="true"' : '') . '>Remote Repaired $49.99</option>
-											              <option value="remote_replaced" ' . (strcmp($ss['name'], 'remote_replaced') == 0 ? 'selected="true"' : '') . '>Remote Replaced $99.99</option>
-											              <option value="remote_firmware_update" ' . (strcmp($ss['name'], 'remote_firmware_update') == 0 ? 'selected="true"' : '') . '>Remote Firmware Update $0</option>
-											              <option value="labor" ' . (strcmp($ss['name'], 'labor') == 0 ? 'selected="true"' : '') . '>Labor $75</option>
+											              <option value="replace_drive_system"  <?php echo (strcmp($ss['name'], 'replace_drive_system') == 0 ? 'selected="true"' : '') ?>>Replaced Drive System</option>
+											              <option value="deck_replaced" <?php echo (strcmp($ss['name'], 'deck_replaced') == 0 ? 'selected="true"' : '') ?>>Deck Replaced $350.00</option>
+											              <option value="nose_replaced" <?php echo (strcmp($ss['name'], 'nose_replaced') == 0 ? 'selected="true"' : '') ?>>Nose Replaced $99</option>
+											              <option value="rear_bumper_replaced" <?php echo (strcmp($ss['name'], 'rear_bumper_replaced') == 0 ? 'selected="true"' : '')?>>Rear Bumper Replaced $15</option>
+											              <option value="griptape_replaced" <?php echo (strcmp($ss['name'], 'griptape_replaced') == 0 ? 'selected="true"' : '')?>>Griptape Replaced $29.99</option>
+											              <option value="electronic_circut_replaced" <?php echo (strcmp($ss['name'], 'electronic_circut_replaced') == 0 ? 'selected="true"' : '') ?>>Marbel Electronic Circuit Replaced $340.00</option>
+											              <option value="battery_system_replaced" <?php echo (strcmp($ss['name'], 'battery_system_replaced') == 0 ? 'selected="true"' : '') ?>>Battery System Replaced $320.00</option>
+											              <option value="phase_wire_repair" <?php echo (strcmp($ss['name'], 'phase_wire_repair') == 0 ? 'selected="true"' : '') ?>>Phase Wire Check/Repair $29.99</option>
+											              <option value="drive_system_tuned" <?php echo (strcmp($ss['name'], 'drive_system_tuned') == 0 ? 'selected="true"' : '') ?>>Drive System Tuned $29.99</option>
+											              <option value="full_drive_system_replaced" <?php echo (strcmp($ss['name'], 'full_drive_system_replaced') == 0 ? 'selected="true"' : '') ?>>Full Drive System Replaced $195</option>
+											              <option value="drive_belt_replaced" <?php echo (strcmp($ss['name'], 'drive_belt_replaced') == 0 ? 'selected="true"' : '') ?>>Drive Belt Replaced $15</option>
+											              <option value="motor_replaced" <?php echo (strcmp($ss['name'], 'motor_replaced') == 0 ? 'selected="true"' : '') ?>>Motor Replaced $85.00</option>
+											              <option value="motor_position_sensor_replaced" <?php echo (strcmp($ss['name'], 'motor_position_sensor_replaced') == 0 ? 'selected="true"' : '') ?>>Motor Position Sensor Replaced $45.00</option>
+											              <option value="belt_cover_replaced" <?php echo (strcmp($ss['name'], 'belt_cover_replaced') == 0 ? 'selected="true"' : '') ?>>Belt Cover Replaced $29.99</option>
+											              <option value="fan_cap_check_repaired" <?php echo (strcmp($ss['name'], 'fan_cap_check_repaired') == 0 ? 'selected="true"' : '') ?>>Fan Cap Check/Repaired $0</option>
+											              <option value="76mm_wheel_replaced" <?php echo (strcmp($ss['name'], '76mm_wheel_replaced') == 0 ? 'selected="true"' : '') ?>>76mm Wheel Replaced (single) $12.50</option>
+											              <option value="100mm_wheel_replaced" <?php echo (strcmp($ss['name'], '100mm_wheel_replaced') == 0 ? 'selected="true"' : '') ?>>100mm Wheel Replaced (single) $18.75</option>
+											              <option value="bearings_replaced" <?php echo (strcmp($ss['name'], 'bearings_replaced') == 0 ? 'selected="true"' : '') ?>>Bearings Replaced $24.95</option>
+											              <option value="spacers_replaced" <?php (strcmp($ss['name'], 'spacers_replaced') == 0 ? 'selected="true"' : '') ?>>Spacers Replaced $2</option>
+											              <option value="remote_repaired" <?php echo (strcmp($ss['name'], 'remote_repaired') == 0 ? 'selected="true"' : '') ?>>Remote Repaired $49.99</option>
+											              <option value="remote_replaced" <?php echo (strcmp($ss['name'], 'remote_replaced') == 0 ? 'selected="true"' : '') ?>>Remote Replaced $99.99</option>
+											              <option value="remote_firmware_update" <?php echo (strcmp($ss['name'], 'remote_firmware_update') == 0 ? 'selected="true"' : '')?>>Remote Firmware Update $0</option>
+											              <option value="labor" <?php echo (strcmp($ss['name'], 'labor') == 0 ? 'selected="true"' : '') ?>>Labor $75</option>
 											            </select>
 											          </div>
 											        </div>
 											        <div class="col-md-6">
-											          <div class="col-md-4">
-											            <div class="col-md-5">Qty:</div><div class="col-md-7"><input class="col-md-12 form-control" type="text" name="service_qty_' . $i . '" value="' . $ss['quantity'] . '" /></div>
-											          </div>  
-											          <div class="col-md-4">
-											            <div class="col-md-5">Rate:</div><div class="col-md-7"><input class="col-md-12 form-control" type="text" name="service_rate_' . $i . '" value="' . $ss['rate'] . '" /></div>
-											          </div>  
-											          <div class="col-md-4">
-											            <div class="col-md-5">Amount:</div><div class="col-md-7"><input class="col-md-12 form-control" type="text" name="service_amt_' . $i . '" value="' . $ss['amount'] . '" /></div>
-											          </div>  
+											            <div class="col-md-3 form-group">Qty:</div><div class="col-md-9 form-group"><input class="form-control" type="text" name="service_qty_<?php echo $i; ?>" value=" <?php echo $ss['quantity'] ;?>" /></div>
+											            <div class="col-md-3 form-group">Rate:</div><div class="col-md-9 form-group"><input class="form-control" type="text" name="service_rate_<?php echo $i ; ?>" value="<?php echo $ss['rate']; ?>" /></div>
+											            <div class="col-md-3 form-group">Amount:</div><div class="col-md-9 form-group"><input class="col-md-12 form-control" type="text" name="service_amt_<?php echo $i; ?>" value="<?php echo $ss['amount']; ?>" /></div>
 											        </div>
 											      </div>
-											    </div>
-											    <div class="row-fluid">
 											      <div class="col-md-12" style="margin: 10px 0 20px 0;">
-											        <div class="col-md-6">
+											        <div class="col-md-6 form-group">
 											          <div class="col-md-12">
-											            <input class="form-control" type="text" name="service_description_' . $i . '"  value="' . $ss['description'] . '"/>
+											            <input class="form-control" type="text" name="service_description_<?php echo $i ?>"  value="<?php echo $ss['description'] ?>"/>
 											          </div>
 											        </div>
 											        <div class="col-md-6">
-											          <div class="col-md-4">
-											            <div class="col-md-5">Discount:</div><div class="col-md-7"><input class="col-md-12 form-control" type="text" name="service_discount_' . $i . '"  value="' . $ss['discount'] . '"/></div>
-											          </div>
-											          <div class="col-md-8">
-											            <div class="col-md-4">Finished:</div><div class="col-md-12"><input class="form-control" type="checkbox" name="service_finish_' . $i . '" ' . ($ss['complete'] ? 'checked="true"' : '') . '/> ' . ($ss['complete'] == true ? ' by ' . $ss['admin_name'] . ' on ' . date('M j, Y g:i a', $ss['complete_date']) : '') . '</div>
-											          </div>
+											            <div class="col-md-3 form-group">Discount:</div><div class="col-md-9 form-group"><input class="form-control" type="text" name="service_discount_<?php echo $i; ?>"  value="<?php echo $ss['discount'] ?>"/></div>
+											            <div class="col-md-3 form-group">Finished:</div><div class="col-md-9"><input class="" type="checkbox" name="service_finish_<?php echo $i; ?>" <?php echo ($ss['complete'] ? 'checked="true"' : ''); ?> /> <?php echo  ($ss['complete'] == true ? ' by ' . $ss['admin_name'] . ' on ' . date('M j, Y g:i a', $ss['complete_date']) : ''); ?></div>
 											        </div>
 											      </div>
-											    </div>
-											  </div>';
+											  </div> <?php 
                                     }
                                 }
                                 ?>
@@ -353,36 +338,30 @@
                         </div>
                     </div>
 
-                    <div class="row-fluid">
-                        <div class="col-md-12" style="background-color: #00aeee; color: #fff; padding-bottom: 50px;">
-                            <h1 style="color: #fff; margin: 0px 0px;text-align:left;">Quality Control Checklist</h1>
-                            <div class="col-md-6">
+                        <div class="col-md-12">
+                              <div class="panel panel-info">
+                            <div class="panel-heading">
+                                Quality Control Checklist</div>
+                            <div class="panel-body">
                                 <span>- ALL Capacitors have Silicone Stakes</span><br />
                                 <span>- Both BT chips have Silicone Stakes</span><br />
                                 <span>- Wires will not rub on the I-beam or any other hard edges</span><br />
                                 <span>- Braided housing extended ALL the way.</span><br />
                                 <span>- Wires from the deck to drive systems are extended the proper length</span>
-                            </div>
-                            <div class="col-md-6">
+                          
                                 <span>- Main power connector insulated from vibration with siliconed</span><br />
                                 <span>- Fan Cap Secured! Fan Cap Secured! Fan Cap Secured!</span><br />
                                 <span>- Motor Mount properly torqued down (no rub on drive wheel)</span><br />
                                 <span>- All wires properly siliconed down</span><br />
                                 <span>&nbsp;&nbsp;(Hall Sensor, 12 pin, Phase Wires, Power)</span>
                             </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <!--just for spacing to make it look a little nicer -->
-                    <div class="row-fluid">
-                        <div class="col-md-12">
-                            <br />
-                        </div>
-                    </div>
+                 
 
-                    <div class="row-fluid">
                         <div class="col-md-12">
-                            <div class="col-md-6">
+                            <div class="col-md-6 form-group">
                                 <span>Quality Control Check: <input type="checkbox" name="qa_complete" <?php if ($service['qa_complete'] == 1) {
                                     echo "checked=\"true\"";
                                 } ?>f> <?php if ($service['qa_complete'] == 1) {
@@ -390,16 +369,8 @@
                                 } ?></span>
                             </div>
                         </div>
-                    </div>
 
-                    <!--just for spacing to make it look a little nicer -->
-                    <div class="row-fluid">
-                        <div class="col-md-12" style="padding-bottom: 50px;">
 
-                        </div>
-                    </div>
-
-                    <div class="row-fluid">
                         <div class="col-md-12">
                             <div class="col-md-3 form-group">
 <!--                                <input type="submit" name="cd-delete" class="btn btn-primary btn-lg outline text-center" value="Delete Record">-->
@@ -409,15 +380,13 @@
                                 <input type="submit" name="cd-submit" class="btn btn-custom btn-lg" value="Save Changes">
                             </div>
                         </div>
-                    </div>
 
                 </form>
             </div>
 <?php } ?>
-        <div class="container" style="background-color: #fafafa; color: #666;margin-top: 20px;">
-				<h1 style="padding: 0 0 15px; border-bottom: 1px solid #aaa;"><small><span style="float: left;">Service Update Log</span></small></h1>
+        <div class="col-md-12" style="background-color: #fafafa; color: #666;margin-bottom: 10%;">
+				<h1 style="padding: 0 0 15px; border-bottom: 1px solid #aaa;"><small><span>Service Update Log</span></small></h1>
 				<?php foreach ($recentServiceLog as $i => $log): ?>
-					<div class="row-fluid">
 						<div class="col-md-12">
 							<div class="col-md-1"><?php echo (sizeof($recentServiceLog) - ($i + 1) + 1); ?></div>
 							<div class="col-md-2">
@@ -430,17 +399,15 @@
 								<span><?php echo $log['date']; ?></span>
 							</div>
 						</div>
-					</div>
 				<?php endforeach; ?>
 			</div>
     </div>
-    <script id="service_input">
+  <div id="service_input" class="hidden">
   <div class="service_item">
-    <div class="row-fluid">
       <div class="col-md-12">
         <div class="col-md-6">
-          <div class="col-md-12">
-            <select name="service_name_%length%">
+          <div class="col-md-12 form-group">
+            <select name="service_name_%length%" class="form-control">
               <option value="">Please select a service option</option>
               <option value="replace_drive_system">Replaced Drive System</option>
               <option value="deck_replaced">Deck Replaced $350.00</option>
@@ -469,43 +436,30 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="col-md-4">
-            <div class="col-md-5">Qty:</div><div class="col-md-7"><input class="col-md-12" type="text" name="service_qty_%length%" /></div>
-          </div>  
-          <div class="col-md-4">
-            <div class="col-md-5">Rate:</div><div class="col-md-7"><input class="col-md-12" type="text" name="service_rate_%length%" /></div>
-          </div>  
-          <div class="col-md-4">
-            <div class="col-md-5">Amount:</div><div class="col-md-7"><input class="col-md-12" type="text" name="service_amt_%length%" /></div>
-          </div>  
+            <div class="col-md-3 form-group">Qty:</div><div class="col-md-9 form-group"><input class="form-control" type="text" name="service_qty_%length%" /></div>
+            <div class="col-md-3 form-group">Rate:</div><div class="col-md-9 form-group"><input class="form-control" type="text" name="service_rate_%length%" /></div>
+            <div class="col-md-3 form-group">Amount:</div><div class="col-md-9 form-group"><input class="form-control" type="text" name="service_amt_%length%" /></div>
         </div>
       </div>
-    </div>
-    <div class="row-fluid">
       <div class="col-md-12" style="margin: 10px 0 20px 0;">
-        <div class="col-md-6">
+        <div class="col-md-6 form-group">
           <div class="col-md-12">
-            <input type="text" name="service_description_%length%" />
+              <input type="text" class="form-control" placeholder="service description" name="service_description_%length%" />
           </div>
         </div>
         <div class="col-md-6">
-          <div class="col-md-4">
-            <div class="col-md-5">Discount:</div><div class="col-md-7"><input class="col-md-12" type="text" name="service_discount_%length%" /></div>
-          </div>
-          <div class="col-md-8">
-            <div class="col-md-4">Finish</div><div class="col-md-12"><input type="checkbox" name="service_finish_%length%" /></div>
-          </div>
+            <div class="col-md-3 form-group">Discount:</div><div class="col-md-9 form-group"><input class="form-control" type="text" name="service_discount_%length%" /></div>
+            <div class="col-md-3 form-group">Finish</div><div class="col-md-9 form-group"><input type="checkbox" name="service_finish_%length%" /></div>
         </div>
       </div>
-    </div>
   </div>
-</script>
+</div>
 
 <script>
   $(document).ready(function () {
     $('#add_service_item').click(function() {
       console.log("clicked the add service item")
-      var text = $("#service_input").html().replace(/\%length%/g, $('#service_items').children().size()); 
+      var text = $('body').find("#service_input").html().replace(/\%length%/g, $('#service_items').children().size()); 
       $('#service_items').append(text);
       $('#service_item_count').val($('#service_items').children().size());
     });

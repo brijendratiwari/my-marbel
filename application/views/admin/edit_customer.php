@@ -236,7 +236,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-3 form-group">
-                                        <a href="/new_services/id/<?php echo $customer['id']; ?>" class="btn btn-custom btn-lg" >Add Service Record</a>
+                                        <a href="/new_services/<?php echo $customer['id']; ?>" class="btn btn-custom btn-lg" >Add Service Record</a>
                                     </div>
                                     <div class="col-md-3 form-group">
                                         <input type="submit" name="cd-submit" class="btn btn-custom btn-lg" value="Save Changes">
