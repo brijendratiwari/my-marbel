@@ -82,9 +82,9 @@
                 <?php 
                 $user_type=$this->session->userdata['marbel_user']['type'];
                 if($user_type==='customer'){?>
-                 <a class="navbar-brand" href="<?php echo base_url('index.php/customer_profile');?>"><img src="/assets/img/logo.png"></a>
+                 <a class="navbar-brand" href="<?php echo base_url('customer_profile');?>"><img src="/assets/img/logo.png"></a>
                 <?php } else{?>
-                <a class="navbar-brand" href="<?php echo base_url('index.php/profile');?>"><img src="/assets/img/logo.png"></a>
+                <a class="navbar-brand" href="<?php echo base_url('profile');?>"><img src="/assets/img/logo.png"></a>
                 <?php } ?>
             </div>
             <!-- /.navbar-header -->
@@ -101,9 +101,9 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li>
                          <?php   if($user_type==='customer'){?>
-                            <a href="<?php echo base_url('index.php/customer_profile'); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            <a href="<?php echo base_url('customer_profile'); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
                          <?php } else{?>
-                            <a href="<?php echo base_url('index.php/profile'); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            <a href="<?php echo base_url('profile'); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
                          <?php } ?>
                         </li>
                         <li class="divider"></li>

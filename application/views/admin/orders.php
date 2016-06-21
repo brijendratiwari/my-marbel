@@ -69,7 +69,7 @@
 
 <!--Order modal ..-->
 
-<form id="add-row-form" action="<?php echo base_url('index.php/add_order') ?>" method="POST">
+<form id="add-row-form" action="<?php echo base_url('add_order') ?>" method="POST">
 		<div class="modal fade" id="ordersModal" tabindex="-1" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);display: none;">
 			<div class="modal-dialog">
 				<div class="modal-content">

@@ -1,7 +1,7 @@
  <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                 <p class="centered">
-                  <a href="<?php echo base_url('index.php/customer_profile');?>">
+                  <a href="<?php echo base_url('customer_profile');?>">
                 <img class="img-circle" width="60" src="/assets/img/ui-sam.jpg">
                 </a>
                 </p>
