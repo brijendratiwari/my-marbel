@@ -28,6 +28,7 @@ class Services extends CI_Controller {
         $sLimit = "";
         $lenght = 50;
         $str_point = 0;
+       
         if ($this->input->get('status', TRUE)) {
             $status = $this->input->get('status', TRUE);
             ;
@@ -99,13 +100,19 @@ class Services extends CI_Controller {
         $i = 0;
         $final = array();
         foreach ($result as $val) {
+            $user_url='';
+            $service_url='';
+            if($val['user_id']!='')
+                $user_url='/id/'.$val['user_id'];
+            if($val['id']!='')
+                $service_url='/service_id/'.$val['id'];
             if ($status == 'finished') {
                 $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', $val['qa_date']), $val['tracking_out'], $val['status'], '<a href="' . base_url('index.php/edit_service/' . $val['id'] . '/fn') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             } else if ($status == 'inhouse') {
                 $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', strtotime($val['date'])), $val['priority'], Date('M j, Y', strtotime($val['due_date'])), $val['status'], '<a href="' . base_url('index.php/edit_service/' . $val['id'] . '/in') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             } elseif ($status == 'pending') {
 
-                $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', strtotime($val['date'])), $val['suggested_response'], $val['tracking_in'], '<a href="' . base_url('index.php/new_services/' . $val['id'] . '/' . $val['user_id']) . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+                $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', strtotime($val['date'])), $val['suggested_response'], $val['tracking_in'], '<a href="' . base_url('index.php/new_services'.$service_url.$user_url) . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             }
         }
 
@@ -113,16 +120,33 @@ class Services extends CI_Controller {
         die;
     }
 
-    public function new_services($service_id = false, $user_id = false) {
+    public function new_services() {
 
-        if ($user_id != '') {
+            
+                
+            $service_id=array_search('service_id',$this->uri->segment_array());
+            $redirect_url='';
+            if($service_id){
+                
+                $service_index=$this->uri->segment($service_id);
+                $service_id=$this->uri->segment($service_id+1);
+                $service_url='/'.$service_index.'/'.$service_id;
+            }
+             $id=array_search('id',$this->uri->segment_array());
+            if($id){
+              
+                $user_index=$this->uri->segment($id);
+                $user_id=$this->uri->segment($id+1);
+                $user_url='/'.$user_index.'/'.$user_id;
+            }
             $this->data['page'] = "New Services";
             $tis->data['title'] = "New Services";
-            $this->data['customer'] = $this->Customer->getCustomers($user_id);
+            $this->data['customer'] = $customer= $this->Customer->getCustomers($user_id);
             $this->data['orders'] = $this->Services->getOrders($user_id);
             $this->data['totalServiceRecords'] = $this->Services->getTotalServiceRecords();
             $this->data['admins'] = $this->Services->getAdmins();
-            if ($service_id != '') {
+            
+            if ($service_id) {
 
                 $this->data['service'] = $services = $this->Services->getService($service_id);
             }
@@ -136,16 +160,17 @@ class Services extends CI_Controller {
                     $this->Services->insertService();
                 }
                 $this->session->set_flashdata('success', 'Service Record has been added for order #' . $this->input->post('order_number'));
-                redirect('new_services/' . $service_id . '/' . $user_id);
+                redirect('new_services' . $service_url . $user_url);
             }
-
-
+            if($customer==''){
+                 $this->session->set_flashdata('error', 'A customer id needs to be specified to add a service record');
+                 redirect('services?status=pending');
+                 
+            }
+            
             $this->load->template('admin/new_services', $this->data);
-        } else {
-            $this->session->set_flashdata('error', 'A customer id needs to be specified to add a service record');
-            redirect('new_services/' . $service_id);
         }
-    }
+
 
     public function edit_service($id = false, $param = false) {
 
