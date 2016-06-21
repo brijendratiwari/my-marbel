@@ -125,26 +125,37 @@ class Users_model extends CI_Model {
         $query = $this->db->get();
         $salt = '';
         if ($query->num_rows() == 0) {
-
-            $salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
-            $insert = array('user_id' => '(SELECT id FROM m_users WHERE email =' . $email . ')', 'password' => $salt, 'salt' => $salt);
-            $this->db->insert('m_user_auth', $insert);
+            $this->db->select('id')->from('m_users');
+            $this->db->where('email', $email);
+            $query1 = $this->db->get();
+            if ($query1->num_rows() > 0) {
+                $user_data = $query1->result_array();
+                $salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+                $insert = array('user_id' => $user_data[0]['user_id'], 'password' => $salt, 'salt' => $salt);
+                $this->db->insert('m_user_auth', $insert);
+            } else {
+                return 0;
+            }
+        }else{
+             $user_data=$query->result_array();
+             $salt = $user_data[0]['salt'];
         }
         $key = hash('sha512', 'reset-password-key' . $salt);
         $users = $this->getUserEmailData($email);
+//        echo base_url('resetPassword/' . $email . '/' . $key . '');
         $mergeVars = array(
             array(
                 'rcpt' => $email,
                 'vars' => array(
                     array(
                         'name' => 'resetlink',
-                        'content' => 'http://mymarbel.com/reset-password/' . $email . '/' . $key
+                        'content' => base_url('resetPassword/' . $email . '/' . $key . '')
                     )
                 )
             )
         );
         $this->sendTemplateEmail('password-reset-template', $users, 'Password reset for MyMarbel', $mergeVars);
-        return 0;
+        return TRUE;
     }
 
     function getUserEmailData($userStr) {
@@ -297,7 +308,7 @@ class Users_model extends CI_Model {
     }
 
     function get_mandrill() {
-        require_once 'utils/mail/mandrill/Mandrill.php';
+        $this->load->library('Mandrill');
         return new Mandrill(MANDRILL_API_KEY);
     }
 
@@ -306,39 +317,66 @@ class Users_model extends CI_Model {
     }
 
     /* function for API */
+
     function getAppUserByEmail($email) {
 
 
         $customer = array();
 
         $this->db->select('mu.id as user_id, mu.email, mu.first_name, mu.last_name, mu.type, mu.register_date, mu.last_activity, mu.phone, mu.notes, mua.password as db_password, mua.salt');
-        
+
         $this->db->from('m_users as mu');
         $this->db->join('m_user_auth as mua', 'mua.user_id = mu.id', 'LEFT');
         $this->db->where('mu.email', $email);
-       $res=$this->db->get();
+        $res = $this->db->get();
 
-        if($res->num_rows() > 0){
+        if ($res->num_rows() > 0) {
             $user_data = $res->result_array();
-               $customer = array(
-                    'user_id' => $user_data[0]['user_id'],
-                    'email' => $user_data[0]['email'],
-                    'first_name' => $user_data[0]['first_name'],
-                    'last_name' => $user_data[0]['last_name'],
-                    'type' => $user_data[0]['type'],
-                    'register_date' => $user_data[0]['register_date'],
-                    'last_activity' => $user_data[0]['last_activity'],
-                    'phone' => $user_data[0]['phone'],
-                    'notes' => $user_data[0]['notes'],
-                    'db_password' => $user_data[0]['db_password'],
-                    'salt' => $user_data[0]['salt']
-                );
-                  return $customer;
-        }else{
+            $customer = array(
+                'user_id' => $user_data[0]['user_id'],
+                'email' => $user_data[0]['email'],
+                'first_name' => $user_data[0]['first_name'],
+                'last_name' => $user_data[0]['last_name'],
+                'type' => $user_data[0]['type'],
+                'register_date' => $user_data[0]['register_date'],
+                'last_activity' => $user_data[0]['last_activity'],
+                'phone' => $user_data[0]['phone'],
+                'notes' => $user_data[0]['notes'],
+                'db_password' => $user_data[0]['db_password'],
+                'salt' => $user_data[0]['salt']
+            );
+            return $customer;
+        } else {
             return FALSE;
         }
-        
-     
+    }
+
+    function updatePassword($email, $resetKey, $newPassword) {
+        $this->db->select('mua.salt,mua.user_id');
+        $this->db->from('m_user_auth as mua');
+        $this->db->join('m_users as mu', 'mu.id = mua.user_id');
+        $this->db->where('mu.email', $email);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $user_data = $query->result_array();
+            $salt = $user_data[0]['salt'];
+            $key = hash('sha512', 'reset-password-key' . $salt);
+//         echo $key.'<br>';
+//         echo $resetKey.'<br>';die;
+            if (strcmp($key, $resetKey) !== 0) {
+                return 1;
+            }
+            $newSalt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+            $password = hash('sha512', $newPassword . $newSalt);
+            $this->db->where('user_id', $user_data[0]['user_id']);
+            $this->db->update('m_user_auth', array('password' => $password, 'salt' => $newSalt));
+            if ($this->db->affected_rows() > 0) {
+                return 0;
+            } else {
+                return 'error';
+            }
+        }
+        return 2;
     }
 
 }

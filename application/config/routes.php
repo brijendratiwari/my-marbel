@@ -55,6 +55,8 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = 'admin/customers';
 
 
+$route['resetPassword/(:any)/(:any)'] = 'login/reset_password/$1/$2';
+
 
 $route['customers'] = 'admin/customers';
 $route['customer_list'] = 'admin/customers/get_customers';

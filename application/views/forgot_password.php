@@ -47,7 +47,7 @@
         url: "/login/ajax_forgot",
         data: "reset_request_email="+email,
         success: function(html) { 
-          if (html==1) {
+          if (html==0) {
             $("#error").fadeIn("slow");
             $('#error').addClass('error');
             $('#loader').css('display', 'none', 'important');
