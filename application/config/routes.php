@@ -101,3 +101,14 @@ $route['delete_services/(:num)/(:any)']='admin/services/delete_services/$1/$2';
 
 $route['email']='admin/email';
 $route['send_email']='admin/email/send_email';
+
+$route['customer'] = 'customer/dashboard';
+$route['customer_profile'] = 'customer/profile';
+$route['order']='customer/order';
+
+$route['ride_reports']='customer/ridereports';
+
+$route['support']='customer/support';
+
+
+
