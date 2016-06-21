@@ -89,7 +89,10 @@ $route['shipped_list']='admin/shipped/get_shipped';
 
 $route['services']='admin/services';
 $route['services_list']='admin/services/get_services';
-$route['new_services/(:num)/(:num)']='admin/services/new_services/$1/$2';
+$route['new_services']='admin/services/new_services';
+$route['new_services/(:any)/(:num)']='admin/services/new_services/$1/$2';
+$route['new_services/(:any)/(:any)/(:any)']='admin/services/new_services/$1/$2/$3';
+$route['new_services/(:any)/(:num)/(:any)/(:num)']='admin/services/new_services/$1/$2/$3/$4';
 $route['new_services/(:num)']='admin/services/new_services/$1';
 $route['edit_service/(:num)/(:any)']='admin/services/edit_service/$1/$2';
 $route['delete_services/(:num)/(:any)']='admin/services/delete_services/$1/$2';
