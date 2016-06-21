@@ -264,7 +264,7 @@
         
         <div class="col-md-3">
 	  <div class="col-md-12" style="background-color: #fafafa; color: #666;">
-							<h4 style="border-bottom:1px solid black;"><span>Customer Details</span> <span><a href="<?php echo base_url('index.php/edit_customer/'.$order[0]['user_id'].''); ?>">edit</a></span></h4>
+							<h4 style="border-bottom:1px solid black;"><span>Customer Details</span> <span><a href="<?php echo base_url('edit_customer/'.$order[0]['user_id'].''); ?>">edit</a></span></h4>
 							<p><?php echo $customer[0]['first_name'].' '.$customer[0]['last_name']; ?></p>
 							<p><?php 
 								if (sizeof($customer[0]['phone']) > 10) {

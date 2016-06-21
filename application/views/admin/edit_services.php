@@ -30,7 +30,7 @@
                   
                         <div class="col-md-12">
                             <div class="col-md-3">
-                                <span>Order: #<small><?php echo'<a href="'.base_url('index.php/edit_order/' . $service['order_id'] . '').'"> '.(isset($service['order']['order_number'])?$service['order']['order_number']:'Not found').'</a>'; ?></small></span>
+                                <span>Order: #<small><?php echo'<a href="'.base_url('edit_order/' . $service['order_id'] . '').'"> '.(isset($service['order']['order_number'])?$service['order']['order_number']:'Not found').'</a>'; ?></small></span>
                             </div>
                             <div class="col-md-3">
                                 <span>Service: #<small><?php echo $service['id']; ?></small></span>

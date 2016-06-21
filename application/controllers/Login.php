@@ -66,16 +66,10 @@ class Login extends CI_Controller {
         }
     }
 
-    public function reset_password($email = FALSE, $key = FALSE) {
-        if($email && $key){
-        $this->data['page'] = 'Reset Password';
-        $this->data['title'] = 'Reset Password';
-        $this->data['resetKey'] = $key;
-        $this->data['email'] = $email;
-        $this->load->view('reset_password', $this->data);
-        }else{
-            redirect('login');
-        }
+    public function logout() {
+
+        $this->session->sess_destroy();
+        redirect('login');
     }
 
 }

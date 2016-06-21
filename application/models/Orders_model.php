@@ -237,5 +237,30 @@ class Orders_model extends CI_Model {
             return FALSE;
         }
     }
+    /*update order by customer*/
+   public  function updateOrder($userId, $orderId, $order_number, $delivery_address, $delivery_address_2, $city, $state, $zip, $country, $wheel_color, $wheel_size) {
+            $this->db->select('id, order_status, order_number, delivery_address, delivery_address_2, city, state, zip, country, wheel_color, wheel_size')->from('m_orders');
+            $this->db->where('id',$orderId);
+            $this->db->where('order_status != ', 'shipping');
+            $this->db->where('order_status != ', 'refunded');
+            $query=$this->db->get();
+            if($query->num_rows()>0){
+                $response=$query->row_array();
+                if (strcmp($delivery_address, $response['delivery_address']) !== 0) { $this->logOrderUpdate($response['id'], $userId, sprintf('Updated the delivery address to "%s"', $delivery_address)); }
+                if (strcmp($delivery_address_2, $response['delivery_address_2']) !== 0) { $this->logOrderUpdate($response['id'], $userId, sprintf('Updated the delivery address 2 to "%s"', $delivery_address_2)); }
+                if (strcmp($city, $response['city']) !== 0) { $this->logOrderUpdate($response['id'], $userId, sprintf('Updated the city to "%s"', $city)); }
+                if (strcmp($state, $response['state']) !== 0) { $this->logOrderUpdate($response['id'], $userId, sprintf('Updated the state to "%s"', $state)); }
+                if (strcmp($zip, $response['zip']) !== 0) { $this->logOrderUpdate($response['id'], $userId, sprintf('Updated the zip code to "%s"', $zip)); }
+                if (strcmp($country,$response['country']) !== 0) { $this->logOrderUpdate($response['id'], $userId, sprintf('Updated the country to "%s"', $country)); }
+                if (strcmp($wheel_color, $response['wheel_color']) !== 0) { $this->logOrderUpdate($response['id'], $userId, sprintf('Updated the wheel color to "%s"', $wheel_color)); }
+                if (strcmp($wheel_size, $response['wheel_size']) !== 0) { $this->logOrderUpdate($response['id'], $userId, sprintf('Updated the wheel size to "%s"', $wheel_size)); }
+                $this->db->where('order_number',$order_number);
+                $this->db->update('m_orders',array('delivery_address'=>$delivery_address,'delivery_address_2'=>$delivery_address_2,'city'=>$city,'state'=>$state,'zip'=>$zip,'country'=>$country,'wheel_color'=>$wheel_color,'wheel_size'=>$wheel_size));
+               
+		return TRUE;
+                
+                }
+                return FALSE;
+	}
 
 }

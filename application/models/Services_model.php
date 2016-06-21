@@ -379,4 +379,10 @@ function getOrderByNumber($order_number) {
               }
          
 	}
+        /* get countries from json file */
+
+    function getCountries() {
+        $jsonStr = file_get_contents(base_url() . "/assets/countries.json");
+        return json_decode($jsonStr, true);
+    }
 }

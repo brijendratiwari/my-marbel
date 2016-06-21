@@ -7,7 +7,7 @@
         
                  </div>   
 
-                    <div  class="col-lg-7 text-left form-group page-header"><a class='btn btn-sm btn-custom' href="<?php echo base_url('index.php/shipped'); ?>">Shipped Orders</a></div>
+                    <div  class="col-lg-7 text-left form-group page-header"><a class='btn btn-sm btn-custom' href="<?php echo base_url('shipped'); ?>">Shipped Orders</a></div>
                 
             </div>
             <!-- /.row -->

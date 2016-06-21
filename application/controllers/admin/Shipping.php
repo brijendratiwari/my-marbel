@@ -96,7 +96,7 @@ class Shipping extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'],$val['id'], $val['first_name'], $val['last_name'], date('M j, Y', $val['order_date']), date('M j, Y',$val['est_ship_date']), Date('M j, Y',$val['last_activity']), $val['order_status'], $val['wheel_color'], $val['wheel_size'],$val['priority'], '<a href="'.base_url('index.php/edit_order/' . $val['id']).'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+            $output['aaData'][] = array("DT_RowId" => $val['id'],$val['id'], $val['first_name'], $val['last_name'], date('M j, Y', $val['order_date']), date('M j, Y',$val['est_ship_date']), Date('M j, Y',$val['last_activity']), $val['order_status'], $val['wheel_color'], $val['wheel_size'],$val['priority'], '<a href="'.base_url('edit_order/' . $val['id']).'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
         }
 
         echo json_encode($output);
