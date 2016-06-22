@@ -10,8 +10,8 @@ $(document).ready(function(){
    var base_url = $('body').find('#base_url').val();
     
      $("#customer-data").dataTable({
-//              "oLanguage": {
-//            "sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
+              "oLanguage": {
+            "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
 //         "ordering": false,
         "bProcessing": true,
         "bServerSide": true,
@@ -38,8 +38,8 @@ $(document).ready(function(){
     /* order list datatable... */
     
      $("#order-data").dataTable({
-//              "oLanguage": {
-//            "sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
+              "oLanguage": {
+            "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
 //         "ordering": false,
         "bProcessing": true,
         "bServerSide": true,
@@ -64,8 +64,8 @@ $(document).ready(function(){
     /* shipping list datatable... */
     
      $("#shipping-data").dataTable({
-//              "oLanguage": {
-//            "sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
+              "oLanguage": {
+            "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
 //         "ordering": false,
         "bProcessing": true,
         "bServerSide": true,
@@ -93,8 +93,8 @@ $(document).ready(function(){
        /* shipped list datatable... */
     
      $("#shipped-data").dataTable({
-        //"oLanguage": {
-        //"sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
+        "oLanguage": {
+        "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
         //"ordering": false,
         "bProcessing": true,
         "bServerSide": true,
@@ -118,8 +118,8 @@ $(document).ready(function(){
      /* finished list datatable... */
     
      $("#finished-data").dataTable({
-        //"oLanguage": {
-        //"sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
+        "oLanguage": {
+        "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
         //"ordering": false,
         "bProcessing": true,
         "bServerSide": true,
@@ -140,8 +140,8 @@ $(document).ready(function(){
         ]}); 
        /* inhouse list datatable... */
     $("#inhouse-data").dataTable({
-        //"oLanguage": {
-        //"sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
+        "oLanguage": {
+        "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
         //"ordering": false,
         "bProcessing": true,
         "bServerSide": true,
@@ -163,8 +163,8 @@ $(document).ready(function(){
         ]}); 
     /* pending list datatable... */
      $("#pending-data").dataTable({
-        //"oLanguage": {
-        //"sProcessing": "<img src='"+base_url+"../assets/img/ajax-loader.gif'>"},
+        "oLanguage": {
+        "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
         //"ordering": false,
         "bProcessing": true,
         "bServerSide": true,
