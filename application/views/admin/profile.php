@@ -159,7 +159,7 @@
                         <?php if($this->session->userdata('marbel_user')!=''){
                                 $session=$this->session->userdata('marbel_user');?>
                                     
-                        <option value="<?php echo $session['type'];?>"><?php echo ucwords($session['type']);?></option>
+                        <option value="<?php echo $session['type_id'];?>"><?php echo ucwords($session['type']);?></option>
                        <?php
                             }
                         ?>
