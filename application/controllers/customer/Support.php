@@ -24,6 +24,9 @@ class Support extends CI_Controller {
     }
     public function upload(){
         $this->load->helper('my_mail');
+        if($this->input->post('cd-notes') == ''){
+            die('Please write something!!');
+        }
         $orders = $this->Services->getOrders($this->session->userdata['marbel_user']['user_id']);
         if (isset($_FILES["file"]) && $_FILES["file"]["error"]== UPLOAD_ERR_OK) {
                     $uploadDirectory = CONTACT_UPLOADS_DIRECTORY;
@@ -62,7 +65,7 @@ class Support extends CI_Controller {
                         $fromName = $this->session->userdata['marbel_user']['first_name'].' '.$this->session->userdata['marbel_user']['last_name'];
                         $subject = $fromName.' has submitted a support form VIA '.base_url().'customer/support';
                         $text = "Message: ".$this->input->post('cd-notes')."\n\n";
-                        $text .= "Uploaded Attachment: ".base_url('assets/uploads/').$newFileName."\n\n";
+                        $text .= "Uploaded Attachment: ".base_url('assets/uploads/'.$newFileName);
                         $mail = mymail('sandeep@ignisitsolutions.com',$subject, $text,FALSE,$from,$fromName);
                         if(!$mail) {
                             die ($mail);
@@ -77,8 +80,8 @@ class Support extends CI_Controller {
                 $fromName = $this->session->userdata['marbel_user']['first_name'].' '.$this->session->userdata['marbel_user']['last_name'];
                 $subject = $fromName.' has submitted a support form VIA'. base_url().'/customer/support';
                 $text = "Message: ".$this->input->post('cd-notes')."\n\n";
-                $text .= "Orders:";
-                $mail = mymail(CONTACT_EMAIL,$subject, $text,FALSE,$from,$fromName);
+//                $text .= "Orders:";
+                $mail = mymail('sandeep@ignisitsolutions.com',$subject, $text,FALSE,$from,$fromName);
                         if(!$mail) {
                             die ($mail);
                         } else {

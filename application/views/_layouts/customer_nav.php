@@ -11,19 +11,19 @@
                 } ?></h5>
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="customer"><i class="fa fa-desktop"></i> Dashboard</a>
+                            <a href="<?php echo base_url('customer'); ?>"><i class="fa fa-desktop"></i> Dashboard</a>
                         </li>
                         
                         
                        
                         <li>
-                            <a href="order"><i class="fa fa-tag"></i> Orders</a>
+                            <a href="<?php echo base_url('order'); ?>"><i class="fa fa-tag"></i> Orders</a>
                         </li>
                         <li>
-                            <a href="ride_reports"><i class="fa fa-bar-chart-o"></i> Ride Report</a>
+                            <a href="<?php echo base_url('ride_reports');?>"><i class="fa fa-bar-chart-o"></i> Ride Report</a>
                         </li>
                         <li>
-                            <a href="support"><i class="fa fa-envelope fa-fw"></i> Support</a>
+                            <a href="<?php echo base_url('support');?>"><i class="fa fa-envelope fa-fw"></i> Support</a>
                         </li>
                         
                     </ul>
