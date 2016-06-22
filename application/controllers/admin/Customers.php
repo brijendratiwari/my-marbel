@@ -273,7 +273,7 @@ class Customers extends CI_Controller {
         $this->form_validation->set_rules('cd-phone', 'Phone', 'trim|required');
         $this->form_validation->set_rules('cd-first', 'FirstName', 'trim|required');
         $this->form_validation->set_rules('cd-last', 'LastName', 'trim|required');
-        $this->form_validation->set_rules('cd-password', 'Password', 'trim|required');
+        #$this->form_validation->set_rules('cd-password', 'Password', 'trim|required');
 
         //run validation on form input
         if ($this->form_validation->run() == FALSE) {
