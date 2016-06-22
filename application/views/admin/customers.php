@@ -68,33 +68,23 @@
             <h4 class="modal-title" id="myModalLabel">Add New Customer</h4>
           </div>
           <div class="modal-body">
-            <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-first" class="form-control" placeholder="First Name">
                   <span id="cd-first" class="text-danger hidden"></span>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-last" class="form-control" placeholder="Last Name">
                   <span id="cd-last" class="text-danger hidden"></span>
                 </div>
-              </div>
-            </div>
-            <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-email" class="form-control" placeholder="Email">
                   <span id="cd-email" class="text-danger hidden"></span>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="password" name="cd-password" class="form-control" placeholder="Password">
                   <span id="cd-password" class="text-danger hidden"></span>
                 </div>
-              </div>
-            </div>
-            <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                     <select id="cd-type" name="cd-type" class="form-control">
                     <?php 
                             if(!empty($user_type)){
@@ -112,109 +102,77 @@
                   </select>
                 </div>
                   
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input class="form-control" type="text" placeholder="Phone Number" name="cd-phone" id="cd-phone" <?php if (isset($error) && $error > 0) { echo 'value="'.$phone.'"'; } ?>>
                   <span id="cd-phone" class="text-danger hidden"></span>
                 </div>
               
-              </div>
-            </div>
               
-              <div class="col-md-6" id="typeparent" style="height:40px">
+              <div class="col-md-6 form-group" id="typeparent">
                       <select id="cd-type-parent" name="cd-type-parent" class="form-control">
                          
                       </select>
                 </div>
               <!--add some more addition field-->
-              <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-email-second" class="form-control" placeholder="Email Secondary" >
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-bio" class="form-control" placeholder="Bio" >
                 </div>
-              </div>
-            </div>
-              <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-weight" class="form-control" placeholder="Weight" >
                 </div>
-                   <div class="col-md-6">
+                   <div class="col-md-6 form-group">
                   <input type="text" name="cd-height" class="form-control" placeholder="Height">
                 </div>
-                
-              </div>
-            </div>
-              <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+             
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-company" class="form-control" placeholder="Company" >
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-address-one" class="form-control" placeholder="Address one" >
                 </div>
-              </div>
-            </div>
-               <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-address-two" class="form-control" placeholder="Address Two" >
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-city" class="form-control" placeholder="City" >
                 </div>
-              </div>
-            </div>
-               <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-state-region" class="form-control" placeholder="State/Region" >
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-postal-code" class="form-control" placeholder="Postal Code" >
                 </div>
-              </div>
-            </div>
-               <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-country" class="form-control" placeholder="Country" >
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                    <select id="cd-accepts-marketing" name="cd-accepts-marketing" class="form-control">
                        <option value="">Accepts Marketing</option>
                        <option value="yes">Yes</option>
                        <option value="no">No</option>
                       </select>
                 </div>
-              </div>
-            </div>
-             <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                   <input type="text" name="cd-alias" class="form-control" placeholder="Alias" >
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                    <select id="cd-privacy-setting" name="cd-privacy-setting" class="form-control">
                        <option value="">Privacy Setting</option>
                        <option value="ON">ON</option>
                        <option value="OFF">OFF</option>
                       </select>
                 </div>
-              </div>
-            </div>
-              <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                  <select id="cd-units" name="cd-units" class="form-control">
                        <option value="">Units</option>
                        <option value="metric">Metric</option>
                        <option value="english">English</option>
                       </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                    <select id="cd-rangealarm" name="cd-rangealarm" class="form-control">
                        <option value="">Range Alarm</option>
                        <option value="10">10%</option>
@@ -223,88 +181,70 @@
                        <option value="OFF">OFF</option>
                       </select>
                 </div>
-              </div>
-              </div>
-              <div class="form-group" style="height:30px">
-                   <div class="row-fluid">
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                  <select id="cd-notifications-rides" name="cd-notifications-rides" class="form-control">
                        <option value="">Notifications Rides</option>
                        <option value="ON">ON</option>
                        <option value="OFF">OFF</option>
                       </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                     <input type="text" name="cd-primary-riding-style" class="form-control" placeholder="Primary Riding Style">
                 </div>
-              </div>
-              </div>
-              <div class="form-group" style="height:30px">
-              <div class="row-fluid">
-                <div class="col-md-6">
+            
+                <div class="col-md-6 form-group">
                  <select id="cd-safety-brake" name="cd-safety-brake" class="form-control">
                        <option value="">Safety Brake</option>
                        <option value="ON">ON</option>
                        <option value="OFF">OFF</option>
                       </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                     <input type="text" name="cd-preferred-braking-force" class="form-control" placeholder="Preferred Braking Force">
                 </div>
-              </div>
-              </div>
-              <div class="form-group" style="height:30px">
-                  <div class="row-fluid">
-                <div class="col-md-6">
+              
+             
+                <div class="col-md-6 form-group">
                  <select id="cd-reverse-turned" name="cd-reverse-turned" class="form-control">
                        <option value="">Reverse Turned</option>
                        <option value="ON">ON</option>
                        <option value="OFF">OFF</option>
                       </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                     <input type="text" name="cd-locked-settings" class="form-control" placeholder="Locked Settings">
                 </div>
-              </div>
-            </div>
-              <div class="form-group" style="height:30px">
-                  <div class="row-fluid">
-                <div class="col-md-6">
+            
+            
+                <div class="col-md-6 form-group">
                  <input type="text" name="cd-twitter-handle" class="form-control" placeholder="Twitter Handle">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                     <input type="text" name="cd-linkedin-handle" class="form-control" placeholder="Linkedin Handle">
                 </div>
-              </div>
-            </div>
-               <div class="form-group" style="height:30px">
-                  <div class="row-fluid">
-                <div class="col-md-6">
+            
+                <div class="col-md-6 form-group">
                  <input type="text" name="cd-instagram-handle" class="form-control" placeholder="Instagram Handle">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-group">
                     <input type="text" name="cd-reddit-handle" class="form-control" placeholder="Reddit Handle">
                 </div>
-              </div>
-            </div>
-                <div class="form-group" style="height:30px">
-                  <div class="row-fluid">
-              <div class="col-md-6">
+           
+       
+              <div class="col-md-6 form-group">
                   <input type="text" name="cd-terrain" class="form-control" placeholder="Terrain">
                 </div>
-                      </div>
-            </div>
+
               <!--end here new changes-->
-              <div class="form-group" style="height:90px">
-              <div class="row-fluid">
-                <div class="col-md-12"> 
+      
+                <div class="col-md-12 form-group"> 
                   <textarea name="cd-notes" class="form-control" placeholder="Comment" style="max-height: 90px; height: 90px;"></textarea>
                 </div>
-              </div>
-            </div>
+      
               
             
           </div>
+            <div class="clearfix"></div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             <button type="submit" id="add-row" class="btn btn-success">Add</button>
