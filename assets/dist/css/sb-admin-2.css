@@ -103,6 +103,12 @@ body {
     background: none;
     border: none;
 }
+.ride-report{
+    background-color: #4a3553;
+    background-image: url("../../../assets/img/img-1.jpg");
+    background-size: cover;
+    height:100vh;
+}
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;
