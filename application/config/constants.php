@@ -93,9 +93,15 @@ define("SHOPIFY_DEBUG", false);
 define("ROOT_PATH", realpath('../'));
 
 define("CONTACT_ALLOWED_FILESIZE", 1048576 * 10); # 1048576 = 1 mb
-define("CONTACT_UPLOADS_DIRECTORY", 'cache/uploads/');
+define("CONTACT_UPLOADS_DIRECTORY", __DIR__.'/../../assets/uploads/');
+
 
 //define("MANDRILL_API_KEY", "k3nXvdqEhHEa9LLJ__bUCA");
 define("MANDRILL_API_KEY", "k3nXvdqEhHEa9LLJ__bUCA");
 // define("MANDRILL_API_KEY", "FfkPdqhpdANpREYXKuAM_Q");
 define("CONTACT_EMAIL", 'hello@ridemarbel.com');
+define("SMTP_Secure", 'ssl');
+define("SMTP_HOST", 'smtp.gmail.com');
+define("SMTP_PORT", '465');
+define("SMTP_USERNAME", 'ankit@24x7ibuilder.com');
+define("SMTP_PASSWORD", 'ankit123');

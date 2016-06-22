@@ -111,6 +111,7 @@ $route['order']='customer/order';
 $route['ride_reports']='customer/ridereports';
 
 $route['support']='customer/support';
+$route['upload']='customer/support/upload';
 
 
 
