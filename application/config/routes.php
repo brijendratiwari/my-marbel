@@ -98,6 +98,7 @@ $route['new_services/(:num)/(:num)']='admin/services/new_services/$1/$2';
 $route['new_services/(:num)']='admin/services/new_cust_services/$1';
 $route['edit_service/(:num)/(:any)']='admin/services/edit_service/$1/$2';
 $route['delete_services/(:num)/(:any)']='admin/services/delete_services/$1/$2';
+$route['order_service/(:num)/(:num)']='admin/services/new_order_service/$1/$2';
 
 
 

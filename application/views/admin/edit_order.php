@@ -283,7 +283,7 @@
 								<h6 style="border-bottom:1px solid black;"><span >Tasks regarding this customer</span> <span><a href="#">new</a></span></h6>
 			</div>			
 							<div class="col-md-12" style="background-color: #fafafa; color: #666">
-								<h6 style="border-bottom:1px solid black;"><span>Repairs related to this order</span> <span ><a href="/new-service?id=<?php echo $order[0]['user_id'].'&order_id='.$order_id; ?>">new</a></span></h6>
+								<h6 style="border-bottom:1px solid black;"><span>Repairs related to this order</span> <span ><a href="<?php echo base_url('order_service/'.$order[0]['user_id'].'/'.$order_id.''); ?>">new</a></span></h6>
 							</div>
 					
     </div>

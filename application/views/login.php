@@ -60,7 +60,7 @@
       var password=$("#login__password").val();
       $.ajax({
         type: "POST",
-        url: "/login/ajax_login",
+        url: "<?php echo base_url();?>/login/ajax_login",
         data: "login__email="+email+"&login__password="+password,
         success: function(html) { 
             

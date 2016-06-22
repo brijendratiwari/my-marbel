@@ -159,6 +159,34 @@ class Services extends CI_Controller {
 
         $this->load->template('admin/new_services', $this->data);
         }
+        
+    public function new_order_service($user_id = false,$order_id = FALSE) {
+
+     
+      
+        $this->data['page'] = "New Services";
+        $tis->data['title'] = "New Services";
+        $this->data['customer'] = $customer = $this->Customer->getCustomers($user_id);
+        $this->data['orders'] = $this->Services->getOrders($user_id);
+        $this->data['totalServiceRecords'] = $this->Services->getTotalServiceRecords();
+        $this->data['admins'] = $this->Services->getAdmins();
+        $this->data['orderId'] = $order_id;
+
+        
+        if ($this->input->post()) {
+
+
+            $this->Services->insertService();
+            $this->session->set_flashdata('success', 'Service Record has been added for order #' . $this->input->post('order_number'));
+            redirect('order_service/'.$user_id.'/'.$order_id.'');
+        }
+        if ($customer == '') {
+            $this->session->set_flashdata('error', 'A customer id needs to be specified to add a service record');
+            redirect('services?status=pending');
+        }
+
+        $this->load->template('admin/new_services', $this->data);
+        }
 
         public function new_cust_services($id = FALSE) {
 

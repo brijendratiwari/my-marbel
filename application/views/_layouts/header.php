@@ -8,40 +8,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <!--<base href="//<?php echo base_url(); ?>">-->
     <title><?php echo ucwords(str_replace('-', ' ', $page)); ?> | My Marbel</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="/assets/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Timeline CSS -->
-    <link href="/assets/dist/css/timeline.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/dist/css/timeline.css" rel="stylesheet">
 
         <!-- DataTables CSS -->
-    <link href="/assets/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="/assets/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
     
     
     <!-- Custom CSS -->
-    <link href="/assets/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="/assets/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/bower_components/morrisjs/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url(); ?>/assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     
     <!-- Summer note CSS -->
-    <link href="/assets/js/summernote-master/summernote.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/js/summernote-master/summernote.css" rel="stylesheet">
   
     <!-- datepicker CSS -->
-    <link href="/assets/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/css/bootstrap-datepicker.min.css" rel="stylesheet">
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -56,18 +56,18 @@
     
     
       <!-- jQuery -->
-    <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/bower_components/jquery/dist/jquery.min.js"></script>
 
     
     <!-- form JavaScript -->
-    <script src="/assets/js/jquery.form.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/js/jquery.form.min.js"></script>
     
     
     <!-- form JavaScript -->
-    <script src="/assets/js/summernote-master/summernote.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/js/summernote-master/summernote.min.js"></script>
     
     <!-- datepicker JavaScript -->
-    <script src="/assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/js/bootstrap-datepicker.min.js"></script>
 
     <div id="wrapper">
     <!-- Navigation -->
@@ -82,9 +82,9 @@
                 <?php 
                 $user_type=$this->session->userdata['marbel_user']['type'];
                 if($user_type==='customer'){?>
-                 <a class="navbar-brand" href="<?php echo base_url('customer_profile');?>"><img src="/assets/img/logo.png"></a>
+                 <a class="navbar-brand" href="<?php echo base_url('customer_profile');?>"><img src="<?php echo base_url(); ?>/assets/img/logo.png"></a>
                 <?php } else{?>
-                <a class="navbar-brand" href="<?php echo base_url('profile');?>"><img src="/assets/img/logo.png"></a>
+                <a class="navbar-brand" href="<?php echo base_url('profile');?>"><img src="<?php echo base_url(); ?>/assets/img/logo.png"></a>
                 <?php } ?>
             </div>
             <!-- /.navbar-header -->
@@ -107,7 +107,7 @@
                          <?php } ?>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="/login/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="<?php echo base_url('login/logout');?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

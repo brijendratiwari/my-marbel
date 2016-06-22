@@ -22,7 +22,6 @@ class Login extends CI_Controller {
     }
 
     public function ajax_login() {
-
         $email = $this->input->post('login__email');
         $password = $this->input->post('login__password');
         $login = $this->Users->login($email, $password);
@@ -30,8 +29,9 @@ class Login extends CI_Controller {
             echo $login;
         } else {
             $user_info = $this->session->userdata('marbel_user');
+
             if ($user_info != '') {
-                echo '/' . $user_info['type'];
+                echo base_url($user_info['type']);
             } else {
 
                 echo '/logout';
@@ -42,7 +42,7 @@ class Login extends CI_Controller {
     public function logout() {
 
         $this->session->sess_destroy();
-        redirect('/login');
+        redirect(base_url('login'));
     }
 
     public function forgot_password() {

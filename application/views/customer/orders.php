@@ -19,13 +19,18 @@
 					<span class="orderName col-md-offset-3 col-md-3" style="text-align: right">Order Number: </span>
 					<div class="col-md-3 form-group"><select name="orders" id="orders" class="form-control" style="padding: 5px; margin: 0px;">';
 						$activeOrderNumber = '';
+                                                if(!empty($orders)){
 						foreach ($orders as $order) {
 							if (empty($activeOrderNumber)) { $activeOrderNumber = $order['order_number']; }
 							echo '<option '.((strcmp($order['country'], '') !== FALSE) ? 'selected="selected"' : '').' value="order-'.$order['order_number'].'">'.$order['order_number'].'</option> ';
 						}
+                                        }else{
+                                            echo '<option>No order found</option>';
+                                        }
 						echo '</select></div></div></form>';
 						echo '</div>';
 						echo '<div class="orders">';
+                                                if(!empty($orders)){
 						foreach ($orders as $order) {
 							echo '<div id="order-'.$order['order_number'].'" '.($order['order_number'] == $activeOrderNumber ? '' : 'style="display: none;"').'>';
 							echo '<div class=" order_total col-md-12 form-group">';
@@ -63,11 +68,12 @@
 							}
 
 							echo '</div>';
-						}
+						}}
 						echo '</div>';
 						?>
 					<div id="shipping-orders">
 						<?php
+                                                if(!empty($orders)){
 						foreach ($orders as $order) {
 							?>
 							<form id="shipping-order-<?php echo $order['order_number']; ?>" class="cd-form floating-labels" style="text-align: center; color: #777;<?php echo ($order['order_number'] == $activeOrderNumber ? '' : 'display: none;'); ?>" method="POST" action="<?php echo base_url();?>order">
@@ -133,10 +139,9 @@
 										</div>
 									</div>
 						</form>
-						<?php } ?>
+						<?php } } ?>
 					</div>
 
-				</section>
 </div>
             </div>
             </div>
