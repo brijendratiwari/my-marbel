@@ -115,4 +115,6 @@ $route['support']='customer/support';
 $route['upload']='customer/support/upload';
 
 
-
+/*api  */
+$route['saveuserinformation']='appsignin/save_user_information';
+/*....api*/

@@ -94,6 +94,7 @@ define("ROOT_PATH", realpath('../'));
 
 define("CONTACT_ALLOWED_FILESIZE", 1048576 * 10); # 1048576 = 1 mb
 define("CONTACT_UPLOADS_DIRECTORY", __DIR__.'/../../assets/uploads/');
+define("CONTACT_UPLOADS_DIRECTORY_IMAGE", __DIR__.'/../../assets/profile-imgs/');
 
 
 //define("MANDRILL_API_KEY", "k3nXvdqEhHEa9LLJ__bUCA");

@@ -323,7 +323,7 @@ class Users_model extends CI_Model {
 
         $customer = array();
 
-        $this->db->select('mu.id as user_id, mu.email, mu.first_name, mu.last_name, mu.type, mu.register_date, mu.last_activity, mu.phone, mu.notes, mua.password as db_password, mua.salt');
+        $this->db->select('mu.id as user_id, mu.email, mu.first_name, mu.last_name, mu.type, mu.register_date, mu.last_activity, mu.phone, mu.notes, mu.email_secondary,mu.bio,mu.height,mu.weight,mu.terrain,mu.company,mu.address_one,mu.address_two,mu.city,mu.state_or_region,mu.postal_code,mu.country,mu.accepts,mu.alias,mu.privacy_setting,mu.units,mu.range_alarm,mu.notifications,mu.primary_riding_style,mu.safety_brake,mu.preferred_braking_force,mu.reverse_turned,mu.locked_settings,mu.user_profile_pic, mua.password as db_password, mua.salt');
 
         $this->db->from('m_users as mu');
         $this->db->join('m_user_auth as mua', 'mua.user_id = mu.id', 'LEFT');
@@ -331,21 +331,8 @@ class Users_model extends CI_Model {
         $res = $this->db->get();
 
         if ($res->num_rows() > 0) {
-            $user_data = $res->result_array();
-            $customer = array(
-                'user_id' => $user_data[0]['user_id'],
-                'email' => $user_data[0]['email'],
-                'first_name' => $user_data[0]['first_name'],
-                'last_name' => $user_data[0]['last_name'],
-                'type' => $user_data[0]['type'],
-                'register_date' => $user_data[0]['register_date'],
-                'last_activity' => $user_data[0]['last_activity'],
-                'phone' => $user_data[0]['phone'],
-                'notes' => $user_data[0]['notes'],
-                'db_password' => $user_data[0]['db_password'],
-                'salt' => $user_data[0]['salt']
-            );
-            return $customer;
+           return $res->row_array();
+            
         } else {
             return FALSE;
         }
@@ -378,5 +365,24 @@ class Users_model extends CI_Model {
         }
         return 2;
     }
-
+    public function getUserImage($id){
+        $this->db->select('user_profile_pic')->from('m_users');
+        $this->db->where('id',$id);
+        $query=$this->db->get();
+        if($query->num_rows()>0){
+            $image=$query->row();
+            return $image->user_profile_pic;
+        }
+        
+    }
+    public function checkUserEmail($email){
+        $this->db->select('email')->from('m_users');
+        $this->db->where('email',$email);
+        $query=$this->db->get();
+        if($query->num_rows()>0){
+           
+            return $query->num_rows();
+        }
+        
+    }
 }

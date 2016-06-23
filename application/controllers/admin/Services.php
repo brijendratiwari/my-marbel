@@ -100,19 +100,27 @@ class Services extends CI_Controller {
         $i = 0;
         $final = array();
         foreach ($result as $val) {
+           #echo  'service_id:'.$val['id'].'/ user_id :'.$val['user_id']; die;
+            
             $user_url = '';
             $service_url = '';
-            if ($val['user_id'] != '')
-                $user_url = '/id/' . $val['user_id'];
-            if ($val['id'] != '')
-                $service_url = '/service_id/' . $val['id'];
+     
             if ($status == 'finished') {
                 $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', $val['qa_date']), $val['tracking_out'], $val['status'], '<a href="' . base_url('edit_service/' . $val['id'] . '/fn') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             } else if ($status == 'inhouse') {
                 $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', strtotime($val['date'])), $val['priority'], Date('M j, Y', strtotime($val['due_date'])), $val['status'], '<a href="' . base_url('edit_service/' . $val['id'] . '/in') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             } elseif ($status == 'pending') {
-
-                $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', strtotime($val['date'])), $val['suggested_response'], $val['tracking_in'], '<a href="' . base_url('new_services/'.$val['id'].'/'.$val['user_id'].'') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+                if($val['user_id']=='')
+                $user_id=0;
+                    else
+                 $user_id=$val['user_id'];
+                    
+                if($val['id']=='')
+                    $service_id=0;
+                    else
+                    $service_id=$val['id'];
+                    
+                $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', strtotime($val['date'])), $val['suggested_response'], $val['tracking_in'], '<a href="' . base_url('new_services/'.$service_id.'/'.$user_id.'') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             }
         }
 
@@ -122,13 +130,19 @@ class Services extends CI_Controller {
 
     public function new_services($service_id = false,$id = FALSE) {
 
-     
+
         if ($service_id) {
             $service_id = $service_id;
         }
         if ($id) {
             $user_id = $id;
         }
+        if($user_id==0){
+            $this->session->set_flashdata('error', 'A customer id needs to be specified to add a service record');
+            redirect('services?status=pending');
+        }
+        
+        
         $this->data['page'] = "New Services";
         $tis->data['title'] = "New Services";
         $this->data['customer'] = $customer = $this->Customer->getCustomers($user_id);
@@ -190,7 +204,7 @@ class Services extends CI_Controller {
 
         public function new_cust_services($id = FALSE) {
 
-        if ($id) {
+             if ($id) {
             $user_id = $id;
         }
         $this->data['page'] = "New Services";

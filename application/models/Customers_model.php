@@ -152,7 +152,7 @@ class Customers_model extends CI_Model {
                 $parent_type = $this->input->post('cd-type');
             }
             $profile = NULL; 
-            if(isset($_FILES)){
+            if(isset($_FILES['cd-profile']['name'])){
                 
                 $filename = explode('.',$_FILES['cd-profile']['name']);
                 
@@ -160,6 +160,9 @@ class Customers_model extends CI_Model {
                 
                 move_uploaded_file($_FILES['cd-profile']['tmp_name'],__DIR__.'/../../assets/profile-imgs/'.  basename($profile));
                 
+            }
+            else{
+                $profile=$this->Users->getUserImage($id);
             }
            
             $data_update = array(
