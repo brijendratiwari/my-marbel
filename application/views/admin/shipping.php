@@ -19,6 +19,16 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+                            <div class="col-lg-12 text-center">
+                                <div class="col-lg-2">Sort By Country:</div>
+                            <div class="col-lg-2">
+                               <select id="country-search" class="form-control">
+                                    <option value="">All</option>
+                                    <option value="IT">International</option>
+                                    <option value="NA">North America</option>
+                                </select>
+                            </div>
+                            </div>
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="shipping-data" style="width:100% !important;">
                                     <thead>
@@ -33,6 +43,7 @@
                                             <th>W - Color</th>
                                             <th>W - Size</th>
                                             <th>RTY</th>
+                                            <th>Country</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>

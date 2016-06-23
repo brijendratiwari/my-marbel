@@ -63,7 +63,7 @@ $(document).ready(function(){
         );
     /* shipping list datatable... */
     
-     $("#shipping-data").dataTable({
+    var shipping_data = $("#shipping-data").dataTable({
               "oLanguage": {
             "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
 //         "ordering": false,
@@ -85,10 +85,16 @@ $(document).ready(function(){
             {"sClass": "hidden-phone", "aTargets": [7]},
             {"sClass": "hidden-phone", "aTargets": [8]},
             {"sClass": "hidden-phone", "aTargets": [9]},
-            {"sClass": "hidden-phone text-center", "aTargets": [10],"bSortable": false },
+            {"sClass": "hidden-phone", "aTargets": [10]},
+            {"sClass": "hidden-phone text-center", "aTargets": [11],"bSortable": false },
             
         ]}
         );
+
+     /* filter by country */
+     $('#country-search').change( function() { 
+            shipping_data.fnFilter( $(this).val() ); 
+       });
     
        /* shipped list datatable... */
     
