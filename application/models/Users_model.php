@@ -95,7 +95,7 @@ class Users_model extends CI_Model {
 
     function checkbrute($user_id) {
         $this->db->select('time')->from('m_user_login_attempts');
-        $this->db->where('id', $user_id);
+        $this->db->where('user_id', $user_id);
         $this->db->where('time > ', 'UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 2 HOUR)');
         $query = $this->db->get();
         if ($query->num_rows() > 5) {
