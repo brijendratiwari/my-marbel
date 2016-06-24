@@ -70,7 +70,8 @@ class Shipped extends CI_Controller {
         $this->Shipped->db->from('m_orders');
          $this->Shipped->Shipped->db->join("m_users", "m_orders.user_id = m_users.id", "LEFT");
             $this->Shipped->db->join("(SELECT order_id, date as shipped_date FROM `m_order_logs` WHERE notes LIKE '%to \"shipped\"%' ORDER BY date DESC ) mol", "mol.order_id = m_orders.id", "LEFT");
-                   if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
+             $this->db->where('m_orders.order_status','shipped');
+            if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
             $words = $_GET['sSearch'];
             for ($i = 0; $i < count($col_sort); $i++) {
 
