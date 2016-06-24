@@ -100,7 +100,7 @@ $route['edit_service/(:num)/(:any)']='admin/services/edit_service/$1/$2';
 $route['delete_services/(:num)/(:any)']='admin/services/delete_services/$1/$2';
 $route['order_service/(:num)/(:num)']='admin/services/new_order_service/$1/$2';
 
-
+$route['calendar']='admin/calendar';
 
 $route['email']='admin/email';
 $route['send_email']='admin/email/send_email';
@@ -113,6 +113,7 @@ $route['ride_reports']='customer/ridereports';
 
 $route['support']='customer/support';
 $route['upload']='customer/support/upload';
+
 
 
 /*api  */

@@ -43,6 +43,10 @@
     <!-- datepicker CSS -->
     <link href="<?php echo base_url(); ?>/assets/css/bootstrap-datepicker.min.css" rel="stylesheet">
     
+    
+    <!--calendar css --> 
+    <link href="<?php echo base_url(); ?>/assets/full-calendar/fullcalendar.min.css" rel="stylesheet">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -68,6 +72,10 @@
     
     <!-- datepicker JavaScript -->
     <script src="<?php echo base_url(); ?>/assets/js/bootstrap-datepicker.min.js"></script>
+    
+    <!-- fullcalendar JavaScript -->
+    <script src="<?php echo base_url(); ?>/assets/full-calendar/lib/moment.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/full-calendar/fullcalendar.js"></script>
 
     <div id="wrapper">
     <!-- Navigation -->

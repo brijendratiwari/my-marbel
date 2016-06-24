@@ -18,7 +18,7 @@
                             <a href="javascript:;"><i class="fa fa-tasks fa-fw"></i> Tasks</a>
                         </li>
                         <li>
-                            <a href="javascript:;"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
+                            <a href="<?php echo base_url('calendar');?>"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url('customers'); ?>"><i class="fa fa-users fa-fw"></i> Customers</a>
