@@ -68,7 +68,6 @@ class Users_model extends CI_Model {
                 }
             }
         } else {
-            exit;
             return 2;
         }
     }
