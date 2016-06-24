@@ -10,7 +10,7 @@
 
     $(document).ready(function () {
 
-        $('#calendar').fullCalendar({
+        var calendar = $('#calendar').fullCalendar({
             defaultDate: '2016-06-12',
             editable: true,
             eventLimit: true, // allow "more" link when too many events
@@ -69,16 +69,67 @@
                     url: 'http://google.com/',
                     start: '2016-06-28'
                 }
-            ]
+            ],
+            eventDrop: function () {
+                alert('work in progress....');
+            },
+            selectable: true,
+            selectHelper: true,
+            select: function (start, end, allDay) {
+                var title = prompt('Event Title:');
+                var url = prompt('Type Event url, if exits:');
+                if (title) {
+                       alert('work in progress....');
+//                    var start = $.fullCalendar.formatDate(start, "yyyy-MM-dd HH:mm:ss");
+//                    var end = $.fullCalendar.formatDate(end, "yyyy-MM-dd HH:mm:ss");
+//                    $.ajax({
+//                        url: 'http://localhost:8888/fullcalendar/add_events.php',
+//                        data: 'title=' + title + '&start=' + start + '&end=' + end + '&url=' + url,
+//                        type: "POST",
+//                        success: function (json) {
+//                            alert('Added Successfully');
+//                        }
+//                    });
+//                    calendar.fullCalendar('renderEvent',
+//                            {
+//                                title: title,
+//                                start: start,
+//                                end: end,
+//                                allDay: allDay
+//                            },
+//                    true // make the event "stick"
+//                            );
+                }
+                calendar.fullCalendar('unselect');
+            }, eventClick: function (event, jsEvent, view) {
+                var title = prompt('Event Title:', event.title, {buttons: {Ok: true, Cancel: false}});
+                if (title) {
+//                    event.title = title;
+//                    $.ajax({
+//                        url: 'process.php',
+//                        data: 'type=changetitle&title=' + title + '&eventid=' + event.id,
+//                        type: 'POST',
+//                        dataType: 'json',
+//                        success: function (response) {
+//                            if (response.status == 'success')
+//                                $('#calendar').fullCalendar('updateEvent', event);
+//                        },
+//                        error: function (e) {
+//                            alert('Error processing your request: ' + e.responseText);
+//                        }
+//                    });
+                }
+            }
+
         });
 
     });
 
 </script>
 <style>
-    
+
     .fc-event{
-         background-color: #00aeef !important;
-    border: 1px solid #00aeef !important;
+        background-color: #00aeef !important;
+        border: 1px solid #00aeef !important;
     }
 </style>
