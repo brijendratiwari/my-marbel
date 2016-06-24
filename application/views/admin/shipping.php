@@ -24,7 +24,7 @@
                                <select id="country-search" class="form-control">
                                     <option value="">By country</option>
                                     <option value="IT">International</option>
-                                    <option value="NA">North America</option>
+                                    <option value="US">North America</option>
                                 </select>
                             </div>
                             </div>

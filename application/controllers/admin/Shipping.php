@@ -39,12 +39,11 @@ class Shipping extends CI_Controller {
 
         if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
             $words = $_GET['sSearch'];
-//            for ($i = 0; $i < count($col_sort); $i++) {
 
             if ($words == 'IT') {
-                $query .= " AND  m_orders.country = 'IT' ";
-            } else if ($words == 'NA') {
-                $query .= " AND  m_orders.country != 'IT' ";
+                $query .= " AND  m_orders.country != 'US' ";
+            } else if ($words == 'US') {
+                $query .= " AND  m_orders.country = 'US' ";
             } else {
                 $query .= "AND (`m_users`.`first_name` REGEXP '$words'
                            OR `m_users`.`last_name` REGEXP '$words'
@@ -53,7 +52,6 @@ class Shipping extends CI_Controller {
                            OR `m_orders`.`country` REGEXP '$words'
                            OR `m_orders`.`wheel_color` REGEXP '$words')";
             }
-//            }
         }
 
         if (isset($_GET['iSortCol_0'])) {
