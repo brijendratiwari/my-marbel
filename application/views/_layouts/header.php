@@ -24,7 +24,7 @@
     <link href="<?php echo base_url(); ?>/assets/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="<?php echo base_url(); ?>/assets/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>/assets/bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet">
     
     
     <!-- Custom CSS -->

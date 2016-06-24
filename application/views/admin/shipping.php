@@ -19,11 +19,10 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="col-lg-12 text-center">
-                                <div class="col-lg-2">Sort By Country:</div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-12 text-center form-group">
+                            <div class="col-lg-2 pull-right">
                                <select id="country-search" class="form-control">
-                                    <option value="">All</option>
+                                    <option value="">By country</option>
                                     <option value="IT">International</option>
                                     <option value="NA">North America</option>
                                 </select>
