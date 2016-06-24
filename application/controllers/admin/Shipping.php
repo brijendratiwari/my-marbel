@@ -40,9 +40,9 @@ class Shipping extends CI_Controller {
         if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
             $words = $_GET['sSearch'];
 
-            if ($words == 'IT') {
+            if ($words == 'International') {
                 $query .= " AND  m_orders.country != 'US' ";
-            } else if ($words == 'US') {
+            } else if ($words == 'North America') {
                 $query .= " AND  m_orders.country = 'US' ";
             } else {
                 $query .= "AND (`m_users`.`first_name` REGEXP '$words'

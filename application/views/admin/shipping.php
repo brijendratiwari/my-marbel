@@ -23,8 +23,8 @@
                             <div class="col-lg-2 pull-right">
                                <select id="country-search" class="form-control">
                                     <option value="">By country</option>
-                                    <option value="IT">International</option>
-                                    <option value="US">North America</option>
+                                    <option value="International">International</option>
+                                    <option value="North America">North America</option>
                                 </select>
                             </div>
                             </div>
