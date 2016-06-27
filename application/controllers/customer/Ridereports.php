@@ -12,6 +12,9 @@ class Ridereports extends CI_Controller {
         if ($this->Users->auth_check() == false) {
             redirect('/login');
         }
+         if($this->session->userdata['marbel_user']['type']!='customer'){
+                redirect('logout');
+            }
     }
     public function index(){
         

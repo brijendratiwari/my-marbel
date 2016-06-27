@@ -17,7 +17,7 @@ class Login extends CI_Controller {
             $this->data['title'] = 'Login';
             $this->load->view('login', $this->data);
         } else {
-            redirect('customers');
+            redirect($this->session->userdata['marbel_user']['type']);
         }
     }
 

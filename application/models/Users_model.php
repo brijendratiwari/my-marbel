@@ -107,9 +107,17 @@ class Users_model extends CI_Model {
     }
 
     function auth_check() {
-        if ($this->session->userdata('marbel_user') != '') {
-
-            return true;
+        if ($this->session->userdata('marbel_user')) {
+            
+            if($this->session->userdata['marbel_user']['type']!='' && ($this->session->userdata['marbel_user']['type']=='admin')){
+                
+                 return true;
+                 
+            }elseif ($this->session->userdata['marbel_user']['type']!='' && ($this->session->userdata['marbel_user']['type']=='customer')){
+                
+                 return true;
+            }
+           
         } else {
 
             return false;

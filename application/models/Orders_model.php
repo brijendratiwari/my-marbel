@@ -170,7 +170,7 @@ class Orders_model extends CI_Model {
                 $this->logOrderUpdate($id, $userId, sprintf('Updated the product from "%s" to "%s"', $order_data[0]['product'], $product));
             }
             if (strcmp($order_total, $order_data[0]['order_total']) !== 0) {
-                $this->logOrderUpdate($id, $userId, sprintf('Updated the total from "%s" to "%s"', $order_total2, $order_data[0]['order_total']));
+                $this->logOrderUpdate($id, $userId, sprintf('Updated the total from "%s" to "%s"', $order_total, $order_data[0]['order_total']));
             }
             if (strcmp($order_status, $order_data[0]['order_status']) !== 0) {
                 $this->logOrderUpdate($id, $userId, sprintf('Updated the status from "%s" to "%s"', $order_data[0]['order_status'], $order_status));

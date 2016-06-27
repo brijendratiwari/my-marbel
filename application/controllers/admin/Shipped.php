@@ -14,6 +14,9 @@ class Shipped extends CI_Controller {
         if ($this->Users->auth_check() == false) {
             redirect('/login');
         }
+         if($this->session->userdata['marbel_user']['type']!='admin'){
+            redirect('logout');
+        }
     }
     public function index(){
         

@@ -12,6 +12,9 @@ class Orders extends CI_Controller {
         if ($this->Users->auth_check() == false) {
             redirect('/login');
         }
+         if($this->session->userdata['marbel_user']['type']!='admin'){
+            redirect('logout');
+        }
     }
 
     /* order index page */
