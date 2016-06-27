@@ -181,12 +181,14 @@ class Services_model extends CI_Model {
 	}
         
         function getOrders($user_id) {	        
-	$order=array();
+	$orders_info=array();
         $this->db->select('id, order_number, delivery_address, delivery_address_2, city, state, zip, country, order_total, order_status, invoice_url, order_date, est_ship_date, est_ship_location, product, wheel_color, wheel_size, firmware_version, deck_serial_number, main_serial_number, tracking_number, notes, priority')->from('m_orders');
         $this->db->where('user_id',$user_id);
         $query=$this->db->get();
         if($query->num_rows()>0){
-            $order=$query->row_array();
+            $orders=$query->result_array();
+          
+            foreach($orders as $key=>$order){
             if ($order['order_status'] == 'deposit') {
                     $order['order_friendly_status'] = 'Deposit Paid';
                 } else if ($order['order_status'] == 'balance') {
@@ -212,8 +214,11 @@ class Services_model extends CI_Model {
 				$estShipping .= ' via '.$estShippingLocation;
 			}
 			$order['friendly_est_ship_date'] = $estShipping;
-                        $orders[] = $order;
-                        return $orders;
+                        
+                  $orders_info[]= $order;  
+            }
+            
+             return $orders_info;
         }
 	
 }   
