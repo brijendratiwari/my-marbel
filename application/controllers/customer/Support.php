@@ -69,7 +69,7 @@ class Support extends CI_Controller {
                         $subject = $fromName.' has submitted a support form VIA '.base_url().'customer/support';
                         $text = "Message: ".$this->input->post('cd-notes')."\n\n";
                         $text .= "Uploaded Attachment: ".base_url('assets/uploads/'.$newFileName);
-                        $mail = mymail('sandeep@ignisitsolutions.com',$subject, $text,FALSE,$from,$fromName);
+                        $mail = mymail(CONTACT_EMAIL,$subject, $text,FALSE,$from,$fromName);
                         if(!$mail) {
                             die ($mail);
                         } else {
@@ -84,7 +84,7 @@ class Support extends CI_Controller {
                 $subject = $fromName.' has submitted a support form VIA'. base_url().'/customer/support';
                 $text = "Message: ".$this->input->post('cd-notes')."\n\n";
 //                $text .= "Orders:";
-                $mail = mymail('sandeep@ignisitsolutions.com',$subject, $text,FALSE,$from,$fromName);
+                $mail = mymail(CONTACT_EMAIL,$subject, $text,FALSE,$from,$fromName);
                         if(!$mail) {
                             die ($mail);
                         } else {
