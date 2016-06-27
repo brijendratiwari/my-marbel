@@ -222,6 +222,49 @@ class Services_model extends CI_Model {
         }
 	
 }   
+        function getOneOrder($user_id,$order_id) {	        
+	$orders_info=array();
+        $this->db->select('id, order_number, delivery_address, delivery_address_2, city, state, zip, country, order_total, order_status, invoice_url, order_date, est_ship_date, est_ship_location, product, wheel_color, wheel_size, firmware_version, deck_serial_number, main_serial_number, tracking_number, notes, priority')->from('m_orders');
+        $this->db->where('user_id',$user_id);
+        $this->db->where('id',$order_id);
+        $query=$this->db->get();
+        if($query->num_rows()>0){
+            $orders=$query->result_array();
+          
+            foreach($orders as $key=>$order){
+            if ($order['order_status'] == 'deposit') {
+                    $order['order_friendly_status'] = 'Deposit Paid';
+                } else if ($order['order_status'] == 'balance') {
+                        $order['order_friendly_status'] = 'Fully Paid';
+                } else if ($order['order_status'] == 'refunded') {
+                        $order['order_friendly_status'] = 'Refunded';
+                } else if ($order['order_status'] == 'building') {
+                        $order['order_friendly_status'] = 'Building';
+                } else if ($order['order_status'] == 'qa') {
+                        $order['order_friendly_status'] = 'Quality Assurance';
+                } else if ($order['order_status'] == 'shipping') {
+                        $order['order_friendly_status'] = 'Shipping';
+                }  else if ($order['order_status'] == 'shipped') {
+                        $order['order_friendly_status'] = 'Shipped';
+                } else if ($order['order_status'] == 'hold') {
+                        $order['order_friendly_status'] = 'On Hold';
+                } 
+                $estShipping = $order['est_ship_date'];
+                $estShippingLocation = $order['est_ship_location'];
+                if (intval(date('his', $estShipping)) == 120000 && intval(date('j', $estShipping)) == 1) { $estShipping = 'in '.date('M, Y', $estShipping); }
+			else { $estShipping =  'by '.date('M j, Y', $estShipping); };
+			if ($estShippingLocation!='') {
+				$estShipping .= ' via '.$estShippingLocation;
+			}
+			$order['friendly_est_ship_date'] = $estShipping;
+                        
+                  $orders_info[]= $order;  
+            }
+            
+             return $orders_info;
+        }
+	
+}   
 
 
 function getOrderByNumber($order_number) {	        

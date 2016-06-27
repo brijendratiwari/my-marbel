@@ -19,6 +19,16 @@ class Order extends CI_Controller {
       public function index(){
            $this->data['page']='Order';
           $this->data['title']='Order';
+
+          $user_id=$this->session->userdata['marbel_user']['user_id'];
+          $this->data['countries']=$this->Services->getCountries();
+          $this->data['orders']=$this->Services->getOrders($user_id);
+          $this->load->customer('customer/orders',$this->data);
+      }
+      
+      public function edit_order($order_id){
+           $this->data['page']='Order';
+          $this->data['title']='Order';
           if($this->input->post()){
               
             $order_number = $this->input->post('cd-order-number');
@@ -34,17 +44,17 @@ class Order extends CI_Controller {
             $response=$this->Orders->updateOrder($this->session->userdata['marbel_user']['user_id'], $orderId, $order_number, $delivery_address, $delivery_address_2, $city, $state, $zip, $country, $wheel_color, $wheel_size);
             if($response){
                 $this->session->set_flashdata('success','Shipping information for order #'.$order_number.' has been updated');
-                redirect('order');
+                redirect('order_edit/'.$orderId);
             }else{
                 
                  $this->session->set_flashdata('error','Could not update shipping for order #'.$order_number.'<br />This item has already shipped or was refunded');
-                 redirect('order');
+                 redirect('order_edit/'.$orderId);
             }
             
           }
           $user_id=$this->session->userdata['marbel_user']['user_id'];
           $this->data['countries']=$this->Services->getCountries();
-          $this->data['orders']=$this->Services->getOrders($user_id);
-          $this->load->customer('customer/orders',$this->data);
+          $this->data['orders']=$this->Services->getOneOrder($user_id,$order_id);
+          $this->load->customer('customer/edit_order',$this->data);
       }
 }

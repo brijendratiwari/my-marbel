@@ -110,7 +110,9 @@ $route['send_email']='admin/email/send_email';
 
 $route['customer'] = 'customer/dashboard';
 $route['customer_profile'] = 'customer/profile';
+
 $route['order']='customer/order';
+$route['order_edit/(:num)']='customer/order/edit_order/$1';
 
 $route['ride_reports']='customer/ridereports';
 
