@@ -462,6 +462,14 @@
       var text = $('body').find("#service_input").html().replace(/\%length%/g, $('#service_items').children().size()); 
       $('#service_items').append(text);
       $('#service_item_count').val($('#service_items').children().size());
-    });
+      });
+      
+ 
+   
+        /* date picker */
+            $('#cd-due').datepicker({
+                
+                'format' : 'yyyy-mm-dd' 
+            });
   });
 </script>
