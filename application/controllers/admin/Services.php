@@ -109,9 +109,9 @@ class Services extends CI_Controller {
             $service_url = '';
      
             if ($status == 'finished') {
-                $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', $val['qa_date']), $val['tracking_out'], $val['status'], '<a href="' . base_url('edit_service/' . $val['id'] . '/fn') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), date('M j, Y', $val['qa_date']), $val['tracking_out'], ucwords($val['status']), '<a href="' . base_url('edit_service/' . $val['id'] . '/fn') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             } else if ($status == 'inhouse') {
-                $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', strtotime($val['date'])), $val['priority'], Date('M j, Y', strtotime($val['due_date'])), $val['status'], '<a href="' . base_url('edit_service/' . $val['id'] . '/in') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), date('M j, Y', strtotime($val['date'])), $val['priority'], Date('M j, Y', strtotime($val['due_date'])), ucwords($val['status']), '<a href="' . base_url('edit_service/' . $val['id'] . '/in') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             } elseif ($status == 'pending') {
                 if($val['user_id']=='')
                 $user_id=0;
@@ -123,7 +123,7 @@ class Services extends CI_Controller {
                     else
                     $service_id=$val['id'];
                     
-                $output['aaData'][] = array("DT_RowId" => $val['id'], $val['first_name'], $val['last_name'], date('M j, Y', strtotime($val['date'])), $val['suggested_response'], $val['tracking_in'], '<a href="' . base_url('new_services/'.$service_id.'/'.$user_id.'') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), date('M j, Y', strtotime($val['date'])), $val['suggested_response'], $val['tracking_in'], '<a href="' . base_url('new_services/'.$service_id.'/'.$user_id.'') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             }
         }
 
