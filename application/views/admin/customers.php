@@ -35,7 +35,7 @@
                                             <th>Last Activity</th>
                                             <th>Phone Number</th>
                                             <th>Notes</th>
-                                            <th>Action</th>
+                                            <th width="80">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
