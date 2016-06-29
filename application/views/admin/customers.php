@@ -263,7 +263,32 @@
 
 <!-- // Customer modal ..-->
 
+    <div class="modal fade" id="usersProfileModal" tabindex="-1" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);display: none;">
+      <div class="modal-dialog user-profile">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title" id="myModalLabel">Customer Information</h4>
+          </div>
+          <div class="modal-body profile-html">
+              
+              
+            
+          </div>
+            <div class="clearfix"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      <div class="checkout_loader hidden" id="form_loader">
+        <div class="overlay new_loader"></div>
+        <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/images/chekout-loading.gif'); ?>" /></div>
+       </div>
+      </div>
+        
 
+        
+    </div>
 
 
 <script>
@@ -358,6 +383,13 @@ $(document).ready(function(){
 
         });
     
+    
+    $('body').on('click','.userRow',function(){
+        
+        var user_id = $(this).attr('data-id');
+        
+        $('body').find('.profile-html').load("<?php echo base_url('get_customer_info'); ?>/"+user_id+"");
+    })
 })
 
   function deleteCustomer(id){
@@ -372,3 +404,11 @@ $(document).ready(function(){
 
 
 </script>
+<style>
+    .user-profile{
+        width:80% !important;
+    }
+    .profile-html > #page-wrapper{
+        margin: 0 !important;
+    }
+</style>

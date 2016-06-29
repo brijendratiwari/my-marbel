@@ -9,6 +9,7 @@ class Customers extends CI_Controller {
         $this->load->database();
         $this->load->model('customers_model', "Customer");
         $this->load->model('users_model', "Users");
+        $this->load->model('services_model', "Services");
         if ($this->Users->auth_check() == false) {
             redirect('/login');
         }
@@ -89,7 +90,7 @@ class Customers extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'],$val['id'], $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'], $val['notes'], '<a href="edit_customer/'.$val['id'].'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteCustomer('.$val['id'].')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
+            $output['aaData'][] = array("DT_RowId" => $val['id'],$val['id'], '<a href="#" data-toggle="modal" class="userRow" data-target="#usersProfileModal" data-id="'.$val['id'].'">'.$val['email'].'</a>', '<a href="#" data-toggle="modal" class="userRow" data-target="#usersProfileModal" data-id="'.$val['id'].'">'.$val['first_name'].'</a>', '<a href="#" data-toggle="modal" class="userRow" data-target="#usersProfileModal" data-id="'.$val['id'].'">'.$val['last_name'].'</a>', '<a href="#" data-toggle="modal" class="userRow" data-target="#usersProfileModal" data-id="'.$val['id'].'">'.date('M j, Y', $val['last_activity']).'</a>', '<a href="#" data-toggle="modal" class="userRow" data-target="#usersProfileModal" data-id="'.$val['id'].'">'.$val['phone'].'</a>', '<a href="#" data-toggle="modal" class="userRow" data-target="#usersProfileModal" data-id="'.$val['id'].'">'.$val['notes'].'</a>', '<a href="edit_customer/'.$val['id'].'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteCustomer('.$val['id'].')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
         }
 
         echo json_encode($output);
@@ -292,5 +293,13 @@ class Customers extends CI_Controller {
             $this->Customer->updateProfile($session['user_id']);
             
         }
+ }
+ public function get_customer_info($id=fasle){
+    if($id!=''){
+        
+        $this->data['user_info']=$this->Customer->getCustomerInfo($id);
+        $this->data['user_orders']=$this->Services->getOrders($id);
+    }
+    echo  $this->load->view('admin/load_customer_info',$this->data,True);
  }
 }

@@ -9,6 +9,7 @@ class Profile extends CI_Controller {
         $this->load->database();
         $this->load->model('customers_model', "Customer");
         $this->load->model('users_model', "Users");
+        $this->load->model('services_model', "Services");
         if ($this->Users->auth_check() == false) {
             redirect('/login');
         }
@@ -22,6 +23,7 @@ class Profile extends CI_Controller {
         $this->data['title']="Profile";
         $user_info=$this->session->userdata('marbel_user');
         $this->data['user_info']=$this->Customer->getCustomers($user_info['user_id']);
+        $this->data['user_orders']=$this->Services->getOrders($user_info['user_id']);
         $this->load->template('admin/profile',$this->data);
     }
 }

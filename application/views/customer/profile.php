@@ -27,13 +27,20 @@
                              </div>
                                 <div class='clearfix'></div>
                             <div class="col-md-12 text-left">
-                                <h3><?php echo (!empty($user_info['first_name']))?$user_info['first_name']." ".$user_info['last_name']:"";?></h3></div>
+                                <h3><?php echo (!empty($user_info['first_name']))?$user_info['first_name']." ".$user_info['last_name']:"Empty";?></h3></div>
 
                               <div class="clearfix"></div>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Orders</div>
                                     <div class="panel-body">
-                                         Empty
+                                        <?php if($user_orders){ foreach ($user_orders as $user_order){?>
+                                            <p>Order Date: <?php echo (!empty($user_order['order_date']))?date('M j, Y', $user_order['order_date']):"";?></p>
+                                            <p>Order Number: <?php echo (!empty($user_order['order_number']))?$user_order['order_number']:"";?></p>
+                                            <p>Product: <?php echo (!empty($user_order['product']))?$user_order['product']:"";?></p>
+                                            <p>Status: <?php echo (!empty($user_order['order_friendly_status']))?$user_order['order_friendly_status']:"";?></p>
+                                             <p>Total: <?php echo (!empty($user_order['order_total']))?'$'.$user_order['order_total']:"";?></p>
+                                             <hr>
+                                        <?php }}else{echo '<p>No Order Found!</p>';} ?>
 
                                     </div>
                                 </div>
@@ -41,7 +48,29 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Service</div>
                                     <div class="panel-body">
-                                        Empty
+                                         <?php if($user_orders){ foreach ($user_orders as $user_order){
+                                            $services=getServices($user_order['id']);
+                                            if(!empty($services)){
+                                            foreach($services as $service){?>
+                                                
+                                        <p>Date: <?php echo (!empty($service['date']))?date('M j, Y', strtotime($service['date'])):"";?></p>
+                                                <p>Status: <?php echo (!empty($service['status']))?ucwords($service['status']):"";?></p>
+                                                <p>Type: <?php echo (!empty($service['type']))?ucwords($service['type']):"";?></p>
+                                                <p>Issue: <?php echo (!empty($service['issue']))?$service['issue']:"";?></p>
+                                                <p>Diagnostic Response: <?php echo (!empty($service['diagnostic_response']))?$service['diagnostic_response']:"";?></p>
+                                                <p>Included Parts: <?php echo (!empty($service['included_parts']))?$service['included_parts']:"";?></p>
+                                                <p>Notes: <?php echo (!empty($service['notes']))? $service['notes']:"";?></p>
+                                                <hr>
+                                           <?php }
+                                            }else{
+                                                echo "<p>No Services Found!</p>";
+                                            }
+                                            ?>
+                                            
+                                        <?php }}else{
+                                                echo "<p>No Services Found!</p>";
+                                            } ?>
+                                   
                                     </div>
                                 </div>
 
@@ -55,7 +84,7 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Note</div>
                                     <div class="panel-body">
-                                        <?php echo (!empty($user_info['notes']))?$user_info['notes']:"";?>
+                                        <?php echo (!empty($user_info['notes']))?$user_info['notes']:"Empty";?>
                                     </div>
                                 </div>
 
@@ -65,10 +94,10 @@
                             <div class="panel panel-default">
                                     <div class="panel-heading">Active</div>
                                     <div class="panel-body">
-                                        <p>Phone: <?php echo (!empty($user_info['notes']))?$user_info['phone']:"";?></p>
-                                        <p>Email: <?php echo (!empty($user_info['email']))?$user_info['email']:"";?></p>
-                                        <p>Email2: <?php echo (!empty($user_info['email_secondary']))?$user_info['email_secondary']:"";?></p>
-                                        <p>Accept marketing: <?php echo (!empty($user_info['accepts']))?ucwords($user_info['accepts']):"";?></p>
+                                        <p>Phone: <?php echo (!empty($user_info['notes']))?$user_info['phone']:"Empty";?></p>
+                                        <p>Email: <?php echo (!empty($user_info['email']))?$user_info['email']:"Empty";?></p>
+                                        <p>Email2: <?php echo (!empty($user_info['email_secondary']))?$user_info['email_secondary']:"Empty";?></p>
+                                        <p>Accept marketing: <?php echo (!empty($user_info['accepts']))?ucwords($user_info['accepts']):"Empty";?></p>
                                     </div>
                                 </div>
 
@@ -81,14 +110,14 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Deafult Address</div>
                                     <div class="panel-body">
-                                       <?php echo (!empty($user_info['address_one']))?$user_info['address_one']:"";?>
+                                       <?php echo (!empty($user_info['address_one']))?$user_info['address_one']:"Empty";?>
                                     </div>
                                 </div>
 
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Last Login</div>
                                     <div class="panel-body">
-                                        <?php echo (!empty($user_info['last_activity']))?date('M j, Y',$user_info['last_activity']):"";?>
+                                        <?php echo (!empty($user_info['last_activity']))?date('M j, Y',$user_info['last_activity']):"Empty";?>
                                     </div>
                                 </div>
 
@@ -100,8 +129,8 @@
                                 </div>
 
                                 <div class="aka">
-                                    <div class="social">TWITTER:  <?php echo (!empty($user_info['twitter_handle']))?$user_info['twitter_handle']:"";?></div>
-                                    <div class="social">LINKED IN:  <?php echo (!empty($user_info['linkedin_handle']))?$user_info['linkedin_handle']:"";?></div>
+                                    <div class="social">TWITTER:  <?php echo (!empty($user_info['twitter_handle']))?$user_info['twitter_handle']:"Empty";?></div>
+                                    <div class="social">LINKED IN:  <?php echo (!empty($user_info['linkedin_handle']))?$user_info['linkedin_handle']:"Empty";?></div>
                                 </div>
 
                                 

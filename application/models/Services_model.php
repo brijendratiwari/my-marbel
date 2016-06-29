@@ -433,4 +433,72 @@ function getOrderByNumber($order_number) {
         $jsonStr = file_get_contents(base_url() . "/assets/countries.json");
         return json_decode($jsonStr, true);
     }
+    function getServicesByOrderId(){
+        
+        $service=array();
+        $this->db->select('s.id, s.order_id, o.user_id, o.order_number, s.status, s.type, s.priority, s.due_date, s.tracking_in, s.tracking_out, s.issue, s.date, s.suggested_response, s.suggested_response_admin_id, s.suggested_response_date, s.diagnostic_response, s.included_parts, s.test_ride_complete, s.test_ride_admin_id, s.test_ride_date, s.final_test_ride_complete, s.final_test_ride_admin_id, s.final_test_ride_date, s.qa_complete, s.qa_admin_id, s.qa_date, s.notes, s.customer_notes')->from('m_services s');
+        $this->db->join('m_orders o','o.id = s.order_id','left');
+        $this->db->where('s.id',$id);
+        $query=$this->db->get();
+        if($query->num_rows()>0){
+            $service=array();
+           $response=$query->row_array();
+            $included_pts = array();
+            foreach (explode(',', $response['included_parts']) as $part) {
+                $included_pts[] = $part; 
+
+            } 
+            $service['id']=$response['id'];
+            $service['customer']=$this->Customer->getCustomers($response['user_id']);
+            $service['order']=$this->Services->getOrderByNumber($response['order_number']);
+            $service['order_id']=$response['order_id'];
+            $service['status']=$response['status'];
+            $service['type']=$response['type'];
+            $service['priority']=$response['priority'];
+            $service['due_date']=  strtotime($response['due_date']);
+            $service['tracking_in']=$response['tracking_in'];
+            $service['tracking_out']=$response['tracking_out'];
+            $service['issue']=$response['issue'];
+            $service['date']=strtotime($response['date']);
+            $service['suggested_response']=$response['suggested_response'];
+            $service['suggested_response_admin']=$this->Customer->getCustomers($response['suggested_response_admin_id']);
+            $service['suggested_response_date']=$response['suggested_response_date'];
+            $service['diagnostic_response']=$response['diagnostic_response'];
+            $service['included_parts']=$included_pts;
+            $service['test_ride_complete']=$response['test_ride_complete'];
+            $service['test_ride_admin_id']=$this->Customer->getCustomers($response['test_ride_admin_id']);
+            $service['test_ride_date']=$response['test_ride_date'];
+            $service['final_test_ride_complete']=$response['final_test_ride_complete'];
+            $service['final_test_ride_admin']=$this->Customer->getCustomers($response['final_test_ride_admin_id']);
+            $service['final_test_ride_date']=$response['final_test_ride_date'];
+            $service['qa_complete']=$response['qa_complete'];
+            $service['qa_admin']=$this->Customer->getCustomers($response['qa_admin_id']);
+            $service['qa_date']=$response['qa_date'];
+            $service['notes']=$response['notes'];
+            $service['customer_notes']=$response['customer_notes'];
+            $service['services']=array();
+            $getServiceItems=$this->getServiceItem($response['id']);
+            if($getServiceItems!=''){
+                $i=0;
+                foreach($getServiceItems as $getServiceItem){
+                    $service['services'][$i]['name']=$getServiceItem['service_name'];
+                    $service['services'][$i]['quantity']=$getServiceItem['quantity'];
+                    $service['services'][$i]['rate']=$getServiceItem['rate'];
+                    $service['services'][$i]['amount']=$getServiceItem['amount'];
+                    $service['services'][$i]['description']=$getServiceItem['description'];
+                    $service['services'][$i]['discount']=$getServiceItem['discount'];
+                    $service['services'][$i]['date']=strtotime($getServiceItem['date']);
+                    $service['services'][$i]['complete']=strtotime($getServiceItem['complete']);
+                    $service['services'][$i]['admin_id']=$getServiceItem['admin_id'];
+                    $service['services'][$i]['admin_name']=$getServiceItem['first_name'].' '.$getServiceItem['last_name'];
+                    $service['services'][$i]['complete_date']=$getServiceItem['complete_date'];
+               $i++;
+                    }
+           
+            }
+            
+            
+        }
+        return $service;
+    }
 }

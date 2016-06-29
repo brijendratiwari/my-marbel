@@ -233,4 +233,15 @@ class Customers_model extends CI_Model {
                     echo json_encode($result);
                     die;
    }
+   
+   function getCustomerInfo($id){
+       $this->db->select('*')->from('m_users');
+       $this->db->where('id',$id);
+       $query=$this->db->get();
+       if($query->num_rows()>0){
+           
+           return $query->row_array();
+       }
+   }
+   
 }
