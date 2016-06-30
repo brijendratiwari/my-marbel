@@ -46,6 +46,8 @@
     
     <!--calendar css --> 
     <link href="<?php echo base_url(); ?>/assets/full-calendar/fullcalendar.min.css" rel="stylesheet">
+    <link href='<?php echo base_url(); ?>/assets/full-calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+    
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,8 +63,10 @@
     
       <!-- jQuery -->
     <script src="<?php echo base_url(); ?>/assets/bower_components/jquery/dist/jquery.min.js"></script>
-
-    
+     <!-- fullcalendar JavaScript -->
+    <script src='<?php echo base_url(); ?>/assets/full-calendar/jquery-ui.min.js'></script>
+     <script src="<?php echo base_url(); ?>/assets/full-calendar/moment.min.js"></script>
+    <script src='<?php echo base_url(); ?>/assets/full-calendar/fullcalendar.min.js'></script>
     <!-- form JavaScript -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery.form.min.js"></script>
     
@@ -73,9 +77,8 @@
     <!-- datepicker JavaScript -->
     <script src="<?php echo base_url(); ?>/assets/js/bootstrap-datepicker.min.js"></script>
     
-    <!-- fullcalendar JavaScript -->
-    <script src="<?php echo base_url(); ?>/assets/full-calendar/lib/moment.min.js"></script>
-    <script src="<?php echo base_url(); ?>/assets/full-calendar/fullcalendar.js"></script>
+   
+   
 
     <div id="wrapper">
     <!-- Navigation -->

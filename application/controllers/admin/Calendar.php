@@ -11,6 +11,7 @@ class Calendar extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('users_model', "Users");
+        $this->load->model('Calendar_model', "Calendar");
         if ($this->Users->auth_check() == false) {
             redirect('/login');
         }
@@ -25,5 +26,11 @@ class Calendar extends CI_Controller {
 
         $this->load->template('admin/calender', $this->data);
     }
-
+    public function process(){
+        
+        if($this->input->post()){
+            
+            $this->Calendar->calendar_process();
+        }
+    }
 }
