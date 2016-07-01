@@ -16,6 +16,7 @@
       <div class="form__field">
         <input id="login__submit" type="submit" value="Request Reset">
       </div>
+        <p class="text--center">Login? &nbsp<a class= "forgot" href="login">Click here</a></p> 
       <div class="form__field">&nbsp
         <div id="error">
           <div id="loader">

@@ -49,18 +49,28 @@
 <?php if (isset($emails)) : ?> 
             <p>Emails based upon your search (Country: <?php echo $_POST['custom_filters_country']; ?>, <?php echo $_POST['custom_filters_start_date'] . ' to ' . $_POST['custom_filters_end_date']; ?>, Status: <?php echo $_POST['custom_filters_status']; ?>)</p>
             <pre>
-    				<code><?php $i = 0;
-    $str = '';
-    foreach ($emails as $email) {
-        if (empty($email['email'])) {
-            continue;
-        } if ($i > 0) {
-            $str .= ', ';
-        } $str .= $email['email'];
-        $i += 1;
-    } echo trim($str); ?></code>
+                <code><?php $i = 0;
+                    $str = '';
+                    if (!empty($emails)){
+                        foreach ($emails as $email) {
+                            if (empty($email['email'])) {
+                                continue;
+                            } if ($i > 0) {
+                                $str .= ', ';
+                            } 
+                            $str .= $email['email'];
+                            $i += 1;
+                        } 
+                        echo trim($str); 
+                    
+                    }
+                    else{
+                      echo "No list found !";  
+                        
+                    } ?>
+                 </code>
             </pre>
-<?php endif; ?>
+      <?php endif; ?>
 
         <form method="POST" onsubmit="return postForm()">
             <legend>Send Template</legend>

@@ -101,8 +101,8 @@ define("CONTACT_UPLOADS_DIRECTORY_IMAGE", __DIR__.'/../../assets/profile-imgs/')
 define("MANDRILL_API_KEY", "k3nXvdqEhHEa9LLJ__bUCA");
 // define("MANDRILL_API_KEY", "FfkPdqhpdANpREYXKuAM_Q");
 define("CONTACT_EMAIL", 'hello@ridemarbel.com');
-define("SMTP_Secure", 'ssl');
-define("SMTP_HOST", 'smtp.gmail.com');
-define("SMTP_PORT", '465');
-define("SMTP_USERNAME", 'ankit@24x7ibuilder.com');
-define("SMTP_PASSWORD", 'ankit123');
+//define("SMTP_Secure", 'ssl');
+//define("SMTP_HOST", 'smtp.gmail.com');
+//define("SMTP_PORT", '465');
+//define("SMTP_USERNAME", 'ankit@24x7ibuilder.com');
+//define("SMTP_PASSWORD", 'ankit123');
