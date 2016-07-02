@@ -223,7 +223,7 @@
                     <div class="row-fluid">
                         <div class="col-md-12">
                             <div class="col-md-6">
-                                <p><input class="form-control" type="date" name="cd-est_ship_date" id="cd-est_ship_date" style="padding: 9px;" value="<?php
+                                <p><input class="form-control" type="test" name="cd-est_ship_date" id="cd-est_ship_date" style="padding: 9px;" value="<?php
                                     if ($order[0]['est_ship_date'] > 0) {
                                         echo date("Y-m-d", $order[0]['est_ship_date']);
                                     }

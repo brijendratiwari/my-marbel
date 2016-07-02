@@ -221,7 +221,7 @@ class Orders extends CI_Controller {
                     $shipping_cost = $this->input->post('cd-shipping_cost');
                     $order_status = $this->input->post('cd-order_status');
                     $invoice_url = $this->input->post('cd-invoice_url');
-                    $est_ship_date = $this->input->post('cd-est_ship_date');
+                    $est_ship_date = strtotime($this->input->post('cd-est_ship_date'));
                     $est_ship_location = $this->input->post('cd-est_ship_location');
                     $firmware_version = $this->input->post('cd-firmware_version');
                     $deck_serial_number = $this->input->post('cd-deck_serial_number');

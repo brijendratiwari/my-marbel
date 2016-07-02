@@ -121,6 +121,8 @@ $route['ride_reports']='customer/ridereports';
 $route['support']='customer/support';
 $route['upload']='customer/support/upload';
 
+$route['tasks']='admin/tasks';
+$route['add_task']='admin/tasks/add_task';
 
 
 /*api  */
