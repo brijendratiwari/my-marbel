@@ -127,13 +127,13 @@
         /* initialize the calendar
          -----------------------------------------------------------------*/
 
-       var calendar =  $('#calendar').fullCalendar({
+        var calendar = $('#calendar').fullCalendar({
             events: JSON.parse(json_events),
             //events: [{"id":"14","title":"New Event","start":"2015-01-24T16:00:00+04:00","allDay":false}],
             utc: true,
             header: {
-                left: 'prev,next today',
-                center: 'title',
+                left: 'next today',
+                center: 'Event Name',
                 right: 'month,agendaWeek,agendaDay'
             },
             editable: true,
@@ -158,7 +158,68 @@
                 });
                 $('#calendar').fullCalendar('updateEvent', event);
                 console.log(event);
+            },
+            eventDrop: function (event, delta, revertFunc) {
+                var title = event.title;
+                var start = event.start.format();
+                var end = (event.end == null) ? start : event.end.format();
+                $.ajax({
+                    url: 'process',
+                    data: 'type=resetdate&title=' + title + '&start=' + start + '&end=' + end + '&eventid=' + event.id,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status != 'success')
+                            revertFunc();
+                    },
+                    error: function (e) {
+                        revertFunc();
+                        alert('Error processing your request: ' + e.responseText);
+                    }
+                });
+            },
+            eventClick: function (event, jsEvent, view) {
+                console.log(event.id);
+                var title = prompt('Event Title:', event.title, {buttons: {Ok: true, Cancel: false}});
+                if (title) {
+                    event.title = title;
+                    console.log('type=changetitle&title=' + title + '&eventid=' + event.id);
+                    $.ajax({
+                        url: 'process',
+                        data: 'type=changetitle&title=' + title + '&eventid=' + event.id,
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.status == 'success')
+                                $('#calendar').fullCalendar('updateEvent', event);
+                        },
+                        error: function (e) {
+                            alert('Error processing your request: ' + e.responseText);
+                        }
+                    });
+                }
+            },
+            eventResize: function (event, delta, revertFunc) {
+                console.log(event);
+                var title = event.title;
+                var end = event.end.format();
+                var start = event.start.format();
+                $.ajax({
+                    url: 'process',
+                    data: 'type=resetdate&title=' + title + '&start=' + start + '&end=' + end + '&eventid=' + event.id,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.status != 'success')
+                            revertFunc();
+                    },
+                    error: function (e) {
+                        revertFunc();
+                        alert('Error processing your request: ' + e.responseText);
+                    }
+                });
             }
+
         });
 
         function getFreshEvents() {
@@ -184,7 +245,7 @@
         });
         $('.fc-next-button').click(function () {
             var moment = $('#calendar').fullCalendar('getDate');
-             getEvents(moment.format());
+            getEvents(moment.format());
         });
 /* datetime picker*/
          $('#datetimepicker8').datetimepicker({
