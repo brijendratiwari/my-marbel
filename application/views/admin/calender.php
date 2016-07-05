@@ -213,8 +213,16 @@
             },
             eventClick: function (event, jsEvent, view) {
                 console.log(event.id);
+                $('body').find('.checkout_loader').removeClass('hidden');
                 $('body').find('#editEventModal').modal('show');
-                $('body').find('.update-event-data').load("<?php echo base_url('admin/calendar/getSingleEvent'); ?>/" + event.id + "");
+                $('body').find('.update-event-data').load("<?php echo base_url('admin/calendar/getSingleEvent'); ?>/" + event.id + "",function(response){
+                    
+                    if(response){
+                    
+                     $('body').find('.checkout_loader').addClass('hidden');
+                        
+                    }
+                });
 //                var title = prompt('Event Title:', event.title, {buttons: {Ok: true, Cancel: false}});
 //                if (title) {
 //                    event.title = title;
@@ -411,12 +419,16 @@ var base_url = $('body').find('#base_url').val();
     /*end ajax here */
     /*get evnt on click..*/
     $('body').on('click','.get-event',function(){
-    
+    $('body').find('.checkout_loader').removeClass('hidden');
        var event = $(this).attr('data-eventId');
        
          if(event!=''){
              
-             $('body').find('.update-event-data').load("<?php echo base_url('admin/calendar/getSingleEvent'); ?>/" + event + "");
+             $('body').find('.update-event-data').load("<?php echo base_url('admin/calendar/getSingleEvent'); ?>/" + event + "",function(response){
+                 if(response){
+                     $('body').find('.checkout_loader').addClass('hidden');
+                 }
+             });
          }
     
     })
