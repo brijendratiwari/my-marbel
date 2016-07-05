@@ -256,7 +256,7 @@ class Tasks extends CI_Controller {
             $temp = $_GET['sSortDir_0'] === 'asc' ? 'asc' : 'desc';
             $order_by = $col_sort[$index];
         }
-        $this->Tasks->db->select("m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date");
+        $this->Tasks->db->select("m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date,,m_tasks.task_completed_date");
 
         if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
             $words = $_GET['sSearch'];
@@ -282,7 +282,7 @@ class Tasks extends CI_Controller {
             $records = $this->Tasks->db->get("m_tasks");
         }
         #echo $this->db->last_query(); die;
-        $this->db->select('m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date');
+        $this->db->select('m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date,m_tasks.task_completed_date');
         $this->db->from('m_tasks');
         $this->db->join('m_task_category','m_task_category.cat_id=m_tasks.task_cat_id','left');
         $this->db->where('task_status', 'Completed');
@@ -309,7 +309,84 @@ class Tasks extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['task_id'],'<span><i class="fa fa-check"></i></span> '.$val['cat_name'], $val['task_name'], $val['task_regarding'], date('m/d/Y', strtotime($val['task_due_date'])));
+            $output['aaData'][] = array("DT_RowId" => $val['task_id'],'<span><i class="fa fa-check"></i></span> '.$val['cat_name'], $val['task_name'], $val['task_regarding'], date('m/d/Y', strtotime($val['task_completed_date'])));
+        }
+
+        echo json_encode($output);
+        die;
+    }
+    
+     public function get_completed_task_assign_by_me(){
+        
+         $sLimit = "";
+        $lenght = 10;
+        $str_point = 0;
+        $col_sort = array("m_tasks.task_id","m_task_category.cat_name", "m_tasks.task_name", "m_tasks.task_regarding","m_tasks.task_due_date");
+        $order_by = "m_tasks.task_id";
+        $temp = 'Desc';
+        $id_by = $this->session->userdata['marbel_user']['user_id'];
+        if (isset($_GET['iSortCol_0'])) {
+            $index = $_GET['iSortCol_0'];
+            $temp = $_GET['sSortDir_0'] === 'asc' ? 'asc' : 'desc';
+            $order_by = $col_sort[$index];
+        }
+        $this->Tasks->db->select("m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date,CONCAT_WS(' ', m_users.first_name, m_users.last_name) AS assign_to_name,m_tasks.task_completed_date");
+
+        if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
+            $words = $_GET['sSearch'];
+            for ($i = 0; $i < count($col_sort); $i++) {
+
+                $this->Tasks->db->or_like($col_sort[$i], $words, "both");
+            }
+        }
+
+        $this->Tasks->db->order_by($order_by, $temp);
+
+        if (isset($_GET['iDisplayStart']) && $_GET['iDisplayLength'] != '-1') {
+            $str_point = intval($_GET['iDisplayStart']);
+            $lenght = intval($_GET['iDisplayLength']);
+            $this->db->join('m_task_category','m_task_category.cat_id=m_tasks.task_cat_id','left');
+            $this->db->join('m_users','m_users.id=m_tasks.task_assign_to','left');
+            $this->db->where('task_assign_by', $id_by);
+            $this->db->where('task_status', 'Completed');
+            $records = $this->Tasks->db->get("m_tasks", $lenght, $str_point);
+        } else {
+            $this->db->join('m_task_category','m_task_category.cat_id=m_tasks.task_cat_id','left');
+            $this->db->join('m_users','m_users.id=m_tasks.task_assign_to','left');
+            $this->db->where('task_assign_by', $id_by);
+            $this->db->where('task_status', 'Completed');
+            $records = $this->Tasks->db->get("m_tasks");
+        }
+        #echo $this->db->last_query(); die;
+        $this->db->select("m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date,CONCAT_WS(' ', m_users.first_name, m_users.last_name) AS assign_to_name,m_tasks.task_completed_date");
+        $this->db->from('m_tasks');
+        $this->db->join('m_task_category','m_task_category.cat_id=m_tasks.task_cat_id','left');
+          $this->db->join('m_users','m_users.id=m_tasks.task_assign_to','left');
+        $this->db->where('task_status', 'Completed');
+        $this->db->where('task_assign_by', $id_by);
+         if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
+            $words = $_GET['sSearch'];
+            for ($i = 0; $i < count($col_sort); $i++) {
+
+                $this->Tasks->db->or_like($col_sort[$i], $words, "both");
+            }
+        }
+        $total_record = $this->Tasks->db->count_all_results();
+
+        $output = array(
+            "sEcho" => intval($_GET['sEcho']),
+            "iTotalRecords" => $total_record,
+            "iTotalDisplayRecords" => $total_record,
+            "aaData" => array()
+        );
+
+        $result = $records->result_array();
+
+        $i = 0;
+        $final = array();
+        foreach ($result as $val) {
+
+            $output['aaData'][] = array("DT_RowId" => $val['task_id'],'<span><i class="fa fa-check"></i></span> '.$val['cat_name'], $val['task_name'], $val['task_regarding'],(!empty($val['task_completed_date']) && $val['task_completed_date']!='0000-00-00')? date('m/d/Y', strtotime($val['task_completed_date'])):'', $val['assign_to_name']);
         }
 
         echo json_encode($output);

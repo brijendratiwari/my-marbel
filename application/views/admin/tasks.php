@@ -112,7 +112,7 @@
                     </div>
 
                     <div class='panel-body'>
-                        <table class="table table-striped table-bordered table-hover"  style="width:100% !important;">
+                        <table class="table table-striped table-bordered table-hover" id="completed_task_assign_by_me-data"  style="width:100% !important;">
                             <thead
                                 <tr>
                                   
@@ -125,27 +125,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                   
-                                 
-                                    <?php if($completed_task_by){
-                                    foreach($completed_task_by as $task){?>
-                                         <tr>
-                                             <td><span><i class="fa fa-check"></i></span> <?php echo $task['category_name'];?></td>
-                                        <td><?php echo $task['task_name'];?></td> 
-                                        <td><?php echo $task['task_regarding'];?></td>
-                                        
-                                         <td><?php echo (!empty($task['task_completed_date']) && $task['task_completed_date']!='0000-00-00')? date('m/d/Y', strtotime($task['task_completed_date'])):"";?></td>
-                                            <td><?php echo $task['assign_to_name'];?></td>
-                                </tr>
-                                
-                                   <?php }
-                                }else{
-                                    echo "<tr><td colspan='5'>No record found!</td></tr>";
-                                }
-                                ?>
-                                </tr>
-                               
+                             
                             </tbody>
                         </table>
                     </div>
@@ -194,14 +174,14 @@
                         <div class="col-md-12 form-group">
                             <select  name="cd-assignee" class="form-control">
                                 <option value="">Select Assignee</option>
-<?php if ($assignee) {
-    foreach ($assignee as $name) {
-        ?>
+                                <?php if ($assignee) {
+                                    foreach ($assignee as $name) {
+
+                                        if($name['id']!=$this->session->userdata['marbel_user']['user_id']){
+                                        ?>
 
                                         <option value="<?php echo $name['id']; ?>"><?php echo $name['first_name'] . ' ' . $name['last_name'] . '(' . $name['user_role_type'] . ')'; ?></option>
-    <?php }
-}
-?>
+                                  <?php }} }?>
 
                             </select>
                             <span id="cd-assignee" class="text-danger"><?php echo form_error('cd-assignee'); ?></span>

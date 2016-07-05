@@ -106,6 +106,7 @@ $route['order_service/(:num)/(:num)']='admin/services/new_order_service/$1/$2';
 
 $route['calendar']='admin/calendar';
 $route['process']='admin/calendar/process';
+$route['add_event']='admin/calendar/add_event';
 
 $route['email']='admin/email';
 $route['send_email']='admin/email/send_email';
@@ -128,6 +129,7 @@ $route['update_task/(:num)']='admin/tasks/update_task/$1';
 $route['get_task_assign_to_me']='admin/tasks/get_task_assign_to_me';
 $route['get_task_assign_by_me']='admin/tasks/get_task_assign_by_me';
 $route['get_task_completed_to_me']='admin/tasks/get_task_completed_to_me';
+$route['get_completed_task_assign_by_me']='admin/tasks/get_completed_task_assign_by_me';
 
 /*api  */
 $route['saveuserinformation']='appsignin/save_user_information';
