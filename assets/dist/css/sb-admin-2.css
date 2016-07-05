@@ -57,7 +57,7 @@ body {
     padding: 3px;
     font-size: 13px;
 }
-#task-completed-by-me-data td, #task-completed-by-me-data th{
+#completed_task_assign_by_me-data td, #completed_task_assign_by_me-data th{
     padding: 3px;
     font-size: 13px;
 }
