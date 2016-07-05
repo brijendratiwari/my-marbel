@@ -305,3 +305,9 @@ $(document).ready(function(){
         });
         })
 </script>
+<style>
+    .pagination > li > a, .pagination > li > span{
+        
+        padding:0px 5px !important;
+    }
+</style>
