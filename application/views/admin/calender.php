@@ -180,7 +180,7 @@
                     type: 'POST',
                     dataType: 'json',
                     success: function (response) {
-                        event.id = response.eventid;
+                        event.id = response.id;
                         $('#calendar').fullCalendar('updateEvent', event);
                     },
                     error: function (e) {
@@ -213,25 +213,27 @@
             },
             eventClick: function (event, jsEvent, view) {
                 console.log(event.id);
-                var title = prompt('Event Title:', event.title, {buttons: {Ok: true, Cancel: false}});
-                if (title) {
-                    event.title = title;
-                    console.log('type=changetitle&title=' + title + '&eventid=' + event.id);
-                    $.ajax({
-                        url: 'process',
-                        data: 'type=changetitle&title=' + title + '&eventid=' + event.id,
-                        type: 'POST',
-                        dataType: 'json',
-                        success: function (response) {
-                            if (response.status == 'success')
-                                $('#calendar').fullCalendar('updateEvent', event);
-                            getEvents(0);
-                        },
-                        error: function (e) {
-                            alert('Error processing your request: ' + e.responseText);
-                        }
-                    });
-                }
+                $('body').find('#editEventModal').modal('show');
+                $('body').find('.update-event-data').load("<?php echo base_url('admin/calendar/getSingleEvent'); ?>/" + event.id + "");
+//                var title = prompt('Event Title:', event.title, {buttons: {Ok: true, Cancel: false}});
+//                if (title) {
+//                    event.title = title;
+//                    console.log('type=changetitle&title=' + title + '&eventid=' + event.id);
+//                    $.ajax({
+//                        url: 'process',
+//                        data: 'type=changetitle&title=' + title + '&eventid=' + event.id,
+//                        type: 'POST',
+//                        dataType: 'json',
+//                        success: function (response) {
+//                            if (response.status == 'success')
+//                                $('#calendar').fullCalendar('updateEvent', event);
+//                            getEvents(0);
+//                        },
+//                        error: function (e) {
+//                            alert('Error processing your request: ' + e.responseText);
+//                        }
+//                    });
+//                }
             },
             eventResize: function (event, delta, revertFunc) {
                 console.log(event);
