@@ -43,7 +43,7 @@
             <div class="modal-body">
                 <div class="col-md-12">
                  
-                     <label>Event Name</label>
+                     <label>Event Name <i class="fa fa-calendar"></i></label>
                   
                     <input type="text" name="cd-title" class="form-control" placeholder="Event Name">
                   <span id="cd-title" class="text-danger hidden"></span>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-md-12">
                  
-                     <label>Location</label>
+                     <label>Location <i class="fa fa-map-marker"></i></label>
                   
                     <input type="text" name="cd-location" class="form-control" placeholder="Location">
                     <span id="cd-location" class="text-danger hidden"></span>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-md-12">
                  
-                     <label>Start Date/Time</label>
+                     <label>Start Date/Time <i class="fa fa-calendar-o"></i></label>
                   
                      <input type="text" name="cd-date-start" id="" class="form-control datetimepicker8" placeholder="Date/Time">
                     <span id="cd-date-start" class="text-danger hidden"></span>
@@ -67,7 +67,7 @@
                 </div>
                  <div class="col-md-12">
                  
-                     <label>End Date/Time</label>
+                     <label>End Date/Time <i class="fa fa-calendar-o"></i></label>
                   
                      <input type="text" name="cd-date-end" id="" class="form-control datetimepicker9" placeholder="Date/Time">
                     <span id="cd-date-end" class="text-danger hidden"></span>
