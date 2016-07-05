@@ -25,7 +25,7 @@
 
                     <div class='panel-body'>
                             <div class="col-md-12 form-group">
-                                <select id="cd-country" name="cd-country" class="form-control">
+                                <select id="cd-country" name="cd-country" class="form-control" required>
                                     <option value="">Please select a country</option>
                                     <option value="North American">North American</option>
                                     <option value="International">International</option>
@@ -34,7 +34,7 @@
                             </div>
                            
                             <div class="col-md-12 form-group">
-                                <select id="cd-priority" name="cd-priority" class="form-control">
+                                <select id="cd-priority" name="cd-priority" class="form-control" required>
                                     <option value="">Please select a priority</option>
                                     <option value="all">All</option>
                                     <option value="1">1</option>
@@ -47,7 +47,7 @@
                                   <span  class="text-danger"><?php echo form_error('cd-priority');?></span>
                             </div>
                             <div class="col-md-12 form-group">
-                                <select id="cd-status" name="cd-status" class="form-control">
+                                <select id="cd-status" name="cd-status" class="form-control" required>
                                     <option value="">Please select a status</option>
                                     <option value="all">All</option>
                                     <option value="deposit">Deposit</option>
@@ -61,7 +61,7 @@
                                  <span  class="text-danger"><?php echo form_error('cd-status');?></span>
                             </div>
                         <div class="col-md-12 form-group" id="change-input">
-                               <input type="number" name="cd-number-of-day" class="form-control" placeholder="Number of Day To Add" min="1" max="100">
+                               <input type="number" name="cd-number-of-day" class="form-control" placeholder="Number of Day To Add" min="1" max="100" required>
                                <span  class="text-danger"><?php echo form_error('cd-number-of-day');?></span>
                             </div>
                        
@@ -88,14 +88,14 @@
             var types=$(this).val();
             if(types==='North American'){
                
-               $('#change-input').html('<input type="number" name="cd-number-of-day" class="form-control" placeholder="Number of Day To Add" min="1" max="100"><span  class="text-danger"><?php echo form_error('cd-number-of-day');?></span>')
+               $('#change-input').html('<input type="number" name="cd-number-of-day" class="form-control" placeholder="Number of Day To Add" min="1" max="100" required><span  class="text-danger"><?php echo form_error('cd-number-of-day');?></span>')
                 
             }else if(types==='International'){
                 
-                $('#change-input').html('<input type="number" name="cd-number-of-month" class="form-control" placeholder="Number of Day To Month" min="1" max="4"><span  class="text-danger"><?php echo form_error('cd-number-of-month');?></span>')
+                $('#change-input').html('<input type="number" name="cd-number-of-month" class="form-control" placeholder="Number of Day To Month" min="1" max="4" required><span  class="text-danger"><?php echo form_error('cd-number-of-month');?></span>')
             }else{
                 
-                 $('#change-input').html('<input type="number" name="cd-number-of-day" class="form-control" placeholder="Number of Day To Add" min="1" max="100"><span  class="text-danger"><?php echo form_error('cd-number-of-day');?></span>')
+                 $('#change-input').html('<input type="number" name="cd-number-of-day" class="form-control" placeholder="Number of Day To Add" min="1" max="100" required><span  class="text-danger"><?php echo form_error('cd-number-of-day');?></span>')
             }
         });
         

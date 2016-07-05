@@ -258,7 +258,7 @@ $(document).ready(function(){
           
               
         ]});
-    /* task assign to me datatable... */
+    /* task completed to me datatable... */
      $("#task-completed-to-me-data").dataTable({
         "oLanguage": {
         "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
@@ -277,6 +277,30 @@ $(document).ready(function(){
             {"sClass": " aligncenter", "aTargets": [1]},
             {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
             {"sClass": "hidden-phone", "aTargets": [3]}
+       
+          
+              
+        ]});
+    /* task completed assign by me datatable... */
+     $("#completed_task_assign_by_me-data").dataTable({
+        "oLanguage": {
+        "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
+        "ordering": false,
+        "bFilter": false ,
+        "bLengthChange":false,
+        "bProcessing": true,
+        "bServerSide": true,
+        "sAjaxSource": base_url + "get_completed_task_assign_by_me", "bDeferRender": true,
+         "aLengthMenu": [[5,10,20, -1], [5,10,20,'All', $("#sAll").val()]],
+        "sPaginationType": "numbers",
+        "iDisplayLength": 10,
+        "bDestroy": true, //!!!--- for remove data table warning.
+        "aoColumnDefs": [
+            {"aTargets": [0]},
+            {"sClass": " aligncenter", "aTargets": [1]},
+            {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
+            {"sClass": "hidden-phone", "aTargets": [3]},
+            {"sClass": "hidden-phone", "aTargets": [4]}
        
           
               

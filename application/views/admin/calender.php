@@ -1,9 +1,13 @@
 <div id="page-wrapper">
+
     <div class="row">
         <div class="col-lg-12" style="margin-top: 2%;">
 
             <div class="row">
                 <div class="col-lg-12">
+                    
+                    <div id="eventSuccess" class="pull-right alert alert-success hidden message"></div>
+               
                     <button class="btn btn-sm btn-custom" data-target="#eventModal" data-toggle="modal">Create Event</button>
                 </div>
             </div>
@@ -30,15 +34,52 @@
 
 <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);display: none;">
     <div class="modal-dialog">
+        <form name="event-create" id="event-create" method="post" action="">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <h4 class="modal-title" id="myModalLabel">Create New Event</h4>
             </div>
             <div class="modal-body">
-
-
-
+                <div class="col-md-12">
+                 
+                     <label>Event Name</label>
+                  
+                    <input type="text" name="cd-title" class="form-control" placeholder="Event Name">
+                  <span id="cd-title" class="text-danger hidden"></span>
+                  
+                </div>
+                <div class="col-md-12">
+                 
+                     <label>Location</label>
+                  
+                    <input type="text" name="cd-location" class="form-control" placeholder="Location">
+                    <span id="cd-location" class="text-danger hidden"></span>
+               
+                </div>
+                <div class="col-md-12">
+                 
+                     <label>Start Date/Time</label>
+                  
+                     <input type="text" name="cd-date-start" id="datetimepicker8" class="form-control" placeholder="Date/Time">
+                    <span id="cd-date-start" class="text-danger hidden"></span>
+                  
+                </div>
+                 <div class="col-md-12">
+                 
+                     <label>End Date/Time</label>
+                  
+                     <input type="text" name="cd-date-end" id="datetimepicker9" class="form-control" placeholder="Date/Time">
+                    <span id="cd-date-end" class="text-danger hidden"></span>
+                  
+                </div>
+                <div class="col-md-12">
+                 
+                     <label>Description</label>
+                   <textarea name="cd-description" class="form-control" placeholder="Tell people more about event" style="max-height: 90px; height: 90px;"></textarea>
+                    <span id="cd-description" class="text-danger hidden"></span>
+               
+                </div>
             </div>
             <div class="clearfix"></div>
             <div class="modal-footer">
@@ -46,6 +87,7 @@
                 <button type="submit" id="add-event" class="btn btn-success">Create</button>
             </div>
         </div>
+    </form>
         <div class="checkout_loader hidden" id="form_loader">
             <div class="overlay new_loader"></div>
             <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/images/chekout-loading.gif'); ?>" /></div>
@@ -205,8 +247,76 @@
             var moment = $('#calendar').fullCalendar('getDate');
             getEvents(moment.format());
         });
+/* datetime picker*/
+         $('#datetimepicker8').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },
+                minDate: new Date()
+            });
+            $('#datetimepicker9').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },
+                minDate: new Date()
+            });
+            
+ /* add event through ajax */
+var base_url = $('body').find('#base_url').val();
+    
+        // Script for validate and submit remind form by AJAX...
+        var options = {
+            beforeSerialize: function () {
+                // return false to cancel submit 
+                $('body').find('#eventModal #form_loader').removeClass('hidden');
+            },
+            url: base_url+'add_event',
+            success: function (data) {
+                var err = $.parseJSON(data);
+                if (err.result == false) {
+                    $('body').find('#eventModal #form_loader').addClass('hidden');
+                    $(err.error).each(function (index, value) {
+                        $.each(value, function (index2, msg) {
+                            $("#eventModal #" + index2).text(msg);
+                            $("#eventModal #" + index2).removeClass('hidden');
+                        });
+                    });
+                }
+                else {
+                    $('body').find('#eventModal #form_loader').addClass('hidden');
+                    if (err.success) {
 
+                        $('body').find('#eventModal input select').each(function () {
 
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        $("#eventSuccess").text(err.success);
+                        $("#eventSuccess").removeClass('hidden');
+                        
+                         setTimeout(function () {
+                            $('body').find('#eventModal').modal('hide');
+                        }, 500)
+                        window.location.href='<?php echo base_url('calendar');?>';
+                  }
+                    else {
+                        $('body').find('#eventModal input select').each(function () {
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        setTimeout(function () {
+                            $('body').find('#eventModal').modal('hide');
+                        }, 500)
+                    }
+                }
+            }
+        };
+        $('body').find('#event-create').ajaxForm(options);
+    /*end ajax here */
     });
 
     function getEvents(month) {
