@@ -101,6 +101,7 @@ class Calendar extends CI_Controller {
             $data_insert=array(
                 'title'=>$this->input->post('cd-title'),
                 'description'=>$this->input->post('cd-description'),
+                 'location'=>$this->input->post('cd-location'),
                 'startdate'=>$start_date_time,
                 'enddate'=>$end_date_time,
                 'allDay'=>'false'
