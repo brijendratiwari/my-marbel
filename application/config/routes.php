@@ -107,6 +107,7 @@ $route['order_service/(:num)/(:num)']='admin/services/new_order_service/$1/$2';
 $route['calendar']='admin/calendar';
 $route['process']='admin/calendar/process';
 $route['add_event']='admin/calendar/add_event';
+$route['update_event']='admin/calendar/update_event/$1';
 
 $route['email']='admin/email';
 $route['send_email']='admin/email/send_email';

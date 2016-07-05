@@ -357,7 +357,56 @@ var base_url = $('body').find('#base_url').val();
         };
         $('body').find('#event-create').ajaxForm(options);
     /*end ajax here */
-    
+    /* Update event through ajax */
+var base_url = $('body').find('#base_url').val();
+            
+        // Script for validate and submit remind form by AJAX...
+        var options = {
+            beforeSerialize: function () {
+                // return false to cancel submit 
+                $('body').find('#editEventModal #form_loader').removeClass('hidden');
+            },
+            url: base_url+'update_event',
+            success: function (data) {
+                var err = $.parseJSON(data);
+                if (err.result == false) {
+                    $('body').find('#editEventModal #form_loader').addClass('hidden');
+                    $(err.error).each(function (index, value) {
+                        $.each(value, function (index2, msg) {
+                            $("#editEventModal #" + index2).text(msg);
+                            $("#editEventModal #" + index2).removeClass('hidden');
+                        });
+                    });
+                }
+                else {
+                    $('body').find('#editEventModal #form_loader').addClass('hidden');
+                    if (err.success) {
+
+                        $('body').find('#editEventModal input select').each(function () {
+
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        $("#eventSuccess").text(err.success);
+                        $("#eventSuccess").removeClass('hidden');
+                        
+                         setTimeout(function () {
+                            $('body').find('#editEventModal').modal('hide');
+                        }, 500)
+                        window.location.href='<?php echo base_url('calendar');?>';
+                  }
+                    else {
+                        $('body').find('#editEventModal input select').each(function () {
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        setTimeout(function () {
+                            $('body').find('#editEventModal').modal('hide');
+                        }, 500)
+                    }
+                }
+            }
+        };
+        $('body').find('#event-update').ajaxForm(options);
+    /*end ajax here */
     /*get evnt on click..*/
     $('body').on('click','.get-event',function(){
     

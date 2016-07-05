@@ -10,7 +10,7 @@
                  
                      <label>Location</label>
                   
-                    <input type="text" name="cd-location" class="form-control" placeholder="Location" nvalue="<?php echo $event->location; ?>" >
+                    <input type="text" name="cd-location" class="form-control" placeholder="Location" value="<?php echo $event->location; ?>" >
                     <span id="cd-location" class="text-danger hidden"></span>
                
                 </div>
@@ -35,7 +35,7 @@
                      <label>Description</label>
                    <textarea name="cd-description"  class="form-control" placeholder="Tell people more about event" style="max-height: 90px; height: 90px;"><?php echo $event->description; ?></textarea>
                     <span id="cd-description" class="text-danger hidden"></span>
-               
+                    <input type="hidden" value="<?php echo $event->id; ?>" name="event_id" id="event_id">
                 </div>
 
 <script>
