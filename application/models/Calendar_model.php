@@ -91,9 +91,19 @@ class Calendar_model extends CI_Model {
             return FALSE;
         }
     }
-    public function add_event(){
-        
-        
+    
+    public function getEventById($event_id) {
+        $table = 'm_calendar';
+        $this->db->select('*')->from($table)->where('id',$event_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $getRecord = $query->row();
+            return $getRecord;
+        }else{
+            
+            return FALSE;
+        }
     }
+  
 
 }

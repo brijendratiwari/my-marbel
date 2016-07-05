@@ -14,7 +14,7 @@
             <div class="row" style="margin-top: 2%;">
                 <div class="col-lg-3">
                     <div class="panel panel-default">
-                        <div class="panel-heading">All Events</div>
+                        <div class="panel-heading">Events</div>
                         <div class="panel-body event-data">
 
                         </div>
@@ -61,7 +61,7 @@
                  
                      <label>Start Date/Time</label>
                   
-                     <input type="text" name="cd-date-start" id="datetimepicker8" class="form-control" placeholder="Date/Time">
+                     <input type="text" name="cd-date-start" id="" class="form-control datetimepicker8" placeholder="Date/Time">
                     <span id="cd-date-start" class="text-danger hidden"></span>
                   
                 </div>
@@ -69,7 +69,7 @@
                  
                      <label>End Date/Time</label>
                   
-                     <input type="text" name="cd-date-end" id="datetimepicker9" class="form-control" placeholder="Date/Time">
+                     <input type="text" name="cd-date-end" id="" class="form-control datetimepicker9" placeholder="Date/Time">
                     <span id="cd-date-end" class="text-danger hidden"></span>
                   
                 </div>
@@ -99,13 +99,45 @@
 </div>
 <!--create Event modal end-->
 
+
+<!--update Event modal-->
+
+<div class="modal fade" id="editEventModal" tabindex="-1" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);display: none;">
+    <div class="modal-dialog">
+        <form name="event-update" id="event-update" method="post" action="">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Update Event</h4>
+            </div>
+            <div class="modal-body update-event-data">
+             <!--content will be load on click-->
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" id="update-event" class="btn btn-success">Update</button>
+            </div>
+        </div>
+    </form>
+        <div class="checkout_loader hidden" id="form_loader">
+            <div class="overlay new_loader"></div>
+            <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/images/chekout-loading.gif'); ?>" /></div>
+        </div>
+    </div>
+
+
+
+</div>
+<!--update Event modal end-->
+
 <script>
 
     $(document).ready(function () {
 
 
         /* call function get events month wise for listing */
-        getEvents(false);
+        getEvents(0);
 
 
         var zone = "05:30";  //Change this to your timezone
@@ -133,7 +165,7 @@
             utc: true,
             header: {
                 left: 'next today',
-                center: 'Event Name',
+                center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
             editable: true,
@@ -171,6 +203,7 @@
                     success: function (response) {
                         if (response.status != 'success')
                             revertFunc();
+                        getEvents(0);
                     },
                     error: function (e) {
                         revertFunc();
@@ -192,6 +225,7 @@
                         success: function (response) {
                             if (response.status == 'success')
                                 $('#calendar').fullCalendar('updateEvent', event);
+                            getEvents(0);
                         },
                         error: function (e) {
                             alert('Error processing your request: ' + e.responseText);
@@ -212,13 +246,19 @@
                     success: function (response) {
                         if (response.status != 'success')
                             revertFunc();
+                        getEvents(0);
                     },
                     error: function (e) {
                         revertFunc();
                         alert('Error processing your request: ' + e.responseText);
                     }
                 });
-            }
+            }, dayRender: function(date, cell){
+                    var maxDate = new Date();
+                    if (date > maxDate){
+                        $(cell).addClass('disabled');
+        }
+    }
 
         });
 
@@ -248,7 +288,7 @@
             getEvents(moment.format());
         });
 /* datetime picker*/
-         $('#datetimepicker8').datetimepicker({
+         $('body').find('.datetimepicker8').datetimepicker({
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
@@ -257,7 +297,7 @@
                 },
                 minDate: new Date()
             });
-            $('#datetimepicker9').datetimepicker({
+            $('body').find('.datetimepicker9').datetimepicker({
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
@@ -317,6 +357,22 @@ var base_url = $('body').find('#base_url').val();
         };
         $('body').find('#event-create').ajaxForm(options);
     /*end ajax here */
+    
+    /*get evnt on click..*/
+    $('body').on('click','.get-event',function(){
+    
+       var event = $(this).attr('data-eventId');
+       
+         if(event!=''){
+             
+             $('body').find('.update-event-data').load("<?php echo base_url('admin/calendar/getSingleEvent'); ?>/" + event + "");
+         }
+    
+    })
+    /*get evnt on click..*/
+    
+    
+    
     });
 
     function getEvents(month) {

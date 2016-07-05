@@ -39,7 +39,7 @@ class Calendar extends CI_Controller {
         if($date == FALSE){
             
             $month = date('m');
-            $year = date('y');
+            $year = date('Y');
         }else{
             
             $month = date('m',  strtotime($date));
@@ -50,6 +50,18 @@ class Calendar extends CI_Controller {
         $this->data['events'] = $this->Calendar->getAllEvents($month,$year);
 
         $this->load->view('admin/events', $this->data);
+    }
+    
+    public function getSingleEvent($event_id = FALSE){
+        
+       if($event_id != ''){
+           
+           $this->data['event'] = $this->Calendar->getEventById($event_id);
+
+           $this->load->view('admin/update_event', $this->data);
+       }        
+
+        
     }
     
     public function add_event(){
