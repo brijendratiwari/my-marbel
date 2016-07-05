@@ -92,9 +92,9 @@ class Calendar extends CI_Controller {
                 $start_date_time=$start_date.'T'.$start_time.$timezone;
             }
             if($this->input->post('cd-date-end')){
-                $endDate=explode(' ',$this->input->post('cd-date-start'));
-                $end_date=date('Y-m-d',  strtotime($startDate[0]));
-                $end_time=date('H:i:s',  strtotime($startDate[1].' '.$startDate[2]));
+                $endDate=explode(' ',$this->input->post('cd-date-end'));
+                $end_date=date('Y-m-d',  strtotime($endDate[0]));
+                $end_time=date('H:i:s',  strtotime($endDate[1].' '.$endDate[2]));
                 $end_date_time=$end_date.'T'.$end_time.$timezone;
             }
            
@@ -155,9 +155,9 @@ class Calendar extends CI_Controller {
                 $start_date_time=$start_date.'T'.$start_time.$timezone;
             }
             if($this->input->post('cd-date-end')){
-                $endDate=explode(' ',$this->input->post('cd-date-start'));
-                $end_date=date('Y-m-d',  strtotime($startDate[0]));
-                $end_time=date('H:i:s',  strtotime($startDate[1].' '.$startDate[2]));
+                $endDate=explode(' ',$this->input->post('cd-date-end'));
+                $end_date=date('Y-m-d',  strtotime($endDate[0]));
+                $end_time=date('H:i:s',  strtotime($endDate[1].' '.$endDate[2]));
                 $end_date_time=$end_date.'T'.$end_time.$timezone;
             }
            
