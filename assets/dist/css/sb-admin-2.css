@@ -45,6 +45,22 @@ body {
     margin-top: 14px;
     text-align: center;
 }
+#task-assign-to-me-data td, #task-assign-to-me-data th{
+    padding: 3px;
+    font-size: 13px;
+}
+#task-assign-by-me-data td, #task-assign-by-me-data th{
+    padding: 3px;
+    font-size: 13px;
+}
+#task-completed-to-me-data td, #task-completed-to-me-data th{
+    padding: 3px;
+    font-size: 13px;
+}
+#task-completed-by-me-data td, #task-completed-by-me-data th{
+    padding: 3px;
+    font-size: 13px;
+}
 #customer-data td, #customer-data th{
     padding: 3px;
     font-size: 13px;
