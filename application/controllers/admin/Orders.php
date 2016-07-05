@@ -277,5 +277,38 @@ class Orders extends CI_Controller {
             redirect('orders');
         }
     }
+    
+    public function update_order_estimated_shipping_date(){
+        
+        $this->data['page']='Update Order';
+        $this->data['title']='Update Order';
+        if($this->input->post()){
+            $this->form_validation->set_rules('cd-country', 'Country', 'trim|required');
+            $this->form_validation->set_rules('cd-priority', 'Priority', 'trim|required');
+            $this->form_validation->set_rules('cd-status', 'Status', 'trim|required');
+           if($this->input->post('cd-number-of-day')){
+            $this->form_validation->set_rules('cd-number-of-day', 'Number of day', 'trim|required|numeric');
+           }
+           if($this->input->post('cd-number-of-month')){
+            $this->form_validation->set_rules('cd-number-of-month', 'Number of Month', 'trim|required|numeric');
+           }
+
+            //run validation on form input
+            if ($this->form_validation->run() == TRUE) {
+
+                $response =  $this->Orders->UpdateOrders();     
+                
+                if($response){
+                    $this->session->set_flashdata('success','Order updated succesfuly.');
+                }else{
+                    $this->session->set_flashdata('error','Order not updated,try again.');
+                }
+                    redirect('orders');
+
+            }
+        }
+        $this->load->template('admin/update_order_estimated_shipping_date', $this->data);
+        
+    }
 
 }

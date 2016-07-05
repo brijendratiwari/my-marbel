@@ -11,6 +11,7 @@
     
                     <div id="userSuccess" class="pull-left alert alert-success hidden message"></div>
                  </div>   
+                  
                     <div  class="col-lg-6 page-header text-right"><button class="btn btn-custom" data-toggle="modal" data-target="#usersModal">Add New Customer</button></div>
                 </div>
                 <!-- /.col-lg-12 -->

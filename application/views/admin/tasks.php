@@ -5,7 +5,10 @@
             <div class="col-lg-6">
              
                      <div id="taskSuccess" class="pull-left alert alert-success hidden message"></div>
-               
+                     <?php if($this->session->flashdata('success')){?>
+                    
+                     <div id="taskSuccess" class="pull-left alert alert-success  message"><?php echo $this->session->flashdata('success');?></div>
+                     <?php } ?>
             </div>   
 
             
@@ -28,7 +31,7 @@
                     </div>
 
                     <div class='panel-body'>
-                        <table class="table table-striped table-bordered table-hover"  style="width:100% !important;">
+                        <table class="table table-striped table-bordered table-hover" id="task-assign-to-me-data" style="width:100% !important;">
                             <thead
                                 <tr>
                                     <th>Category</th>
@@ -39,22 +42,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if($pending_task_to){
-                                    foreach($pending_task_to as $task){?>
-                                         <tr>
-                                             <td><span style="color: #00aeef;"><i class="fa fa-circle"></i></span> <?php echo $task['category_name'];?></td>
-                                        <td><?php echo $task['task_name'];?></td> 
-                                        <td><?php echo $task['task_regarding'];?></td>
-                                        <td><?php echo date('m/d/Y', strtotime($task['task_due_date']));?></td>
-                                        <td><a class="btn btn-xs btn-success" href="#" class="btn btn-custom" data-toggle="modal" data-target="#editTaskModal"><i class="fa fa-eye"></i> View</a></td>
-
-                                </tr>
-                                
-                                   <?php }
-                                }else{
-                                    echo "<tr><td colspan='4'>No record found!</td></tr>";
-                                }
-                                ?>
+                               
                                
                             </tbody>
                         </table>
@@ -70,7 +58,7 @@
                     </div>
 
                     <div class='panel-body'>
-                        <table class="table table-striped table-bordered table-hover"  style="width:100% !important;">
+                        <table class="table table-striped table-bordered table-hover" id="task-assign-by-me-data"  style="width:100% !important;">
                             <thead
                                 <tr>
                                     
@@ -82,23 +70,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                 <?php  if($pending_task_by){
-                                    foreach($pending_task_by as $task){?>
-                                         <tr>
-                                        <td><span style="color: #00aeef;"><i class="fa fa-circle"></i></span> <?php echo $task['category_name'];?></td>
-                                        <td><?php echo $task['task_name'];?></td> 
-                                        <td><?php echo $task['task_regarding'];?></td>
-                                        <td><?php echo date('m/d/Y', strtotime($task['task_due_date']));?></td>
-                                        <td><?php echo $task['assign_to_name'];?></td>
-
-                                </tr>
                                 
-                                   <?php }
-                                }else{
-                                    echo "<tr><td colspan='5'>No record found!</td></tr>";
-                                }
-                                ?>
-                               
                             </tbody>
                         </table>
                     </div>
@@ -113,33 +85,19 @@
                     </div>
 
                     <div class='panel-body'>
-                        <table class="table table-striped table-bordered table-hover"  style="width:100% !important;">
+                        <table class="table table-striped table-bordered table-hover" id="task-completed-to-me-data"  style="width:100% !important;">
                             <thead
                                 <tr>
                                    
                                     <th>Category</th>
                                     <th>Task Title</th>
                                     <th>Regarding</th>
-                                    <th>Due Date</th>
+                                    <th>Date</th>
                                 </tr>
                             </thead>
                             <tbody>
                                
-                                    <?php if($completed_task_to){
-                                    foreach($completed_task_to as $task){?>
-                                         <tr>
-                                        <td><span><i class="fa fa-check"></i></span> <?php echo $task['category_name'];?></td>
-                                        <td><?php echo $task['task_name'];?></td> 
-                                        <td><?php echo $task['task_regarding'];?></td>
-                                        <td><?php echo date('m/d/Y', strtotime($task['task_due_date']));?></td>
-                                         
-                                </tr>
-                                
-                                   <?php }
-                                }else{
-                                    echo "<tr><td colspan='4'>No record found!</td></tr>";
-                                }
-                                ?>
+                                   
                                
                             </tbody>
                         </table>
@@ -161,7 +119,7 @@
                                     <th>Category</th>
                                     <th>Task Title</th>
                                     <th>Regarding</th>
-                                    <th>Due Date</th>
+                                    <th>Date</th>
                                     <th>Assigned To</th>
                                      
                                 </tr>
@@ -176,9 +134,9 @@
                                              <td><span><i class="fa fa-check"></i></span> <?php echo $task['category_name'];?></td>
                                         <td><?php echo $task['task_name'];?></td> 
                                         <td><?php echo $task['task_regarding'];?></td>
-                                        <td><?php echo date('m/d/Y', strtotime($task['task_due_date']));?></td>
-                                         <td><?php echo $task['assign_to_name'];?></td>
-                                         
+                                        
+                                         <td><?php echo (!empty($task['task_completed_date']) && $task['task_completed_date']!='0000-00-00')? date('m/d/Y', strtotime($task['task_completed_date'])):"";?></td>
+                                            <td><?php echo $task['assign_to_name'];?></td>
                                 </tr>
                                 
                                    <?php }
@@ -200,7 +158,7 @@
 <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);display: none;">
     <div class="modal-dialog user-profile">
         <div class="modal-content">
-            <form name="task" method="post" action="" id="edit-row-form">
+            <form name="task" method="post" action="" id="add-row-form">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <h4 class="modal-title" id="myModalLabel">Add Task</h4>
@@ -281,64 +239,18 @@
 <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);display: none;">
     <div class="modal-dialog user-profile">
         <div class="modal-content">
-            <form name="task" method="post" action="<?php base_url('add_task'); ?>" id="add-row-form">
+        
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
             </div>
-            <div class="modal-body profile-html">
+            <div class="modal-body profile-html edtttask">
 
                
-                    <div class="col-lg-12" >
-
-
-                        <div class="col-md-12 form-group">
-                            <label>Task name</label>
-                           test
-                        </div>
-                        <div class="col-md-12 form-group">
-                              <label>Category</label>
-                       
-                              test
-                           
-                        </div>
-                        <div class="col-md-12 form-group">
-                           <label>Assignee name</label>
-                       
-                              test
-                        </div>
-                        <div class="col-md-12 form-group">
-                           
-                            <label> Due date </label>
-                       
-                              test
-                        </div>
-                        <div class="col-md-12 form-group">
-                           
-                            <label> Regarding</label>
-                       
-                              test
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <select  name="cd-status" class="form-control">
-                              
-                                <option value="Pending">Pending</option>
-                                <option value="Completed">Completed</option>
-                                <option value="Doing">Doing</option>
-                            </select>
-                            <span id="cd-assignee" class="text-danger"><?php echo form_error('cd-status'); ?></span>
-                        </div>
-                       
-                    </div>
+                    
 
             </div>
-            <div class="clearfix"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                 <button type="submit" id="add-row" class="btn btn-success">Update</button>
-            </div>
-                            </form>
-
+           
         </div>
         <div class="checkout_loader hidden" id="form_loader">
             <div class="overlay new_loader"></div>
@@ -400,7 +312,12 @@ $(document).ready(function(){
         };
         $('body').find('#add-row-form').ajaxForm(options);
                 
-       
+         $('body').on('click', '.edit-task', function () {
+
+            var task_id = $(this).attr('data-id');
+            $('body').find('.edtttask').html('');
+            $('body').find('.edtttask').load("<?php echo base_url('edit_task'); ?>/" + task_id + "");
+        })
          /* date picker */
         $('.duedate').datepicker({
             'format': 'yyyy-mm-dd',

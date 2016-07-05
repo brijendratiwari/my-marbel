@@ -31,6 +31,7 @@ class Customers extends CI_Controller {
     /* datatable for getting customer list... */
 
     public function get_customers() {
+        $id = $this->session->userdata['marbel_user']['user_id'];
         $sLimit = "";
         $lenght = 50;
         $str_point = 0;

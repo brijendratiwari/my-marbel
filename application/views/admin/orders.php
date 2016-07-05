@@ -20,7 +20,7 @@
            <div id="orderSuccess" class="pull-left alert alert-success hidden message"></div>
            <div id="orderError" class="pull-left alert alert-danger hidden message"></div>
                  </div>   
-                    <div  class="col-lg-6 page-header text-right"><button class="btn btn-custom" data-toggle="modal" data-target="#ordersModal">Add New Order</button></div>
+                    <div  class="col-lg-6 page-header text-right"><a href="<?php echo base_url('update_orders');?>" class="btn btn-custom">Update Order</a> <button class="btn btn-custom" data-toggle="modal" data-target="#ordersModal">Add New Order</button></div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

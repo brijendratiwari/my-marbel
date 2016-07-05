@@ -80,7 +80,7 @@ $route['order_list'] = 'admin/orders/get_orders';
 $route['add_order'] = 'admin/orders/add_order';
 $route['edit_order/(:num)'] = 'admin/orders/edit_order/$1';
 $route['delete_order/(:num)'] = 'admin/orders/delete_order/$1';
-
+$route['update_orders'] = 'admin/orders/update_order_estimated_shipping_date';
 
 $route['forgot_password']='login/forgot_password';
 
@@ -123,7 +123,11 @@ $route['upload']='customer/support/upload';
 
 $route['tasks']='admin/tasks';
 $route['add_task']='admin/tasks/add_task';
-
+$route['edit_task/(:num)']='admin/tasks/edit_task/$1';
+$route['update_task/(:num)']='admin/tasks/update_task/$1';
+$route['get_task_assign_to_me']='admin/tasks/get_task_assign_to_me';
+$route['get_task_assign_by_me']='admin/tasks/get_task_assign_by_me';
+$route['get_task_completed_to_me']='admin/tasks/get_task_completed_to_me';
 
 /*api  */
 $route['saveuserinformation']='appsignin/save_user_information';

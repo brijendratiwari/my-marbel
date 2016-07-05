@@ -14,8 +14,8 @@ class Tasks_model extends CI_Model {
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             if ($id != '') {
-               
-                $nameCategory=$query->row_array();
+
+                $nameCategory = $query->row_array();
                 return $nameCategory['cat_name'];
             } else {
                 return $query->result_array();
@@ -41,43 +41,71 @@ class Tasks_model extends CI_Model {
         }
     }
 
-    public function getTasks($id_to = false,$id_by=false,$status=false) {
+    public function getTasks($id_to = false, $id_by = false, $status = false) {
 
         $this->db->select('*')->from('m_tasks');
         $this->db->where('task_status', $status);
-        if($id_to){
+        if ($id_to) {
             $this->db->where('task_assign_to', $id_to);
         }
-        if($id_by){
-             $this->db->where('task_assign_by', $id_by);
+        if ($id_by) {
+            $this->db->where('task_assign_by', $id_by);
         }
+        $this->db->order_by('task_due_date', 'asc');
+        $this->db->limit(0, 10);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            $task=array();
-            $task=$query->result_array();
-            $i=0;
-            foreach($task as $result){
-                
-                $task[$i]['assign_to_name']=$this->getAssigneeNameById($result['task_assign_to']);
-                $task[$i]['assign_by_name']=$this->getAssigneeNameById($result['task_assign_by']);
-                $task[$i]['category_name']=$this->getTaskCategory($result['task_cat_id']);
-                
-           $i++;
-           
+            $task = array();
+            $task = $query->result_array();
+            $i = 0;
+            foreach ($task as $result) {
+
+                $task[$i]['assign_to_name'] = $this->getAssigneeNameById($result['task_assign_to']);
+                $task[$i]['assign_by_name'] = $this->getAssigneeNameById($result['task_assign_by']);
+                $task[$i]['category_name'] = $this->getTaskCategory($result['task_cat_id']);
+
+                $i++;
             }
 //            echo "<pre>";print_r($task); 
             return $task;
-        }else{ return false;}
-    }
-    public function getAssigneeNameById($id){
-        
-        $this->db->select('first_name,last_name')->from('m_users');
-        $this->db->where('id',$id);
-        $query=$this->db->get();
-        if($query->num_rows()>0){
-           $nameassignee=$query->row_array();
-            return  $nameassignee['first_name'].' '.$nameassignee['last_name'];
+        } else {
+            return false;
         }
-        
     }
+
+    public function getAssigneeNameById($id) {
+
+        $this->db->select('first_name,last_name')->from('m_users');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $nameassignee = $query->row_array();
+            return $nameassignee['first_name'] . ' ' . $nameassignee['last_name'];
+        }
+    }
+
+    public function getTasksById($task_id = false) {
+
+        $this->db->select('*')->from('m_tasks');
+        $this->db->where('task_status', 'Pending');
+
+        if ($task_id) {
+
+            $this->db->where('task_id', $task_id);
+        }
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $task = array();
+            $task = $query->row_array();
+            $task['assign_to_name'] = $this->getAssigneeNameById($task['task_assign_to']);
+            $task['assign_by_name'] = $this->getAssigneeNameById($task['task_assign_by']);
+            $task['category_name'] = $this->getTaskCategory($task['task_cat_id']);
+
+            #echo "<pre>";print_r($task);  die;
+            return $task;
+        } else {
+            return false;
+        }
+    }
+
 }
