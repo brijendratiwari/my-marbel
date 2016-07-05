@@ -164,7 +164,7 @@
             //events: [{"id":"14","title":"New Event","start":"2015-01-24T16:00:00+04:00","allDay":false}],
             utc: true,
             header: {
-                left: 'prev,next today',
+                left: 'prev,next',
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
