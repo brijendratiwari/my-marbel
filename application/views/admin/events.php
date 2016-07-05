@@ -6,7 +6,7 @@
                                 <i class="fa fa-calendar"></i> <a href="#" style="color:black;"><?php echo substr($val['title'],0,10) . '...'; ?></a>
                             </div>
                             <div class="col-lg-3">
-                                <a href="#"  class="text-danger"><i class="fa fa-trash"></i></a>
+                                <a href="<?php echo base_url('delete_event/'.$val['id']);?>" onclick="return confirm('Are you sure to delete event permanently?');"  class="text-danger"><i class="fa fa-trash"></i></a>
                             </div>
                             </div>
                                 <?php } }else{ ?>

@@ -5,7 +5,12 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    
+                    <?php if($this->session->flashdata('success')){?>
+                    <div  class="pull-right alert alert-success message"><?php echo $this->session->flashdata('success');?></div>
+                    <?php } ?>
+                     <?php if($this->session->flashdata('error')){?>
+                    <div  class="pull-right alert alert-danger message"><?php echo $this->session->flashdata('error');?></div>
+                    <?php } ?>
                     <div id="eventSuccess" class="pull-right alert alert-success hidden message"></div>
                
                     <button class="btn btn-sm btn-custom" data-target="#eventModal" data-toggle="modal">Create Event</button>

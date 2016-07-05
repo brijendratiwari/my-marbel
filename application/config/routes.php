@@ -108,6 +108,7 @@ $route['calendar']='admin/calendar';
 $route['process']='admin/calendar/process';
 $route['add_event']='admin/calendar/add_event';
 $route['update_event']='admin/calendar/update_event/$1';
+$route['delete_event/(:num)']='admin/calendar/event_delete/$1';
 
 $route['email']='admin/email';
 $route['send_email']='admin/email/send_email';
