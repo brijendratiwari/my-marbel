@@ -36,12 +36,12 @@
 
                             <?php if ($user_orders) {
                                 foreach ($user_orders as $user_order) { ?>
-                                    <p>Order Date: <?php echo (!empty($user_order['order_date'])) ? date('M j, Y', $user_order['order_date']) : ""; ?></p>
-                                    <p>Order Number: <?php echo (!empty($user_order['order_number'])) ? $user_order['order_number'] : ""; ?></p>
-                                    <p>Product: <?php echo (!empty($user_order['product'])) ? $user_order['product'] : ""; ?></p>
-                                    <p>Status: <?php echo (!empty($user_order['order_friendly_status'])) ? $user_order['order_friendly_status'] : ""; ?></p>
-                                    <p>Total: <?php echo (!empty($user_order['order_total'])) ? '$' . $user_order['order_total'] : ""; ?></p>
-                                    <hr>
+                                    <p><label>Order Date : </label> <?php echo (!empty($user_order['order_date']))?date('M j, Y', $user_order['order_date']):"";?></p>
+                                            <p><label>Order Number : </label> <?php echo (!empty($user_order['order_number']))?$user_order['order_number']:"";?></p>
+                                            <p><label>Product : </label><?php echo (!empty($user_order['product']))?$user_order['product']:"";?></p>
+                                            <p><label>Status : </label><?php echo (!empty($user_order['order_friendly_status']))?$user_order['order_friendly_status']:"";?></p>
+                                             <p><label>Total : </label><?php echo (!empty($user_order['order_total']))?'$'.$user_order['order_total']:"";?></p>
+                                             <hr>
     <?php }
 } else {
     echo '<p>No Order Found!</p>';
@@ -61,14 +61,14 @@ if ($user_orders) {
             foreach ($services as $service) {
                 ?>
 
-                                            <p>Date: <?php echo (!empty($service['date'])) ? date('M j, Y', strtotime($service['date'])) : ""; ?></p>
-                                            <p>Status: <?php echo (!empty($service['status'])) ? ucwords($service['status']) : ""; ?></p>
-                                            <p>Type: <?php echo (!empty($service['type'])) ? ucwords($service['type']) : ""; ?></p>
-                                            <p>Issue: <?php echo (!empty($service['issue'])) ? $service['issue'] : ""; ?></p>
-                                            <p>Diagnostic Response: <?php echo (!empty($service['diagnostic_response'])) ? $service['diagnostic_response'] : ""; ?></p>
-                                            <p>Included Parts: <?php echo (!empty($service['included_parts'])) ? $service['included_parts'] : ""; ?></p>
-                                            <p>Notes: <?php echo (!empty($service['notes'])) ? $service['notes'] : ""; ?></p>
-                                            <hr>
+                                            <p><label>     Date:</label> <?php echo (!empty($service['date']))?date('M j, Y', strtotime($service['date'])):"";?></p>
+                                                <p><label>Status : </label> <?php echo (!empty($service['status']))?ucwords($service['status']):"";?></p>
+                                                <p><label>Type : </label> <?php echo (!empty($service['type']))?ucwords($service['type']):"";?></p>
+                                                <p><label>Issue : </label> <?php echo (!empty($service['issue']))?$service['issue']:"";?></p>
+                                                <p><label>Diagnostic Response : </label> <?php echo (!empty($service['diagnostic_response']))?$service['diagnostic_response']:"";?></p>
+                                                <p><label>Included Parts : </label> <?php echo (!empty($service['included_parts']))?$service['included_parts']:"";?></p>
+                                                <p><label>Notes : </label><?php echo (!empty($service['notes']))? $service['notes']:"";?></p>
+                                                <hr>
                                         <?php
                                         }
                                     } else {
@@ -95,7 +95,10 @@ if ($user_orders) {
                     <div class="panel panel-default">
                         <div class="panel-heading">Note</div>
                         <div class="panel-body">
-<?php echo (!empty($user_info['notes'])) ? $user_info['notes'] : "Empty"; ?>
+                                        <p><label>Orders : </label> <?php echo (!empty($user_info['note_orders']))?$user_info['note_orders']:"Empty";?></p>
+                                        <p><label>Services : </label> <?php echo (!empty($user_info['note_services']))?$user_info['note_services']:"Empty";?></p>
+                                        <p><label>Tasks : </label> <?php echo (!empty($user_info['note_tasks']))?$user_info['note_tasks']:"Empty";?></p>
+                                        <p><label>Support Tickets : </label> <?php echo (!empty($user_info['note_support_ticket']))?ucwords($user_info['note_support_ticket']):"Empty";?></p>
                         </div>
                     </div>
 
@@ -105,10 +108,10 @@ if ($user_orders) {
                     <div class="panel panel-default">
                         <div class="panel-heading">Active</div>
                         <div class="panel-body">
-                            <p>Phone: <?php echo (!empty($user_info['notes'])) ? $user_info['phone'] : "Empty"; ?></p>
-                            <p>Email: <?php echo (!empty($user_info['email'])) ? $user_info['email'] : "Empty"; ?></p>
-                            <p>Email2: <?php echo (!empty($user_info['email_secondary'])) ? $user_info['email_secondary'] : "Empty"; ?></p>
-                            <p>Accept marketing: <?php echo (!empty($user_info['accepts'])) ? ucwords($user_info['accepts']) : "Empty"; ?></p>
+                             <p><label>Phone : </label> <?php echo (!empty($user_info['notes']))?$user_info['phone']:"Empty";?></p>
+                                        <p><label>Email : </label> <?php echo (!empty($user_info['email']))?$user_info['email']:"Empty";?></p>
+                                        <p><label>Email Secondary : </label> <?php echo (!empty($user_info['email_secondary']))?$user_info['email_secondary']:"Empty";?></p>
+                                        <p><label>Accept marketing : </label> <?php echo (!empty($user_info['accepts']))?ucwords($user_info['accepts']):"Empty";?></p>
                         </div>
                     </div>
 
@@ -119,9 +122,26 @@ if ($user_orders) {
 
 
                     <div class="panel panel-default">
-                        <div class="panel-heading">Deafult Address</div>
+                        <div class="panel-heading">Default Address</div>
                         <div class="panel-body">
-<?php echo (!empty($user_info['address_one'])) ? $user_info['address_one'] : "Empty"; ?>
+                                        <?php 
+                                        if(empty($user_info['country']) && empty($user_info['city'])&& empty($user_info['state_or_region'])){
+                                        if(!empty($user_orders)){?>
+                                        <p><label>City : </label> <?php echo (!empty($user_orders[0]['city']))?$user_orders[0]['city']:"Empty";?></p>
+                                        <p><label>State : </label> <?php echo (!empty($user_orders[0]['state']))?$user_orders[0]['state']:"Empty";?></p>
+                                        <p><label>Zip : </label> <?php echo (!empty($user_orders[0]['zip']))?$user_orders[0]['zip']:"Empty";?></p>
+                                        <p><label>Address : </label> <?php echo (!empty($user_orders[0]['delivery_address']))?ucwords($user_orders[0]['delivery_address']):"Empty";?></p>
+                                        <p><label>Address Secondary : </label> <?php echo (!empty($user_orders[0]['delivery_address_2']))?ucwords($user_orders[0]['delivery_address_2']):"Empty";?></p>
+                                        <p><label>Country : </label> <?php echo (!empty($user_orders[0]['country']))?ucwords($user_orders[0]['country']):"Empty";?></p>
+                                         <?php } else{ echo "Empty";} }else{?>
+                                            
+                                         <p><label>City : </label> <?php echo (!empty($user_info['city']))?$user_info['city']:"Empty";?></p>
+                                        <p><label>State : </label> <?php echo (!empty($user_info['state_or_region']))?$user_info['state_or_region']:"Empty";?></p>
+                                        <p><label>Zip : </label> <?php echo (!empty($user_info['postal_code']))?$user_info['postal_code']:"Empty";?></p>
+                                        <p><label>Address : </label> <?php echo (!empty($user_info['address_one']))?ucwords($user_info['address_one']):"Empty";?></p>
+                                        <p><label>Address Secondary : </label> <?php echo (!empty($user_info['address_two']))?ucwords($user_info['address_two']):"Empty";?></p>
+                                        <p><label>Country : </label> <?php echo (!empty($user_info['country']))?ucwords($user_info['country']):"Empty";?></p>
+                                       <?php  }?>
                         </div>
                     </div>
 
@@ -165,7 +185,7 @@ if ($user_orders) {
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+                    <h4 class="modal-title" id="myModalLabel">Edit Profile <span class="label label-info"><?php echo ucwords($this->session->userdata['marbel_user']['type']);?> </span></h4>
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
@@ -180,6 +200,7 @@ if ($user_orders) {
                                 <span id="cd-last" class="text-danger hidden"></span>
                             </div>
                     </div>
+                    
                     <div class="col-md-12">
                             <div class="col-md-6 form-group">
                                 <label>Email</label>

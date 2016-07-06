@@ -71,14 +71,17 @@
           </div>
           <div class="modal-body">
                 <div class="col-md-6 form-group">
+                    <label>First Name</label>
                   <input type="text" name="cd-first" class="form-control" placeholder="First Name">
                   <span id="cd-first" class="text-danger hidden"></span>
                 </div>
                 <div class="col-md-6 form-group">
+                     <label>Last Name</label>
                   <input type="text" name="cd-last" class="form-control" placeholder="Last Name">
                   <span id="cd-last" class="text-danger hidden"></span>
                 </div>
                 <div class="col-md-6 form-group">
+                    <label>Email</label>
                   <input type="text" name="cd-email" class="form-control" placeholder="Email">
                   <span id="cd-email" class="text-danger hidden"></span>
                 </div>
@@ -87,6 +90,7 @@
                   <span id="cd-password" class="text-danger hidden"></span>
                 </div>-->
                 <div class="col-md-6 form-group">
+                    <label>Parent Type</label>
                     <select id="cd-type" name="cd-type" class="form-control">
                     <?php 
                             if(!empty($user_type)){
@@ -105,82 +109,104 @@
                 </div>
                   
                 <div class="col-md-6 form-group">
+                    <label>Phone</label>
                   <input class="form-control" type="text" placeholder="Phone Number" name="cd-phone" id="cd-phone" <?php if (isset($error) && $error > 0) { echo 'value="'.$phone.'"'; } ?>>
                   <span id="cd-phone" class="text-danger hidden"></span>
                 </div>
               
               
               <div class="col-md-6 form-group" id="typeparent">
+                   <label>Type</label>
                       <select id="cd-type-parent" name="cd-type-parent" class="form-control">
                          
                       </select>
                 </div>
               <!--add some more addition field-->
                 <div class="col-md-6 form-group">
+                    <label>Email Secondary</label>
                   <input type="text" name="cd-email-second" class="form-control" placeholder="Email Secondary" >
                 </div>
                 <div class="col-md-6 form-group">
+                    <label>Bio</label>
                   <input type="text" name="cd-bio" class="form-control" placeholder="Bio" >
                 </div>
                 <div class="col-md-6 form-group">
+                    <label>Weight</label>
                   <input type="text" name="cd-weight" class="form-control" placeholder="Weight" >
                 </div>
                    <div class="col-md-6 form-group">
+                        <label>Height</label>
                   <input type="text" name="cd-height" class="form-control" placeholder="Height">
                 </div>
              
                 <div class="col-md-6 form-group">
+                      <label>Company</label>
                   <input type="text" name="cd-company" class="form-control" placeholder="Company" >
                 </div>
                 <div class="col-md-6 form-group">
+                    <label>Address One</label>
                   <input type="text" name="cd-address-one" class="form-control" placeholder="Address one" >
                 </div>
                 <div class="col-md-6 form-group">
+                    <label>Address Two</label>
                   <input type="text" name="cd-address-two" class="form-control" placeholder="Address Two" >
                 </div>
                 <div class="col-md-6 form-group">
+                    <label>City</label>
                   <input type="text" name="cd-city" class="form-control" placeholder="City" >
                 </div>
                 <div class="col-md-6 form-group">
+                     <label>State/Region</label>
                   <input type="text" name="cd-state-region" class="form-control" placeholder="State/Region" >
                 </div>
                 <div class="col-md-6 form-group">
+                    <label>Postal Code</label>
                   <input type="text" name="cd-postal-code" class="form-control" placeholder="Postal Code" >
                 </div>
                 <div class="col-md-6 form-group">
+                    <label>Country</label>
                   <input type="text" name="cd-country" class="form-control" placeholder="Country" >
                 </div>
 
                 <div class="col-md-6 form-group">
+                    <label>Alias</label>
                   <input type="text" name="cd-alias" class="form-control" placeholder="Alias" >
                 </div>
             
 
                 <div class="col-md-6 form-group">
+                       <label>Twitter Handle</label>
                  <input type="text" name="cd-twitter-handle" class="form-control" placeholder="Twitter Handle">
                 </div>
                 <div class="col-md-6 form-group">
+                     <label>Linkedin Handle</label>
                     <input type="text" name="cd-linkedin-handle" class="form-control" placeholder="Linkedin Handle">
                 </div>
             
                 <div class="col-md-6 form-group">
+                    <label>Instagram Handle</label>
                  <input type="text" name="cd-instagram-handle" class="form-control" placeholder="Instagram Handle">
                 </div>
                 <div class="col-md-6 form-group">
+                       <label>Reddit Handle</label>
                     <input type="text" name="cd-reddit-handle" class="form-control" placeholder="Reddit Handle">
                 </div>
               <!--end here new changes-->
       
                 <div class="col-md-12 form-group"> 
+                    <label>Note of order</label>
                   <textarea name="cd-notes-order" class="form-control" placeholder="Write here note of order....." style="max-height: 90px; height: 90px;"></textarea>
                 </div>
                <div class="col-md-12 form-group"> 
+                   <label>Note of services</label>
                   <textarea name="cd-note-services" class="form-control" placeholder="Write here note of services....." style="max-height: 90px; height: 90px;"></textarea>
                 </div>
                <div class="col-md-12 form-group"> 
+                    <label>Note of tasks regarding</label>
                   <textarea name="cd-note-task" class="form-control" placeholder="Write here note of tasks regarding....." style="max-height: 90px; height: 90px;"></textarea>
                 </div>
                <div class="col-md-12 form-group"> 
+                    <label>Note of open support tickets</label>
                   <textarea name="cd-support-ticket" class="form-control" placeholder="Write here note of open support tickets" style="max-height: 90px; height: 90px;"></textarea>
                 </div>  
             
