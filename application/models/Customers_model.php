@@ -44,7 +44,7 @@ class Customers_model extends CI_Model {
        }
    }
    function getCustomers($id){
-        $this->db->select('mu.id, mu.email, mu.first_name, mu.last_name, mu.type, mu.parent_type, mu.register_date, mu.last_activity, mu.phone, mu.notes, muli.ip,mu.email_secondary,mu.bio,mu.height,mu.weight,mu.terrain,mu.company,mu.address_one,mu.address_two,mu.city,mu.state_or_region,mu.postal_code,mu.country,mu.accepts,mu.alias,mu.privacy_setting,mu.units,mu.range_alarm,mu.notifications,mu.primary_riding_style,mu.safety_brake,mu.preferred_braking_force,mu.reverse_turned,mu.locked_settings,mu.user_profile_pic,mu.reddit_handle,mu.instagram_handle,mu.linkedin_handle,mu.twitter_handle')->from('m_users mu');
+        $this->db->select('mu.id, mu.email, mu.first_name, mu.last_name, mu.type, mu.parent_type, mu.register_date, mu.last_activity, mu.phone, mu.notes, muli.ip,mu.email_secondary,mu.bio,mu.height,mu.weight,mu.terrain,mu.company,mu.address_one,mu.address_two,mu.city,mu.state_or_region,mu.postal_code,mu.country,mu.accepts,mu.alias,mu.privacy_setting,mu.units,mu.range_alarm,mu.notifications,mu.primary_riding_style,mu.safety_brake,mu.preferred_braking_force,mu.reverse_turned,mu.locked_settings,mu.user_profile_pic,mu.reddit_handle,mu.instagram_handle,mu.linkedin_handle,mu.twitter_handle,mu.parental_lock,mu.note_orders,mu.note_services,mu.note_tasks,mu.note_support_ticket')->from('m_users mu');
         $this->db->join('m_user_login_ip muli','muli.user_id = mu.id AND muli.time = mu.last_activity','left');
         $this->db->where('mu.id',$id);
         $this->db->order_by('mu.id ASC');
@@ -102,32 +102,27 @@ class Customers_model extends CI_Model {
             'state_or_region'=>$this->input->post('cd-state-region'),
             'postal_code'=>$this->input->post('cd-postal-code'),
             'country'=>$this->input->post('cd-country'),
-            'accepts'=>$this->input->post('cd-accepts-marketing'),
             'alias'=>$this->input->post('cd-alias'),
-            'privacy_setting'=>$this->input->post('cd-privacy-setting'),
-            'range_alarm'=>$this->input->post('cd-rangealarm'),
-            'notifications'=>$this->input->post('cd-notifications-rides'),
-            'primary_riding_style'=>$this->input->post('cd-primary-riding-style'),
-            'safety_brake'=>$this->input->post('cd-safety-brake'),
-            'preferred_braking_force'=>$this->input->post('cd-preferred-braking-force'),
-            'reverse_turned'=>$this->input->post('cd-reverse-turned'),
-            'locked_settings'=>$this->input->post('cd-locked-settings'),
-            'terrain'=>$this->input->post('cd-terrain'),
             'twitter_handle'=>$this->input->post('cd-twitter-handle'),
             'linkedin_handle'=>$this->input->post('cd-linkedin-handle'),
             'instagram_handle'=>$this->input->post('cd-instagram-handle'),
             'reddit_handle'=>$this->input->post('cd-reddit-handle'),
+            'note_orders'=>$this->input->post('cd-note-order'),
+            'note_services'=>$this->input->post('cd-note-services'),
+            'note_tasks'=>$this->input->post('cd-note-task'),
+            'note_support_ticket'=>$this->input->post('cd-support-tickets'),
+           
              );
              $this->db->where('id',$id);
              $this->db->update('m_users',$update_data);
-              $random_salt = '';
-                if ($this->input->post('cd-password')!='') {
-                    $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
-                    $password = hash('sha512', $this->input->post('cd-password') . $random_salt);
-                    $update_password=array('password'=>$this->input->post('cd-password'),'salt'=>$random_salt);
-                    $this->db->where('user_id',$id);
-                    $this->db->update('m_user_auth',$update_password);
-                }  
+//              $random_salt = '';
+//                if ($this->input->post('cd-password')!='') {
+//                    $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+//                    $password = hash('sha512', $this->input->post('cd-password') . $random_salt);
+//                    $update_password=array('password'=>$this->input->post('cd-password'),'salt'=>$random_salt);
+//                    $this->db->where('user_id',$id);
+//                    $this->db->update('m_user_auth',$update_password);
+//                }  
     }
     
     function deleteCustomer($id){
@@ -143,14 +138,7 @@ class Customers_model extends CI_Model {
        if ( $this->input->post()) {
             $first_name=$this->input->post('cd-first');
             $last_name=$this->input->post('cd-last');
-            $password = $this->input->post('cd-password');
-            if ($this->input->post('cd-type-parent') != '') {
-                $type = $this->input->post('cd-type-parent');
-                $parent_type = $this->input->post('cd-type');
-            } else {
-                $type = $this->input->post('cd-type');
-                $parent_type = $this->input->post('cd-type');
-            }
+//            $password = $this->input->post('cd-password');
             $profile = NULL; 
             if(isset($_FILES['cd-profile']['name'])){
                 
@@ -169,8 +157,6 @@ class Customers_model extends CI_Model {
                 'email' => $this->input->post('cd-email'),
                 'first_name' => $this->input->post('cd-first'),
                 'last_name' => $this->input->post('cd-last'),
-                'parent_type' => $parent_type,
-                'type' => $type,
                 'phone' => $this->input->post('cd-phone'),
                 'bio' => $this->input->post('cd-bio'),
                 'height' => $this->input->post('cd-height'),
@@ -192,27 +178,31 @@ class Customers_model extends CI_Model {
                 'preferred_braking_force' => $this->input->post('cd-preferred-braking-force'),
                 'reverse_turned' => $this->input->post('cd-reverse-turned'),
                 'locked_settings' => $this->input->post('cd-locked-settings'),
+                'parental_lock' => $this->input->post('cd-parental-lock'),
                 'terrain' => $this->input->post('cd-terrain'),
+                'note_support_ticket' => $this->input->post('cd-support-ticket'),
+                'note_tasks' => $this->input->post('cd-note-task'),
+                'note_services' => $this->input->post('cd-note-services'),
+                'note_orders' => $this->input->post('cd-notes-order'),
                 'user_profile_pic' => $profile,
+                'last_activity' => time()
                 
-                'last_activity' => time(),
-                'register_date' => time()
             );
 
                 $this->db->where('id',$id); 
                 $this->db->update('m_users', $data_update);
                 if($this->db->affected_rows()>0){
-                    if ($password != '') {
-                         
-                        
-                         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
-                         $password = hash('sha512', $password . $random_salt);
-                         $user_auth = array('password' => $password, 'salt' => $random_salt);
-                         $this->db->where('user_id',$id); 
-                         $this->db->update('m_user_auth', $user_auth);
-
-
-                    }
+//                    if ($password != '') {
+//                         
+//                        
+//                         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+//                         $password = hash('sha512', $password . $random_salt);
+//                         $user_auth = array('password' => $password, 'salt' => $random_salt);
+//                         $this->db->where('user_id',$id); 
+//                         $this->db->update('m_user_auth', $user_auth);
+//
+//
+//                    }
                     $result['result'] = TRUE;
                     $result['success'] = $first_name . ' ' . $last_name . ' was Updated successfully';
                     echo json_encode($result);

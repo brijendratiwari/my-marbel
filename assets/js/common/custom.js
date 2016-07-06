@@ -22,13 +22,14 @@ $(document).ready(function(){
         "bDestroy": true, //!!!--- for remove data table warning.
         "aoColumnDefs": [
             {"aTargets": [0],"sClass":"hidden"},
-            {"sClass": " aligncenter", "aTargets": [1]},
+            {"sClass": "aligncenter text-center", "aTargets": [1],"bSortable": false },
             {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
             {"sClass": "hidden-phone", "aTargets": [3]},
             {"sClass": "hidden-phone", "aTargets": [4]},
             {"sClass": "hidden-phone", "aTargets": [5]},
             {"sClass": "hidden-phone", "aTargets": [6]},
-            {"sClass": "hidden-phone text-center", "aTargets": [7],"bSortable": false },
+             {"sClass": "hidden-phone text-center", "aTargets": [7]},
+            {"sClass": "hidden-phone text-center", "aTargets": [8],"bSortable": false },
             
         ]}
         );

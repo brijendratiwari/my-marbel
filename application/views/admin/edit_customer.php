@@ -2,8 +2,8 @@
 
             
             <div class="row">
-                
-                <div class="col-md-12" style="margin-top:10px"><a class='btn btn-sm btn-default' href="<?php echo base_url('customers'); ?>">Go Back</a></div>
+             
+                <div class="col-md-12" style="margin-top:10px"><a class='btn btn-sm btn-default' href="<?php echo base_url('customers'); ?>">Go Back</a>  </div>
                   
                 <div class="col-md-12 menu-drop-down">
                     <?php
@@ -17,7 +17,7 @@
                             <input type="hidden" name="cd-user_id" value="<?php echo $customer['id']; ?>" />
                             <div style="margin-top:25px;">
                             <h1 style="padding: 0">
-                                <span style="float: left">Customer Details:</span>
+                                <span style="float: left">User Details:</span>
                                 <span style="float: right">
                                     <p class="cd-select">
                                         <?php
@@ -52,194 +52,233 @@
                                    
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="col-md-6">User:
-                                        <p id="parentlevel"><?php echo $customer['parent_name']?>
+                                    <div class="col-md-6">
+                                        <label>User</label>
+                                        <p id="parentlevel"><?php echo $customer['parent_name']?></p>
                                     </div>
-                                    <div class="col-md-6">User Type:
-                                        <p id="childlevel"><?php echo $customer['child_name']?>
+                                    <div class="col-md-6">
+                                        <label>User Type</label>
+                                        <p id="childlevel"><?php echo $customer['child_name']?></p>
                                     </div>
                                 </div>
                             
                                 <div class="col-md-12">
+                                   
+                                    
+                               
                                     <div class="col-md-6  form-group">
+                                        <label>First Name</label>
                                         <input type="text" class="form-control" name="cd-first_name" id="cd-first_name" value="<?php echo $customer['first_name']; ?>" placeholder="First Name">
                                     </div>
                                     <div class="col-md-6  form-group">
+                                        <label>Last Name</label>
                                         <input type="text" class="form-control" name="cd-last_name" id="cd-last_name" value="<?php echo $customer['last_name']; ?>" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-6 form-group">
+                                        <label>Email</label>
                                         <input type="text" class="form-control" name="cd-email" id="cd-email" value="<?php echo $customer['email']; ?>" placeholder="Email">
                                     </div>
                                     <div class="col-md-6  form-group">
+                                         <label>Phone</label>
                                         <input type="text" class="form-control" name="cd-phone" id="cd-phone" value="<?php echo $customer['phone']; ?>" placeholder="Phone">
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+<!--                                <div class="col-md-12">
+                                     
                                     <div class="col-md-12 form-group">
+                                         <label>Password</label>
                                         <input type="password" class="form-control" name="cd-password" id="cd-password" placeholder="Enter a new password">
                                     </div>
-                                </div>
+                                </div>-->
                             <!--add new column for users-->
                                 <div class="col-md-12">
                                     <div class="col-md-6 form-group">
+                                         <label>Email Secondary</label>
                                         <input type="text" class="form-control" name="cd-email-second" id="cd-email-second"  placeholder="Email Secondary" value="<?php echo $customer['email_secondary']; ?>">
                                     </div>
                                     <div class="col-md-6 form-group">
+                                        <label>Bio</label>
                                         <input type="text" class="form-control" name="cd-bio" id="cd-email-second"  placeholder="Bio" value="<?php echo $customer['bio']; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
+                                        <label>Weight</label>
                                         <input type="text" class="form-control" name="cd-weight" id="cd-weight"  placeholder="Weight" value="<?php echo $customer['weight']; ?>">
                                     </div>
                                     <div class="col-md-6">
+                                        <label>Height</label>
                                         <input type="text" class="form-control" name="cd-height" id="cd-height"  placeholder="Height" value="<?php echo $customer['height']; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
+                                         <label>Company</label>
                                         <input type="text" class="form-control" name="cd-company" id="cd-company"  placeholder="Company" value="<?php echo $customer['company']; ?>">
                                     </div>
                                     <div class="col-md-6">
+                                        <label>Address</label>
                                         <input type="text" class="form-control" name="cd-address-one" id="cd-address-one"  placeholder="Address One" value="<?php echo $customer['address_one']; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
+                                        <label>Address Two</label>
                                         <input type="text" class="form-control" name="cd-address-two" id="cd-address-two"  placeholder="Address Two" value="<?php echo $customer['address_two']; ?>">
                                     </div>
                                     <div class="col-md-6">
+                                        <label>City</label>
                                         <input type="text" class="form-control" name="cd-city" id="cd-city"  placeholder="City" value="<?php echo $customer['city']; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
+                                         <label>State/Region</label>
                                         <input type="text" class="form-control" name="cd-state-region" id="cd-state-region"  placeholder="State/Region" value="<?php echo $customer['state_or_region']; ?>">
                                     </div>
                                     <div class="col-md-6">
+                                          <label>Postal Code</label>
                                         <input type="text" class="form-control" name="cd-postal-code" id="cd-postal-code"  placeholder="Postal Code" value="<?php echo $customer['postal_code']; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
+                                        <label>Country</label>
                                         <input type="text" class="form-control" name="cd-country" id="cd-country"  placeholder="Country" value="<?php echo $customer['country']; ?>">
                                     </div>
                                     <div class="col-md-6">
-                                        <select id="cd-accepts-marketing" class="form-control" name="cd-accepts-marketing">
-                                            <option value="">Accepts Marketing</option>
-                                            <option value="yes" <?php if (strcmp($customer['accepts'], 'yes') == 0) { echo 'selected="selected"'; }?>>Yes</option>
-                                            <option value="no" <?php if (strcmp($customer['accepts'], 'no') == 0) { echo 'selected="selected"'; }?>>No</option>
-                                           </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-6">
+                                          <label>Alias</label>
                                         <input type="text" class="form-control" name="cd-alias" id="cd-alias"  placeholder="Alias" value="<?php echo $customer['alias']; ?>">
                                     </div>
-                                    <div class="col-md-6">
-                                        <select id="cd-privacy-setting" class="form-control" name="cd-privacy-setting">
-                                            <option value="">Privacy Setting</option>
-                                            <option value="ON" <?php if (strcmp($customer['privacy_setting'], 'ON') == 0) { echo 'selected="selected"'; }?>>ON</option>
-                                            <option value="OFF" <?php if (strcmp($customer['privacy_setting'], 'OFF') == 0) { echo 'selected="selected"'; }?>>OFF</option>
-                                            </select>
-                                        
-                                    </div>
+                                    
                                 </div>
-                                <div class="col-md-12 form-group">
+                            <div class="col-md-12 form-group">
                                     <div class="col-md-6">
-                                        <select id="cd-units" class="form-control" name="cd-units">
-                                            <option value="">Units</option>
-                                            <option value="metric" <?php if (strcmp($customer['units'], 'metric') == 0) { echo 'selected="selected"'; }?>>Metric</option>
-                                            <option value="english" <?php if (strcmp($customer['units'], 'admin') == 0) { echo 'selected="selected"'; }?>>English</option>
-                                           </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                         <select id="cd-rangealarm" class="form-control" name="cd-rangealarm" >
-                                                <option value="">Range Alarm</option>
-                                                <option value="10" <?php if (strcmp($customer['range_alarm'], '10') == 0) { echo 'selected="selected"'; }?>>10%</option>
-                                                <option value="25" <?php if (strcmp($customer['range_alarm'], '20') == 0) { echo 'selected="selected"'; }?>>25%</option>
-                                                <option value="25" <?php if (strcmp($customer['range_alarm'], '25') == 0) { echo 'selected="selected"'; }?>>50%</option>
-                                                <option value="OFF" <?php if (strcmp($customer['range_alarm'], 'OFF') == 0) { echo 'selected="selected"'; }?>>OFF</option>
-                                               </select>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-6">
-                                        <select id="cd-notifications-rides" class="form-control" name="cd-notifications-rides">
-                                                <option value="">Notifications Rides</option>
-                                                <option value="ON" <?php if (strcmp($customer['notifications'], 'ON') == 0) { echo 'selected="selected"'; }?>>ON</option>
-                                                <option value="OFF" <?php if (strcmp($customer['notifications'], 'OFF') == 0) { echo 'selected="selected"'; }?>>OFF</option>
-                                            </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="cd-primary-riding-style" id="cd-primary-riding-style"  placeholder="Primary Riding Style" value="<?php echo $customer['primary_riding_style']; ?>">
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-6">
-                                        <select id="cd-safety-brake" class="form-control" name="cd-safety-brake">
-                                            <option value="">Safety Brake</option>
-                                            <option value="ON" <?php if (strcmp($customer['safety_brake'], 'ON') == 0) { echo 'selected="selected"'; }?>>ON</option>
-                                            <option value="OFF" <?php if (strcmp($customer['safety_brake'], 'OFF') == 0) { echo 'selected="selected"'; }?>>OFF</option>
-                                            </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="cd-preferred-braking-force"  placeholder="Preferred Braking Force" value="<?php echo $customer['preferred_braking_force']; ?>">
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-6">
-                                        <select id="cd-reverse-turned" class="form-control" name="cd-reverse-turned" >
-                                            <option value="">Reverse Turned</option>
-                                            <option value="ON" <?php if (strcmp($customer['reverse_turned'], 'ON') == 0) { echo 'selected="selected"'; }?>>ON</option>
-                                            <option value="OFF" <?php if (strcmp($customer['reverse_turned'], 'OFF') == 0) { echo 'selected="selected"'; }?>>OFF</option>
-                                           </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="cd-locked-settings" id="cd-locked-settings"  placeholder="Preferred Braking Force" value="<?php echo $customer['locked_settings']; ?>">
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-6">
+                                        <label>Twitter Handle</label>
                                         <input type="text" class="form-control" name="cd-twitter-handle" id="cd-twitter-handle"  placeholder="Twitter Handle" value="<?php echo $customer['twitter_handle']; ?>">
                                     </div>
                                     <div class="col-md-6">
+                                         <label>Linkedin Handle</label>
                                         <input type="text" class="form-control" name="cd-linkedin-handle" id="cd-linkedin-handle"  placeholder="Linkedin Handle" value="<?php echo $customer['linkedin_handle']; ?>">
                                         
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
+                                        <label>Instagram Handle</label>
                                         <input type="text" class="form-control" name="cd-instagram-handle" id="cd-instagram-handle"  placeholder="Instagram Handle" value="<?php echo $customer['instagram_handle']; ?>">
                                     </div>
                                     <div class="col-md-6">
+                                        <label>Reddit Handle</label>
                                         <input type="text" class="form-control" name="cd-reddit-handle" id="cd-reddit-handle"  placeholder="Reddit Handle" value="<?php echo $customer['reddit_handle']; ?>">
                                         
                                     </div>
                                 </div>
-                                <div class="col-md-12 form-group">
+                                
+                              <div class="col-md-12 form-group">
+                                  <div class="col-md-12">
+                                          <label>Note of order</label>
+                                           <textarea name="cd-note-order" class="form-control" placeholder="Write here note of order....." style="max-height: 90px; height: 90px;"><?php echo $customer['note_orders']?></textarea>
+                                   
+                                    </div>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" name="cd-terrain" id="cd-terrain" placeholder="Terrain" value="<?php echo $customer['terrain']; ?>">
+                                          <label>Note Of Services</label>
+                                          <textarea name="cd-note-services" class="form-control" placeholder="Write here note of services....." style="max-height: 90px; height: 90px;"><?php echo $customer['note_services']?></textarea>
+                                        
+                                    </div>
+                                    <div class="col-md-12">
+                                          <label>Note of Tasks Regarding</label>
+                                           <textarea name="cd-note-task" class="form-control" placeholder="Write here note of tasks regarding....." style="max-height: 90px; height: 90px;"><?php echo $customer['note_tasks']?></textarea>
+                                        
+                                    </div>
+                                  <div class="col-md-12">
+                                    <label>Note of Open Support Tickets</label>
+                                   <textarea name="cd-support-tickets" class="form-control" placeholder="Write here note of open support tickets" style="max-height: 90px; height: 90px;"><?php echo $customer['note_support_ticket']?></textarea>
+                                  </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-6">
+                                        <label>Accepts Marketing : </label>
+                                        <span class='label label-info'><?php echo (!empty($customer['accepts']))?$customer['accepts']:"";?></span>
+                                      
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Privacy Setting : </label>
+                                        
+                                         <span class='label label-info'><?php echo (!empty($customer['privacy_setting']))?$customer['privacy_setting']:"Empty";?></span>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-6">
+                                          <label>Units : </label>
+                                        <span class='label label-info'><?php echo (!empty($customer['units']))?$customer['units']:"Empty";?></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                         <label>Range Alarm : </label>
+                                         <span class='label label-info'><?php echo (!empty( $customer['range_alarm']))? $customer['range_alarm'].'%':"Empty";?></span>
+                                       
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-6">
+                                        <label>Notifications Rides : </label>
+                                        <span class='label label-info'><?php echo (!empty($customer['notifications']))? $customer['notifications']:"Empty";?></span>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Primary Riding Style : </label>
+                                        <span class='label label-info'><?php echo (!empty($customer['primary_riding_style']))? $customer['primary_riding_style']:"Empty";?></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-6">
+                                        <label>Safety Brake : </label>
+                                        <span class='label label-info'><?php echo (!empty($customer['safety_brake']))? $customer['safety_brake']:"";?></span>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                         <label>Preferred Braking Force : </label>
+                                         <span class='label label-info'><?php echo (!empty($customer['preferred_braking_force']))? $customer['preferred_braking_force'].'%':"Empty";?></span>
+                                       
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-6">
+                                        <label>Reverse Turned : </label>
+                                         <span class='label label-info'><?php echo (!empty( $customer['reverse_turned']))?  $customer['reverse_turned']:"Empty";?></span>
+                                       
+                                    </div>
+                                     <div class="col-md-6">
+                                          <label>Terrain : </label>
+                                          <span class='label label-info'><?php echo (!empty( $customer['terrain']))?  $customer['terrain']:"Empty";?></span>
+                                       
+                                    </div>
+                                </div>
+                                 <div class="col-md-12 form-group">
+                                    <div class="col-md-6">
+                                        <label>Lock : </label>
+                                         <span class='label label-info'><?php echo (!empty( $customer['locked_settings']))?  $customer['locked_settings']:"Empty";?></span>
+                                       
+                                    </div>
+                                     <div class="col-md-6">
+                                          <label>Parental lock : </label>
+                                          <span class='label label-info'><?php echo (!empty( $customer['parental_lock']))?  $customer['parental_lock']:"Empty";?></span>
+                                       
                                     </div>
                                 </div>
                             <!--end here-->
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-12">
-                                        <textarea style="max-height: 90px; height: 71px; width: 684px;" class="notes" class="form-control" name="cd-notes" id="cd-notes" placeholder="Add notes to this user"><?php echo $customer['notes']; ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="col-md-3 form-group">
+                             
+                                <div class="col-md-12" style="margin-top:10px">
+                                     <div class="col-md-6 form-group">
+                                    
                                         <a href="/new_services/<?php echo $customer['id']; ?>" class="btn btn-custom btn-lg" >Add Service Record</a>
-                                    </div>
-                                    <div class="col-md-3 form-group">
-                                        <input type="submit" name="cd-submit" class="btn btn-custom btn-lg" value="Save Changes">
+                                            <input type="submit" name="cd-submit" class="btn btn-custom btn-lg" value="Save Changes">
+                                           <a href="javascript:deleteCustomer('<?php echo $customer['id']; ?>')" class="btn btn-lg btn-danger">Delete</a>
                                     </div>
                                 </div>
                     </form>
@@ -347,5 +386,12 @@ $(function(){
           })
        
      });
- 
+ function deleteCustomer(id){
+      
+       if (confirm('Are you sure you want to delete?'))
+        {
+            window.location.href = "<?php echo base_url() ?>deleteCustomer/" + id;
+        }
+      
+  }
 </script>

@@ -21,7 +21,7 @@
                             <a href="<?php echo base_url('calendar');?>"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('customers'); ?>"><i class="fa fa-users fa-fw"></i> Customers</a>
+                            <a href="<?php echo base_url('customers'); ?>"><i class="fa fa-users fa-fw"></i> Users</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url('orders');?>"><i class="fa fa-bar-chart-o fa-fw"></i> Orders</a>

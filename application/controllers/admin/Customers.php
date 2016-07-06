@@ -91,7 +91,7 @@ class Customers extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'],$val['id'], $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'], $val['notes'], ' <a href="#" title="View user information" data-toggle="modal" class="btn btn-xs btn-info userRow" data-target="#usersProfileModal" data-id="'.$val['id'].'"><i class="fa fa-eye"></i></a> <a href="edit_customer/'.$val['id'].'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> <a href="javascript:deleteCustomer('.$val['id'].')" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>');
+            $output['aaData'][] = array("DT_RowId" =>$val['id'],$val['id'],'<a href="'.  base_url('get_customer_info/'.$val['id']).'" title="View user information"  class="btn btn-xs btn-info userRow"><i class="fa fa-eye"></i></a>', $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'], $val['notes'], '  <a href="edit_customer/'.$val['id'].'" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>');
         }
 
         echo json_encode($output);
@@ -124,7 +124,7 @@ class Customers extends CI_Controller {
             $email = $this->input->post('cd-email');
             $first_name = $this->input->post('cd-first');
             $last_name = $this->input->post('cd-last');
-            $password = $this->input->post('cd-password');
+//            $password = $this->input->post('cd-password');
             if ($this->input->post('cd-type-parent') != '') {
                 $type = $this->input->post('cd-type-parent');
                 $parent_type = $this->input->post('cd-type');
@@ -145,18 +145,19 @@ class Customers extends CI_Controller {
             $state_region = $this->input->post('cd-state-region');
             $postal_code = $this->input->post('cd-postal-code');
             $country = $this->input->post('cd-country');
-            $accepts_marketing = $this->input->post('cd-accepts-marketing');
+            $accepts_marketing = 'yes';
             $alias = $this->input->post('cd-alias');
-            $privacy_setting = $this->input->post('cd-privacy-setting');
-            $units = $this->input->post('cd-units');
-            $rangealarm = $this->input->post('cd-rangealarm');
-            $notifications_rides = $this->input->post('cd-notifications-rides');
-            $primary_riding_style = $this->input->post('cd-primary-riding-style');
-            $safety_brake = $this->input->post('cd-safety-brake');
-            $preferred_braking_force = $this->input->post('cd-preferred-braking-force');
-            $reverse_turned = $this->input->post('cd-reverse-turned');
-            $locked_settings = $this->input->post('cd-locked-settings');
-            $terrain = $this->input->post('cd-terrain');
+            $privacy_setting = 'OFF';
+            $units = 'English';
+            $rangealarm = 'OFF';
+            $notifications_rides = 'ON';
+            $primary_riding_style ='';
+            $safety_brake = 'ON';
+            $preferred_braking_force = '100';
+            $reverse_turned = 'OFF';
+            $locked_settings = 'OFF';
+            $parental_locked_settings = 'OFF';
+            $terrain = '';
             $twitter_handle = $this->input->post('cd-twitter-handle');
             $linkedin_handle = $this->input->post('cd-linkedin-handle');
             $instagram_handle = $this->input->post('cd-instagram-handle');
@@ -193,12 +194,16 @@ class Customers extends CI_Controller {
                 'preferred_braking_force' => $preferred_braking_force,
                 'reverse_turned' => $reverse_turned,
                 'locked_settings' => $locked_settings,
+                'parental_lock' => $parental_locked_settings,
                 'terrain' => $terrain,
                 'twitter_handle' => $twitter_handle,
                 'linkedin_handle' => $linkedin_handle,
                 'instagram_handle' => $instagram_handle,
                 'reddit_handle' => $reddit_handle,
-                'notes' => $notes,
+                'note_orders' => $this->input->post('cd-notes-order'),
+                'note_services' => $this->input->post('cd-note-services'),
+                'note_tasks' => $this->input->post('cd-note-task'),
+                'note_support_ticket' => $this->input->post('cd-support-ticket'),
                 'phone' => $phone,
                 'last_activity' => time(),
                 'register_date' => time()
@@ -207,8 +212,8 @@ class Customers extends CI_Controller {
                 $this->db->insert('m_users', $data_insert);
                 $user_id = $this->db->insert_id();
                 if ($user_id != '') {
-                    $user_auth = array('user_id' => $user_id, 'password' => $password, 'salt' => $random_salt);
-                    $this->db->insert('m_user_auth', $user_auth);
+//                    $user_auth = array('user_id' => $user_id, 'password' => $password, 'salt' => $random_salt);
+//                    $this->db->insert('m_user_auth', $user_auth);
                     $result['result'] = TRUE;
                     $result['success'] = $first_name . ' ' . $last_name . ' was added successfully';
                     echo json_encode($result);
@@ -296,11 +301,13 @@ class Customers extends CI_Controller {
         }
  }
  public function get_customer_info($id=fasle){
+     $this->data['title']='User Profile';
+     $this->data['page']='User Profile';
     if($id!=''){
         
         $this->data['user_info']=$this->Customer->getCustomerInfo($id);
         $this->data['user_orders']=$this->Services->getOrders($id);
     }
-    echo  $this->load->view('admin/load_customer_info',$this->data,True);
+    $this->load->template('admin/load_customer_info',$this->data);
  }
 }

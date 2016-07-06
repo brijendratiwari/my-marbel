@@ -1,10 +1,9 @@
  <!-- Page Content -->
         <div id="page-wrapper">
-                <div class="row">
+            <div class="row" >
                 <div class="col-lg-12">
-                <div class="col-lg-6">
-                <div id="userSuccess" class="pull-left alert alert-success hidden message"></div>        
-                <div class="pull-left alert alert-danger hidden message" id="userError"></div>
+                <div class="col-lg-6" style="margin-top: 2%;">
+                    <a href="<?php echo base_url('customers');?>" class="btn btn-sm btn-default">Go Back</a>
                  </div>   
                     
                 </div>
@@ -12,7 +11,7 @@
             </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Profile Information</h1>
+                        <h1 class="page-header">Users Information</h1>
                         
                         
                         <!--user info page-->

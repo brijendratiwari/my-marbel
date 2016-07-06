@@ -57,7 +57,7 @@ class Orders_model extends CI_Model {
 
     public function getOrder($order_id) {
 
-        $this->db->select('user_id, order_number, delivery_address, delivery_address_2, city, state, zip, country, order_total, order_status, invoice_url, order_date, est_ship_date, est_ship_location, product, wheel_color, wheel_size, firmware_version, deck_serial_number, main_serial_number, tracking_number, shipping_cost, notes, priority');
+        $this->db->select('user_id, order_number, delivery_address, delivery_address_2, city, state, zip, country, order_total, order_status, invoice_url, order_date, est_ship_date, est_ship_location, product, wheel_color, wheel_size, firmware_version, deck_serial_number, main_serial_number, tracking_number, shipping_cost, notes, priority,id');
         $this->db->from('m_orders');
         $this->db->where('id', $order_id);
         $res = $this->db->get();

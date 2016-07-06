@@ -13,3 +13,14 @@ function getServices($id=false){
         return false;
     }
 }
+ function getUserImages($id){
+         $CI= & get_instance();
+        $CI->db->select('user_profile_pic')->from('m_users');
+        $CI->db->where('id',$id);
+        $query=$CI->db->get();
+        if($query->num_rows()>0){
+            $image=$query->row();
+            return $image->user_profile_pic;
+        }
+        
+    }

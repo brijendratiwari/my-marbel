@@ -253,9 +253,11 @@
                     </div>
                     <div class="row-fluid">
                         <div class="col-md-12">
-                            <div class="col-md-offset-9 col-md-3">
-                                <input type="submit" name="cd-submit" class="btn btn-custom btn-lg" value="Save Changes">
+                            
+                            <div class="col-md-offset-9 col-md-6">
+                                <input type="submit" name="cd-submit" class="btn btn-custom btn-lg" value="Save Changes">  <a  href="<?php echo base_url('delete_order/'.$order[0]['id']);?>" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-lg btn-danger">Delete</a>
                             </div>
+         
                         </div>
                     </div>
                 </fieldset>

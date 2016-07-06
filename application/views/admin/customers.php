@@ -12,7 +12,7 @@
                     <div id="userSuccess" class="pull-left alert alert-success hidden message"></div>
                  </div>   
                   
-                    <div  class="col-lg-6 page-header text-right"><button class="btn btn-custom" data-toggle="modal" data-target="#usersModal">Add New Customer</button></div>
+                    <div  class="col-lg-6 page-header text-right"><button class="btn btn-custom" data-toggle="modal" data-target="#usersModal">Add New User</button></div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -21,7 +21,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Customers List
+                            Users List
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -30,13 +30,14 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>View Profile</th>
                                             <th>Email</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Last Activity</th>
                                             <th>Phone Number</th>
                                             <th>Notes</th>
-                                            <th width="80">Action</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -66,7 +67,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add New Customer</h4>
+            <h4 class="modal-title" id="myModalLabel">Add New User</h4>
           </div>
           <div class="modal-body">
                 <div class="col-md-6 form-group">
@@ -81,10 +82,10 @@
                   <input type="text" name="cd-email" class="form-control" placeholder="Email">
                   <span id="cd-email" class="text-danger hidden"></span>
                 </div>
-                <div class="col-md-6 form-group">
+<!--                <div class="col-md-6 form-group">
                   <input type="password" name="cd-password" class="form-control" placeholder="Password">
                   <span id="cd-password" class="text-danger hidden"></span>
-                </div>
+                </div>-->
                 <div class="col-md-6 form-group">
                     <select id="cd-type" name="cd-type" class="form-control">
                     <?php 
@@ -149,74 +150,12 @@
                 <div class="col-md-6 form-group">
                   <input type="text" name="cd-country" class="form-control" placeholder="Country" >
                 </div>
-                <div class="col-md-6 form-group">
-                   <select id="cd-accepts-marketing" name="cd-accepts-marketing" class="form-control">
-                       <option value="">Accepts Marketing</option>
-                       <option value="yes">Yes</option>
-                       <option value="no">No</option>
-                      </select>
-                </div>
+
                 <div class="col-md-6 form-group">
                   <input type="text" name="cd-alias" class="form-control" placeholder="Alias" >
                 </div>
-                <div class="col-md-6 form-group">
-                   <select id="cd-privacy-setting" name="cd-privacy-setting" class="form-control">
-                       <option value="">Privacy Setting</option>
-                       <option value="ON">ON</option>
-                       <option value="OFF">OFF</option>
-                      </select>
-                </div>
-                <div class="col-md-6 form-group">
-                 <select id="cd-units" name="cd-units" class="form-control">
-                       <option value="">Units</option>
-                       <option value="metric">Metric</option>
-                       <option value="english">English</option>
-                      </select>
-                </div>
-                <div class="col-md-6 form-group">
-                   <select id="cd-rangealarm" name="cd-rangealarm" class="form-control">
-                       <option value="">Range Alarm</option>
-                       <option value="10">10%</option>
-                       <option value="25">25%</option>
-                       <option value="25">50%</option>
-                       <option value="OFF">OFF</option>
-                      </select>
-                </div>
-                <div class="col-md-6 form-group">
-                 <select id="cd-notifications-rides" name="cd-notifications-rides" class="form-control">
-                       <option value="">Notifications Rides</option>
-                       <option value="ON">ON</option>
-                       <option value="OFF">OFF</option>
-                      </select>
-                </div>
-                <div class="col-md-6 form-group">
-                    <input type="text" name="cd-primary-riding-style" class="form-control" placeholder="Primary Riding Style">
-                </div>
             
-                <div class="col-md-6 form-group">
-                 <select id="cd-safety-brake" name="cd-safety-brake" class="form-control">
-                       <option value="">Safety Brake</option>
-                       <option value="ON">ON</option>
-                       <option value="OFF">OFF</option>
-                      </select>
-                </div>
-                <div class="col-md-6 form-group">
-                    <input type="text" name="cd-preferred-braking-force" class="form-control" placeholder="Preferred Braking Force">
-                </div>
-              
-             
-                <div class="col-md-6 form-group">
-                 <select id="cd-reverse-turned" name="cd-reverse-turned" class="form-control">
-                       <option value="">Reverse Turned</option>
-                       <option value="ON">ON</option>
-                       <option value="OFF">OFF</option>
-                      </select>
-                </div>
-                <div class="col-md-6 form-group">
-                    <input type="text" name="cd-locked-settings" class="form-control" placeholder="Locked Settings">
-                </div>
-            
-            
+
                 <div class="col-md-6 form-group">
                  <input type="text" name="cd-twitter-handle" class="form-control" placeholder="Twitter Handle">
                 </div>
@@ -230,19 +169,20 @@
                 <div class="col-md-6 form-group">
                     <input type="text" name="cd-reddit-handle" class="form-control" placeholder="Reddit Handle">
                 </div>
-           
-       
-              <div class="col-md-6 form-group">
-                  <input type="text" name="cd-terrain" class="form-control" placeholder="Terrain">
-                </div>
-
               <!--end here new changes-->
       
                 <div class="col-md-12 form-group"> 
-                  <textarea name="cd-notes" class="form-control" placeholder="Comment" style="max-height: 90px; height: 90px;"></textarea>
+                  <textarea name="cd-notes-order" class="form-control" placeholder="Write here note of order....." style="max-height: 90px; height: 90px;"></textarea>
                 </div>
-      
-              
+               <div class="col-md-12 form-group"> 
+                  <textarea name="cd-note-services" class="form-control" placeholder="Write here note of services....." style="max-height: 90px; height: 90px;"></textarea>
+                </div>
+               <div class="col-md-12 form-group"> 
+                  <textarea name="cd-note-task" class="form-control" placeholder="Write here note of tasks regarding....." style="max-height: 90px; height: 90px;"></textarea>
+                </div>
+               <div class="col-md-12 form-group"> 
+                  <textarea name="cd-support-ticket" class="form-control" placeholder="Write here note of open support tickets" style="max-height: 90px; height: 90px;"></textarea>
+                </div>  
             
           </div>
             <div class="clearfix"></div>
@@ -269,7 +209,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <h4 class="modal-title" id="myModalLabel">Customer Information</h4>
+            <h4 class="modal-title" id="myModalLabel">User Information</h4>
           </div>
           <div class="modal-body profile-html">
               
