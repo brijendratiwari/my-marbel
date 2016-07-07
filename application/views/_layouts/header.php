@@ -110,7 +110,7 @@
                 <li class="dropdown">
                     
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <img data-holder-rendered="true" src="<?php echo !empty(getUserImages($this->session->userdata['marbel_user']['user_id']))?base_url('assets/profile-imgs/'.getUserImages($this->session->userdata['marbel_user']['user_id'])):base_url('assets/images/m_list02..gif');?>" style="width: 30px; height: 30px;" data-src="holder.js/140x140" class="img-circle" alt="140x140">  <?php echo ucwords($this->session->userdata['marbel_user']['first_name'].' '.$this->session->userdata['marbel_user']['last_name']);?>  <i class="fa fa-caret-down"></i></a>
+                        <img data-holder-rendered="true" src="<?php echo !empty(getUserImages($this->session->userdata['marbel_user']['user_id']))?base_url('assets/profile-imgs/'.getUserImages($this->session->userdata['marbel_user']['user_id'])):base_url('assets/images/m_list02.gif');?>" style="width: 30px; height: 30px;" data-src="holder.js/140x140" class="img-circle" alt="140x140">  <?php echo ucwords($this->session->userdata['marbel_user']['first_name'].' '.$this->session->userdata['marbel_user']['last_name']);?>  <i class="fa fa-caret-down"></i></a>
                       
                     <ul class="dropdown-menu dropdown-user">
                         <li>

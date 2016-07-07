@@ -19,6 +19,7 @@ class Appsignin extends CI_Controller {
         if (empty($_REQUEST["userEmail"]) || empty($_REQUEST["userPassword"])) {
             $returnValue["status"] = "400";
             $returnValue["message"] = "Missing required information";
+            echo json_encode($returnValue); die;
             
         }
 
@@ -30,6 +31,7 @@ class Appsignin extends CI_Controller {
          if (empty($userDetails)) {
             $returnValue["status"] = "403";
             $returnValue["message"] = "User not found";
+            echo json_encode($returnValue); die;
          
         }
 
@@ -70,14 +72,16 @@ class Appsignin extends CI_Controller {
             $returnValue["userProfilePicture"] = base_url('assets/profile-imgs/'.$userDetails["user_profile_pic"]);
             $returnValue["status"] = "200";
             $returnValue["message"] = "success";
+            echo json_encode($returnValue); die;
             
             
         } else {
             $returnValue["status"] = "401";
             $returnValue["message"] = "Incorrect Password";
+            echo json_encode($returnValue); die;
       
         }
-    echo json_encode($returnValue);
+    
         
     }
     public function save_user_information(){
