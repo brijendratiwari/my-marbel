@@ -86,6 +86,7 @@ $route['forgot_password']='login/forgot_password';
 
 $route['profile'] = 'admin/profile';
 $route['edit_profile'] = 'admin/customers/edit_profile';
+$route['edit_customer_profile'] = 'customer/profile/edit_profile';
 
 $route['shipping']='admin/shipping';
 $route['shipping_list']='admin/shipping/get_shipping';

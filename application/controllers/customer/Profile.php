@@ -26,4 +26,28 @@ class Profile extends CI_Controller {
         $this->data['user_orders']=$this->Services->getOrders($user_info['user_id']);
         $this->load->customer('customer/profile',$this->data);
     }
+    
+     public function edit_profile(){
+
+        $this->form_validation->set_rules('cd-email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('cd-phone', 'Phone', 'trim|required');
+        $this->form_validation->set_rules('cd-first', 'FirstName', 'trim|required');
+        $this->form_validation->set_rules('cd-last', 'LastName', 'trim|required');
+        #$this->form_validation->set_rules('cd-password', 'Password', 'trim|required');
+
+        //run validation on form input
+        if ($this->form_validation->run() == FALSE) {
+            //validation fails
+            $this->form_validation->set_error_delimiters('', '');
+            $error = $this->form_validation->error_array();
+            $result['result'] = false;
+            $result['error'] = $error;
+            echo json_encode($result);
+            die;
+        }else{
+            $session=$this->session->userdata('marbel_user');
+            $this->Customer->updateProfile($session['user_id']);
+            
+        }
+ }
 }
