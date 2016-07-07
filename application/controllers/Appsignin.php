@@ -97,6 +97,8 @@ class Appsignin extends CI_Controller {
             
             $returnValue["status"] = "400";
             $returnValue["message"] = $message;
+            echo json_encode($returnValue);
+             die;
            
         }else{
                 if(isset($_REQUEST['userId']))
@@ -161,6 +163,8 @@ class Appsignin extends CI_Controller {
                          }
                          $returnValue["status"] = "200";
                          $returnValue["message"] = "User informatiom updated successfully .";
+                         echo json_encode($returnValue);
+                            die;
 
                     }else{
                          $check_email=$this->Users->checkUserEmail($_REQUEST["userEmail"]);
@@ -176,15 +180,19 @@ class Appsignin extends CI_Controller {
                                 }
                                 $returnValue["status"] = "200";
                                 $returnValue["message"] = "User informatiom added successfully.";
+                                echo json_encode($returnValue);
+                                die;
                          }else{
                     
                             $returnValue["status"] = "401";
                             $returnValue["message"] = "Email already exist.Please try with other email";
+                            echo json_encode($returnValue);
+                            die;
                            }
                         }
                 
       
         }
-        echo json_encode($returnValue);
+        
     }
 }
