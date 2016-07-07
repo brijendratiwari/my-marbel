@@ -195,7 +195,7 @@ if ($user_orders) {
                                 <span id="cd-first" class="text-danger hidden"></span>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Last Name</label>
+                            <label>Last Name</label>
                                 <input type="text" name="cd-last" class="form-control" placeholder="Last Name" value="<?php echo (!empty($user_info['last_name'])) ? $user_info['last_name'] : ""; ?>">
                                 <span id="cd-last" class="text-danger hidden"></span>
                             </div>

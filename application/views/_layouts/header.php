@@ -120,7 +120,7 @@
                             <a href="<?php echo base_url('profile'); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
                          <?php } ?>
                         </li>
-                        <li class="divider"></li>
+                        <li><a data-target="#resetPasswordUserModal" href="#" data-toggle="modal"><i class="fa fa-key fa-fw"></i> Reset Password</a></li>
                         <li><a href="<?php echo base_url('login/logout');?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
@@ -131,4 +131,115 @@
             <!-- /.navbar-top-links -->
 
             <input type="hidden" id="base_url" value="<?php echo base_url(); ?>">  
-      
+      <!--Reset password model-->
+<form id="resetPasswordUser-row-form" action="" method="POST" enctype="multipart/form-data">
+    <div class="modal fade" id="resetPasswordUserModal" tabindex="-1" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Reset Password <span class="label label-info"></span></h4>
+                </div>
+               
+                <div class="modal-body">
+                    
+                    <div class="col-md-12">
+                        <div class="co-md-12 form-group" > 
+                            <div id="resetPasswordSuccess" class="pull-left alert  alert-success hidden  message"></div>        
+                            <div class="pull-left alert  alert-danger hidden message" id="resetPasswordError"></div></div>
+                            <div class="col-md-12 form-group">
+                                <label>New Password</label>
+                                <input type="password" name="cd-password" class="form-control" placeholder="New Password" >
+                                <span id="cd-password" class="text-danger hidden"></span>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>Confirm Password</label>
+                                <input type="password" name="cd-confirm-password" class="form-control" placeholder="Confirm Password" >
+                                <span id="cd-confirm-password" class="text-danger hidden"></span>
+                            </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="clearfix"></div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" value="<?php echo $this->session->userdata['marbel_user']['user_id']; ?>">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="add-row" class="btn btn-success">Submit New Password</button>
+                </div>
+            </div>
+            <div class="checkout_loader hidden" id="form_loader">
+                <div class="overlay new_loader"></div>
+                <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/images/chekout-loading.gif'); ?>" /></div>
+            </div>
+        </div>
+
+
+
+    </div>
+</form>
+<!---//...end-->
+<script>
+   //resset password
+     $(document).ready(function () {
+         var user_type='<?php echo $this->session->userdata['marbel_user']['type'];?>';
+         var urls='';
+         if(user_type==='admin'){
+             urls='reset_password_users';
+         }
+         if(user_type==='customer'){
+             urls='reset_password_customer';
+         }
+        var base_url = $('body').find('#base_url').val();
+
+        // Script for validate and submit remind form by AJAX...
+        var options = {
+            beforeSerialize: function () {
+                // return false to cancel submit 
+                $('body').find('#resetPasswordUserModal #form_loader').removeClass('hidden');
+            },
+            url: base_url + urls,
+            success: function (data) {
+                var err = $.parseJSON(data);
+                if (err.result == false) {
+                    $('body').find('#resetPasswordUserModal #form_loader').addClass('hidden');
+                    $(err.error).each(function (index, value) {
+                        $.each(value, function (index2, msg) {
+                            $("#resetPasswordUserModal #" + index2).text(msg);
+                            $("#resetPasswordUserModal #" + index2).removeClass('hidden');
+                        });
+                    });
+                } else {
+                    $('body').find('#resetPasswordUserModal #form_loader').addClass('hidden');
+                    if (err.success) {
+
+                        $('body').find('#resetPasswordUserModal input select').each(function () {
+
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        $("#resetPasswordSuccess").text(err.success);
+                        $("#resetPasswordSuccess").removeClass('hidden');
+
+
+                        setTimeout(function () {
+                            $('body').find('#resetPasswordUserModal').modal('hide');
+//                           window.location.href = '';
+                        }, 1000)
+                    } else {
+                        $('body').find('#resetPasswordUserModal input select').each(function () {
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        $("#resetPasswordError").text(err.error);
+                        $("#resetPasswordError").removeClass('hidden');
+                        setTimeout(function () {
+                            $('body').find('#resetPasswordUserModal').modal('hide');
+                        }, 1000)
+                    }
+                }
+            }
+        };
+        $('body').find('#resetPasswordUser-row-form').ajaxForm(options);
+    });
+   // JavaScript Document
+   </script>

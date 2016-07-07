@@ -115,14 +115,12 @@ class Customers_model extends CI_Model {
              );
              $this->db->where('id',$id);
              $this->db->update('m_users',$update_data);
-//              $random_salt = '';
-//                if ($this->input->post('cd-password')!='') {
-//                    $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
-//                    $password = hash('sha512', $this->input->post('cd-password') . $random_salt);
-//                    $update_password=array('password'=>$this->input->post('cd-password'),'salt'=>$random_salt);
-//                    $this->db->where('user_id',$id);
-//                    $this->db->update('m_user_auth',$update_password);
-//                }  
+             if($this->db->affected_rows()>0){
+                 return true;
+             }else{
+                 
+                 return false;
+             }
     }
     
     function deleteCustomer($id){
@@ -138,7 +136,7 @@ class Customers_model extends CI_Model {
        if ( $this->input->post()) {
             $first_name=$this->input->post('cd-first');
             $last_name=$this->input->post('cd-last');
-//            $password = $this->input->post('cd-password');
+            /*$password = $this->input->post('cd-password');*/
             $profile = NULL; 
             if(isset($_FILES['cd-profile']['name'])){
                 
@@ -192,17 +190,17 @@ class Customers_model extends CI_Model {
                 $this->db->where('id',$id); 
                 $this->db->update('m_users', $data_update);
                 if($this->db->affected_rows()>0){
-//                    if ($password != '') {
-//                         
-//                        
-//                         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
-//                         $password = hash('sha512', $password . $random_salt);
-//                         $user_auth = array('password' => $password, 'salt' => $random_salt);
-//                         $this->db->where('user_id',$id); 
-//                         $this->db->update('m_user_auth', $user_auth);
-//
-//
-//                    }
+                   /* if ($password != '') {
+                         
+                        
+                         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+                         $password = hash('sha512', $password . $random_salt);
+                         $user_auth = array('password' => $password, 'salt' => $random_salt);
+                         $this->db->where('user_id',$id); 
+                         $this->db->update('m_user_auth', $user_auth);
+
+
+                    }*/
                     $result['result'] = TRUE;
                     $result['success'] = $first_name . ' ' . $last_name . ' was Updated successfully';
                     echo json_encode($result);
@@ -233,5 +231,31 @@ class Customers_model extends CI_Model {
            return $query->row_array();
        }
    }
-   
+   function checkEmail($email,$id){
+       $this->db->select('email')->from('m_users');
+       $this->db->where('email',$email);
+       $this->db->where('id != ',$id);
+       $query=$this->db->get();
+       if($query->num_rows()>0){
+           
+           return true;
+       }else{
+           
+           return false;
+       }
+       
+   }
+   function getEmailByUserId($id=false){
+       
+       $this->db->select('email')->from('m_users');
+       $this->db->where('id',$id);
+       $query=$this->db->get();
+       if($query->num_rows()>0){
+           $info=$query->row_array();
+           return $info->email;
+       }else{
+           
+           return false;
+       }
+   }
 }

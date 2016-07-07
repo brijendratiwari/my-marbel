@@ -3,9 +3,20 @@
             <div class="row" >
                 <div class="col-lg-12">
                 <div class="col-lg-6" style="margin-top: 2%;">
-                    <a href="<?php echo base_url('customers');?>" class="btn btn-sm btn-default">Go Back</a>
+                    <a href="<?php echo base_url('customers');?>" class="btn btn-sm btn-default">Go Back</a>&nbsp;&nbsp;&nbsp; 
                  </div>   
-                    
+                     <?php
+                    if ( $this->session->flashdata('success')) {
+                        echo '<div class="alert alert-success pull-left message" style="margin-top: 1%;">'.$this->session->flashdata('success').'</div>';
+                    }
+                    ?>
+                    <?php
+                    if ( $this->session->flashdata('error')) {
+                        echo '<div class="alert alert-danger pull-left message" style="margin-top: 1%;">'.$this->session->flashdata('error').'</div>';
+                    }
+                    ?>
+                    <div id="resetPasswordSuccess" class="pull-left alert alert-success hidden message"></div>        
+                    <div class="pull-left alert alert-danger hidden message" id="resetPasswordError"></div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -89,7 +100,7 @@
                                         <p><label>Support Tickets : </label> <?php echo (!empty($user_info['note_support_ticket']))?ucwords($user_info['note_support_ticket']):"Empty";?></p>
                                     </div>
                                 </div>
-
+                              <a data-target="#resetPasswordModal" data-toggle="modal" class="btn btn-custom btn-lg">Reset Password</a>
                             </div>
                             <div class="col-md-6 right-info-section">
 
@@ -153,8 +164,9 @@
                                     <div class="social"><label>LINKED IN: </label> <?php echo (!empty($user_info['linkedin_handle']))?$user_info['linkedin_handle']:"Empty";?></div>
                                 </div>
 
-                                
+                                 
                             </div>
+                             
                           </div>
                         <!--/.user info page-->
                     </div>
@@ -170,3 +182,109 @@
 
     
 <!-- // user modal ..-->
+<!--Reset password model-->
+<form id="resetPassword-row-form" action="" method="POST" enctype="multipart/form-data">
+    <div class="modal fade" id="resetPasswordModal" tabindex="-1" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Reset Password <span class="label label-info"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                            <div class="col-md-12 form-group text-center">
+                                <a href="<?php echo base_url('send_password_email_profile/'.$user_info['id']);?>" class="btn btn-custom btn-sm">Send Reset Password Email</a>
+                            </div>
+                            
+                    </div>
+                    <h1 class="text-center">OR</h1>
+                    <div class="col-md-12">
+                            <div class="col-md-12 form-group">
+                                <label>New Password</label>
+                                <input type="password" name="cd-password" class="form-control" placeholder="New Password" >
+                                <span id="cd-password" class="text-danger hidden"></span>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>Confirm Password</label>
+                                <input type="password" name="cd-confirm-password" class="form-control" placeholder="Confirm Password" >
+                                <span id="cd-confirm-password" class="text-danger hidden"></span>
+                            </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="clearfix"></div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" value="<?php echo $user_info['id']; ?>">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="add-row" class="btn btn-success">Submit New Password</button>
+                </div>
+            </div>
+            <div class="checkout_loader hidden" id="form_loader">
+                <div class="overlay new_loader"></div>
+                <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/images/chekout-loading.gif'); ?>" /></div>
+            </div>
+        </div>
+
+
+
+    </div>
+</form>
+<!---//...end-->
+<script>
+   //resset password
+     $(document).ready(function () {
+
+        var base_url = $('body').find('#base_url').val();
+
+        // Script for validate and submit remind form by AJAX...
+        var options = {
+            beforeSerialize: function () {
+                // return false to cancel submit 
+                $('body').find('#resetPasswordModal #form_loader').removeClass('hidden');
+            },
+            url: base_url + 'reset_password_users',
+            success: function (data) {
+                var err = $.parseJSON(data);
+                if (err.result == false) {
+                    $('body').find('#resetPasswordModal #form_loader').addClass('hidden');
+                    $(err.error).each(function (index, value) {
+                        $.each(value, function (index2, msg) {
+                            $("#resetPasswordModal #" + index2).text(msg);
+                            $("#resetPasswordModal #" + index2).removeClass('hidden');
+                        });
+                    });
+                } else {
+                    $('body').find('#resetPasswordModal #form_loader').addClass('hidden');
+                    if (err.success) {
+
+                        $('body').find('#resetPasswordModal input select').each(function () {
+
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        $("#resetPasswordSuccess").text(err.success);
+                        $("#resetPasswordSuccess").removeClass('hidden');
+
+
+                        setTimeout(function () {
+                            $('body').find('#resetPasswordModal').modal('hide');
+//                           window.location.href = '';
+                        }, 500)
+                    } else {
+                        $('body').find('#resetPasswordModal input select').each(function () {
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        $("#resetPasswordError").text(err.error);
+                        $("#resetPasswordError").removeClass('hidden');
+                        setTimeout(function () {
+                            $('body').find('#resetPasswordModal').modal('hide');
+                        }, 500)
+                    }
+                }
+            }
+        };
+        $('body').find('#resetPassword-row-form').ajaxForm(options);
+    });
+   // JavaScript Document
+   </script>

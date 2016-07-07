@@ -50,4 +50,58 @@ class Profile extends CI_Controller {
             
         }
  }
+ 
+ public function email_check() {
+         if($this->input->post('cd-user_id')){
+            $isExist = $this->Customer->checkEmail($this->input->post('cd-email'), $this->input->post('cd-user_id'));
+         }else{
+             
+              $isExist = $this->Customer->checkEmail($this->input->post('cd-email'), $this->session->userdata['marbel_user']['user_id']);
+         }
+        if ($isExist) {
+            $this->form_validation->set_message('email_check', 'This email is already exist, try wit different email address.');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+    
+     public function reset_password_customer() {
+        $id = $this->input->post('id');
+        $password = $this->input->post('cd-password');
+        if ($this->input->post('id')) {
+            $this->form_validation->set_rules('cd-password', 'Password', 'trim|required|matches[cd-confirm-password]');
+            $this->form_validation->set_rules('cd-confirm-password', 'Confirm Password', 'trim|required');
+            //run validation on form input
+            if ($this->form_validation->run() == FALSE) {
+                //validation fails
+                $this->form_validation->set_error_delimiters('', '');
+                $error = $this->form_validation->error_array();
+                $result['result'] = false;
+                $result['error'] = $error;
+                echo json_encode($result);
+                die;
+            } else {
+
+                if ($password != '') {
+
+                    $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+                    $password = hash('sha512', $password . $random_salt);
+                    $user_auth = array('password' => $password, 'salt' => $random_salt);
+                    $this->db->where('user_id', $id);
+                    $this->db->update('m_user_auth', $user_auth);
+                    $result['result'] = TRUE;
+                    $result['success'] = 'Password reset Successfully';
+                    echo json_encode($result);
+                    die;
+                }
+            }
+        } else {
+
+            $result['result'] = false;
+            $result['error'] = 'Some thing went wrough ! Please try again.';
+            echo json_encode($result);
+            die;
+        }
+    }
 }

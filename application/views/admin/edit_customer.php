@@ -8,9 +8,16 @@
                 <div class="col-md-12 menu-drop-down">
                     <?php
                     if ( $this->session->flashdata('success')) {
-                        echo '<div class="alert alert-success">'.$this->session->flashdata('success').'</div>';
+                        echo '<div class="alert alert-success" style="margin-top: 1%;">'.$this->session->flashdata('success').'</div>';
                     }
                     ?>
+                    <?php
+                    if ( $this->session->flashdata('error')) {
+                        echo '<div class="alert alert-danger" style="margin-top: 1%;">'.$this->session->flashdata('error').'</div>';
+                    }
+                    ?>
+                    <div id="resetPasswordSuccess" class="pull-left alert alert-success hidden message"></div>        
+                    <div class="pull-left alert alert-danger hidden message" id="resetPasswordError"></div>
                     <form class="cd-form floating-labels" style="max-width: 100%; width: 100%;margin: 0px;" method="POST" action="">
                             <input type="hidden" name="cd-type" value="<?php echo $customer['type'];?>">
                             <input type="hidden" name="cd-parent" value="<?php echo $customer['parent_type'];?>">
@@ -69,20 +76,24 @@
                                     <div class="col-md-6  form-group">
                                         <label>First Name</label>
                                         <input type="text" class="form-control" name="cd-first_name" id="cd-first_name" value="<?php echo $customer['first_name']; ?>" placeholder="First Name">
+                                        <span class="text-danger"><?php echo form_error('cd-first_name');?></span>
                                     </div>
                                     <div class="col-md-6  form-group">
                                         <label>Last Name</label>
                                         <input type="text" class="form-control" name="cd-last_name" id="cd-last_name" value="<?php echo $customer['last_name']; ?>" placeholder="Last Name">
+                                        <span class="text-danger"><?php echo form_error('cd-last_name');?></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-6 form-group">
                                         <label>Email</label>
                                         <input type="text" class="form-control" name="cd-email" id="cd-email" value="<?php echo $customer['email']; ?>" placeholder="Email">
+                                    <span class="text-danger"><?php echo form_error('cd-email');?></span>
                                     </div>
                                     <div class="col-md-6  form-group">
                                          <label>Phone</label>
                                         <input type="text" class="form-control" name="cd-phone" id="cd-phone" value="<?php echo $customer['phone']; ?>" placeholder="Phone">
+                                          <span class="text-danger"><?php echo form_error('cd-phone');?></span>
                                     </div>
                                 </div>
 <!--                                <div class="col-md-12">
@@ -274,10 +285,12 @@
                             <!--end here-->
                              
                                 <div class="col-md-12" style="margin-top:10px">
-                                     <div class="col-md-6 form-group">
+                                     <div class="col-md-8 form-group">
                                     
-                                        <a href="/new_services/<?php echo $customer['id']; ?>" class="btn btn-custom btn-lg" >Add Service Record</a>
-                                            <input type="submit" name="cd-submit" class="btn btn-custom btn-lg" value="Save Changes">
+                                         <a href="/new_services/<?php echo $customer['id']; ?>" class="btn btn-custom btn-lg" >Add Service Record</a>&nbsp;&nbsp;&nbsp;
+                                       
+                                            <input type="submit" name="cd-submit" class="btn btn-custom btn-lg" value="Save Changes">&nbsp;&nbsp;&nbsp;
+                                             <a data-target="#resetPasswordModal" data-toggle="modal" class="btn btn-custom btn-lg">Reset Password</a>
                                            <a href="javascript:deleteCustomer('<?php echo $customer['id']; ?>')" class="btn btn-lg btn-danger">Delete</a>
                                     </div>
                                 </div>
@@ -287,6 +300,57 @@
            
         </div>
 </div>
+
+<!--Reset password model-->
+<form id="resetPassword-row-form" action="" method="POST" enctype="multipart/form-data">
+    <div class="modal fade" id="resetPasswordModal" tabindex="-1" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Reset Password <span class="label label-info"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                            <div class="col-md-12 form-group text-center">
+                                <a href="<?php echo base_url('send_password_email/'.$customer['id']);?>" class="btn btn-custom btn-sm">Send Reset Password Email</a>
+                            </div>
+                            
+                    </div>
+                    <h1 class="text-center">OR</h1>
+                    <div class="col-md-12">
+                            <div class="col-md-12 form-group">
+                                <label>New Password</label>
+                                <input type="password" name="cd-password" class="form-control" placeholder="New Password" >
+                                <span id="cd-password" class="text-danger hidden"></span>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>Confirm Password</label>
+                                <input type="password" name="cd-confirm-password" class="form-control" placeholder="Confirm Password" >
+                                <span id="cd-confirm-password" class="text-danger hidden"></span>
+                            </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="clearfix"></div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" value="<?php echo $customer['id']; ?>">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="add-row" class="btn btn-success">Submit New Password</button>
+                </div>
+            </div>
+            <div class="checkout_loader hidden" id="form_loader">
+                <div class="overlay new_loader"></div>
+                <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/images/chekout-loading.gif'); ?>" /></div>
+            </div>
+        </div>
+
+
+
+    </div>
+</form>
+<!---//...end-->
 <style>
     /* add cee for custome menu user on edit customer*/
  .menu-drop-down h1{
@@ -343,6 +407,59 @@
 /*end here*/
 </style>
 <script>
+   //resset password
+     $(document).ready(function () {
+
+        var base_url = $('body').find('#base_url').val();
+
+        // Script for validate and submit remind form by AJAX...
+        var options = {
+            beforeSerialize: function () {
+                // return false to cancel submit 
+                $('body').find('#resetPasswordModal #form_loader').removeClass('hidden');
+            },
+            url: base_url + 'reset_password_users',
+            success: function (data) {
+                var err = $.parseJSON(data);
+                if (err.result == false) {
+                    $('body').find('#resetPasswordModal #form_loader').addClass('hidden');
+                    $(err.error).each(function (index, value) {
+                        $.each(value, function (index2, msg) {
+                            $("#resetPasswordModal #" + index2).text(msg);
+                            $("#resetPasswordModal #" + index2).removeClass('hidden');
+                        });
+                    });
+                } else {
+                    $('body').find('#resetPasswordModal #form_loader').addClass('hidden');
+                    if (err.success) {
+
+                        $('body').find('#resetPasswordModal input select').each(function () {
+
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        $("#resetPasswordSuccess").text(err.success);
+                        $("#resetPasswordSuccess").removeClass('hidden');
+
+
+                        setTimeout(function () {
+                            $('body').find('#resetPasswordModal').modal('hide');
+//                           window.location.href = '';
+                        }, 500)
+                    } else {
+                        $('body').find('#resetPasswordModal input select').each(function () {
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        $("#resetPasswordError").text(err.error);
+                        $("#resetPasswordError").removeClass('hidden');
+                        setTimeout(function () {
+                            $('body').find('#resetPasswordModal').modal('hide');
+                        }, 500)
+                    }
+                }
+            }
+        };
+        $('body').find('#resetPassword-row-form').ajaxForm(options);
+    });
    // JavaScript Document
 
         startList = function() {
