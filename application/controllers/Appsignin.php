@@ -39,14 +39,21 @@ class Appsignin extends CI_Controller {
         $userSalt = $userDetails["salt"];
         $userPassword = hash('sha512', $userPassword . $userSalt);
         if ($userSecuredPassword == $userPassword) {
+            if($userDetails["user_profile_pic"]!=''){
+                
+                 $user_profile=base_url('assets/profile-imgs/'.$userDetails["user_profile_pic"]);
+            }else{
+                
+                $user_profile='';
+            }
             $returnValue["status"] = "200";
+            $returnValue["message"] = "success";
             $returnValue["userFirstName"] = $userDetails["first_name"];
             $returnValue["userLastName"] = $userDetails["last_name"];
             $returnValue["userEmail"] = $userDetails["email"];
             $returnValue["userId"] = $userDetails["user_id"];
             $returnValue["userType"] = $userDetails["type"];
             $returnValue["register_date"] = $userDetails["register_date"];
-            $returnValue["message"] = $userDetails["notes"];
             $returnValue["userEmailSecondary"] = $userDetails["email_secondary"];
             $returnValue["userBio"] = $userDetails["bio"];
             $returnValue["height"] = $userDetails["height"];
@@ -69,9 +76,15 @@ class Appsignin extends CI_Controller {
             $returnValue["preferredBrakingForce"] = $userDetails["preferred_braking_force"];
             $returnValue["reverseTurned"] = $userDetails["reverse_turned"];
             $returnValue["lockedSettings"] = $userDetails["locked_settings"];
-            $returnValue["userProfilePicture"] = base_url('assets/profile-imgs/'.$userDetails["user_profile_pic"]);
-            $returnValue["status"] = "200";
-            $returnValue["message"] = "success";
+            $returnValue["parentalLock"] = $userDetails["parental_lock"];
+            $returnValue["linkedinHandle"] = $userDetails["linkedin_handle"];
+            $returnValue["instagramHandle"] = $userDetails["instagram_handle"];
+            $returnValue["redditHandle"] = $userDetails["reddit_handle"];
+            $returnValue["noteOrders"] = $userDetails["note_orders"];
+            $returnValue["noteServices"] = $userDetails["note_services"];
+            $returnValue["noteTasks"] = $userDetails["note_tasks"];
+            $returnValue["noteSupportTicket"] = $userDetails["note_support_ticket"];
+            $returnValue["userProfilePicture"] =$user_profile;
             echo json_encode($returnValue); die;
             
             

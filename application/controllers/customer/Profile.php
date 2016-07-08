@@ -59,7 +59,7 @@ class Profile extends CI_Controller {
               $isExist = $this->Customer->checkEmail($this->input->post('cd-email'), $this->session->userdata['marbel_user']['user_id']);
          }
         if ($isExist) {
-            $this->form_validation->set_message('email_check', 'This email is already exist, try wit different email address.');
+            $this->form_validation->set_message('email_check', 'This email is already exist, try with different email address.');
             return FALSE;
         } else {
             return TRUE;

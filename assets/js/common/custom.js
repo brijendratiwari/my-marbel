@@ -28,8 +28,8 @@ $(document).ready(function(){
             {"sClass": "hidden-phone", "aTargets": [4]},
             {"sClass": "hidden-phone", "aTargets": [5]},
             {"sClass": "hidden-phone", "aTargets": [6]},
-             {"sClass": "hidden-phone text-center", "aTargets": [7]},
-            {"sClass": "hidden-phone text-center", "aTargets": [8],"bSortable": false },
+            {"sClass": "hidden-phone text-center", "aTargets": [7],"bSortable": false},
+           
             
         ]}
         );

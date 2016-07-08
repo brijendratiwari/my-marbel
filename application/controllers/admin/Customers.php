@@ -91,7 +91,7 @@ class Customers extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['id'], '<a href="' . base_url('get_customer_info/' . $val['id']) . '" title="View user information"  class="btn btn-xs btn-info userRow"><i class="fa fa-eye"></i></a>', $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'], $val['notes'], '  <a href="edit_customer/' . $val['id'] . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>');
+            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['id'], '<a href="' . base_url('get_customer_info/' . $val['id']) . '" title="View user information"  class="btn btn-xs btn-info userRow"><i class="fa fa-eye"></i></a>', $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'],  '  <a href="edit_customer/' . $val['id'] . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>');
         }
 
         echo json_encode($output);
@@ -365,9 +365,11 @@ class Customers extends CI_Controller {
     public function send_password_email($id=false){
      if ($id) {
             $email = $this->Customer->getEmailByUserId($id);
+            if($email!=''){
             $this->Users->sendPasswordResetEmail($email);
             $this->session->set_flashdata('success','Send password in mail successfully.');
             redirect('edit_customer/'.$id);
+            }
         }else{
             $this->session->set_flashdata('error','Some thing went wrough! please try again.');
             redirect('edit_customer/'.$id);

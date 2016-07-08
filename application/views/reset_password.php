@@ -47,18 +47,39 @@
   $(document).ready(function(){
     $('#loader').css('display', 'none', 'important');
     $("#login__update__password").click(function(){
-      password1=$("#login_password").val();
-      password2=$("#login_password_2").val();
-      resetKey=$("#reset_key").val();
-      email=$("#email").val();
-      if (password1 != password2) {
-        $("#error").fadeIn("slow");
-        $('#error').addClass('error');
-        $('#loader').css('display', 'none', 'important');
-        $("#error_text").html("Your passwords do not match");
-        setTimeout(function() { $("#error").fadeOut("slow"); }, 5000); 
-        return false;
+     var password1=$("#login_password").val();
+     var password2=$("#login_password_2").val();
+     var resetKey=$("#reset_key").val();
+     var email=$("#email").val();
+    if (password1=='') {
+         $("#error").fadeIn("slow");
+         $('#error').addClass('error');
+         $('#loader').css('display', 'none', 'important');
+         $("#error_text").html("New password is required");
+         setTimeout(function() { $("#error").fadeOut("slow"); }, 5000); 
+         return false;
       }
+      else if(password2==''){
+         $("#error").fadeIn("slow");
+         $('#error').addClass('error');
+         $('#loader').css('display', 'none', 'important');
+         $("#error_text").html("Confirm password is required");
+         setTimeout(function() { $("#error").fadeOut("slow"); }, 5000); 
+         return false;
+      }
+      else
+      {
+          
+        if (password1 != password2) {
+            $("#error").fadeIn("slow");
+            $('#error').addClass('error');
+            $('#loader').css('display', 'none', 'important');
+            $("#error_text").html("Your passwords do not match");
+            setTimeout(function() { $("#error").fadeOut("slow"); }, 5000); 
+            return false;
+         }
+      }
+      
       $.ajax({
         type: "POST",
         url: "/login/ajax_forgot",
@@ -76,7 +97,8 @@
             $('#error').addClass('error');
             $('#loader').css('display', 'none', 'important');
             $("#error_text").html("Your password has been updated");
-            setTimeout(function() { $("#error").fadeOut("slow"); window.location='/'; }, 5000); 
+            setTimeout(function() { $("#error").fadeOut("slow"); 
+            window.location='<?php echo base_url();?>'; }, 5000); 
           }
         },
         beforeSend:function() {

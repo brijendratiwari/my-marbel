@@ -22,7 +22,7 @@
             </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Users Information</h1>
+                        <h1 class="page-header">User Information</h1>
                         
                         
                         <!--user info page-->

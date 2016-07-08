@@ -252,7 +252,7 @@ class Customers_model extends CI_Model {
        $query=$this->db->get();
        if($query->num_rows()>0){
            $info=$query->row_array();
-           return $info->email;
+           return $info['email'];
        }else{
            
            return false;

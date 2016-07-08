@@ -36,7 +36,6 @@
                                             <th>Last Name</th>
                                             <th>Last Activity</th>
                                             <th>Phone Number</th>
-                                            <th>Notes</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>

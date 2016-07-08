@@ -12,7 +12,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Profile Information</h1>
+            <h1 class="page-header">My Profile Information</h1>
 
 
             <!--user info page-->

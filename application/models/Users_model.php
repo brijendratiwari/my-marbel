@@ -125,6 +125,7 @@ class Users_model extends CI_Model {
     }
 
     function sendPasswordResetEmail($email) {
+        
         $this->db->select('mua.salt')->from('m_user_auth mua');
         $this->db->join('m_users mu', 'mu.id = mua.user_id');
         $this->db->where('mu.email', $email);
@@ -132,24 +133,28 @@ class Users_model extends CI_Model {
         $query = $this->db->get();
         $salt = '';
         if ($query->num_rows() == 0) {
+           
             $this->db->select('id')->from('m_users');
             $this->db->where('email', $email);
             $query1 = $this->db->get();
             if ($query1->num_rows() > 0) {
+              
                 $user_data = $query1->result_array();
                 $salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
                 $insert = array('user_id' => $user_data[0]['user_id'], 'password' => $salt, 'salt' => $salt);
                 $this->db->insert('m_user_auth', $insert);
             } else {
+                
                 return 0;
             }
         }else{
+           
              $user_data=$query->result_array();
              $salt = $user_data[0]['salt'];
         }
         $key = hash('sha512', 'reset-password-key' . $salt);
         $users = $this->getUserEmailData($email);
-//        echo base_url('resetPassword/' . $email . '/' . $key . '');
+        #echo base_url('resetPassword/' . $email . '/' . $key . ''); die;
         $mergeVars = array(
             array(
                 'rcpt' => $email,
@@ -330,7 +335,7 @@ class Users_model extends CI_Model {
 
         $customer = array();
 
-        $this->db->select('mu.id as user_id, mu.email, mu.first_name, mu.last_name, mu.type, mu.register_date, mu.last_activity, mu.phone, mu.notes, mu.email_secondary,mu.bio,mu.height,mu.weight,mu.terrain,mu.company,mu.address_one,mu.address_two,mu.city,mu.state_or_region,mu.postal_code,mu.country,mu.accepts,mu.alias,mu.privacy_setting,mu.units,mu.range_alarm,mu.notifications,mu.primary_riding_style,mu.safety_brake,mu.preferred_braking_force,mu.reverse_turned,mu.locked_settings,mu.user_profile_pic, mua.password as db_password, mua.salt');
+        $this->db->select('mu.id as user_id, mu.email, mu.first_name, mu.last_name, mu.type, mu.register_date, mu.last_activity, mu.phone, mu.notes, mu.email_secondary,mu.bio,mu.height,mu.weight,mu.terrain,mu.company,mu.address_one,mu.address_two,mu.city,mu.state_or_region,mu.postal_code,mu.country,mu.accepts,mu.alias,mu.privacy_setting,mu.units,mu.range_alarm,mu.notifications,mu.primary_riding_style,mu.safety_brake,mu.preferred_braking_force,mu.reverse_turned,mu.locked_settings,mu.parental_lock,mu.user_profile_pic,mu.twitter_handle,mu.linkedin_handle,mu.instagram_handle,mu.reddit_handle,mu.note_orders,mu.note_services,mu.note_tasks,mu.note_support_ticket, mua.password as db_password, mua.salt');
 
         $this->db->from('m_users as mu');
         $this->db->join('m_user_auth as mua', 'mua.user_id = mu.id', 'LEFT');
