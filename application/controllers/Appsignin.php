@@ -19,6 +19,8 @@ class Appsignin extends CI_Controller {
         if (empty($_REQUEST["userEmail"]) || empty($_REQUEST["userPassword"])) {
             $returnValue["status"] = "400";
             $returnValue["message"] = "Missing required information";
+            $returnValue["result"] = "No Information found.";
+            $returnValue["data"] = array();
             echo json_encode($returnValue); die;
             
         }
@@ -31,6 +33,8 @@ class Appsignin extends CI_Controller {
          if (empty($userDetails)) {
             $returnValue["status"] = "403";
             $returnValue["message"] = "User not found";
+            $returnValue["result"] = "No Information found.";
+            $returnValue["data"] = array();
             echo json_encode($returnValue); die;
          
         }
@@ -48,49 +52,52 @@ class Appsignin extends CI_Controller {
             }
             $returnValue["status"] = "200";
             $returnValue["message"] = "success";
-            $returnValue["userFirstName"] = $userDetails["first_name"];
-            $returnValue["userLastName"] = $userDetails["last_name"];
-            $returnValue["userEmail"] = $userDetails["email"];
-            $returnValue["userId"] = $userDetails["user_id"];
-            $returnValue["userType"] = $userDetails["type"];
-            $returnValue["register_date"] = $userDetails["register_date"];
-            $returnValue["userEmailSecondary"] = $userDetails["email_secondary"];
-            $returnValue["userBio"] = $userDetails["bio"];
-            $returnValue["height"] = $userDetails["height"];
-            $returnValue["weight"] = $userDetails["weight"];
-            $returnValue["terrain"] = $userDetails["terrain"];
-            $returnValue["company"] = $userDetails["company"];
-            $returnValue["addressOne"] = $userDetails["address_one"];
-            $returnValue["addressTwo"] = $userDetails["address_two"];
-            $returnValue["city"] = $userDetails["city"];
-            $returnValue["stateRegion"] = $userDetails["state_or_region"];
-            $returnValue["postalCode"] = $userDetails["postal_code"];
-            $returnValue["country"] = $userDetails["country"];
-            $returnValue["alias"] = $userDetails["alias"];
-            $returnValue["privacySetting"] = $userDetails["privacy_setting"];
-            $returnValue["units"] = $userDetails["units"];
-            $returnValue["rangeAlarm"] = $userDetails["range_alarm"];
-            $returnValue["notification"] = $userDetails["notifications"];
-            $returnValue["primaryRidingStyle"] = $userDetails["primary_riding_style"];
-            $returnValue["safetyBrake"] = $userDetails["safety_brake"];
-            $returnValue["preferredBrakingForce"] = $userDetails["preferred_braking_force"];
-            $returnValue["reverseTurned"] = $userDetails["reverse_turned"];
-            $returnValue["lockedSettings"] = $userDetails["locked_settings"];
-            $returnValue["parentalLock"] = $userDetails["parental_lock"];
-            $returnValue["linkedinHandle"] = $userDetails["linkedin_handle"];
-            $returnValue["instagramHandle"] = $userDetails["instagram_handle"];
-            $returnValue["redditHandle"] = $userDetails["reddit_handle"];
-            $returnValue["noteOrders"] = $userDetails["note_orders"];
-            $returnValue["noteServices"] = $userDetails["note_services"];
-            $returnValue["noteTasks"] = $userDetails["note_tasks"];
-            $returnValue["noteSupportTicket"] = $userDetails["note_support_ticket"];
-            $returnValue["userProfilePicture"] =$user_profile;
+            $returnValue["data"]["userFirstName"] = $userDetails["first_name"];
+            $returnValue["data"]["userLastName"] = $userDetails["last_name"];
+            $returnValue["data"]["userEmail"] = $userDetails["email"];
+            $returnValue["data"]["userId"] = $userDetails["user_id"];
+            $returnValue["data"]["userType"] = $userDetails["type"];
+            $returnValue["data"]["register_date"] = $userDetails["register_date"];
+            $returnValue["data"]["userEmailSecondary"] = $userDetails["email_secondary"];
+            $returnValue["data"]["userBio"] = $userDetails["bio"];
+            $returnValue["data"]["height"] = $userDetails["height"];
+            $returnValue["data"]["weight"] = $userDetails["weight"];
+            $returnValue["data"]["terrain"] = $userDetails["terrain"];
+            $returnValue["data"]["company"] = $userDetails["company"];
+            $returnValue["data"]["addressOne"] = $userDetails["address_one"];
+            $returnValue["data"]["addressTwo"] = $userDetails["address_two"];
+            $returnValue["data"]["city"] = $userDetails["city"];
+            $returnValue["data"]["stateRegion"] = $userDetails["state_or_region"];
+            $returnValue["data"]["postalCode"] = $userDetails["postal_code"];
+            $returnValue["data"]["country"] = $userDetails["country"];
+            $returnValue["data"]["alias"] = $userDetails["alias"];
+            $returnValue["data"]["privacySetting"] = $userDetails["privacy_setting"];
+            $returnValue["data"]["units"] = $userDetails["units"];
+            $returnValue["data"]["rangeAlarm"] = $userDetails["range_alarm"];
+            $returnValue["data"]["notification"] = $userDetails["notifications"];
+            $returnValue["data"]["primaryRidingStyle"] = $userDetails["primary_riding_style"];
+            $returnValue["data"]["safetyBrake"] = $userDetails["safety_brake"];
+            $returnValue["data"]["preferredBrakingForce"] = $userDetails["preferred_braking_force"];
+            $returnValue["data"]["reverseTurned"] = $userDetails["reverse_turned"];
+            $returnValue["data"]["lockedSettings"] = $userDetails["locked_settings"];
+            $returnValue["data"]["parentalLock"] = $userDetails["parental_lock"];
+            $returnValue["data"]["linkedinHandle"] = $userDetails["linkedin_handle"];
+            $returnValue["data"]["instagramHandle"] = $userDetails["instagram_handle"];
+            $returnValue["data"]["redditHandle"] = $userDetails["reddit_handle"];
+            $returnValue["data"]["noteOrders"] = $userDetails["note_orders"];
+            $returnValue["data"]["noteServices"] = $userDetails["note_services"];
+            $returnValue["data"]["noteTasks"] = $userDetails["note_tasks"];
+            $returnValue["data"]["noteSupportTicket"] = $userDetails["note_support_ticket"];
+            $returnValue["data"]["userProfilePicture"] =$user_profile;
+            $returnValue["result"] = "User Information.";
             echo json_encode($returnValue); die;
             
             
         } else {
             $returnValue["status"] = "401";
             $returnValue["message"] = "Incorrect Password";
+            $returnValue["result"] = "No Information found.";
+            $returnValue["data"] = array();
             echo json_encode($returnValue); die;
       
         }
