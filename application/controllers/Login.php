@@ -53,7 +53,7 @@ class Login extends CI_Controller {
     }
 
     public function ajax_forgot() {
-        if($this->input->post(''))
+      
         if ($this->input->post('reset_request_email')) {
             $email = $this->input->post('reset_request_email');
             $login = $this->Users->sendPasswordResetEmail($email);
