@@ -40,7 +40,18 @@
                             
                         </div>
                         <div class="col-md-6 form-group">
-                            <?php echo date('m/d/Y' ,  strtotime($tasks['task_due_date']));?>
+                            <?php echo (($tasks['task_due_date']!='' && $tasks['task_due_date']!='0000-00-00')? date('m/d/Y', strtotime($tasks['task_due_date'])):'N/A');?>
+                        </div>
+                        </div>
+                        <div class="col-lg-12" >
+                        <div class="col-md-6 form-group">
+
+                            <label> Completed date : </label>
+
+                            
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <?php echo (($tasks['task_completed_date']!='' && $tasks['task_completed_date']!='0000-00-00')? date('m/d/Y', strtotime($tasks['task_completed_date'])):'Not Completed');?>
                         </div>
                         </div>
                         <div class="col-lg-12" >
@@ -51,7 +62,30 @@
                             
                         </div>
                         <div class="col-md-6 form-group">
-                            <?php echo $tasks['task_regarding'];?>
+                            <?php echo (!empty($tasks['task_regarding']))?$tasks['task_regarding']:"N/A";?>
+                        </div>
+                        </div>
+                        
+                        <div class="col-lg-12" >
+                        <div class="col-md-6 form-group">
+
+                            <label> Effort : </label>
+
+                            
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <?php echo $tasks['task_effort'];?>
+                        </div>
+                        </div>
+                        <div class="col-lg-12" >
+                        <div class="col-md-6 form-group">
+
+                            <label> Value : </label>
+
+                            
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <?php echo $tasks['task_value'];?>
                         </div>
                         </div>
                         <div class="col-lg-12" >

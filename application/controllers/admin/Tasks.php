@@ -171,7 +171,7 @@ class Tasks extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['task_id'],'<span style="color: #00aeef;"><i class="fa fa-circle"></i></span> '.$val['cat_name'], $val['task_name'], $val['task_regarding'],$val['task_status'],$val['task_effort'],$val['task_value'], date('m/d/Y', strtotime($val['task_due_date'])), ' <a class="btn btn-xs btn-success edit-task" href="#" data-id="'. $val['task_id'].'" data-toggle="modal" data-target="#editTaskModal"><i class="fa fa-eye"></i> View</a>');
+            $output['aaData'][] = array("DT_RowId" => $val['task_id'],'<span style="color: #00aeef;"><i class="fa fa-circle"></i></span> '.$val['cat_name'], $val['task_name'], $val['task_regarding'],$val['task_status'],$val['task_effort'],$val['task_value'], (($val['task_due_date']!='' && $val['task_due_date']!='0000-00-00')? date('m/d/Y', strtotime($val['task_due_date'])):''), ' <a class="btn btn-xs btn-success edit-task" href="#" data-id="'. $val['task_id'].'" data-toggle="modal" data-target="#editTaskModal"><i class="fa fa-eye"></i> View</a>');
         }
 
         echo json_encode($output);
@@ -248,7 +248,7 @@ class Tasks extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['task_id'],'<span style="color: #00aeef;"><i class="fa fa-circle"></i></span> '.$val['cat_name'], $val['task_name'], $val['task_regarding'],$val['task_status'],$val['task_effort'],$val['task_value'], date('m/d/Y', strtotime($val['task_due_date'])), $val['assign_to_name'],' <a class="btn btn-xs btn-success edit-task" href="#" data-id="'. $val['task_id'].'" data-toggle="modal" data-target="#editTaskModal"><i class="fa fa-eye"></i> View</a>');
+            $output['aaData'][] = array("DT_RowId" => $val['task_id'],'<span style="color: #00aeef;"><i class="fa fa-circle"></i></span> '.$val['cat_name'], $val['task_name'], $val['task_regarding'],$val['task_status'],$val['task_effort'],$val['task_value'], (($val['task_due_date']!='' && $val['task_due_date']!='0000-00-00')? date('m/d/Y', strtotime($val['task_due_date'])):''), $val['assign_to_name'],' <a class="btn btn-xs btn-success edit-task" href="#" data-id="'. $val['task_id'].'" data-toggle="modal" data-target="#editTaskModal"><i class="fa fa-eye"></i> View</a>');
         }
 
         echo json_encode($output);
@@ -322,7 +322,7 @@ class Tasks extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['task_id'],'<span><i class="fa fa-check"></i></span> '.$val['cat_name'], $val['task_name'], $val['task_regarding'],$val['task_status'], date('m/d/Y', strtotime($val['task_completed_date'])),' <a class="btn btn-xs btn-success edit-task" href="#" data-id="'. $val['task_id'].'" data-toggle="modal" data-target="#editTaskModal"><i class="fa fa-eye"></i> View</a>');
+            $output['aaData'][] = array("DT_RowId" => $val['task_id'],'<span><i class="fa fa-check"></i></span> '.$val['cat_name'], $val['task_name'], $val['task_regarding'],$val['task_status'], (($val['task_completed_date']!='' && $val['task_completed_date']!='0000-00-00')? date('m/d/Y', strtotime($val['task_completed_date'])):''),' <a class="btn btn-xs btn-success edit-task" href="#" data-id="'. $val['task_id'].'" data-toggle="modal" data-target="#editTaskModal"><i class="fa fa-eye"></i> View</a>');
         }
 
         echo json_encode($output);
