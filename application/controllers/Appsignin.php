@@ -17,10 +17,11 @@ class Appsignin extends CI_Controller {
     public function index() {
         $returnValue = array();
         if (empty($_REQUEST["userEmail"]) || empty($_REQUEST["userPassword"])) {
+            $returnValue["data"] = array();
             $returnValue["status"] = "400";
             $returnValue["message"] = "Missing required information";
             $returnValue["result"] = "No Information found.";
-            $returnValue["data"] = array();
+            
             echo json_encode($returnValue); die;
             
         }
@@ -31,10 +32,11 @@ class Appsignin extends CI_Controller {
         $userDetails = $this->Users->getAppUserByEmail($userEmail);
        
          if (empty($userDetails)) {
+             $returnValue["data"] = array();
             $returnValue["status"] = "403";
             $returnValue["message"] = "User not found";
             $returnValue["result"] = "No Information found.";
-            $returnValue["data"] = array();
+            
             echo json_encode($returnValue); die;
          
         }
@@ -50,8 +52,7 @@ class Appsignin extends CI_Controller {
                 
                 $user_profile='';
             }
-            $returnValue["status"] = "200";
-            $returnValue["message"] = "success";
+            
             $returnValue["data"]["userFirstName"] = $userDetails["first_name"];
             $returnValue["data"]["userLastName"] = $userDetails["last_name"];
             $returnValue["data"]["userEmail"] = $userDetails["email"];
@@ -89,15 +90,18 @@ class Appsignin extends CI_Controller {
             $returnValue["data"]["noteTasks"] = $userDetails["note_tasks"];
             $returnValue["data"]["noteSupportTicket"] = $userDetails["note_support_ticket"];
             $returnValue["data"]["userProfilePicture"] =$user_profile;
+            $returnValue["status"] = "200";
+            $returnValue["message"] = "success";
             $returnValue["result"] = "User Information.";
             echo json_encode($returnValue); die;
             
             
         } else {
+             $returnValue["data"] = array();
             $returnValue["status"] = "401";
             $returnValue["message"] = "Incorrect Password";
             $returnValue["result"] = "No Information found.";
-            $returnValue["data"] = array();
+           
             echo json_encode($returnValue); die;
       
         }
