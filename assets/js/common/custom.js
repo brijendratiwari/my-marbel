@@ -195,7 +195,7 @@ $(document).ready(function(){
      $("#task-assign-to-me-data").dataTable({
         "oLanguage": {
         "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
-        "ordering": false,
+        //"ordering": false,
         "bFilter": false ,
         "bLengthChange":false,
         "bProcessing": true,
@@ -207,17 +207,20 @@ $(document).ready(function(){
         "bDestroy": true, //!!!--- for remove data table warning.
         "aoColumnDefs": [
             {"aTargets": [0]},
-            {"sClass": " aligncenter", "aTargets": [1]},
-            {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
+            {"sClass": " aligncenter", "aTargets": [1],"bSortable": false},
+            {"sClass": "eamil_conform aligncenter", "aTargets": [2],"bSortable": false},
             {"sClass": "hidden-phone", "aTargets": [3],"bSortable": false},
             {"sClass": "hidden-phone", "aTargets": [4],"bSortable": false},
-              
+            {"sClass": "hidden-phone", "aTargets": [5],"bSortable": false},
+            {"sClass": "hidden-phone", "aTargets": [6]},
+            {"sClass": "hidden-phone", "aTargets": [7],"bSortable": false},
+           
         ]}); 
     /* task assign to me datatable... */
      $("#task-assign-by-me-data").dataTable({
         "oLanguage": {
         "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
-        "ordering": false,
+        //"ordering": false,
         "bFilter": false ,
         "bLengthChange":false,
         "bProcessing": true,
@@ -229,10 +232,16 @@ $(document).ready(function(){
         "bDestroy": true, //!!!--- for remove data table warning.
         "aoColumnDefs": [
             {"aTargets": [0]},
-            {"sClass": " aligncenter", "aTargets": [1]},
-            {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
-            {"sClass": "hidden-phone", "aTargets": [3]},
-            {"sClass": "hidden-phone", "aTargets": [4]}
+            {"sClass": " aligncenter", "aTargets": [1],"bSortable": false},
+            {"sClass": "eamil_conform aligncenter", "aTargets": [2],"bSortable": false},
+            {"sClass": "hidden-phone", "aTargets": [3],"bSortable": false},
+            {"sClass": "hidden-phone", "aTargets": [4],"bSortable": false},
+            {"sClass": "hidden-phone", "aTargets": [5],"bSortable": false},
+            {"sClass": "hidden-phone", "aTargets": [6]},
+            {"sClass": "hidden-phone", "aTargets": [7],"bSortable": false},
+            {"sClass": "hidden-phone", "aTargets": [8],"bSortable": false}
+           
+            
           
               
         ]}); 

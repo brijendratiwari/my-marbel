@@ -37,6 +37,9 @@
                                     <th>Category</th>
                                     <th>Task Title</th>
                                     <th>Regarding</th>
+                                    <th>Status</th>
+                                    <th>Effort</th>
+                                    <th>Value</th>
                                     <th>Due Date</th>
                                      <th>Action</th>
                                 </tr>
@@ -65,8 +68,12 @@
                                     <th>Category</th>
                                     <th>Task Title</th>
                                     <th>Regarding</th>
+                                    <th>Status</th>
+                                    <th>Effort</th>
+                                    <th>Value</th>
                                     <th>Due Date</th>
                                     <th>Assigned To</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -92,7 +99,9 @@
                                     <th>Category</th>
                                     <th>Task Title</th>
                                     <th>Regarding</th>
-                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Complete Date</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -119,8 +128,10 @@
                                     <th>Category</th>
                                     <th>Task Title</th>
                                     <th>Regarding</th>
-                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Complete Date</th>
                                     <th>Assigned To</th>
+                                     <th>Action</th>
                                      
                                 </tr>
                             </thead>
@@ -150,11 +161,12 @@
 
 
                         <div class="col-md-12 form-group">
-                            <input type="text" name="cd-taskname" class="form-control" placeholder="* Task Name">
+                            <label>Task Name *</label>
+                            <input type="text" name="cd-taskname" class="form-control" placeholder="Task Name">
                             <span id="cd-taskname" class="text-danger"><?php echo form_error('cd-taskname'); ?></span>
                         </div>
                         <div class="col-md-12 form-group">
-
+                            <label>Select Category *</label>
                             <select  name="cd-category" class="form-control" >
                                 <option value="">Select Category</option>
                                 <?php if ($category) {
@@ -172,6 +184,7 @@
                             <span id="cd-category" class="text-danger"><?php echo form_error('cd-category'); ?></span>
                         </div>
                         <div class="col-md-12 form-group">
+                             <label>Select Assignee</label>
                             <select  name="cd-assignee" class="form-control">
                                 <option value="">Select Assignee</option>
                                 <?php if ($assignee) {
@@ -187,15 +200,46 @@
                             <span id="cd-assignee" class="text-danger"><?php echo form_error('cd-assignee'); ?></span>
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" name="cd-duedate"  class="form-control duedate" placeholder="* Due Date" readonly="readonly" >
+                             <label>Due Date</label>
+                            <input type="text" name="cd-duedate"  class="form-control duedate" placeholder="Due Date" readonly="readonly" >
                             <span id="cd-duedate" class="text-danger"><?php echo form_error('cd-duedate'); ?></span>
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" name="cd-regarding"  class="form-control" placeholder="* Regarding" id="cd-regarding">
+                            <label>Regarding</label>
+                            <input type="text" name="cd-regarding"  class="form-control" placeholder="Regarding" id="cd-regarding">
                             <span id="cd-regarding" class="text-danger"><?php echo form_error('cd-regarding'); ?></span>
                         </div>
-                
-                       
+                         <div class="col-md-12 form-group">
+                             <label>Effort *</label>
+                            <select  name="cd-effort" class="form-control">
+                               <option value="">Effort</option>
+                                <option value="1">1</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+
+                            </select>
+                            <span id="cd-effort" class="text-danger"><?php echo form_error('cd-effort'); ?></span>
+                        </div>
+                       <div class="col-md-12 form-group">
+                             <label>Value *</label>
+                            <select  name="cd-value" class="form-control">
+                               <option value="">Value</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="300">300</option>
+                                <option value="400">400</option>
+                                <option value="500">500</option>
+                                <option value="600">600</option>
+                                <option value="700">700</option>
+                                <option value="800">800</option>
+                                <option value="900">900</option>
+                                <option value="1000">1000</option>
+
+                            </select>
+                            <span id="cd-value" class="text-danger"><?php echo form_error('cd-value'); ?></span>
+                        </div>
                     </div>
 
             </div>

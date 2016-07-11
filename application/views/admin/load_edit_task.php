@@ -62,7 +62,18 @@
                             <div class="col-md-6 form-group ">  
                             
                            <select  name="cd-status" class="form-control">
-                                <option value="Completed">Completed</option>
+                               <option value="To Do" <?php if (strcmp($tasks['task_status'], 'To Do') == 0) {
+                echo 'selected="selected"';
+            } ?>>To Do</option>
+                               <option value="Testing" <?php if (strcmp($tasks['task_status'], 'Testing') == 0) {
+                echo 'selected="selected"';
+            } ?>>Testing</option>
+                               <option value="In Progress" <?php if (strcmp($tasks['task_status'], 'In Progress') == 0) {
+                echo 'selected="selected"';
+            } ?>>In Progress</option>
+                                <option value="Finished" <?php if (strcmp($tasks['task_status'], 'Finished') == 0) {
+                echo 'selected="selected"';
+            } ?>>Finished</option>
                             </select>
                           </div> 
                         </div>

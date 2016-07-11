@@ -85,10 +85,7 @@ class Tasks_model extends CI_Model {
     }
 
     public function getTasksById($task_id = false) {
-
         $this->db->select('*')->from('m_tasks');
-        $this->db->where('task_status', 'Pending');
-
         if ($task_id) {
 
             $this->db->where('task_id', $task_id);
