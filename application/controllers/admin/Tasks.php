@@ -109,13 +109,13 @@ class Tasks extends CI_Controller {
         $lenght = 10;
         $str_point = 0;
         $status="m_tasks.task_status IN ('To Do','Testing','In Progress')";
-        $col_sort = array("m_tasks.task_id","m_task_category.cat_name", "m_tasks.task_name", "m_tasks.task_regarding","m_tasks.task_due_date","m_tasks.task_effort","m_tasks.task_value,m_tasks.task_status");
+        $col_sort = array("m_task_category.cat_name", "m_tasks.task_name", "m_tasks.task_regarding","m_tasks.task_status","m_tasks.task_effort","m_tasks.task_value","m_tasks.task_due_date");
         $order_by = "m_tasks.effort_division_value";
         $temp = 'Desc';
         $id_to = $this->session->userdata['marbel_user']['user_id'];
         if (isset($_GET['iSortCol_0'])) {
             $index = $_GET['iSortCol_0'];
-            $temp = $_GET['sSortDir_0'] === 'asc' ? 'asc' : 'desc';
+            $temp = $_GET['sSortDir_0'] === 'asc' ? 'desc' : 'asc';
             $order_by = $col_sort[$index];
         }
         $this->Tasks->db->select("m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date,m_tasks.task_effort,m_tasks.task_value,m_tasks.task_status");
@@ -143,7 +143,7 @@ class Tasks extends CI_Controller {
             $this->db->where($status);
             $records = $this->Tasks->db->get("m_tasks");
         }
-        echo $this->db->last_query(); 
+        #echo $this->db->last_query(); 
         $this->db->select('m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date,m_tasks.task_effort,m_tasks.task_value,m_tasks.task_status');
         $this->db->from('m_tasks');
         $this->db->join('m_task_category','m_task_category.cat_id=m_tasks.task_cat_id','left');
@@ -183,11 +183,11 @@ class Tasks extends CI_Controller {
         $lenght = 10;
         $str_point = 0;
         $status="m_tasks.task_status IN ('To Do','Testing','In Progress')";
-        $col_sort = array("m_tasks.task_id","m_task_category.cat_name", "m_tasks.task_name", "m_tasks.task_regarding","m_tasks.task_due_date","m_tasks.task_effort","m_tasks.task_value","m_tasks.task_status");
+        $col_sort = array("m_task_category.cat_name", "m_tasks.task_name", "m_tasks.task_regarding","m_tasks.task_status","m_tasks.task_effort","m_tasks.task_value","m_tasks.task_due_date");
         $order_by = "m_tasks.effort_division_value";
         $temp = 'Desc';
         $id_by = $this->session->userdata['marbel_user']['user_id'];
-        if (isset($_GET['iSortCol_0'])) {
+        if (isset($_GET['iSortCol_0'] )) {
             $index = $_GET['iSortCol_0'];
             $temp = $_GET['sSortDir_0'] === 'asc' ? 'asc' : 'desc';
             $order_by = $col_sort[$index];
@@ -260,7 +260,7 @@ class Tasks extends CI_Controller {
           $sLimit = "";
         $lenght = 10;
         $str_point = 0;
-        $col_sort = array("m_tasks.task_id","m_task_category.cat_name", "m_tasks.task_name", "m_tasks.task_regarding","m_tasks.task_due_date","m_tasks.task_status");
+        $col_sort = array("m_task_category.cat_name", "m_tasks.task_name", "m_tasks.task_regarding","m_tasks.task_status","m_tasks.task_completed_date");
         $order_by = "m_tasks.effort_division_value";
         $temp = 'Desc';
         $id_to = $this->session->userdata['marbel_user']['user_id'];
@@ -334,7 +334,7 @@ class Tasks extends CI_Controller {
          $sLimit = "";
         $lenght = 10;
         $str_point = 0;
-        $col_sort = array("m_tasks.task_id","m_task_category.cat_name", "m_tasks.task_name", "m_tasks.task_regarding","m_tasks.task_due_date","m_tasks.task_status");
+        $col_sort = array("m_tasks.task_id","m_task_category.cat_name", "m_tasks.task_name", "m_tasks.task_regarding","m_tasks.task_status","m_tasks.task_completed_date","m_tasks.assign_to_name");
         $order_by = "m_tasks.effort_division_value";
         $temp = 'Desc';
         $id_by = $this->session->userdata['marbel_user']['user_id'];
