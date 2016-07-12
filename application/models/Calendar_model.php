@@ -62,9 +62,10 @@ class Calendar_model extends CI_Model {
 
         if ($type == 'fetch') {
             $events = array();
-            $this->db->select('mc.id,mc.title,mc.event_created_by,mc.event_type,mc.startdate,mc.enddate,mc.allDay,mcet.id as event_type_id,mcet.name as event_type,mcet.color_code')->from('m_calendar as mc')->join('m_cal_event_type as mcet','mcet.id=mc.event_type');
+            $this->db->select('mc.id,mc.title,mc.event_created_by,mc.event_type,mc.startdate,mc.enddate,mc.allDay,mc.task_id,mcet.id as event_type_id,mcet.name as event_type,mcet.color_code')->from('m_calendar as mc')->join('m_cal_event_type as mcet','mcet.id=mc.event_type');
             if($cal_type == 'personal'){
                 $this->db->where('mc.event_type',1);
+                $this->db->or_where('mc.event_type',2);
             }
             if($cal_type == 'forall'){
                 $this->db->where('mc.event_type !=',1);
@@ -79,6 +80,7 @@ class Calendar_model extends CI_Model {
                     $get_final[$i]['title'] = $record['title'];
                     $get_final[$i]['event_created_by'] = $record['event_created_by'];
                     $get_final[$i]['event_type'] = $record['event_type'];
+                    $get_final[$i]['task_id'] = $record['task_id'];
                     $get_final[$i]['start'] = $record['startdate'];
                     $get_final[$i]['end'] = $record['enddate'];
                     $get_final[$i]['color_code'] = $record['color_code'];

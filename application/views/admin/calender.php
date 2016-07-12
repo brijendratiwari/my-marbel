@@ -224,7 +224,7 @@
 //                    element.css('background-color', 'grey');
 //                    element.css('border-color', 'grey');
 //                }
-                 if(event.event_created_by != '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>' && event.event_type_id == 1) {
+                 if(event.event_created_by == '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>' && event.task_id != 0) {
                     element.css('display', 'none');
                 }
             },
