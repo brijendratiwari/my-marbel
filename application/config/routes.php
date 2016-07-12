@@ -107,7 +107,8 @@ $route['delete_services/(:num)/(:any)']='admin/services/delete_services/$1/$2';
 $route['order_service/(:num)/(:num)']='admin/services/new_order_service/$1/$2';
 
 $route['calendar']='admin/calendar';
-$route['process']='admin/calendar/process';
+$route['calendar/my_calendar']='admin/calendar/my_calendar';
+$route['calendar/process']='admin/calendar/process';
 $route['add_event']='admin/calendar/add_event';
 $route['update_event']='admin/calendar/update_event/$1';
 $route['delete_event/(:num)']='admin/calendar/event_delete/$1';

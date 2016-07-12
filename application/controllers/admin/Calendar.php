@@ -25,7 +25,21 @@ class Calendar extends CI_Controller {
         $this->data['page'] = 'Calender';
         $this->data['title'] = 'Calender';
         $this->data['assignee'] = $this->Tasks->getTaskAssignee();
+        /* Get calendra event type */
+        $this->data['event_types'] = $this->Calendar->getEventTypes();
+        $this->data['page_type'] = 'public';
         $this->load->template('admin/calender', $this->data);
+    }
+    
+    /* public calendar */
+    public function my_calendar() {
+        $this->data['page'] = 'Calender';
+        $this->data['title'] = 'Calender';
+        $this->data['assignee'] = $this->Tasks->getTaskAssignee();
+        /* Get calendra event type */
+        $this->data['event_types'] = $this->Calendar->getEventTypes();
+        $this->data['page_type'] = 'private';
+        $this->load->template('admin/my_calendar', $this->data);
     }
 
     public function process() {
@@ -51,6 +65,7 @@ class Calendar extends CI_Controller {
 
         $this->data['events'] = $this->Calendar->getAllEvents($month, $year);
 
+
         $this->load->view('admin/events', $this->data);
     }
 
@@ -60,6 +75,8 @@ class Calendar extends CI_Controller {
 
             $this->data['event'] = $this->Calendar->getEventById($event_id);
             $this->data['assignee'] = $this->Tasks->getTaskAssignee();
+            /* Get calendra event type */
+            $this->data['event_types'] = $this->Calendar->getEventTypes();
             $this->load->view('admin/update_event', $this->data);
         }
     }
@@ -114,8 +131,8 @@ class Calendar extends CI_Controller {
                 'location' => $this->input->post('cd-location'),
                 'startdate' => $start_date_time,
                 'enddate' => $end_date_time,
-                'start_date' => $start_date.' '.$start_time,
-                'end_date' => $end_date.' '.$end_time,
+                'start_date' => $start_date . ' ' . $start_time,
+                'end_date' => $end_date . ' ' . $end_time,
                 'allDay' => 'false'
             );
             $this->db->insert('m_calendar', $data_insert);
@@ -186,8 +203,8 @@ class Calendar extends CI_Controller {
                 'location' => $this->input->post('cd-location'),
                 'startdate' => $start_date_time,
                 'enddate' => $end_date_time,
-                'start_date' => $start_date.' '.$start_time,
-                'end_date' => $end_date.' '.$end_time,
+                'start_date' => $start_date . ' ' . $start_time,
+                'end_date' => $end_date . ' ' . $end_time,
                 'allDay' => 'false'
             );
             $id = $this->input->post('event_id');

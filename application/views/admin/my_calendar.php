@@ -14,8 +14,8 @@
                     <div id="eventSuccess" class="pull-right alert alert-success hidden message"></div>
                
                     <button class="btn btn-sm btn-custom" data-target="#eventModal" data-toggle="modal">Create Event</button>
-                    <a href='<?php echo base_url('calendar'); ?>' class="btn btn-sm btn-custom tab-active">Company Overview</a>
-                    <a href='<?php echo base_url('calendar/my_calendar'); ?>' class="btn btn-sm btn-custom">Personal</a>
+                    <a href='<?php echo base_url('calendar'); ?>' class="btn btn-sm btn-custom">Company Overview</a>
+                    <a href='<?php echo base_url('calendar/my_calendar'); ?>' class="btn btn-sm btn-custom tab-active">Personal</a>
                 </div>
             </div>
             <div class="row" style="margin-top: 2%;">
@@ -197,7 +197,7 @@
         $.ajax({
             url: '<?php echo base_url('calendar/process'); ?>',
             type: 'POST', // Send post data
-            data: 'type=fetch&cal_type=forall',
+            data: 'type=fetch&cal_type=personal',
             async: false,
             success: function (s) {
                 json_events = s;
@@ -342,7 +342,7 @@
             $.ajax({
                 url: '<?php echo base_url('calendar/process'); ?>',
                 type: 'POST', // Send post data
-                data: 'type=fetch&cal_type=forall',
+                data: 'type=fetch&cal_type=personal',
                 async: false,
                 success: function (s) {
                     freshevents = s;
@@ -411,7 +411,7 @@ var base_url = $('body').find('#base_url').val();
                          setTimeout(function () {
                             $('body').find('#eventModal').modal('hide');
                         }, 500)
-                        window.location.href='<?php echo base_url('calendar');?>';
+                        window.location.href='<?php echo base_url('calendar/my_calendar');?>';
                   }
                     else {
                         $('body').find('#eventModal input select').each(function () {
@@ -461,7 +461,7 @@ var base_url = $('body').find('#base_url').val();
                          setTimeout(function () {
                             $('body').find('#editEventModal').modal('hide');
                         }, 500)
-                        window.location.href='<?php echo base_url('calendar');?>';
+                        window.location.href='<?php echo base_url('calendar/my_calendar');?>';
                   }
                     else {
                         $('body').find('#editEventModal input select').each(function () {

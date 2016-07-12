@@ -5,6 +5,11 @@ class Calendar_model extends CI_Model {
     function calendar_process() {
         $table = 'm_calendar';
         $type = $this->input->post('type');
+        
+        if($this->input->post('cal_type')){
+            
+            $cal_type=$this->input->post('cal_type');
+        }
 
         if ($type == 'new') {
             $startdate = $this->input->post('startdate') . '+' . $this->input->post('zone');
@@ -57,7 +62,13 @@ class Calendar_model extends CI_Model {
 
         if ($type == 'fetch') {
             $events = array();
-            $this->db->select('*')->from($table);
+            $this->db->select('mc.id,mc.title,mc.event_created_by,mc.event_type,mc.startdate,mc.enddate,mc.allDay,mcet.id as event_type_id,mcet.name as event_type,mcet.color_code')->from('m_calendar as mc')->join('m_cal_event_type as mcet','mcet.id=mc.event_type');
+            if($cal_type == 'personal'){
+                $this->db->where('mc.event_type',1);
+            }
+            if($cal_type == 'forall'){
+                $this->db->where('mc.event_type !=',1);
+            }
             $query = $this->db->get();
             if ($query->num_rows() > 0) {
                 $getRecord = $query->result_array();
@@ -70,6 +81,8 @@ class Calendar_model extends CI_Model {
                     $get_final[$i]['event_type'] = $record['event_type'];
                     $get_final[$i]['start'] = $record['startdate'];
                     $get_final[$i]['end'] = $record['enddate'];
+                    $get_final[$i]['color_code'] = $record['color_code'];
+                    $get_final[$i]['event_type_id'] = $record['event_type_id'];
                     $get_final[$i]['allDay'] = ($record['allDay'] == "true") ? true : false;
                     $i++;
                 }
@@ -107,5 +120,14 @@ class Calendar_model extends CI_Model {
         }
     }
   
+    public function getEventTypes(){
+        
+        $query = $this->db->where('active',1)->get('m_cal_event_type');
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }else{
+            return FALSE;
+        }
+    }
 
 }

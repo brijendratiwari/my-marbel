@@ -19,19 +19,13 @@
                  
                      <label>Event Types <i class="fa fa"></i></label>
                         <select  name="cd-types" class="form-control">
-                        <?php if($event->event_type=='Task'){?>
-                             <option value="Task" <?php if (strcmp($event->event_type, 'Task') == 0) {
-                echo 'selected="selected"';
-            } ?>>Task Event</option>
-                        <?php } else {?>
+                     
                         <option value="">Event Types</option>
-                        <option value="Private" <?php if (strcmp($event->event_type, 'Private') == 0) {
-                echo 'selected="selected"';
-            } ?>>Private Event</option>
-                        <option value="Public" <?php if (strcmp($event->event_type, 'Public') == 0) {
-                echo 'selected="selected"';
-            } ?>>Public Event</option>
-                        <?php } ?>
+                         <?php if(!empty($event_types)){
+                        foreach ($event_types as $type){ ?>
+                    <option value="<?php echo $type['id'];?>" <?php if($event->event_type == $type['id']){echo 'selected';} ?>><?php echo $type['name'];?></option>
+                        <?php } } ?>
+                   </select>
                         </select>
                     <span id="cd-types" class="text-danger hidden"></span>
                
