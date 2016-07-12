@@ -139,3 +139,10 @@ $route['get_completed_task_assign_by_me']='admin/tasks/get_completed_task_assign
 /*api  */
 $route['saveuserinformation']='appsignin/save_user_information';
 /*....api*/
+
+
+// route for inventory
+
+$route['inventory']='admin/inventory';
+$route['inventory/add']='admin/inventory/addPart';
+$route['inventory/get_part']='admin/inventory/get_part';

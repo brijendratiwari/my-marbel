@@ -36,6 +36,9 @@
                             <a href="<?php echo base_url('services?status=pending')?>"><i class="fa fa-bank fa-fw"></i> Service</a>
                         </li>
                         <li>
+                            <a href="<?php echo base_url('inventory')?>"><i class="fa fa-bank fa-fw"></i> Inventory Explainer</a>
+                        </li>
+                        <li>
                             <a href="<?php echo base_url('email');?>"><i class="fa fa-envelope fa-fw"></i> Email</a>
                         </li>
                         
