@@ -12,6 +12,7 @@ class Calendar extends CI_Controller {
         parent::__construct();
         $this->load->model('users_model', "Users");
         $this->load->model('Calendar_model', "Calendar");
+        $this->load->model('Tasks_model', "Tasks");
         if ($this->Users->auth_check() == false) {
             redirect('/login');
         }
@@ -23,8 +24,22 @@ class Calendar extends CI_Controller {
     public function index() {
         $this->data['page'] = 'Calender';
         $this->data['title'] = 'Calender';
-
+        $this->data['assignee'] = $this->Tasks->getTaskAssignee();
+        /* Get calendra event type */
+        $this->data['event_types'] = $this->Calendar->getEventTypes();
+        $this->data['page_type'] = 'public';
         $this->load->template('admin/calender', $this->data);
+    }
+    
+    /* public calendar */
+    public function my_calendar() {
+        $this->data['page'] = 'Calender';
+        $this->data['title'] = 'Calender';
+        $this->data['assignee'] = $this->Tasks->getTaskAssignee();
+        /* Get calendra event type */
+        $this->data['event_types'] = $this->Calendar->getEventTypes();
+        $this->data['page_type'] = 'private';
+        $this->load->template('admin/my_calendar', $this->data);
     }
 
     public function process() {
@@ -50,6 +65,7 @@ class Calendar extends CI_Controller {
 
         $this->data['events'] = $this->Calendar->getAllEvents($month, $year);
 
+
         $this->load->view('admin/events', $this->data);
     }
 
@@ -58,7 +74,9 @@ class Calendar extends CI_Controller {
         if ($event_id != '') {
 
             $this->data['event'] = $this->Calendar->getEventById($event_id);
-
+            $this->data['assignee'] = $this->Tasks->getTaskAssignee();
+            /* Get calendra event type */
+            $this->data['event_types'] = $this->Calendar->getEventTypes();
             $this->load->view('admin/update_event', $this->data);
         }
     }
@@ -67,6 +85,7 @@ class Calendar extends CI_Controller {
 
         $this->form_validation->set_rules('cd-title', 'Event Name', 'trim|required');
         $this->form_validation->set_rules('cd-location', 'Location', 'trim|required');
+        $this->form_validation->set_rules('cd-types', 'Event Type', 'trim|required');
         $this->form_validation->set_rules('cd-date-start', 'Date Time', 'trim|required');
         $this->form_validation->set_rules('cd-date-end', 'Date Time', 'trim|required');
         $this->form_validation->set_rules('cd-description', 'Description', 'trim|required');
@@ -96,13 +115,24 @@ class Calendar extends CI_Controller {
                 $end_time = date('H:i:s', strtotime($endDate[1] . ' ' . $endDate[2]));
                 $end_date_time = $end_date . 'T' . $end_time . $timezone;
             }
-
+//            if ($this->input->post('cd-assignee')) {
+//
+//                $assignee = $this->input->post('cd-assignee');
+//            } else {
+//
+//                $assignee = $this->session->userdata['marbel_user']['user_id'];
+//            }
             $data_insert = array(
                 'title' => $this->input->post('cd-title'),
                 'description' => $this->input->post('cd-description'),
+                'event_type' => $this->input->post('cd-types'),
+                //'event_created_to' => $assignee,
+                'event_created_by' => $this->session->userdata['marbel_user']['user_id'],
                 'location' => $this->input->post('cd-location'),
                 'startdate' => $start_date_time,
                 'enddate' => $end_date_time,
+                'start_date' => $start_date . ' ' . $start_time,
+                'end_date' => $end_date . ' ' . $end_time,
                 'allDay' => 'false'
             );
             $this->db->insert('m_calendar', $data_insert);
@@ -127,6 +157,7 @@ class Calendar extends CI_Controller {
 
         $this->form_validation->set_rules('cd-title', 'Event Name', 'trim|required');
         $this->form_validation->set_rules('cd-location', 'Location', 'trim|required');
+        $this->form_validation->set_rules('cd-types', 'Event Type', 'trim|required');
         $this->form_validation->set_rules('cd-date-start', 'Date Time', 'trim|required');
         $this->form_validation->set_rules('cd-date-end', 'Date Time', 'trim|required');
         $this->form_validation->set_rules('cd-description', 'Description', 'trim|required');
@@ -157,13 +188,23 @@ class Calendar extends CI_Controller {
                 $end_time = date('H:i:s', strtotime($endDate[1] . ' ' . $endDate[2]));
                 $end_date_time = $end_date . 'T' . $end_time . $timezone;
             }
-
+//            if ($this->input->post('cd-assignee')) {
+//
+//                $assignee = $this->input->post('cd-assignee');
+//            } else {
+//
+//                $assignee = $this->session->userdata['marbel_user']['user_id'];
+//            }
             $data_update = array(
                 'title' => $this->input->post('cd-title'),
                 'description' => $this->input->post('cd-description'),
+                'event_type' => $this->input->post('cd-types'),
+                //'event_created_to' => $assignee,
                 'location' => $this->input->post('cd-location'),
                 'startdate' => $start_date_time,
                 'enddate' => $end_date_time,
+                'start_date' => $start_date . ' ' . $start_time,
+                'end_date' => $end_date . ' ' . $end_time,
                 'allDay' => 'false'
             );
             $id = $this->input->post('event_id');
@@ -200,7 +241,7 @@ class Calendar extends CI_Controller {
         } else {
 
             $this->session->set_flashdata('error', 'Some thing went wrong! Please try again.');
-                redirect('calendar');
+            redirect('calendar');
         }
     }
 

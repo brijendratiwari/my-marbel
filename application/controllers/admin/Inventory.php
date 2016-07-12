@@ -111,7 +111,7 @@ class Inventory extends CI_Controller {
         $tis->data['title'] = "New Part";
         $this->data['part_category'] = $this->inventory->getPartCategory();
         $this->data['part_type'] = $this->inventory->getPartType();
-         $this->data["style_to_load"] = array("assets/css/chosen/chosen.min.css","assets/css/switch/bootstrap-switch.min.css");
+        $this->data["style_to_load"] = array("assets/css/chosen/chosen.min.css","assets/css/switch/bootstrap-switch.min.css");
         $this->data['scripts_to_load'] = array("assets/js/chosen/chosen.jquery.min.js","assets/js/jquery.number.min.js","assets/js/switch/bootstrap-switch.min.js","assets/js/jquery.form.min.js");
        
         if ($this->input->post()) {
