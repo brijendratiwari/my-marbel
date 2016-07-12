@@ -300,29 +300,37 @@ $(document).ready(function(){
         ]});
     
     // Get Part Table
-    $("#part_data").dataTable({
-        "oLanguage": {
-        "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
-        "ordering": false,
-        "bFilter": false ,
-        "bLengthChange":false,
+   
+     
+       var part_data =  $("#part_data").dataTable({
+              "oLanguage": {
+            "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
+//         "ordering": false,
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": base_url + "inventory/get_part", "bDeferRender": true,
-         "aLengthMenu": [[5,10,20, -1], [5,10,20,'All', $("#sAll").val()]],
+        "aLengthMenu": [[10,20,50, 100, -1], [10,20,50, 100,'All', $("#sAll").val()]],
         "sPaginationType": "numbers",
         "iDisplayLength": 10,
         "bDestroy": true, //!!!--- for remove data table warning.
         "aoColumnDefs": [
-            {"aTargets": [0]},
-            {"sClass": " aligncenter", "aTargets": [1]},
+             {"aTargets": [0],"sClass": "text-center","bSortable": false},
+            {"sClass": "aligncenter", "aTargets": [1]},
             {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
             {"sClass": "hidden-phone", "aTargets": [3]},
-            {"sClass": "hidden-phone", "aTargets": [4]}
-       
-          
-              
+            {"sClass": "hidden-phone", "aTargets": [4]},
+            {"sClass": "hidden-phone", "aTargets": [5]},
+            {"sClass": "hidden-phone", "aTargets": [6]},
+            {"sClass": "hidden-phone text-center", "aTargets": [7],"bSortable": false},
+           
+            
         ]});
+    
+       $('.category-search').click( function() { 
+            part_data.fnFilter(($(this).val().toUpperCase())); 
+       });
+    
+
 })
 
    // JavaScript Document

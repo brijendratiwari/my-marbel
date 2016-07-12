@@ -11,16 +11,25 @@
            </div>   
              
             </div>
-             <div class="col-lg-12">
-            <div  class="col-lg-12 page-header pull-right">
-                        <a href="<?php echo base_url().'inventory/add';?>" class="btn btn-custom pull-right">Add Part</a>
-            </div></div>
+            <div  class="col-lg-12">
+            <div  class="col-lg-8 page-header pull-right">    
+            <a href="<?php echo base_url().'inventory/add';?>" class="btn btn-custom pull-right">Add Part</a>
+            <button class="btn btn-custom category-search" value="build">Build</button>
+             <button class="btn btn-custom category-search" value="finishing">Finishing</button>
+	     <button class="btn btn-custom category-search" value="layup">Layup</button>
+	     <button class="btn btn-custom category-search" value="electronics">Electronics</button>
+	     <button class="btn btn-custom category-search" value="logistics">Logistics</button>
+	     <button class="btn btn-custom category-search" value="office">Office</button>
+	     <button class="btn btn-custom category-search" value="R&D">R&D</button>
+            </div>
+            </div>
+          
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           
+                         Part List  
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -29,18 +38,19 @@
                                     <thead>
                                         <tr>
                                             
+						<th style="text-align: center">View Part</th>
 						<th>Part Name</th>
 						<th>Category</th>
 						<th>Type</th>
 						<th>Quantity</th>
 						<th>Cost</th>
 						<th>Manufacturer</th>
-                                                <th>Action</th>
+                                                <th style="text-align: center">Action</th>
                                                 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      
+                                               
                                     </tbody>
                                 </table>
                                
