@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="row" style="margin-top: 2%;">
-                <div class="col-lg-3">
+<!--                <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">Events</div>
                         <div class="panel-body event-data">
@@ -25,9 +25,9 @@
                         </div>
                     </div>
 
-                </div>
+                </div>-->
 
-                <div id='calendar' class="col-lg-9"></div>
+                <div id='calendar' class="col-lg-12"></div>
             </div>
 
             <div style='clear:both'></div>
@@ -62,6 +62,36 @@
                     <span id="cd-location" class="text-danger hidden"></span>
                
                 </div>
+                   <div class="col-md-12">
+                 
+                     <label>Event Types <i class="fa fa"></i></label>
+                  
+                    <select  name="cd-types" class="form-control">
+                    <option value="">Event Types</option>
+                    <option value="Private">Private Event</option>
+                    <option value="Public">Public Event</option>
+                   </select>
+                    <span id="cd-types" class="text-danger hidden"></span>
+               
+                </div>
+<!--                  <div class="col-md-12">
+                 
+                     <label>Select Assignee</label>
+                            <select  name="cd-assignee" class="form-control">
+                                <option value="">Select Assignee</option>
+                                <?php if ($assignee) {
+                                    foreach ($assignee as $name) {
+
+                                        if($name['id']!=$this->session->userdata['marbel_user']['user_id']){
+                                        ?>
+
+                                        <option value="<?php echo $name['id']; ?>"><?php echo $name['first_name'] . ' ' . $name['last_name'] . '(' . $name['user_role_type'] . ')'; ?></option>
+                                  <?php }} }?>
+
+                            </select>
+               <span id="cd-assignee" class="text-danger hidden"></span>
+                </div>-->
+                
                 <div class="col-md-12">
                  
                      <label>Start Date/Time <i class="fa fa-calendar-o"></i></label>
@@ -113,17 +143,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Update Event</h4>
+                <h4 class="modal-title" id="myModalLabel">Event Detail</h4>
             </div>
-            <div class="modal-body update-event-data">
-             <!--content will be load on click-->
+            <div class="update-event-data"><!--content will be load on click--></div>
             </div>
-            <div class="clearfix"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="submit" id="update-event" class="btn btn-success">Update</button>
-            </div>
-        </div>
     </form>
         <div class="checkout_loader hidden" id="form_loader">
             <div class="overlay new_loader"></div>
@@ -167,6 +190,19 @@
         var calendar = $('#calendar').fullCalendar({
             events: JSON.parse(json_events),
             //events: [{"id":"14","title":"New Event","start":"2015-01-24T16:00:00+04:00","allDay":false}],
+            //eventColor: '#00aeef',
+             eventRender: function(event, element) {
+                if(event.event_created_by == '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>') {
+                    element.css('background-color', '#00aeef');
+                }else{
+                    
+                    element.css('background-color', 'grey');
+                    element.css('border-color', 'grey');
+                }
+                 if(event.event_created_by != '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>' && event.event_type=='Private') {
+                    element.css('display', 'none');
+                }
+            },
             utc: true,
             header: {
                 left: 'prev,next',
@@ -217,7 +253,7 @@
                 });
             },
             eventClick: function (event, jsEvent, view) {
-                console.log(event.id);
+               
                 $('body').find('.checkout_loader').removeClass('hidden');
                 $('body').find('#editEventModal').modal('show');
                 $('body').find('.update-event-data').load("<?php echo base_url('admin/calendar/getSingleEvent'); ?>/" + event.id + "",function(response){
@@ -303,24 +339,17 @@
             getEvents(moment.format());
         });
 /* datetime picker*/
-         $('body').find('.datetimepicker8').datetimepicker({
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                },
-                minDate: new Date()
-            });
-            $('body').find('.datetimepicker9').datetimepicker({
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                },
-                minDate: new Date()
-            });
+       
+        $('.datetimepicker8').datetimepicker();
+        $('.datetimepicker9').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $(".datetimepicker8").on("dp.change", function (e) {
+            $('.datetimepicker9').data("DateTimePicker").minDate(e.date);
+        });
+        $(".datetimepicker9").on("dp.change", function (e) {
+            $('.datetimepicker8').data("DateTimePicker").maxDate(e.date);
+        });
             
  /* add event through ajax */
 var base_url = $('body').find('#base_url').val();
@@ -454,10 +483,10 @@ var base_url = $('body').find('#base_url').val();
 
 <style>
 
-    .fc-event{
+/*    .fc-event{
         background-color: #00aeef !important;
         border: 1px solid #00aeef !important;
-    }
+    }*/
     #trash{
         width:32px;
 

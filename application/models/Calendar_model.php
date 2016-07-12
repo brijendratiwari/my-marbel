@@ -66,6 +66,8 @@ class Calendar_model extends CI_Model {
                 foreach ($getRecord as $record) {
                     $get_final[$i]['id'] = $record['id'];
                     $get_final[$i]['title'] = $record['title'];
+                    $get_final[$i]['event_created_by'] = $record['event_created_by'];
+                    $get_final[$i]['event_type'] = $record['event_type'];
                     $get_final[$i]['start'] = $record['startdate'];
                     $get_final[$i]['end'] = $record['enddate'];
                     $get_final[$i]['allDay'] = ($record['allDay'] == "true") ? true : false;

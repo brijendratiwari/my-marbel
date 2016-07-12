@@ -69,6 +69,17 @@ class Tasks extends CI_Controller {
                 );
                 $this->db->insert('m_tasks', $task);
                 if ($this->db->insert_id() > 0) {
+                    //create event of task if due date not empty
+                    if($this->input->post('cd-duedate')){
+                    
+                        $startDate =  $this->input->post('cd-duedate');
+                        $start_date = date('Y-m-d', strtotime($startDate));
+                        $start_time ='00:00:00';
+                        $start_date_time = $start_date . 'T' . $start_time . '+05:30';
+                        $date_time=$start_date.' '.$start_time;
+                     
+                     $this->db->insert('m_calendar', array('title'=>$this->input->post('cd-taskname'),'event_created_by'=>$this->session->userdata['marbel_user']['user_id'],'event_created_to'=>$assignee,'startdate'=>$start_date_time,'enddate'=>$start_date_time,'start_date'=>$date_time,'end_date'=>$date_time,'allDay'=>'false','event_type'=>'Task'));
+                    }
                     $result['result'] = TRUE;
                     $result['success'] = 'Task assigned successfully';
                     echo json_encode($result);
@@ -95,9 +106,13 @@ class Tasks extends CI_Controller {
     public function update_task($task_id) {
 
         if ($this->input->post()) {
-
+            if($this->input->post('cd-status')=='Finished'){
+                $complete_date=date('Y-m-d');
+            }else{
+                $complete_date='0000-00-00';
+            }
             $this->db->where('task_id', $task_id);
-            $this->db->update('m_tasks', array('task_status' => $this->input->post('cd-status'), 'task_completed_date' => date('Y-m-d')));
+            $this->db->update('m_tasks', array('task_status' => $this->input->post('cd-status'), 'task_completed_date' =>$complete_date));
             $this->session->set_flashdata('success', 'Task status updated successfully');
             redirect(base_url('tasks'));
         }
