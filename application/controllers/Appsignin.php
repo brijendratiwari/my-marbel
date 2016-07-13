@@ -246,27 +246,7 @@ class Appsignin extends CI_Controller {
                 'temp_f'=>$_REQUEST["temp_f"],
                 'humidity'=>$_REQUEST["humidity"],
               );
-            if(isset($_REQUEST["ride_ID"]) && $_REQUEST["ride_ID"]!=''){
-                
-                $this->db->where('ride_ID',$_REQUEST["ride_ID"]) ;
-                $this->db->update('m_rides',$ride);
-                
-                if($this->db->affected_rows()>0){
-                    
-                    $returnValue["data"]['ride_ID']=$_REQUEST["ride_ID"];   
-                    $returnValue["status"] = "200";
-                    $returnValue["message"] ='Ride updated successfully';
-                    $returnValue["result"] = 'success';
-                    echo json_encode($returnValue);
-                 die;
-                }else{
-                    $returnValue["status"] = "400";
-                    $returnValue["message"] ='Some thing went wrough ! please try again.';
-                    $returnValue["result"] = 'failed';
-                    echo json_encode($returnValue);
-                    die;
-                }
-            }else{
+            
                 
                 $this->db->insert('m_rides',$ride);
                 if($this->db->insert_id()>0){
@@ -283,8 +263,65 @@ class Appsignin extends CI_Controller {
                     $returnValue["result"] = 'failed';
                     echo json_encode($returnValue);
                     die;
-                }
+             
             }
         }
   } 
+  public function update_ride(){
+       $returnValue = array();
+       $returnValue["data"] = array();
+       $message='';
+       if (empty($_REQUEST["board_id"])) { $message='Board id field is required.'; }
+        if (empty($_REQUEST["ride_name"])) {$message.='Ride name field is required.';}
+        if (empty($_REQUEST["ride_ID"])) {$message.='Ride id field is required.';}
+        if($message!=''){
+            
+            $returnValue["status"] = "400";
+            $returnValue["message"] =$message;
+            $returnValue["result"] = 'Validation Error!';
+            echo json_encode($returnValue);
+             die;
+           
+        }else
+        {
+            $ride=array(
+                'board_ID'=>$_REQUEST["board_id"],
+                'ride_name'=>$_REQUEST["ride_name"],
+                'trip_distance'=>$_REQUEST["trip_distance"],
+                'trip_duration'=>$_REQUEST["trip_duration"],
+                'est_start_st'=>$_REQUEST["est_start_st"],
+                'est_finish_st'=>$_REQUEST["est_finish_st"],
+                'temp_f'=>$_REQUEST["temp_f"],
+                'humidity'=>$_REQUEST["humidity"],
+              );
+            if(isset($_REQUEST["ride_ID"]) && $_REQUEST["ride_ID"]!=''){
+                
+                $this->db->where('ride_ID',$_REQUEST["ride_ID"]) ;
+                $this->db->update('m_rides',$ride);
+                
+                if($this->db->affected_rows()>0){
+                    
+                    $returnValue["data"]['ride_ID']=$_REQUEST["ride_ID"];   
+                    $returnValue["status"] = "200";
+                    $returnValue["message"] ='Ride updated successfully';
+                    $returnValue["result"] = 'success';
+                    echo json_encode($returnValue);
+                 die;
+                }else{
+                    $returnValue["status"] = "400";
+                    $returnValue["message"] ='Changes not found!';
+                    $returnValue["result"] = 'failed';
+                    echo json_encode($returnValue);
+                    die;
+                }
+            }else{
+                
+                 $returnValue["status"] = "400";
+                    $returnValue["message"] ='Ride id not given!';
+                    $returnValue["result"] = 'failed';
+                    echo json_encode($returnValue);
+                    die;
+            }
+        }
+  }
 }
