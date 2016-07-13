@@ -171,94 +171,6 @@ class Inventory extends CI_Controller {
         }
     }
         
-    public function new_order_service($user_id = false,$order_id = FALSE) {
-
-     
-      
-        $this->data['page'] = "New Services";
-        $tis->data['title'] = "New Services";
-        $this->data['customer'] = $customer = $this->Customer->getCustomers($user_id);
-        $this->data['orders'] = $this->Services->getOrders($user_id);
-        $this->data['totalServiceRecords'] = $this->Services->getTotalServiceRecords();
-        $this->data['admins'] = $this->Services->getAdmins();
-        $this->data['orderId'] = $order_id;
-
-        
-        if ($this->input->post()) {
-
-
-            $this->Services->insertService();
-            $this->session->set_flashdata('success', 'Service Record has been added for order #' . $this->input->post('order_number'));
-            redirect('order_service/'.$user_id.'/'.$order_id.'');
-        }
-        if ($customer == '') {
-            $this->session->set_flashdata('error', 'A customer id needs to be specified to add a service record');
-            redirect('services?status=pending');
-        }
-
-        $this->load->template('admin/new_services', $this->data);
-        }
-
-        public function new_cust_services($id = FALSE) {
-
-             if ($id) {
-            $user_id = $id;
-        }
-        $this->data['page'] = "New Services";
-        $tis->data['title'] = "New Services";
-        $this->data['customer'] = $customer = $this->Customer->getCustomers($user_id);
-        $this->data['orders'] = $this->Services->getOrders($user_id);
-        $this->data['totalServiceRecords'] = $this->Services->getTotalServiceRecords();
-        $this->data['admins'] = $this->Services->getAdmins();
-
-
-
-        if ($this->input->post()) {
-
-
-            $this->Services->insertService();
-            $this->session->set_flashdata('success', 'Service Record has been added for order #' . $this->input->post('order_number'));
-            redirect('new_services/'.$user_id.'');
-        }
-        if ($customer == '') {
-            $this->session->set_flashdata('error', 'A customer id needs to be specified to add a service record');
-            redirect('services?status=pending');
-        }
-
-        $this->load->template('admin/new_services', $this->data);
-    }
-
-    public function edit_service($id = false, $param = false) {
-
-        $this->data['service'] = $services = $this->Services->getService($id);
-        $this->data['param'] = $param;
-        if (!empty($services)) {
-
-            $this->data['recentServiceLog'] = $this->Services->getRecentServiceLog($id);
-            $this->data['page'] = "Edit service";
-            $this->data['title'] = "Edit Service";
-            if ($this->input->post()) {
-                $this->Services->updateService($id);
-                redirect('edit_service/' . $id . '/' . $param);
-            }
-        } else {
-            $this->session->set_flashdata('error', 'Could not find this service record, please try another');
-            redirect('services/');
-        }
-
-        $this->load->template('admin/edit_services', $this->data);
-    }
-
-    public function delete_services($id = false, $param = false) {
-
-        $this->Services->deleteService($id);
-        $this->session->set_flashdata('success', 'Deleted the service record for service id ' . $id);
-        if ($param == 'fn')
-            redirect('services?status=finished');
-
-        if ($param == 'in')
-            redirect('services?status=inhouse');
-    }
     
     public function image_validate() {
         if (($_FILES['part_image']['size'] > 0)) {
@@ -351,7 +263,7 @@ class Inventory extends CI_Controller {
                unset($input['pervious_image']);
                $insert_id = $this->inventory->updatePart($id,$input);
                if($insert_id){
-                 $this->session->set_flashdata('success', 'Part Edit Successfully');   
+                 $this->session->set_flashdata('success', 'Part Updated Successfully');   
                }else{
                  $this->session->set_flashdata('error', 'Something went wrong');   
                }
