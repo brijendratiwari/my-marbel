@@ -350,7 +350,7 @@ $(document).ready(function(){
         })
          /* date picker */
         $('.duedate').datepicker({
-            'format': 'yyyy-mm-dd',
+            'format': 'mm/dd/yyyy',
              startDate: new Date()
         });
         })
