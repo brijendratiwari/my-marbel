@@ -1,5 +1,8 @@
 <div id="page-wrapper" style="min-height: 453px;">
             <div class="row">
+                <div style="margin-top: 2%;" class="col-lg-6">
+                    <a class="btn btn-sm btn-default" href="<?php echo base_url('inventory');?>">Go Back</a>&nbsp;&nbsp;&nbsp; 
+                 </div>
                 <div class="col-lg-12">
                     <h1 class="page-header">Add Part</h1>
                 </div>

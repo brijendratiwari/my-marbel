@@ -29,8 +29,11 @@ class Inventory_model extends CI_Model {
   
   public function addPart($input){
      $this->db->insert('m_part',$input); 
-     $this->db->from('m_part_type');
+     if($this->db->affected_rows() > 0){
      return $this->db->insert_id();
+     }else{
+         return FALSE;
+     }
   }
   
   public function getPartDetail($id){
