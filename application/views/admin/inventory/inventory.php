@@ -14,7 +14,7 @@
             <div  class="col-lg-12">
             <div  class="col-lg-8 page-header pull-right">    
             <a href="<?php echo base_url().'inventory/add';?>" class="btn btn-custom pull-right">Add Part</a>
-            <button class="btn btn-custom category-search" value="">All</button>
+            <button class="btn btn-custom category-search tab-active" value="">All</button>
             <button class="btn btn-custom category-search" value="build">Build</button>
              <button class="btn btn-custom category-search" value="finishing">Finishing</button>
 	     <button class="btn btn-custom category-search" value="layup">Layup</button>

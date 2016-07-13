@@ -115,6 +115,7 @@ class Appsignin extends CI_Controller {
         $returnValue["data"] = array();
        
         if (empty($_REQUEST["userEmail"])) { $message='Email field is required.'; }
+        if (!filter_var($_REQUEST["userEmail"], FILTER_VALIDATE_EMAIL)) { $message.= "Invalid email format"; }
         if (empty($_REQUEST["userFirstName"])) {$message.='Firstname field is required.';}
         if (empty($_REQUEST["userLastName"])) {$message.='Lastname field is required.';}
         if (empty($_REQUEST["userType"])) {$message.='user type field is required.';}
@@ -208,9 +209,7 @@ class Appsignin extends CI_Controller {
         $user_id='';
         $returnValue["data"] = array();
         if (empty($_REQUEST["userEmail"])) { $message='Email field is required.'; }
-        if (!filter_var($_REQUEST["userEmail"], FILTER_VALIDATE_EMAIL)) {
-            $message.= "Invalid email format";
-         }
+        if (!filter_var($_REQUEST["userEmail"], FILTER_VALIDATE_EMAIL)) { $message.= "Invalid email format"; }
         if (empty($_REQUEST["userFirstName"])) {$message.='Firstname field is required.';}
         if (empty($_REQUEST["userLastName"])) {$message.='Lastname field is required.';}
         if (empty($_REQUEST["userType"])) {$message.='user type field is required.';}
