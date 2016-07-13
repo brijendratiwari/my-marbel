@@ -335,53 +335,7 @@ $(document).ready(function(){
             }
         };
         $('body').find('#add-row-form').ajaxForm(options);
-          //edit task
-          // Script for validate and submit remind form by AJAX...
-        var options = {
-            beforeSerialize: function () {
-                // return false to cancel submit 
-                $('body').find('#editTaskModal #form_loader').removeClass('hidden');
-            },
-            url: base_url+'update_task',
-            success: function (data) {
-                var err = $.parseJSON(data);
-                if (err.result == false) {
-                    $('body').find('#editTaskModal #form_loader').addClass('hidden');
-                    $(err.error).each(function (index, value) {
-                        $.each(value, function (index2, msg) {
-                            $("#taskModal #" + index2).text(msg);
-                            $("#taskModal #" + index2).removeClass('hidden');
-                        });
-                    });
-                }
-                else {
-                    $('body').find('#editTaskModal #form_loader').addClass('hidden');
-                    if (err.success) {
-
-                        $('body').find('#editTaskModal input select').each(function () {
-
-                            $(this).siblings('.text-danger').addClass('hidden');
-                        })
-                        $("#taskSuccess").text(err.success);
-                        $("#taskSuccess").removeClass('hidden');
-                        $('body').find('#editTaskModal').modal('hide');
-                         setTimeout(function () {
-                             window.location.href=base_url+'tasks';
-                        }, 500)
-                       
-                  }
-                    else {
-                        $('body').find('#editTaskModal input select').each(function () {
-                            $(this).siblings('.text-danger').addClass('hidden');
-                        })
-                        setTimeout(function () {
-                            $('body').find('#editTaskModal').modal('hide');
-                        }, 500)
-                    }
-                }
-            }
-        };
-        $('body').find('#edit-row-form').ajaxForm(options);
+         
           
          $('body').on('click', '.edit-task', function () {
 

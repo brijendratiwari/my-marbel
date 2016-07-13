@@ -221,6 +221,7 @@ class Appsignin extends CI_Controller {
     }
   public function create_ride(){
        $returnValue = array();
+       $returnValue["data"] = array();
        $message='';
        if (empty($_REQUEST["board_id"])) { $message='Board id field is required.'; }
         if (empty($_REQUEST["ride_name"])) {$message.='Ride name field is required.';}
@@ -249,11 +250,14 @@ class Appsignin extends CI_Controller {
                 
                 $this->db->where('ride_ID',$_REQUEST["ride_ID"]) ;
                 $this->db->update('m_rides',$ride);
+                
                 if($this->db->affected_rows()>0){
-                $returnValue["status"] = "200";
-                $returnValue["message"] ='Ride updated successfully';
-                $returnValue["result"] = 'success';
-                echo json_encode($returnValue);
+                    
+                    $returnValue["data"]['ride_ID']=$_REQUEST["ride_ID"];   
+                    $returnValue["status"] = "200";
+                    $returnValue["message"] ='Ride updated successfully';
+                    $returnValue["result"] = 'success';
+                    echo json_encode($returnValue);
                  die;
                 }else{
                     $returnValue["status"] = "400";
@@ -266,13 +270,14 @@ class Appsignin extends CI_Controller {
                 
                 $this->db->insert('m_rides',$ride);
                 if($this->db->insert_id()>0){
-                    
+                    $returnValue["data"]['ride_ID']=$this->db->insert_id();    
                     $returnValue["status"] = "200";
-                $returnValue["message"] ='Ride Inserted successfully';
-                $returnValue["result"] = 'success';
-                echo json_encode($returnValue);
-                 die;
+                    $returnValue["message"] ='Ride Inserted successfully';
+                    $returnValue["result"] = 'success';
+                    echo json_encode($returnValue);
+                    die;
                 }else{
+                    
                     $returnValue["status"] = "400";
                     $returnValue["message"] ='Some thing went wrough ! please try again.';
                     $returnValue["result"] = 'failed';
