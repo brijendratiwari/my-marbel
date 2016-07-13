@@ -149,3 +149,6 @@ $route['create_ride']='appsignin/create_ride';
 $route['inventory']='admin/inventory';
 $route['inventory/add']='admin/inventory/addPart';
 $route['inventory/get_part']='admin/inventory/get_part';
+$route['inventory/view/(:num)']='admin/inventory/view_part/$1';
+$route['inventory/edit/(:num)']='admin/inventory/edit_part/$1';
+$route['inventory/update_image']='admin/inventory/update_image';
