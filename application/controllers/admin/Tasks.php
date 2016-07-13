@@ -114,7 +114,17 @@ class Tasks extends CI_Controller {
             //$this->form_validation->set_rules('cd-assignee', 'Assignee', 'trim|required');
             $this->form_validation->set_rules('cd-effort', 'Effort', 'trim|required');
             $this->form_validation->set_rules('cd-value', 'Value', 'trim|required');
-            if ($this->form_validation->run() == TRUE) {
+            if ($this->form_validation->run() == FALSE) {
+                
+                $this->form_validation->set_error_delimiters('', '');
+                $error = $this->form_validation->error_array();
+                $result['result'] = false;
+                $result['error'] = $error;
+                echo json_encode($result);
+                die;
+            }
+            else{
+                
                 if ($this->input->post('cd-status') == 'Finished') {
                     $complete_date = date('Y-m-d');
                 } else {
@@ -156,8 +166,11 @@ class Tasks extends CI_Controller {
                         $this->db->where('task_id', $task_id);
                         $this->db->update('m_calendar', array('title' => $this->input->post('cd-taskname'), 'event_created_by' => $this->session->userdata['marbel_user']['user_id'], 'event_created_to' => $assignee, 'startdate' => $start_date_time, 'enddate' => $start_date_time, 'start_date' => $date_time, 'end_date' => $date_time, 'allDay' => 'false', 'event_type' => '2'));
                     }
-                    $this->session->set_flashdata('success', 'Task status updated successfully');
-                    redirect(base_url('tasks'));
+                     $result['result'] = TRUE;
+                    $result['success'] = 'Task status updated successfully';
+                    echo json_encode($result);
+                    die;
+                   
                 }
             }
         }

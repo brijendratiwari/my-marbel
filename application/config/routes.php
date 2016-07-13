@@ -139,6 +139,8 @@ $route['get_completed_task_assign_by_me']='admin/tasks/get_completed_task_assign
 
 /*api  */
 $route['saveuserinformation']='appsignin/save_user_information';
+$route['create_ride']='appsignin/create_ride';
+
 /*....api*/
 
 
