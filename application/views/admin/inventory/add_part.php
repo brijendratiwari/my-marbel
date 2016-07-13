@@ -80,8 +80,8 @@
                                              <?php echo form_error('part_cost');?>
                                             </div>
                                          <div class="form-group">
-                                                <label>Weight *</label>
-                                                 <input value="<?php echo set_value('part_weight'); ?>" placeholder="Weight" class="form-control point_only" name="part_weight" id="part_weight">
+                                             <label>Weight <small>(in grams)</small>*</label>
+                                                 <input value="<?php echo set_value('part_weight'); ?>" placeholder="Weight" class="form-control number_only" name="part_weight" id="part_weight">
                                                  <?php echo form_error('part_weight');?>
                                             </div>
                                     
