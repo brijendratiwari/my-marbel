@@ -397,4 +397,17 @@ class Users_model extends CI_Model {
         }
         
     }
+    public function checkUserEmailForUpdate($email=false,$user_id=false){
+        $this->db->select('email')->from('m_users');
+        $this->db->where('email',$email);
+        $this->db->where('id !=',$user_id);
+        $query=$this->db->get();
+        if($query->num_rows()>0){
+           
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
 }

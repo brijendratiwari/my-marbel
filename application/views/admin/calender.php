@@ -39,7 +39,7 @@
                                 <?php echo $type['name'];?>
                             </div>
                             <div class="col-lg-3">
-                                <button class="btn btn-xs" style="background-color:<?php echo $type['color_code']; ?>"></button>
+                                <button class="btn btn-xs"  style="background-color:<?php echo $type['color_code']; ?>"></button>
                             </div>
                             </div>
                           
