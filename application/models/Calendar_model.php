@@ -5,10 +5,10 @@ class Calendar_model extends CI_Model {
     function calendar_process() {
         $table = 'm_calendar';
         $type = $this->input->post('type');
-        
-        if($this->input->post('cal_type')){
-            
-            $cal_type=$this->input->post('cal_type');
+
+        if ($this->input->post('cal_type')) {
+
+            $cal_type = $this->input->post('cal_type');
         }
 
         if ($type == 'new') {
@@ -62,15 +62,19 @@ class Calendar_model extends CI_Model {
 
         if ($type == 'fetch') {
             $events = array();
-            $this->db->select('mc.id,mc.title,mc.event_created_by,mc.event_type,mc.startdate,mc.enddate,mc.allDay,mc.task_id,mcet.id as event_type_id,mcet.name as event_type,mcet.color_code')->from('m_calendar as mc')->join('m_cal_event_type as mcet','mcet.id=mc.event_type');
-            if($cal_type == 'personal'){
-                $this->db->where('mc.event_type',1);
-                $this->db->or_where('mc.event_type',2);
+            $this->db->select('mc.id,mc.title,mc.event_created_by,mc.event_created_to,mc.event_type,mc.startdate,mc.enddate,mc.allDay,mc.task_id,mcet.id as event_type_id,mcet.name as event_type,mcet.color_code')->from('m_calendar as mc')->join('m_cal_event_type as mcet', 'mcet.id=mc.event_type');
+            if ($cal_type == 'personal') {
+                $this->db->where('mc.event_type', 1);
+                $this->db->where('mc.event_created_by', $this->session->userdata['marbel_user']['user_id']);
+                $this->db->or_where('mc.event_type', 2);
+//               $this->db->where('mc.task_id !=', 0);
             }
-            if($cal_type == 'forall'){
-                $this->db->where('mc.event_type !=',1);
+            if ($cal_type == 'forall') {
+                $this->db->where('mc.event_type !=', 1);
+                $this->db->where('mc.task_id', 0);
             }
             $query = $this->db->get();
+//            echo $this->db->last_query();die;
             if ($query->num_rows() > 0) {
                 $getRecord = $query->result_array();
                 $i = 0;
@@ -79,6 +83,7 @@ class Calendar_model extends CI_Model {
                     $get_final[$i]['id'] = $record['id'];
                     $get_final[$i]['title'] = $record['title'];
                     $get_final[$i]['event_created_by'] = $record['event_created_by'];
+                    $get_final[$i]['event_created_to'] = $record['event_created_to'];
                     $get_final[$i]['event_type'] = $record['event_type'];
                     $get_final[$i]['task_id'] = $record['task_id'];
                     $get_final[$i]['start'] = $record['startdate'];
@@ -96,38 +101,38 @@ class Calendar_model extends CI_Model {
         }
     }
 
-    public function getAllEvents($month,$year) {
+    public function getAllEvents($month, $year) {
         $table = 'm_calendar';
-        $this->db->select('*')->from($table)->where('MONTH(startdate)',$month)->where('YEAR(startdate)',$year);
+        $this->db->select('*')->from($table)->where('MONTH(startdate)', $month)->where('YEAR(startdate)', $year);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $getRecord = $query->result_array();
             return $getRecord;
-        }else{
-            
+        } else {
+
             return FALSE;
         }
     }
-    
+
     public function getEventById($event_id) {
         $table = 'm_calendar';
-        $this->db->select('*')->from($table)->where('id',$event_id);
+        $this->db->select('*')->from($table)->where('id', $event_id);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $getRecord = $query->row();
             return $getRecord;
-        }else{
-            
+        } else {
+
             return FALSE;
         }
     }
-  
-    public function getEventTypes(){
-        
-        $query = $this->db->where('active',1)->get('m_cal_event_type');
-        if($query->num_rows() > 0){
+
+    public function getEventTypes() {
+
+        $query = $this->db->where('active', 1)->get('m_cal_event_type');
+        if ($query->num_rows() > 0) {
             return $query->result_array();
-        }else{
+        } else {
             return FALSE;
         }
     }

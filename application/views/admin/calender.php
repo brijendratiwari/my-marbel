@@ -216,17 +216,9 @@
             //events: [{"id":"14","title":"New Event","start":"2015-01-24T16:00:00+04:00","allDay":false}],
             //eventColor: '#00aeef',
              eventRender: function(event, element) {
-//                if(event.event_created_by == '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>') {
                     element.css('background-color', ''+event.color_code+'');
                     element.css('border-color',''+event.color_code+'');
-//                }else{
-//                    
-//                    element.css('background-color', 'grey');
-//                    element.css('border-color', 'grey');
-//                }
-                 if(event.event_created_by == '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>' && event.task_id != 0) {
-                    element.css('display', 'none');
-                }
+
             },
             utc: true,
             header: {

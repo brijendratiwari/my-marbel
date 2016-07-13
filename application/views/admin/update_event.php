@@ -19,12 +19,15 @@
                  
                      <label>Event Types <i class="fa fa"></i></label>
                         <select  name="cd-types" class="form-control">
-                     
+                     <?php if($event->task_id>0){?>
+                             <option value="2">Task</option>
+                     <?php }else{ ?>
                         <option value="">Event Types</option>
                          <?php if(!empty($event_types)){
                         foreach ($event_types as $type){ ?>
                     <option value="<?php echo $type['id'];?>" <?php if($event->event_type == $type['id']){echo 'selected';} ?>><?php echo $type['name'];?></option>
-                        <?php } } ?>
+                     <?php } } } ?>
+                    
                    </select>
                         </select>
                     <span id="cd-types" class="text-danger hidden"></span>
