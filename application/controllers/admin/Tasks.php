@@ -105,10 +105,10 @@ class Tasks extends CI_Controller {
         echo $this->load->view('admin/load_edit_task', $this->data, True);
     }
 
-    public function update_task($task_id) {
+    public function update_task() {
 
         if ($this->input->post()) {
-
+            $task_id=$this->input->post('task_id');
             $this->form_validation->set_rules('cd-taskname', 'Task Name', 'trim|required');
             $this->form_validation->set_rules('cd-category', 'Category', 'trim|required');
             //$this->form_validation->set_rules('cd-assignee', 'Assignee', 'trim|required');
@@ -146,7 +146,6 @@ class Tasks extends CI_Controller {
                     'task_assign_by' => $assign_by_id,
                     'task_due_date' => $this->input->post('cd-duedate'),
                     'task_regarding' => $this->input->post('cd-regarding'),
-                    'task_status' => 'To Do',
                     'task_effort' => $this->input->post('cd-effort'),
                     'task_value' => $this->input->post('cd-value'),
                     'effort_division_value' => $effort_division_value,
@@ -155,6 +154,7 @@ class Tasks extends CI_Controller {
                 );
                 $this->db->where('task_id', $task_id);
                 $this->db->update('m_tasks', $task);
+                #echo $this->db->last_query(); die;
                 if ($this->db->affected_rows() > 0) {
                     if ($this->input->post('cd-duedate')) {
 
@@ -166,11 +166,17 @@ class Tasks extends CI_Controller {
                         $this->db->where('task_id', $task_id);
                         $this->db->update('m_calendar', array('title' => $this->input->post('cd-taskname'), 'event_created_by' => $this->session->userdata['marbel_user']['user_id'], 'event_created_to' => $assignee, 'startdate' => $start_date_time, 'enddate' => $start_date_time, 'start_date' => $date_time, 'end_date' => $date_time, 'allDay' => 'false', 'event_type' => '2'));
                     }
-                     $result['result'] = TRUE;
+                    $result['result'] = TRUE;
                     $result['success'] = 'Task status updated successfully';
                     echo json_encode($result);
                     die;
                    
+                }else{
+                    
+                    $result['result'] = FALSE;
+                    $result['success'] = 'Unknown Error';
+                    echo json_encode($result);
+                    die;
                 }
             }
         }

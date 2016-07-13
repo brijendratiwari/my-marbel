@@ -36,6 +36,7 @@
 
 
                             </select>
+                             <span id="cd-category" class="text-danger"><?php echo form_error('cd-category'); ?></span>
                         </div>
                         </div>
                         <div class="col-lg-12" >
@@ -207,14 +208,61 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="modal-footer">
-                        <input type="hidden" name="task_id" value="<?php echo $task['task_id'];?>">
+                        <input type="hidden" name="task_id" value="<?php echo $tasks['task_id'];?>">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" id="add-row" class="btn btn-success">Update</button>
                     </div>
                 </form>
 <script>
 $(document).ready(function(){
-    
+     var base_url = $('body').find('#base_url').val();
+     //edit task
+          // Script for validate and submit remind form by AJAX...
+        var options = {
+            beforeSerialize: function () {
+                // return false to cancel submit 
+                $('body').find('#editTaskModal #form_loader').removeClass('hidden');
+            },
+            url: base_url+'update_task',
+            success: function (data) {
+                var err = $.parseJSON(data);
+                if (err.result == false) {
+                    $('body').find('#editTaskModal #form_loader').addClass('hidden');
+                    $(err.error).each(function (index, value) {
+                        $.each(value, function (index2, msg) {
+                            $("#editTaskModal #" + index2).text(msg);
+                            $("#editTaskModal #" + index2).removeClass('hidden');
+                        });
+                    });
+                }
+                else {
+                    $('body').find('#editTaskModal #form_loader').addClass('hidden');
+                    if (err.success) {
+
+                        $('body').find('#editTaskModal input select').each(function () {
+
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        $("#taskSuccess").text(err.success);
+                        $("#taskSuccess").removeClass('hidden');
+                        $('body').find('#editTaskModal').modal('hide');
+                         setTimeout(function () {
+                             window.location.href=base_url+'tasks';
+                        }, 500)
+                       
+                  }
+                    else {
+                        $('body').find('#editTaskModal input select').each(function () {
+                            $(this).siblings('.text-danger').addClass('hidden');
+                        })
+                        setTimeout(function () {
+                            $('body').find('#editTaskModal').modal('hide');
+                        }, 500)
+                    }
+                }
+            }
+        };
+        $('body').find('#edit-row-form').ajaxForm(options);
      /* date picker */
         $('.duedate').datepicker({
             'format': 'yyyy-mm-dd',
