@@ -1,4 +1,4 @@
-      <form name="task" method="post" action="<?php echo base_url('update_task/'.$tasks['task_id']);?>" id="edit-row-form">
+      <form name="task" method="post" action="" id="edit-row-form">
 
                     <div class="col-lg-12" >
 
@@ -207,6 +207,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="modal-footer">
+                        <input type="hidden" name="task_id" value="<?php echo $task['task_id'];?>">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" id="add-row" class="btn btn-success">Update</button>
                     </div>

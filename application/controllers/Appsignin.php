@@ -219,4 +219,67 @@ class Appsignin extends CI_Controller {
         }
         
     }
+  public function create_ride(){
+       $returnValue = array();
+       $message='';
+       if (empty($_REQUEST["board_id"])) { $message='Board id field is required.'; }
+        if (empty($_REQUEST["ride_name"])) {$message.='Ride name field is required.';}
+        
+        if($message!=''){
+            
+            $returnValue["status"] = "400";
+            $returnValue["message"] =$message;
+            $returnValue["result"] = 'Validation Error!';
+            echo json_encode($returnValue);
+             die;
+           
+        }else
+        {
+            $ride=array(
+                'board_ID'=>$_REQUEST["board_id"],
+                'ride_name'=>$_REQUEST["ride_name"],
+                'trip_distance'=>$_REQUEST["trip_distance"],
+                'trip_duration'=>$_REQUEST["trip_duration"],
+                'est_start_st'=>$_REQUEST["est_start_st"],
+                'est_finish_st'=>$_REQUEST["est_finish_st"],
+                'temp_f'=>$_REQUEST["temp_f"],
+                'humidity'=>$_REQUEST["humidity"],
+              );
+            if(isset($_REQUEST["ride_ID"]) && $_REQUEST["ride_ID"]!=''){
+                
+                $this->db->where('ride_ID',$_REQUEST["ride_ID"]) ;
+                $this->db->update('m_rides',$ride);
+                if($this->db->affected_rows()>0){
+                $returnValue["status"] = "200";
+                $returnValue["message"] ='Ride updated successfully';
+                $returnValue["result"] = 'success';
+                echo json_encode($returnValue);
+                 die;
+                }else{
+                    $returnValue["status"] = "400";
+                    $returnValue["message"] ='Some thing went wrough ! please try again.';
+                    $returnValue["result"] = 'failed';
+                    echo json_encode($returnValue);
+                    die;
+                }
+            }else{
+                
+                $this->db->insert('m_rides',$ride);
+                if($this->db->insert_id()>0){
+                    
+                    $returnValue["status"] = "200";
+                $returnValue["message"] ='Ride Inserted successfully';
+                $returnValue["result"] = 'success';
+                echo json_encode($returnValue);
+                 die;
+                }else{
+                    $returnValue["status"] = "400";
+                    $returnValue["message"] ='Some thing went wrough ! please try again.';
+                    $returnValue["result"] = 'failed';
+                    echo json_encode($returnValue);
+                    die;
+                }
+            }
+        }
+  } 
 }
