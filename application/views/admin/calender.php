@@ -189,7 +189,7 @@
 
 
         /* call function get events month wise for listing */
-        getEvents(0);
+//        getEvents(0);
 
 
         var zone = "05:30";  //Change this to your timezone
@@ -261,7 +261,7 @@
                     success: function (response) {
                         if (response.status != 'success')
                             revertFunc();
-                        getEvents(0);
+//                        getEvents(0);
                     },
                     error: function (e) {
                         revertFunc();
@@ -314,7 +314,7 @@
                     success: function (response) {
                         if (response.status != 'success')
                             revertFunc();
-                        getEvents(0);
+//                        getEvents(0);
                     },
                     error: function (e) {
                         revertFunc();
@@ -346,7 +346,7 @@
 
 
 
-        /* call events function on previous and next click..*/
+        /* call events function on previous and next click..
         $('.fc-prev-button').click(function () {
             var moment = $('#calendar').fullCalendar('getDate');
             getEvents(moment.format());
@@ -354,7 +354,7 @@
         $('.fc-next-button').click(function () {
             var moment = $('#calendar').fullCalendar('getDate');
             getEvents(moment.format());
-        });
+        }); */
 /* datetime picker*/
        
         $('.datetimepicker8').datetimepicker();
