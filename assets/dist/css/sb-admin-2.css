@@ -218,8 +218,11 @@ body {
 }
 
 .sidebar ul li a.active {
-    background-color: #00AEEF;
-    color: #fff;
+/*    background-color: #00AEEF;
+    color: #fff;*/
+ background-color: #f9ff33;
+    color: #0e0202;
+    font-weight: bold;
 }
 
 .sidebar .arrow {
