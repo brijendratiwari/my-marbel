@@ -80,7 +80,7 @@
                 <select id="template" class="form-control select_input" name="template">
                     <option>Please select a template...</option>
 <?php foreach ($templates as $template): ?>
-                        <option value="<?php echo $template['slug']; ?>"><?php echo $template['name']; ?> (Sends from email address: <?php echo $template['from_email'] ?>)</option>
+                    <option value="<?php echo $template['slug']; ?>"><?php echo ucwords($template['name']); ?> (Sends from email address: <?php echo $template['from_email'] ?>)</option>
 <?php endforeach; ?>
                 </select>
             </div>
@@ -106,7 +106,7 @@
                 <select id="template" class="form-control select_input" name="template">
                     <option>Please select a template...</option>
 <?php foreach ($templates as $template): ?>
-                        <option value="<?php echo $template['slug']; ?>"><?php echo $template['name']; ?> (Sends from email address: <?php echo $template['from_email'] ?>)</option>
+                    <option value="<?php echo $template['slug']; ?>"><?php echo ucwords($template['name']); ?> (Sends from email address: <?php echo $template['from_email'] ?>)</option>
 <?php endforeach; ?>
                 </select>
             </div>

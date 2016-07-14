@@ -51,7 +51,7 @@
                             <a title="Users" href="<?php echo base_url('customers'); ?>"><i class="fa fa-users fa-fw"></i></a>
                         </li>
                         <li>
-                            <a title="Dashboard" href="<?php echo base_url('orders');?>"><i class="fa fa-bar-chart-o fa-fw"></i></a>
+                            <a title="Orders" href="<?php echo base_url('orders');?>"><i class="fa fa-bar-chart-o fa-fw"></i></a>
                         </li>
 <!--                         <li>
                             <a href="<?php echo base_url('update_orders');?>"><i class="fa fa-bar-chart-o fa-fw"></i>Update Orders</a>
