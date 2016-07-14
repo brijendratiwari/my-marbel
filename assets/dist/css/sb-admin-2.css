@@ -225,8 +225,11 @@ body {
     font-weight: bold;
 }
 .sidebar ul li a:hover {
-    background: #f9ff33 none repeat scroll 0 0;
-    color: #000;
+    background: #00aeef none repeat scroll 0 0;
+    box-shadow: 0 10px 13px -8px #000;
+    color: #fff;
+    font-weight: bold;
+    z-index: 9;
 }
 .sidebar .arrow {
     float: right;

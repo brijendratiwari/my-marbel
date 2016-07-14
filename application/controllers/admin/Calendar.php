@@ -74,11 +74,19 @@ class Calendar extends CI_Controller {
         $this->load->view('admin/calendar/events', $this->data);
     }
 
+    public function getEventForView($event_id = FALSE) {
+         
+        if ($event_id != '') {
+            $this->data['event'] = $this->Calendar->getEventById($event_id);
+            /* Get calendra event type */
+            $this->data['event_types'] = $this->Calendar->getEventTypes();
+            $this->load->view('admin/calendar/view_event', $this->data);
+        }
+    }
     public function getSingleEvent($event_id = FALSE) {
          
         if ($event_id != '') {
             $this->data['event'] = $this->Calendar->getEventById($event_id);
-            $this->data['assignee'] = $this->Tasks->getTaskAssignee();
             /* Get calendra event type */
             $this->data['event_types'] = $this->Calendar->getEventTypes();
             $this->load->view('admin/calendar/update_event', $this->data);

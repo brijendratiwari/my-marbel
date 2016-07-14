@@ -30,9 +30,8 @@
                 </div>-->
                 
 
-                <div id='calendar' class="col-lg-12"></div>
+                <div id='calendar' class="col-lg-12 form-group"></div>
                
-                <div class="col-lg-12">
                     <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">Event Types</div>
@@ -60,7 +59,7 @@
                         </div>
                     </div>
 
-                </div></div>
+                </div>
             </div>
             
             
@@ -195,6 +194,25 @@
 </div>
 <!--update Event modal end-->
 
+<!--view Event modal-->
+
+<div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);display: none;">
+    <div class="modal-dialog">
+        <div class="view-event-data">
+            <!--load data for view event-->
+        </div>
+      
+        <div class="checkout_loader hidden" id="form_loader">
+            <div class="overlay new_loader"></div>
+            <div class="new_loader_img"><img class="" src="<?php echo base_url('assets/images/chekout-loading.gif'); ?>" /></div>
+        </div>
+    </div>
+
+
+
+</div>
+<!--view Event modal end-->
+
 <script>
 
     $(document).ready(function () {
@@ -284,8 +302,10 @@
             eventClick: function (event, jsEvent, view) {
                
                 $('body').find('.checkout_loader').removeClass('hidden');
-                $('body').find('#editEventModal').modal('show');
-                $('body').find('.update-event-data').load("<?php echo base_url('admin/calendar/getSingleEvent'); ?>/" + event.id + "",function(response){
+//                $('body').find('#editEventModal').modal('show');
+                $('body').find('#viewEventModal').modal('show');
+//                $('body').find('.update-event-data').load("<?php echo base_url('admin/calendar/getSingleEvent'); ?>/" + event.id + "",function(response){
+                $('body').find('.view-event-data').load("<?php echo base_url('admin/calendar/getEventForView'); ?>/" + event.id + "",function(response){
                     
                     if(response){
                     
@@ -293,25 +313,7 @@
                         
                     }
                 });
-//                var title = prompt('Event Title:', event.title, {buttons: {Ok: true, Cancel: false}});
-//                if (title) {
-//                    event.title = title;
-//                    console.log('type=changetitle&title=' + title + '&eventid=' + event.id);
-//                    $.ajax({
-//                        url: 'process',
-//                        data: 'type=changetitle&title=' + title + '&eventid=' + event.id,
-//                        type: 'POST',
-//                        dataType: 'json',
-//                        success: function (response) {
-//                            if (response.status == 'success')
-//                                $('#calendar').fullCalendar('updateEvent', event);
-//                            getEvents(0);
-//                        },
-//                        error: function (e) {
-//                            alert('Error processing your request: ' + e.responseText);
-//                        }
-//                    });
-//                }
+
             },
             eventResize: function (event, delta, revertFunc) {
                 console.log(event);
@@ -480,22 +482,7 @@ var base_url = $('body').find('#base_url').val();
         };
         $('body').find('#event-update').ajaxForm(options);
     /*end ajax here */
-    /*get evnt on click..*/
-    $('body').on('click','.get-event',function(){
-    $('body').find('.checkout_loader').removeClass('hidden');
-       var event = $(this).attr('data-eventId');
-       
-         if(event!=''){
-             
-             $('body').find('.update-event-data').load("<?php echo base_url('admin/calendar/getSingleEvent'); ?>/" + event + "",function(response){
-                 if(response){
-                     $('body').find('.checkout_loader').addClass('hidden');
-                 }
-             });
-         }
-    
-    })
-    /*get evnt on click..*/
+
     
      $('body').find(".select_input").chosen({no_results_text: "Oops, nothing found!"}); 
     
