@@ -7,6 +7,7 @@
                   <span id="cd-title" class="text-danger hidden"></span>
                   
                 </div>
+                <?php if($event->event_type!=11){?>
                 <div class="col-md-12">
                  
                      <label>Location <i class="fa fa-map-marker"></i></label>
@@ -30,6 +31,7 @@
                     <span id="cd-types" class="text-danger hidden"></span>
                
                 </div>
+                
 <!--                <div class="col-md-12">
                  
                     <label>Select Assignee</label>
@@ -84,6 +86,25 @@
                     <span id="cd-date-end" class="text-danger hidden"></span>
                   
                 </div>
+                <?php } else{ ?>
+                <div class="col-md-12">
+                 
+                     <label>On Date/Time <i class="fa fa-calendar-o"></i></label>
+                  
+                     <input type="text" id="" value="<?php 
+                  
+                     if($event->startdate!=''){
+                         $start_date=explode('T',$event->startdate);
+                         $start_datetime=$start_date[0].' '.explode('+',$start_date[1])[0];
+                     }
+                         echo date('m/d/Y h:i A',strtotime($start_datetime));
+                     
+                     
+                     ?>"  class="form-control" placeholder="Date/Time">
+                    <span id="cd-date-start" class="text-danger hidden"></span>
+                  
+                </div>  
+              <?php } ?>
                 <div class="col-md-12">
                  
                      <label>Description</label>
@@ -92,13 +113,15 @@
                     <input type="hidden" value="<?php echo $event->id; ?>" name="event_id" id="event_id">
                 </div>
                  <div class="clearfix"></div>
-           
+          
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                 <?php if($event->event_created_by== $this->session->userdata['marbel_user']['user_id']){?>
+                  <?php if($event->event_type!=11){?> 
+                <?php if($event->event_created_by== $this->session->userdata['marbel_user']['user_id']){?>
                 <button type="submit" id="update-event" class="btn btn-success">Update</button>
-                 <?php } ?>
+                  <?php }  }?>
             </div>
+            
            
      </div>
 <script>

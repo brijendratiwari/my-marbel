@@ -60,6 +60,19 @@ class Inventory_model extends CI_Model {
       
   }
   
+  public function getAll(){
+      $this->db->select('*');
+      $this->db->from('m_part');
+      $resQuery = $this->db->get();
+       if ($resQuery->num_rows() > 0) {
+           return $resQuery->result_array();
+        } else {
+            return false;
+     } 
+      
+      
+  }
+  
   
   public function updatePart($id,$data){
       
@@ -68,6 +81,12 @@ class Inventory_model extends CI_Model {
        $this->db->update('m_part',$data);
      return TRUE;
       }
+  }
+  
+  public function addEvent($data_insert){
+    $this->db->insert('m_calendar', $data_insert);
+    $id = $this->db->insert_id(); 
+    return $id;  
   }
    
 }

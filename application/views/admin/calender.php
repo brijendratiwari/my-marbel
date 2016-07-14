@@ -44,6 +44,14 @@
                             </div>
                           
                         <?php } } ?>
+                           <div class="col-lg-12"  style="font-size:12px;">
+                            <div class="col-lg-9">
+                               Inventory
+                            </div>
+                            <div class="col-lg-3">
+                                <button class="btn btn-xs" style="background-color:#F5D709"></button>
+                            </div>
+                            </div>  
                         </div>
                     </div>
 
@@ -73,7 +81,7 @@
                      <label>Event Name <i class="fa fa-calendar"></i></label>
                   
                     <input type="text" name="cd-title" class="form-control" placeholder="Event Name">
-                  <span id="cd-title" class="text-danger hidden"></span>
+                    <span id="cd-title" class="text-danger hidden"></span>
                   
                 </div>
                 <div class="col-md-12">

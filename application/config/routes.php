@@ -152,3 +152,4 @@ $route['inventory/get_part']='admin/inventory/get_part';
 $route['inventory/view/(:num)']='admin/inventory/view_part/$1';
 $route['inventory/edit/(:num)']='admin/inventory/edit_part/$1';
 $route['inventory/update_image']='admin/inventory/update_image';
+$route['inventory/autoreorder']='admin/inventory/createEventCron';

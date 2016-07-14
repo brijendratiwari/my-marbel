@@ -12,7 +12,7 @@
              
             </div>
             <div  class="col-lg-12">
-            <div  class="col-lg-8 page-header pull-right">    
+            <div  class="col-lg-9 page-header pull-right">    
             <a href="<?php echo base_url().'inventory/add';?>" class="btn btn-custom pull-right">Add Part</a>
             <button class="btn btn-custom category-search" value="">All</button>
             <button class="btn btn-custom category-search" value="build">Build</button>
@@ -40,6 +40,7 @@
                                         <tr>
                                             
 						<th style="text-align: center">View Part</th>
+						<th>Part Number</th>
 						<th>Part Name</th>
 						<th>Category</th>
 						<th>Type</th>
