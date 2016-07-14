@@ -44,6 +44,14 @@
                             </div>
                           
                         <?php } } ?>
+                           <div class="col-lg-12"  style="font-size:12px;">
+                            <div class="col-lg-9">
+                               Inventory
+                            </div>
+                            <div class="col-lg-3">
+                                <button class="btn btn-xs" style="background-color:#F5D709"></button>
+                            </div>
+                            </div>  
                         </div>
                     </div>
 
@@ -73,7 +81,7 @@
                      <label>Event Name <i class="fa fa-calendar"></i></label>
                   
                     <input type="text" name="cd-title" class="form-control" placeholder="Event Name">
-                  <span id="cd-title" class="text-danger hidden"></span>
+                    <span id="cd-title" class="text-danger hidden"></span>
                   
                 </div>
                 <div class="col-md-12">
@@ -88,7 +96,7 @@
                  
                      <label>Event Types <i class="fa fa"></i></label>
                   
-                    <select  name="cd-types" class="form-control">
+                    <select  name="cd-types" class="form-control select_input">
                     <option value="">Event Types</option>
                     <?php if(!empty($event_types)){
                         foreach ($event_types as $type){ ?>
@@ -485,7 +493,7 @@ var base_url = $('body').find('#base_url').val();
     })
     /*get evnt on click..*/
     
-    
+     $('body').find(".select_input").chosen({no_results_text: "Oops, nothing found!"}); 
     
     });
 
@@ -545,4 +553,8 @@ var base_url = $('body').find('#base_url').val();
         vertical-align: middle;
     }
 
+    .chosen-container {
+        width:100% !important;
+    }
+</style>
 </style>

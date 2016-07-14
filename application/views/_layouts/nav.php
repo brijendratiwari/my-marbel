@@ -2,6 +2,7 @@
                 <div class="sidebar-nav navbar-collapse">
              
                     <ul class="nav nav-main" id="side-menu">
+
                         <li>
                             <a href="javascript:;"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>

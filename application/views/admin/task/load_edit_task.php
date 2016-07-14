@@ -21,7 +21,7 @@
 
                         </div>
                         <div class="col-md-6 form-group">
-                             <select  name="cd-category" class="form-control" >
+                             <select  name="cd-category" class="form-control select_input" >
                                 <option value="">Select Category</option>
                                 <?php if ($category) {
                                     foreach ($category as $name) {
@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-md-6 form-group">
                              
-                            <select  name="cd-assignee" class="form-control">
+                            <select  name="cd-assignee" class="form-control select_input">
                                 <option value="">Select Assignee</option>
                                 <?php if ($assignee) {
                                     foreach ($assignee as $name) {
@@ -113,7 +113,7 @@
                         </div>
                         <div class="col-md-6 form-group">
                           
-                            <select  name="cd-effort" class="form-control">
+                            <select  name="cd-effort" class="form-control select_input">
                                <option value="">Effort</option>
                                 <option value="1" <?php if (strcmp($tasks['task_effort'], '1') == 0) {
                 echo 'selected="selected"';
@@ -144,7 +144,7 @@
                             
                         </div>
                         <div class="col-md-6 form-group">
-                             <select  name="cd-value" class="form-control">
+                             <select  name="cd-value" class="form-control select_input">
                                <option value="">Value</option>
                                 <option value="100" <?php if (strcmp($tasks['task_value'], '100') == 0) {
                 echo 'selected="selected"';
@@ -188,7 +188,7 @@
                             </div> 
                             <div class="col-md-6 form-group ">  
                             
-                           <select  name="cd-status" class="form-control">
+                           <select  name="cd-status" class="form-control select_input">
                                <option value="To Do" <?php if (strcmp($tasks['task_status'], 'To Do') == 0) {
                 echo 'selected="selected"';
             } ?>>To Do</option>
@@ -268,6 +268,12 @@ $(document).ready(function(){
             'format': 'mm/dd/yyyy',
              startDate: new Date()
         });
-    
+     $('body').find(".select_input").chosen({no_results_text: "Oops, nothing found!"}); 
 });
 </script>
+<style>
+  
+    .chosen-container {
+        width:100% !important;
+    }
+</style>

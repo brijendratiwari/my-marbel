@@ -23,7 +23,7 @@ class Shipping extends CI_Controller {
 
         $this->data['page'] = 'Shipping';
         $this->data['title'] = 'Shipping';
-        $this->load->template('admin/shipping', $this->data);
+        $this->load->template('admin/shipping/shipping', $this->data);
     }
 
     public function get_shipping() {

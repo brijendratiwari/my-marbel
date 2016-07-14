@@ -24,7 +24,7 @@ class Orders extends CI_Controller {
         $data['countries'] = $this->getCountries();
         $data['page'] = 'Orders';
         $data['title'] = 'Orders';
-        $this->load->template('admin/orders', $data);
+        $this->load->template('admin/order/orders', $data);
     }
 
     /* datatable for getting order list... */
@@ -250,7 +250,7 @@ class Orders extends CI_Controller {
                 /* get customer details ... */
                 $data['customer'] = $this->Orders->getCustomer($data['order'][0]['user_id']);
                 $data['order_id'] = $order_id;
-                $this->load->template('admin/edit_order', $data);
+                $this->load->template('admin/order/edit_order', $data);
             }
         } else {
             redirect('orders');
@@ -307,7 +307,7 @@ class Orders extends CI_Controller {
 
             }
         }
-        $this->load->template('admin/update_order_estimated_shipping_date', $this->data);
+        $this->load->template('admin/order/update_order_estimated_shipping_date', $this->data);
         
     }
 

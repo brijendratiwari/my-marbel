@@ -20,7 +20,11 @@
                             <div class="row">
                                  <form role="form" method="post" id="addPart" enctype="multipart/form-data">
                                 <div class="col-lg-6">
-                                   
+                                         <div class="form-group">
+                                            <label>Part Number</label>
+                                            <input class="form-control" disabled="" value="<?php echo $part_detail['part_unique_number']; ?>" placeholder="Part Name">
+                                             <?php echo form_error('part_unique_number');?>
+                                        </div>
                                         <div class="form-group">
                                             <label>Part Name *</label>
                                             <input class="form-control" id="part_name"  value="<?php echo $part_detail['part_name']; ?>" name="part_name" placeholder="Part Name">
@@ -70,16 +74,17 @@
                                             <input placeholder="Quantity" value="<?php echo $part_detail['part_quantity']; ?>" class="form-control number_only" name="part_quantity"  id="part_quantity">
                                              <?php echo form_error('part_quantity');?>
                                         </div>
+                                     <div class="form-group">
+                                            <label>Auto Reorder</label>
+                                            <input <?php echo ($part_detail['part_auto_reorder']==1)? 'checked':'';?>  type="checkbox" class="form-control" name="part_auto_reorder" id="part_auto_reorder">
+                                             <?php echo form_error('part_auto_reorder');?>
+                                        </div>
                                         <div class="form-group">
                                             <label>Reorder Quantity</label>
                                             <input placeholder="Reorder Quantity" class="form-control number_only" name="part_reorder_quantity" id="part_reorder_quantity" value="<?php echo $part_detail['part_reorder_quantity']; ?>">
                                               <?php echo form_error('part_reorder_quantity');?>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Auto Reorder</label>
-                                            <input <?php echo ($part_detail['part_auto_reorder']==1)? 'checked':'';?>  type="checkbox" class="form-control" name="part_auto_reorder" id="part_auto_reorder">
-                                             <?php echo form_error('part_auto_reorder');?>
-                                        </div>
+                                       
                                          <div class="form-group">
                                                 <label>Cost *</label>
                                                 <input placeholder="Cost" value="<?php echo $part_detail['part_cost']; ?>" class="form-control point_only" name="part_cost" id="part_cost">

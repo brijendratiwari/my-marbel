@@ -4,11 +4,11 @@
   <head>
     <meta charset="UTF-8">
     <title><?php echo ucwords(str_replace('-', ' ', $page)); ?></title>
-    <link rel="stylesheet" href="/assets/css/style-login.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/style-login.css">
   </head>
 <div class="site__container">
   <div class="grid__container">
-    <img class="logo" src="/assets/img/loginlogo.png">
+    <img class="logo" src="<?php echo base_url(); ?>/assets/img/loginlogo.png">
     <form action="./" method="post" class="form form--login">
       <input id="redirect" type="hidden" value="<?php //echo $redirect; ?>" />
       <div class="form__field">

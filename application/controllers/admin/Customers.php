@@ -25,7 +25,7 @@ class Customers extends CI_Controller {
         $this->data['user_type'] = $this->Customer->getUserType();
         $this->data['page'] = 'Customers';
         $this->data['title'] = 'Customers';
-        $this->load->template('admin/customers', $this->data);
+        $this->load->template('admin/customer/customers', $this->data);
     }
 
     /* datatable for getting customer list... */
@@ -259,7 +259,7 @@ class Customers extends CI_Controller {
             }
             $this->data['customer'] = $this->Customer->getCustomers($id);
             $this->data['user_type'] = $this->Customer->getUserType();
-            $this->load->template('admin/edit_customer', $this->data);
+            $this->load->template('admin/customer/edit_customer', $this->data);
         } else {
             redirect('customers');
         }
@@ -307,7 +307,7 @@ class Customers extends CI_Controller {
             $this->data['user_info'] = $this->Customer->getCustomerInfo($id);
             $this->data['user_orders'] = $this->Services->getOrders($id);
         }
-        $this->load->template('admin/load_customer_info', $this->data);
+        $this->load->template('admin/customer/load_customer_info', $this->data);
     }
 
     public function reset_password_users() {

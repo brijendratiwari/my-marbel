@@ -22,7 +22,7 @@ class Shipped extends CI_Controller {
         
        $this->data['page']='Shipped';
        $this->data['title']='Shipped';
-       $this->load->template('admin/shipped',$this->data);
+       $this->load->template('admin/shipping/shipped',$this->data);
     }
     public function get_shipped() {
          $sLimit = "";
