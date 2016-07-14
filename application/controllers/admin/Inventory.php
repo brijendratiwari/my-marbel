@@ -115,6 +115,7 @@ class Inventory extends CI_Controller {
             $input = $this->input->post();
             $this->form_validation->set_rules('part_name', 'Name', 'required');
             $this->form_validation->set_rules('part_description', 'Description', 'required');
+            $this->form_validation->set_rules('part_unique_number', 'Part Number', 'required|is_unique[m_part.part_unique_number]');
             $this->form_validation->set_rules('part_category', 'Category', 'required');
             $this->form_validation->set_rules('part_type', 'Type', 'required');
             $this->form_validation->set_rules('part_quantity', 'Quantity', 'required|numeric');
@@ -261,6 +262,7 @@ class Inventory extends CI_Controller {
                         }
                     }
                     unset($input['pervious_image']);
+                    unset($input['part_unique_number']);
                     $insert_id = $this->inventory->updatePart($id, $input);
                     if ($insert_id) {
                         $this->session->set_flashdata('success', 'Part Updated Successfully');
