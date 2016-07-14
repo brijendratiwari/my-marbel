@@ -6,7 +6,7 @@
                 <!-- /.col-lg-12 -->
             </div>
      
-     <h2 class="text-center">Comming soon......<i class="fa fa-smile-o"></i></h2>
+     <h2 class="text-center">Coming soon......<i class="fa fa-smile-o"></i></h2>
             <!-- /.row -->
 <!--            <div class="row">
                 <div class="col-lg-3 col-md-6">
