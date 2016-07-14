@@ -2,7 +2,7 @@
                 <div class="sidebar-nav navbar-collapse">
                 <p class="centered">
                   <a href="<?php echo base_url('profile');?>">
-                <img class="img-circle" width="60" src="/assets/img/ui-sam.jpg">
+                <img class="img-circle" width="60" src="../assets/img/ui-sam.jpg">
                 </a>
                 </p>
                 <h5 class="centered"><?php if($this->session->userdata('marbel_user')){
