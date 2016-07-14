@@ -33,6 +33,7 @@ class Profile extends CI_Controller {
         $this->form_validation->set_rules('cd-phone', 'Phone', 'trim|required');
         $this->form_validation->set_rules('cd-first', 'FirstName', 'trim|required');
         $this->form_validation->set_rules('cd-last', 'LastName', 'trim|required');
+        $this->form_validation->set_rules('cd-profile', 'profile', 'callback_image_validate');
         #$this->form_validation->set_rules('cd-password', 'Password', 'trim|required');
 
         //run validation on form input
@@ -102,6 +103,19 @@ class Profile extends CI_Controller {
             $result['error'] = 'Some thing went wrough ! Please try again.';
             echo json_encode($result);
             die;
+        }
+    }
+    public function image_validate() {
+        if (($_FILES['cd-profile']['size'] > 0)) {
+
+            if ($_FILES['cd-profile']['type'] == 'image/jpeg' || $_FILES['cd-profile']['type'] == 'image/png' || $_FILES['cd-profile']['type'] == 'image/jpg') {
+                return true;
+            } else {
+                $this->form_validation->set_message('image_validate', 'Profile image must be jpeg,png or jpg ');
+                return false;
+            }
+        } else {
+            return TRUE;
         }
     }
 }
