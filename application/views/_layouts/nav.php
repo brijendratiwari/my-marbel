@@ -1,15 +1,7 @@
  <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
 
-                <p class="centered">
-                  <a href="<?php echo base_url('profile');?>">
-                <img class="img-circle" width="60" src="../assets/img/ui-sam.jpg">
-                </a>
-                </p>
-                <h5 class="centered"><?php if($this->session->userdata('marbel_user')){
-                    
-                    echo $this->session->userdata['marbel_user']['first_name']." ".$this->session->userdata['marbel_user']['last_name'];
-                } ?></h5>
+              
 
                     <ul class="nav" id="side-menu">
                         <li>
