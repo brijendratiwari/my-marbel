@@ -14,8 +14,8 @@
                     <div id="eventSuccess" class="pull-right alert alert-success hidden message"></div>
                
                     <button class="btn btn-sm btn-custom" data-target="#eventModal" data-toggle="modal">Create Event</button>
-                    <a href='<?php echo base_url('calendar'); ?>' class="btn btn-sm btn-custom">Company Overview</a>
-                    <a href='<?php echo base_url('calendar/my_calendar'); ?>' class="btn btn-sm btn-custom tab-active">Personal</a>
+                    <a href='<?php echo base_url('calendar'); ?>' class="btn btn-sm btn-custom tab-active">Company Overview</a>
+                    <a href='<?php echo base_url('calendar/my_calendar'); ?>' class="btn btn-sm btn-custom">Personal</a>
                 </div>
             </div>
             <div class="row" style="margin-top: 2%;">
@@ -39,11 +39,19 @@
                                 <?php echo $type['name'];?>
                             </div>
                             <div class="col-lg-3">
-                                <button class="btn btn-xs" style="background-color:<?php echo $type['color_code']; ?>"></button>
+                                <button class="btn btn-xs"  style="background-color:<?php echo $type['color_code']; ?>"></button>
                             </div>
                             </div>
                           
                         <?php } } ?>
+                           <div class="col-lg-12"  style="font-size:12px;">
+                            <div class="col-lg-9">
+                               Inventory
+                            </div>
+                            <div class="col-lg-3">
+                                <button class="btn btn-xs" style="background-color:#F5D709"></button>
+                            </div>
+                            </div>  
                         </div>
                     </div>
 
@@ -73,7 +81,7 @@
                      <label>Event Name <i class="fa fa-calendar"></i></label>
                   
                     <input type="text" name="cd-title" class="form-control" placeholder="Event Name">
-                  <span id="cd-title" class="text-danger hidden"></span>
+                    <span id="cd-title" class="text-danger hidden"></span>
                   
                 </div>
                 <div class="col-md-12">
@@ -88,7 +96,7 @@
                  
                      <label>Event Types <i class="fa fa"></i></label>
                   
-                    <select  name="cd-types" class="form-control">
+                    <select  name="cd-types" class="form-control select_input">
                     <option value="">Event Types</option>
                     <?php if(!empty($event_types)){
                         foreach ($event_types as $type){ ?>
@@ -197,7 +205,7 @@
         $.ajax({
             url: '<?php echo base_url('calendar/process'); ?>',
             type: 'POST', // Send post data
-            data: 'type=fetch&cal_type=personal',
+            data: 'type=fetch&cal_type=forall',
             async: false,
             success: function (s) {
                 json_events = s;
@@ -218,14 +226,6 @@
              eventRender: function(event, element) {
                     element.css('background-color', ''+event.color_code+'');
                     element.css('border-color',''+event.color_code+'');
-
-                    console.log('-------------'+event.event_created_by+'----'+event.event_created_to);
-                 if((event.event_created_by != '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>' && event.event_created_to != '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>') && (event.event_type_id==2)) {
-                          element.css('display','none');
-                }
-                 if(event.event_type_id == 2 && event.task_id == 0) {
-                         element.css('display','none');
-                }
 
             },
             utc: true,
@@ -342,7 +342,7 @@
             $.ajax({
                 url: '<?php echo base_url('calendar/process'); ?>',
                 type: 'POST', // Send post data
-                data: 'type=fetch&cal_type=personal',
+                data: 'type=fetch&cal_type=forall',
                 async: false,
                 success: function (s) {
                     freshevents = s;
@@ -362,7 +362,7 @@
         $('.fc-next-button').click(function () {
             var moment = $('#calendar').fullCalendar('getDate');
             getEvents(moment.format());
-        });*/
+        }); */
 /* datetime picker*/
        
         $('.datetimepicker8').datetimepicker();
@@ -411,7 +411,7 @@ var base_url = $('body').find('#base_url').val();
                          setTimeout(function () {
                             $('body').find('#eventModal').modal('hide');
                         }, 500)
-                        window.location.href='<?php echo base_url('calendar/my_calendar');?>';
+                        window.location.href='<?php echo base_url('calendar');?>';
                   }
                     else {
                         $('body').find('#eventModal input select').each(function () {
@@ -461,7 +461,7 @@ var base_url = $('body').find('#base_url').val();
                          setTimeout(function () {
                             $('body').find('#editEventModal').modal('hide');
                         }, 500)
-                        window.location.href='<?php echo base_url('calendar/my_calendar');?>';
+                        window.location.href='<?php echo base_url('calendar');?>';
                   }
                     else {
                         $('body').find('#editEventModal input select').each(function () {
@@ -493,7 +493,7 @@ var base_url = $('body').find('#base_url').val();
     })
     /*get evnt on click..*/
     
-    
+     $('body').find(".select_input").chosen({no_results_text: "Oops, nothing found!"}); 
     
     });
 
@@ -553,4 +553,8 @@ var base_url = $('body').find('#base_url').val();
         vertical-align: middle;
     }
 
+    .chosen-container {
+        width:100% !important;
+    }
+</style>
 </style>

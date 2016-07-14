@@ -19,7 +19,7 @@
                 <div class="col-md-12">
                  
                      <label>Event Types <i class="fa fa"></i></label>
-                        <select  name="cd-types" class="form-control">
+                        <select  name="cd-types" class="form-control select_input">
                      <?php if($event->task_id>0){?>
                              <option value="2">Task</option>
                      <?php }else{ ?>
@@ -140,5 +140,6 @@
         $(".datetimepicker9").on("dp.change", function (e) {
             $('.datetimepicker8').data("DateTimePicker").maxDate(e.date);
         });
+        $('body').find(".select_input").chosen({no_results_text: "Oops, nothing found!"}); 
     })
 </script>

@@ -24,6 +24,6 @@ class Profile extends CI_Controller {
         $user_info=$this->session->userdata('marbel_user');
         $this->data['user_info']=$this->Customer->getCustomers($user_info['user_id']);
         $this->data['user_orders']=$this->Services->getOrders($user_info['user_id']);
-        $this->load->template('admin/profile',$this->data);
+        $this->load->template('admin/profile/profile',$this->data);
     }
 }

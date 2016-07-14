@@ -17,6 +17,8 @@ class Tasks extends CI_Controller {
     public function index() {
         $this->data['page'] = 'task';
         $this->data['title'] = 'task';
+        $this->data["style_to_load"] = array("assets/css/chosen/chosen.min.css");
+        $this->data['scripts_to_load'] = array("assets/js/chosen/chosen.jquery.min.js");
         $id = $this->session->userdata['marbel_user']['user_id'];
         $this->data['category'] = $this->Tasks->getTaskCategory();
         $this->data['assignee'] = $this->Tasks->getTaskAssignee();
@@ -24,7 +26,7 @@ class Tasks extends CI_Controller {
         $this->data['completed_task_to'] = $this->Tasks->getTasks($id, false, 'Completed');
         $this->data['pending_task_by'] = $this->Tasks->getTasks(false, $id, 'Pending');
         $this->data['completed_task_by'] = $this->Tasks->getTasks(false, $id, 'Completed');
-        $this->load->template('admin/tasks', $this->data);
+        $this->load->template('admin/task/tasks', $this->data);
     }
 
     public function add_task() {
@@ -98,11 +100,13 @@ class Tasks extends CI_Controller {
 
     public function edit_task($task_id = false) {
         if ($task_id != '') {
+            $this->data["style_to_load"] = array("assets/css/chosen/chosen.min.css");
+            $this->data['scripts_to_load'] = array("assets/js/chosen/chosen.jquery.min.js");
             $this->data['assignee'] = $this->Tasks->getTaskAssignee();
             $this->data['category'] = $this->Tasks->getTaskCategory();
             $this->data['tasks'] = $this->Tasks->getTasksById($task_id);
         }
-        echo $this->load->view('admin/load_edit_task', $this->data, True);
+        echo $this->load->view('admin/task/load_edit_task', $this->data, True);
     }
 
     public function update_task() {
