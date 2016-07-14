@@ -94,7 +94,7 @@ class Email extends CI_Controller {
         }
 
 
-        $this->load->template('admin/email', $data);
+        $this->load->template('admin/email/email', $data);
     }
 
     /* get templates */

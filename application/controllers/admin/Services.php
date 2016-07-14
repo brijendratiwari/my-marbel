@@ -24,7 +24,7 @@ class Services extends CI_Controller {
 
         $this->data['page'] = 'Services';
         $this->data['title'] = 'Services';
-        $this->load->template('admin/services', $this->data);
+        $this->load->template('admin/services/services', $this->data);
     }
 
     public function get_services() {
@@ -174,7 +174,7 @@ class Services extends CI_Controller {
             redirect('services?status=pending');
         }
 
-        $this->load->template('admin/new_services', $this->data);
+        $this->load->template('admin/services/new_services', $this->data);
         }
         
     public function new_order_service($user_id = false,$order_id = FALSE) {
@@ -202,7 +202,7 @@ class Services extends CI_Controller {
             redirect('services?status=pending');
         }
 
-        $this->load->template('admin/new_services', $this->data);
+        $this->load->template('admin/services/new_services', $this->data);
         }
 
         public function new_cust_services($id = FALSE) {
@@ -231,7 +231,7 @@ class Services extends CI_Controller {
             redirect('services?status=pending');
         }
 
-        $this->load->template('admin/new_services', $this->data);
+        $this->load->template('admin/services/new_services', $this->data);
     }
 
     public function edit_service($id = false, $param = false) {
@@ -252,7 +252,7 @@ class Services extends CI_Controller {
             redirect('services/');
         }
 
-        $this->load->template('admin/edit_services', $this->data);
+        $this->load->template('admin/services/edit_services', $this->data);
     }
 
     public function delete_services($id = false, $param = false) {

@@ -19,27 +19,32 @@ class Calendar extends CI_Controller {
         if ($this->session->userdata['marbel_user']['type'] != 'admin') {
             redirect('logout');
         }
+        
     }
 
     public function index() {
         $this->data['page'] = 'Calender';
         $this->data['title'] = 'Calender';
+        $this->data["style_to_load"] = array("assets/css/chosen/chosen.min.css");
+        $this->data['scripts_to_load'] = array("assets/js/chosen/chosen.jquery.min.js");
         $this->data['assignee'] = $this->Tasks->getTaskAssignee();
         /* Get calendra event type */
         $this->data['event_types'] = $this->Calendar->getEventTypes();
         $this->data['page_type'] = 'public';
-        $this->load->template('admin/calender', $this->data);
+        $this->load->template('admin/calendar/calender', $this->data);
     }
     
     /* public calendar */
     public function my_calendar() {
         $this->data['page'] = 'Calender';
         $this->data['title'] = 'Calender';
+        $this->data["style_to_load"] = array("assets/css/chosen/chosen.min.css");
+        $this->data['scripts_to_load'] = array("assets/js/chosen/chosen.jquery.min.js");
         $this->data['assignee'] = $this->Tasks->getTaskAssignee();
         /* Get calendra event type */
         $this->data['event_types'] = $this->Calendar->getEventTypes();
         $this->data['page_type'] = 'private';
-        $this->load->template('admin/my_calendar', $this->data);
+        $this->load->template('admin/calendar/my_calendar', $this->data);
     }
 
     public function process() {
@@ -66,18 +71,18 @@ class Calendar extends CI_Controller {
         $this->data['events'] = $this->Calendar->getAllEvents($month, $year);
 
 
-        $this->load->view('admin/events', $this->data);
+        $this->load->view('admin/calendar/events', $this->data);
     }
 
     public function getSingleEvent($event_id = FALSE) {
 
         if ($event_id != '') {
-
+            
             $this->data['event'] = $this->Calendar->getEventById($event_id);
             $this->data['assignee'] = $this->Tasks->getTaskAssignee();
             /* Get calendra event type */
             $this->data['event_types'] = $this->Calendar->getEventTypes();
-            $this->load->view('admin/update_event', $this->data);
+            $this->load->view('admin/calendar/update_event', $this->data);
         }
     }
 
