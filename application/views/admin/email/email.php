@@ -16,14 +16,14 @@
         <form action="" method="post">				
             <legend>Retrieve Email List</legend>
             <div class="col-md-6 form-group">
-                <select class="form-control" name="custom_filters.country">
+                <select class="form-control select_input" name="custom_filters.country">
                     <option value="">Please select a country</option>
                     <option value="US">United States</option>
                     <option value="INTL">International</option>
                 </select>
             </div>
             <div class="col-md-6 form-group">
-                <select class="form-control" name="custom_filters.status">
+                <select class="form-control select_input" name="custom_filters.status">
                     <option value="">Please select a status</option>
                     <option value="deposit">Deposit Paid</option>
                     <option value="balance">Balance Paid</option>
@@ -77,7 +77,7 @@
             <input type="hidden" name="template-only" id="template-only" value="true">
 
             <div class="col-md-6 form-group">
-                <select id="template" class="form-control" name="template">
+                <select id="template" class="form-control select_input" name="template">
                     <option>Please select a template...</option>
 <?php foreach ($templates as $template): ?>
                         <option value="<?php echo $template['slug']; ?>"><?php echo $template['name']; ?> (Sends from email address: <?php echo $template['from_email'] ?>)</option>
@@ -103,7 +103,7 @@
             <input type="hidden" name="body-only" id="body-only" value="true">
 
             <div class="col-md-6 form-group">
-                <select id="template" class="form-control" name="template">
+                <select id="template" class="form-control select_input" name="template">
                     <option>Please select a template...</option>
 <?php foreach ($templates as $template): ?>
                         <option value="<?php echo $template['slug']; ?>"><?php echo $template['name']; ?> (Sends from email address: <?php echo $template['from_email'] ?>)</option>
@@ -142,5 +142,11 @@
         
             $('#start_date').datepicker({'format' : 'yyyy-mm-dd' });
             $('#end_date').datepicker({'format' : 'yyyy-mm-dd' });
+            $('body').find(".select_input").chosen({no_results_text: "Oops, nothing found!"}); 
     });
 </script>
+<style>
+    .chosen-container {
+        width:100% !important;
+    }
+</style>
