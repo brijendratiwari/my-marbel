@@ -75,9 +75,8 @@ class Calendar extends CI_Controller {
     }
 
     public function getSingleEvent($event_id = FALSE) {
-
+         
         if ($event_id != '') {
-            
             $this->data['event'] = $this->Calendar->getEventById($event_id);
             $this->data['assignee'] = $this->Tasks->getTaskAssignee();
             /* Get calendra event type */

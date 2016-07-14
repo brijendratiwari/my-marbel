@@ -316,12 +316,13 @@ $(document).ready(function(){
         "aoColumnDefs": [
              {"aTargets": [0],"sClass": "text-center","bSortable": false},
             {"sClass": "aligncenter", "aTargets": [1]},
-            {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
-            {"sClass": "hidden-phone", "aTargets": [3]},
+            {"sClass": "aligncenter", "aTargets": [2]},
+            {"sClass": "eamil_conform aligncenter", "aTargets": [3]},
             {"sClass": "hidden-phone", "aTargets": [4]},
             {"sClass": "hidden-phone", "aTargets": [5]},
             {"sClass": "hidden-phone", "aTargets": [6]},
-            {"sClass": "hidden-phone text-center", "aTargets": [7],"bSortable": false},
+            {"sClass": "hidden-phone", "aTargets": [7]},
+            {"sClass": "hidden-phone text-center", "aTargets": [8],"bSortable": false},
            
             
         ]});
