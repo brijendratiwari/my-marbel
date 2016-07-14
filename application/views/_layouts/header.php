@@ -120,7 +120,12 @@
                         <a class="navbar-brand" href="<?php echo base_url('customer_profile'); ?>"><img src="<?php echo base_url(); ?>/assets/img/logo.png"></a>
                     <?php } else { ?>
                         <a class="navbar-brand" href="<?php echo base_url('profile'); ?>"><img src="<?php echo base_url(); ?>/assets/img/logo.png"></a>
-<?php } ?>
+<?php } ?> <button type="button" class="bugger-icon bar" style="display:block"> 
+                        <span class="fa fa-bars fa-lg"></span>
+                    </button>
+                        <button type="button" class="bugger-icon bar-call-back" style="display:none"> 
+                        <span class="fa fa-bars fa-lg"></span>
+                    </button>
                 </div>
                 <!-- /.navbar-header -->
 
