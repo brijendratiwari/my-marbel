@@ -488,6 +488,7 @@ if ($user_orders) {
                          <div class="col-md-6 form-group">
                                 <label>Profile Image</label>
                                 <input type="file" name="cd-profile" >
+                                <span id="cd-profile" class="text-danger hidden"></span>
                             </div>
 
 

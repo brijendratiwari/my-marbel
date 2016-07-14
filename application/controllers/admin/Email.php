@@ -27,7 +27,8 @@ class Email extends CI_Controller {
 
         $data['page'] = 'Email';
         $data['title'] = 'Email';
-
+        $data["style_to_load"] = array("assets/css/chosen/chosen.min.css");
+        $data['scripts_to_load'] = array("assets/js/chosen/chosen.jquery.min.js");
         $mandrill = $this->get_mandrill();
         $data['templates'] = $this->get_templates($mandrill);
 

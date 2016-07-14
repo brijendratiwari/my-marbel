@@ -333,6 +333,40 @@ $(document).ready(function(){
             part_data.fnFilter(($(this).val().toUpperCase())); 
        });
     
+    
+    
+    $('.bar').click( function() {
+       $('#page-wrapper').animate({
+    marginLeft: '70px'
+}, 0);
+       $('.navbar-collapse').animate({
+      paddingLeft: '150px'
+        }, 0);
+       $('.navbar-collapse .nav-main').addClass('hidden');
+        $('.navbar-collapse .nav-hidden').removeClass('hidden');
+$('.sidebar').animate({
+    left: '-140px'
+}, 0);
+       $(this).hide();
+       $('.bar-call-back').show();
+    });
+
+    $('.bar-call-back').click( function() {
+       $('#page-wrapper').animate({
+    marginLeft: '210px'
+}, 0);
+$('.navbar-collapse').animate({
+      paddingLeft: '0px'
+        }, 0);
+         $('.navbar-collapse .nav-hidden').addClass('hidden');
+         $('.navbar-collapse .nav-main').removeClass('hidden');
+       $('.sidebar').animate({
+    left: '0px'
+}, 0);
+        $(this).hide();
+       $('.bar').show();
+    });
+    
 
 })
 
