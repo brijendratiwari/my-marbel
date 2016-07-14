@@ -64,7 +64,7 @@ class Calendar_model extends CI_Model {
             $events = array();
             $this->db->select('mc.id,mc.title,mc.event_created_by,mc.event_created_to,mc.event_type,mc.startdate,mc.enddate,mc.allDay,mc.task_id,mcet.id as event_type_id,mcet.name as event_type,mcet.color_code')->from('m_calendar as mc')->join('m_cal_event_type as mcet', 'mcet.id=mc.event_type');
             if ($cal_type == 'personal') {
-                $this->db->where('mc.event_type', 1);
+                //$this->db->where('mc.event_type', 1);
                 $this->db->where('mc.event_created_by', $this->session->userdata['marbel_user']['user_id']);
                 $this->db->or_where('mc.event_type', 2);
 //               $this->db->where('mc.task_id !=', 0);

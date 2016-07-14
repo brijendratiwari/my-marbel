@@ -28,7 +28,11 @@
                     </div>
 
                 </div>-->
-                <div class="col-lg-3">
+              
+
+                <div id='calendar' class="col-lg-12"></div>
+                <div class="col-lg-12">
+                    <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">Event Types</div>
                         <div class="panel-body">
@@ -39,17 +43,23 @@
                                 <?php echo $type['name'];?>
                             </div>
                             <div class="col-lg-3">
-                                <button class="btn btn-xs" style="background-color:<?php echo $type['color_code']; ?>"></button>
+                                <button class="btn btn-xs"  style="background-color:<?php echo $type['color_code']; ?>"></button>
                             </div>
                             </div>
                           
                         <?php } } ?>
+                           <div class="col-lg-12"  style="font-size:12px;">
+                            <div class="col-lg-9">
+                               Inventory
+                            </div>
+                            <div class="col-lg-3">
+                                <button class="btn btn-xs" style="background-color:#F5D709"></button>
+                            </div>
+                            </div>  
                         </div>
                     </div>
 
-                </div>
-
-                <div id='calendar' class="col-lg-9"></div>
+                </div></div>
             </div>
 
             <div style='clear:both'></div>
@@ -221,6 +231,9 @@
 
                     console.log('-------------'+event.event_created_by+'----'+event.event_created_to);
                  if((event.event_created_by != '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>' && event.event_created_to != '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>') && (event.event_type_id==2)) {
+                          element.css('display','none');
+                }
+                 if((event.event_created_by != '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>' && event.event_type_id==1)) {
                           element.css('display','none');
                 }
                  if(event.event_type_id == 2 && event.task_id == 0) {

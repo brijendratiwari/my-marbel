@@ -28,7 +28,12 @@
                     </div>
 
                 </div>-->
-                <div class="col-lg-3">
+                
+
+                <div id='calendar' class="col-lg-12"></div>
+               
+                <div class="col-lg-12">
+                    <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">Event Types</div>
                         <div class="panel-body">
@@ -55,11 +60,10 @@
                         </div>
                     </div>
 
-                </div>
-
-                <div id='calendar' class="col-lg-9"></div>
+                </div></div>
             </div>
-
+            
+            
             <div style='clear:both'></div>
         </div>
     </div>
