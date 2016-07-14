@@ -39,7 +39,7 @@
                                 <?php echo $type['name'];?>
                             </div>
                             <div class="col-lg-3">
-                                <button class="btn btn-xs" style="background-color:<?php echo $type['color_code']; ?>"></button>
+                                <button class="btn btn-xs"  style="background-color:<?php echo $type['color_code']; ?>"></button>
                             </div>
                             </div>
                           
@@ -197,7 +197,7 @@
 
 
         /* call function get events month wise for listing */
-        getEvents(0);
+//        getEvents(0);
 
 
         var zone = "05:30";  //Change this to your timezone
@@ -224,17 +224,9 @@
             //events: [{"id":"14","title":"New Event","start":"2015-01-24T16:00:00+04:00","allDay":false}],
             //eventColor: '#00aeef',
              eventRender: function(event, element) {
-//                if(event.event_created_by == '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>') {
                     element.css('background-color', ''+event.color_code+'');
                     element.css('border-color',''+event.color_code+'');
-//                }else{
-//                    
-//                    element.css('background-color', 'grey');
-//                    element.css('border-color', 'grey');
-//                }
-                 if(event.event_created_by == '<?php echo $this->session->userdata['marbel_user']['user_id']; ?>' && event.task_id != 0) {
-                    element.css('display', 'none');
-                }
+
             },
             utc: true,
             header: {
@@ -277,7 +269,7 @@
                     success: function (response) {
                         if (response.status != 'success')
                             revertFunc();
-                        getEvents(0);
+//                        getEvents(0);
                     },
                     error: function (e) {
                         revertFunc();
@@ -330,7 +322,7 @@
                     success: function (response) {
                         if (response.status != 'success')
                             revertFunc();
-                        getEvents(0);
+//                        getEvents(0);
                     },
                     error: function (e) {
                         revertFunc();
@@ -362,7 +354,7 @@
 
 
 
-        /* call events function on previous and next click..*/
+        /* call events function on previous and next click..
         $('.fc-prev-button').click(function () {
             var moment = $('#calendar').fullCalendar('getDate');
             getEvents(moment.format());
@@ -370,7 +362,7 @@
         $('.fc-next-button').click(function () {
             var moment = $('#calendar').fullCalendar('getDate');
             getEvents(moment.format());
-        });
+        }); */
 /* datetime picker*/
        
         $('.datetimepicker8').datetimepicker();

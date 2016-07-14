@@ -265,7 +265,7 @@ $(document).ready(function(){
         $('body').find('#edit-row-form').ajaxForm(options);
      /* date picker */
         $('.duedate').datepicker({
-            'format': 'yyyy-mm-dd',
+            'format': 'mm/dd/yyyy',
              startDate: new Date()
         });
     

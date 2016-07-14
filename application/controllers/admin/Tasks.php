@@ -60,7 +60,7 @@ class Tasks extends CI_Controller {
                     'task_cat_id' => $this->input->post('cd-category'),
                     'task_assign_to' => $assignee,
                     'task_assign_by' => $assign_by_id,
-                    'task_due_date' => $this->input->post('cd-duedate'),
+                    'task_due_date' => date('Y-m-d', strtotime($this->input->post('cd-duedate'))),
                     'task_regarding' => $this->input->post('cd-regarding'),
                     'task_status' => 'To Do',
                     'task_effort' => $this->input->post('cd-effort'),
@@ -144,7 +144,7 @@ class Tasks extends CI_Controller {
                     'task_cat_id' => $this->input->post('cd-category'),
                     'task_assign_to' => $assignee,
                     'task_assign_by' => $assign_by_id,
-                    'task_due_date' => $this->input->post('cd-duedate'),
+                    'task_due_date' => date('Y-m-d', strtotime($this->input->post('cd-duedate'))),
                     'task_regarding' => $this->input->post('cd-regarding'),
                     'task_effort' => $this->input->post('cd-effort'),
                     'task_value' => $this->input->post('cd-value'),
@@ -155,7 +155,6 @@ class Tasks extends CI_Controller {
                 $this->db->where('task_id', $task_id);
                 $this->db->update('m_tasks', $task);
                 #echo $this->db->last_query(); die;
-                if ($this->db->affected_rows() > 0) {
                     if ($this->input->post('cd-duedate')) {
 
                         $startDate = $this->input->post('cd-duedate');
@@ -170,14 +169,7 @@ class Tasks extends CI_Controller {
                     $result['success'] = 'Task status updated successfully';
                     echo json_encode($result);
                     die;
-                   
-                }else{
-                    
-                    $result['result'] = FALSE;
-                    $result['success'] = 'Unknown Error';
-                    echo json_encode($result);
-                    die;
-                }
+                 
             }
         }
     }

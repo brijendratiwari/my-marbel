@@ -341,11 +341,16 @@ $(document).ready(function(){
 
             var task_id = $(this).attr('data-id');
             $('body').find('.edtttask').html('');
-            $('body').find('.edtttask').load("<?php echo base_url('edit_task'); ?>/" + task_id + "");
+            $('body').find('.checkout_loader').removeClass('hidden');
+            $('body').find('.edtttask').load("<?php echo base_url('edit_task'); ?>/" + task_id + "",function(response){
+                if(response){
+                    $('body').find('.checkout_loader').addClass('hidden');
+                }
+            });
         })
          /* date picker */
         $('.duedate').datepicker({
-            'format': 'yyyy-mm-dd',
+            'format': 'mm/dd/yyyy',
              startDate: new Date()
         });
         })

@@ -112,11 +112,108 @@ class Appsignin extends CI_Controller {
         $returnValue = array();
         $message='';
         $password='';
-        $user_id='';
+        $returnValue["data"] = array();
+       
         if (empty($_REQUEST["userEmail"])) { $message='Email field is required.'; }
+        if (!filter_var($_REQUEST["userEmail"], FILTER_VALIDATE_EMAIL)) { $message.= "Invalid email format"; }
         if (empty($_REQUEST["userFirstName"])) {$message.='Firstname field is required.';}
         if (empty($_REQUEST["userLastName"])) {$message.='Lastname field is required.';}
         if (empty($_REQUEST["userType"])) {$message.='user type field is required.';}
+        if (empty($_REQUEST["password"])) {$message.='user password field is required.';}
+        if($message!=''){
+            
+            $returnValue["status"] = "400";
+            $returnValue["message"] = $message;
+            echo json_encode($returnValue);
+             die;
+           
+        }else{
+                
+                 if(isset($_REQUEST['password']))
+                    $password=$_REQUEST['password'];
+                $filename='';
+                if(isset($_REQUEST['userProfilePicture'])){
+                    
+                    $data=$_REQUEST['userProfilePicture'];
+                    $img = str_replace('data:image/jpeg;base64,', '', $data);
+                    $img = str_replace(' ', '+', $img);
+                    $data = base64_decode($img);
+                    $file = CONTACT_UPLOADS_DIRECTORY_IMAGE .$_REQUEST["userFirstName"].'_'.uniqid() . '.jpeg'; 
+                    $filename= $_REQUEST["userFirstName"].'_'.uniqid() . '.jpeg';
+                    @file_put_contents($file, $data);
+                }
+               
+                    $data=array(
+                            'first_name'=>(isset($_REQUEST['userFirstName']))?$_REQUEST['userFirstName']:'',
+                            'last_name'=>(isset($_REQUEST['userLastName']))?$_REQUEST['userLastName']:'',
+                            'email'=>(isset($_REQUEST['userEmail']))?$_REQUEST['userEmail']:'',
+                            'type'=>(isset($_REQUEST['userType']))?$_REQUEST['userType']:'',
+                             'notes'=>(isset($_REQUEST['message']))?$_REQUEST['message']:'',
+                             'email_secondary'=>(isset($_REQUEST['email_secondary']))?:'',
+                             'bio'=>(isset($_REQUEST['bio']))?$_REQUEST['bio']:'',
+                             'height'=>(isset($_REQUEST['height']))?$_REQUEST['height']:'',
+                             'weight'=>(isset($_REQUEST['weight']))?$_REQUEST['weight']:'',
+                             'terrain'=>(isset($_REQUEST['terrain']))?$_REQUEST['terrain']:'',
+                             'company'=>(isset($_REQUEST['company']))?$_REQUEST['company']:'',
+                             'address_one'=>(isset($_REQUEST['addressOne']))?$_REQUEST['addressOne']:'',
+                             'address_two'=>(isset($_REQUEST['addressTwo']))?$_REQUEST['addressTwo']:'',
+                             'city'=>(isset($_REQUEST['city']))?$_REQUEST['city']:'',
+                             'state_or_region'=>(isset($_REQUEST['stateRegion']))?$_REQUEST['stateRegion']:'',
+                             'postal_code'=>(isset($_REQUEST['postalCode']))?$_REQUEST['postalCode']:'',
+                             'country'=>(isset($_REQUEST['country']))?$_REQUEST['country']:'',
+                             'privacy_setting'=>(isset($_REQUEST['privacySetting']))?$_REQUEST['privacySetting']:'',
+                             'units'=>(isset($_REQUEST['units']))?$_REQUEST['units']:'',
+                             'range_alarm'=>(isset($_REQUEST['rangeAlarm']))?$_REQUEST['rangeAlarm']:'',
+                             'notifications'=>(isset($_REQUEST['notifications']))?$_REQUEST['notifications']:'',
+                             'primary_riding_style'=>(isset($_REQUEST['primaryRidingStyle']))?$_REQUEST['primaryRidingStyle']:'',
+                             'safety_brake'=>(isset($_REQUEST['safetyBrake']))?$_REQUEST['safetyBrake']:'',
+                             'preferred_braking_force'=>(isset($_REQUEST['preferredBrakingForce']))?$_REQUEST['preferredBrakingForce']:'',
+                             'reverse_turned'=>(isset($_REQUEST['reverseTurned']))?$_REQUEST['reverseTurned']:'',
+                            'locked_settings'=>(isset($_REQUEST['lockedSettings']))?$_REQUEST['lockedSettings']:'',
+                            'register_date'=>time(),
+                            'user_profile_pic'=>$filename
+                         );
+                  
+                         $check_email=$this->Users->checkUserEmail($_REQUEST["userEmail"]);
+                         if($check_email==''){
+                                $this->db->insert('m_users',$data);
+                                $inser_id=$this->db->insert_id();
+                                if($password!=''){
+
+                                   $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+                                   $password = hash('sha512', $password . $random_salt);
+                                   $user_auth = array('user_id'=>$inser_id,'password' => $password, 'salt' => $random_salt);
+                                   $this->db->insert('m_user_auth', $user_auth);
+                                }
+                                $returnValue["data"]['userId'] =$inser_id;
+                                $returnValue["status"] = "200";
+                                $returnValue["message"] = "User informatiom added successfully.";
+                                echo json_encode($returnValue);
+                                die;
+                         }else{
+                    
+                            $returnValue["status"] = "401";
+                            $returnValue["message"] = "Email already exist.Please try with other email";
+                            echo json_encode($returnValue);
+                            die;
+                           }
+                        
+      
+        }
+        
+    }
+   public function update_user_information(){
+        $returnValue = array();
+        $message='';
+        $password='';
+        $user_id='';
+        $returnValue["data"] = array();
+        if (empty($_REQUEST["userEmail"])) { $message='Email field is required.'; }
+        if (!filter_var($_REQUEST["userEmail"], FILTER_VALIDATE_EMAIL)) { $message.= "Invalid email format"; }
+        if (empty($_REQUEST["userFirstName"])) {$message.='Firstname field is required.';}
+        if (empty($_REQUEST["userLastName"])) {$message.='Lastname field is required.';}
+        if (empty($_REQUEST["userType"])) {$message.='user type field is required.';}
+        if (empty($_REQUEST["userId"])) {$message.='user id field is required.';}
         if($message!=''){
             
             $returnValue["status"] = "400";
@@ -175,6 +272,8 @@ class Appsignin extends CI_Controller {
                             'user_profile_pic'=>$filename
                          );
                     if($user_id!=''){
+                         $check_email=$this->Users->checkUserEmailForUpdate($_REQUEST["userEmail"],$user_id);
+                         if($check_email==false){
                         
                          $this->db->where('id',$user_id);
                          $this->db->update('m_users',$data);
@@ -184,36 +283,22 @@ class Appsignin extends CI_Controller {
                             $password = hash('sha512', $password . $random_salt);
                             $this->db->where('user_id',$user_id);
                             $this->db->update('m_user_auth',array('password'=>$password,'salt'=>$random_salt));
+                            
                          }
+                         $returnValue["data"]['userId'] =$user_id;
                          $returnValue["status"] = "200";
                          $returnValue["message"] = "User informatiom updated successfully .";
                          echo json_encode($returnValue);
                             die;
-
-                    }else{
-                         $check_email=$this->Users->checkUserEmail($_REQUEST["userEmail"]);
-                         if($check_email==''){
-                                $this->db->insert('m_users',$data);
-                                $inser_id=$this->db->insert_id();
-                                if($password!=''){
-
-                                   $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
-                                   $password = hash('sha512', $password . $random_salt);
-                                   $user_auth = array('user_id'=>$inser_id,'password' => $password, 'salt' => $random_salt);
-                                   $this->db->insert('m_user_auth', $user_auth);
-                                }
-                                $returnValue["status"] = "200";
-                                $returnValue["message"] = "User informatiom added successfully.";
-                                echo json_encode($returnValue);
-                                die;
-                         }else{
+                          }else{
                     
                             $returnValue["status"] = "401";
                             $returnValue["message"] = "Email already exist.Please try with other email";
                             echo json_encode($returnValue);
                             die;
                            }
-                        }
+
+                    }
                 
       
         }
@@ -226,6 +311,54 @@ class Appsignin extends CI_Controller {
        if (empty($_REQUEST["board_id"])) { $message='Board id field is required.'; }
         if (empty($_REQUEST["ride_name"])) {$message.='Ride name field is required.';}
         
+        if($message!=''){
+            
+            $returnValue["status"] = "400";
+            $returnValue["message"] =$message;
+            $returnValue["result"] = 'Validation Error!';
+            echo json_encode($returnValue);
+             die;
+           
+        }else
+        {
+            $ride=array(
+                'board_ID'=>$_REQUEST["board_id"],
+                'ride_name'=>$_REQUEST["ride_name"],
+                'trip_distance'=>$_REQUEST["trip_distance"],
+                'trip_duration'=>$_REQUEST["trip_duration"],
+                'est_start_st'=>$_REQUEST["est_start_st"],
+                'est_finish_st'=>$_REQUEST["est_finish_st"],
+                'temp_f'=>$_REQUEST["temp_f"],
+                'humidity'=>$_REQUEST["humidity"],
+              );
+            
+                
+                $this->db->insert('m_rides',$ride);
+                if($this->db->insert_id()>0){
+                    $returnValue["data"]['ride_ID']=$this->db->insert_id();    
+                    $returnValue["status"] = "200";
+                    $returnValue["message"] ='Ride Inserted successfully';
+                    $returnValue["result"] = 'success';
+                    echo json_encode($returnValue);
+                    die;
+                }else{
+                    
+                    $returnValue["status"] = "400";
+                    $returnValue["message"] ='Some thing went wrough ! please try again.';
+                    $returnValue["result"] = 'failed';
+                    echo json_encode($returnValue);
+                    die;
+             
+            }
+        }
+  } 
+  public function update_ride(){
+       $returnValue = array();
+       $returnValue["data"] = array();
+       $message='';
+       if (empty($_REQUEST["board_id"])) { $message='Board id field is required.'; }
+        if (empty($_REQUEST["ride_name"])) {$message.='Ride name field is required.';}
+        if (empty($_REQUEST["ride_ID"])) {$message.='Ride id field is required.';}
         if($message!=''){
             
             $returnValue["status"] = "400";
@@ -261,30 +394,19 @@ class Appsignin extends CI_Controller {
                  die;
                 }else{
                     $returnValue["status"] = "400";
-                    $returnValue["message"] ='Some thing went wrough ! please try again.';
+                    $returnValue["message"] ='Changes not found!';
                     $returnValue["result"] = 'failed';
                     echo json_encode($returnValue);
                     die;
                 }
             }else{
                 
-                $this->db->insert('m_rides',$ride);
-                if($this->db->insert_id()>0){
-                    $returnValue["data"]['ride_ID']=$this->db->insert_id();    
-                    $returnValue["status"] = "200";
-                    $returnValue["message"] ='Ride Inserted successfully';
-                    $returnValue["result"] = 'success';
-                    echo json_encode($returnValue);
-                    die;
-                }else{
-                    
-                    $returnValue["status"] = "400";
-                    $returnValue["message"] ='Some thing went wrough ! please try again.';
+                 $returnValue["status"] = "400";
+                    $returnValue["message"] ='Ride id not given!';
                     $returnValue["result"] = 'failed';
                     echo json_encode($returnValue);
                     die;
-                }
             }
         }
-  } 
+  }
 }

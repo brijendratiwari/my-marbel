@@ -61,7 +61,6 @@ class Inventory extends CI_Controller {
             $lenght = intval($_GET['iDisplayLength']);
             $this->db->join('m_part_categories', 'm_part_categories.part_category_id=part_category', 'left');
             $this->db->join('m_part_type', 'm_part_type.part_type_id=part_type', 'left');
-            $this->db->where('part_user_id', $id_to);
             $records = $this->inventory->db->get("m_part", $lenght, $str_point);
         } else {
             $this->db->join('m_part_categories', 'm_part_categories.part_category_id=part_category', 'left');

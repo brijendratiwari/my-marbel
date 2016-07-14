@@ -328,6 +328,8 @@ $(document).ready(function(){
         ]});
     
        $('.category-search').click( function() { 
+           $('.category-search').removeClass('tab-active');
+           $(this).addClass('tab-active');
             part_data.fnFilter(($(this).val().toUpperCase())); 
        });
     
