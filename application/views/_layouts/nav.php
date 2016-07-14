@@ -4,7 +4,7 @@
                     <ul class="nav nav-main" id="side-menu">
 
                         <li>
-                            <a href="javascript:;"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="<?php echo base_url('dashboard');?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         
                         <li>

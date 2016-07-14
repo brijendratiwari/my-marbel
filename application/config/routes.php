@@ -61,6 +61,8 @@ $route['admin'] = 'admin/customers';
 $route['resetPassword/(:any)/(:any)'] = 'login/reset_password/$1/$2';
 
 
+$route['dashboard'] = 'admin/dashboard';
+
 $route['customers'] = 'admin/customers';
 $route['customer_list'] = 'admin/customers/get_customers';
 $route['add_customer'] = 'admin/customers/add_customer';
