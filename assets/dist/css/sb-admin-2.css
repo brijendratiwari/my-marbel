@@ -569,4 +569,5 @@ table.dataTable thead .sorting:after {
     .bar{
         display: none !important;
     }
+    #page-wrapper{ margin-left: 0px !important;}
 }
