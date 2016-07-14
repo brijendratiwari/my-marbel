@@ -167,7 +167,7 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <label>Select Category *</label>
-                            <select  name="cd-category" class="form-control" >
+                            <select  name="cd-category" class="form-control select_input" >
                                 <option value="">Select Category</option>
                                 <?php if ($category) {
                                     foreach ($category as $name) {
@@ -185,7 +185,7 @@
                         </div>
                         <div class="col-md-12 form-group">
                              <label>Select Assignee</label>
-                            <select  name="cd-assignee" class="form-control">
+                            <select  name="cd-assignee" class="form-control select_input">
                                 <option value="">Select Assignee</option>
                                 <?php if ($assignee) {
                                     foreach ($assignee as $name) {
@@ -211,7 +211,7 @@
                         </div>
                          <div class="col-md-12 form-group">
                              <label>Effort *</label>
-                            <select  name="cd-effort" class="form-control">
+                            <select  name="cd-effort" class="form-control select_input">
                                <option value="">Effort</option>
                                 <option value="1">1</option>
                                 <option value="10">10</option>
@@ -224,7 +224,7 @@
                         </div>
                        <div class="col-md-12 form-group">
                              <label>Value *</label>
-                            <select  name="cd-value" class="form-control">
+                            <select  name="cd-value" class="form-control select_input">
                                <option value="">Value</option>
                                 <option value="100">100</option>
                                 <option value="200">200</option>
@@ -353,11 +353,16 @@ $(document).ready(function(){
             'format': 'mm/dd/yyyy',
              startDate: new Date()
         });
+        $('body').find(".select_input").chosen({no_results_text: "Oops, nothing found!"}); 
         })
 </script>
+
 <style>
     .pagination > li > a, .pagination > li > span{
         
         padding:0px 5px !important;
+    }
+    .chosen-container {
+        width:100% !important;
     }
 </style>

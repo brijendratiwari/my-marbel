@@ -88,7 +88,7 @@
                  
                      <label>Event Types <i class="fa fa"></i></label>
                   
-                    <select  name="cd-types" class="form-control">
+                    <select  name="cd-types" class="form-control select_input">
                     <option value="">Event Types</option>
                     <?php if(!empty($event_types)){
                         foreach ($event_types as $type){ ?>
@@ -485,7 +485,7 @@ var base_url = $('body').find('#base_url').val();
     })
     /*get evnt on click..*/
     
-    
+     $('body').find(".select_input").chosen({no_results_text: "Oops, nothing found!"}); 
     
     });
 
@@ -545,4 +545,8 @@ var base_url = $('body').find('#base_url').val();
         vertical-align: middle;
     }
 
+    .chosen-container {
+        width:100% !important;
+    }
+</style>
 </style>
