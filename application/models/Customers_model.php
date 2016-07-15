@@ -258,4 +258,19 @@ class Customers_model extends CI_Model {
            return false;
        }
    }
+   function getUsersTasks($id=false){
+       
+       $this->db->select('m_tasks.task_name,m_tasks.task_status,m_tasks.task_details,m_tasks.task_due_date')->from('m_tasks');
+       $this->db->join('m_users','m_users.id=m_tasks.task_regarding');
+       $this->db->where('m_tasks.task_regarding',$id);
+       $this->db->order_by('m_tasks.task_id','Desc');
+       $query=$this->db->get();
+       if($query->num_rows()>0){
+           return $info=$query->result_array();
+          
+       }else{
+           
+           return false;
+       }
+   }
 }

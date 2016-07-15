@@ -162,7 +162,7 @@
 
                         <div class="col-md-12 form-group">
                             <label>Task Name *</label>
-                            <input type="text" name="cd-taskname" class="form-control" placeholder="Task Name">
+                            <input type="text" name="cd-taskname" class="form-control" placeholder="Task Name -What to do">
                             <span id="cd-taskname" class="text-danger"><?php echo form_error('cd-taskname'); ?></span>
                         </div>
                         <div class="col-md-12 form-group">
@@ -184,17 +184,20 @@
                             <span id="cd-category" class="text-danger"><?php echo form_error('cd-category'); ?></span>
                         </div>
                         <div class="col-md-12 form-group">
-                             <label>Select Assignee</label>
+                            <label>Select Assignee </label><small><b> - who should Do this task</b></small>
                             <select  name="cd-assignee" class="form-control select_input">
-                                <option value="">Select Assignee</option>
+                               
                                 <?php if ($assignee) {
                                     foreach ($assignee as $name) {
 
-                                        if($name['id']!=$this->session->userdata['marbel_user']['user_id']){
+                                        if($name['id']==$this->session->userdata['marbel_user']['user_id']){
                                         ?>
 
-                                        <option value="<?php echo $name['id']; ?>"><?php echo $name['first_name'] . ' ' . $name['last_name'] . '(' . $name['user_role_type'] . ')'; ?></option>
-                                  <?php }} }?>
+                                <option value="<?php echo $name['id']; ?>" selected="selected">Self - I will do it</option>
+                                  <?php }else{ ?>
+                                  
+                                <option value="<?php echo $name['id']; ?>"><?php echo ucwords($name['first_name'] . ' ' . $name['last_name']) . '(' . $name['user_role_type'] . ')'; ?></option>
+                                  <?php    } } }?>
 
                             </select>
                             <span id="cd-assignee" class="text-danger"><?php echo form_error('cd-assignee'); ?></span>
@@ -206,11 +209,19 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <label>Regarding</label>
-                            <input type="text" name="cd-regarding"  class="form-control" placeholder="Regarding" id="cd-regarding">
+                             <select  name="cd-regarding" class="form-control select_input">
+                                <option value="">User name - who is this task about</option>
+                                <?php if ($regarding) {
+                                    foreach ($regarding as $name) {?>
+                                <option value="<?php echo $name['id']; ?>"><?php echo ucwords($name['first_name'] . ' ' . $name['last_name']) . '(' . $name['user_role_type'] . ')'; ?></option>
+                                  <?php     } }?>
+
+                            </select>
+                          
                             <span id="cd-regarding" class="text-danger"><?php echo form_error('cd-regarding'); ?></span>
                         </div>
                          <div class="col-md-12 form-group">
-                             <label>Effort *</label>
+                             <label>Effort </label><small><b> - How difficult is this task</b></small>(1 = easy / 100 = full attention)
                             <select  name="cd-effort" class="form-control select_input">
                                <option value="">Effort</option>
                                 <option value="1">1</option>
@@ -223,7 +234,7 @@
                             <span id="cd-effort" class="text-danger"><?php echo form_error('cd-effort'); ?></span>
                         </div>
                        <div class="col-md-12 form-group">
-                             <label>Value *</label>
+                             <label>Value </label><small><b> - How important is this task</b></small>(100 = low / 1000 = high)
                             <select  name="cd-value" class="form-control select_input">
                                <option value="">Value</option>
                                 <option value="100">100</option>
@@ -239,6 +250,11 @@
 
                             </select>
                             <span id="cd-value" class="text-danger"><?php echo form_error('cd-value'); ?></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                             <label>Details -</label>
+                             <textarea style="width: 510px; height: 216px;" placeholder="The specifics about this task...if any" class="form-control" name="cd-details"></textarea>
+                            <span id="cd-detail" class="text-danger"><?php echo form_error('cd-detail'); ?></span>
                         </div>
                     </div>
 

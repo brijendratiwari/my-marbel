@@ -38,9 +38,9 @@
                                 foreach ($user_orders as $user_order) { ?>
                                     <p><label>Order Date : </label> <?php echo (!empty($user_order['order_date']))?date('M j, Y', $user_order['order_date']):"";?></p>
                                             <p><label>Order Number : </label> <?php echo (!empty($user_order['order_number']))?$user_order['order_number']:"";?></p>
-                                            <p><label>Product : </label><?php echo (!empty($user_order['product']))?$user_order['product']:"";?></p>
-                                            <p><label>Status : </label><?php echo (!empty($user_order['order_friendly_status']))?$user_order['order_friendly_status']:"";?></p>
-                                             <p><label>Total : </label><?php echo (!empty($user_order['order_total']))?'$'.$user_order['order_total']:"";?></p>
+                                            <p><label>Product : </label> <?php echo (!empty($user_order['product']))?$user_order['product']:"";?></p>
+                                            <p><label>Status : </label> <?php echo (!empty($user_order['order_friendly_status']))?$user_order['order_friendly_status']:"";?></p>
+                                             <p><label>Total : </label> <?php echo (!empty($user_order['order_total']))?'$'.$user_order['order_total']:"";?></p>
                                              <hr>
     <?php }
 } else {
@@ -67,7 +67,7 @@ if ($user_orders) {
                                                 <p><label>Issue : </label> <?php echo (!empty($service['issue']))?$service['issue']:"";?></p>
                                                 <p><label>Diagnostic Response : </label> <?php echo (!empty($service['diagnostic_response']))?$service['diagnostic_response']:"";?></p>
                                                 <p><label>Included Parts : </label> <?php echo (!empty($service['included_parts']))?$service['included_parts']:"";?></p>
-                                                <p><label>Notes : </label><?php echo (!empty($service['notes']))? $service['notes']:"";?></p>
+                                                <p><label>Notes : </label> <?php echo (!empty($service['notes']))? $service['notes']:"";?></p>
                                                 <hr>
                                         <?php
                                         }
@@ -88,7 +88,14 @@ if ($user_orders) {
                     <div class="panel panel-default">
                         <div class="panel-heading">Tasks</div>
                         <div class="panel-body">
-                            Empty
+                             <?php if($regarding_task){ foreach ($regarding_task as $task){?>
+                                            <p><label>Name : </label> <?php echo (!empty($task['task_name']))?$task['task_name']:"Empty";?></p>
+                                            <p><label>Details : </label> <?php echo (!empty($task['task_details']))?$task['task_details']:"Empty";?></p>
+                                            <p><label>Due Date : </label> <?php echo (!empty($task['task_due_date']))?date('M j, Y', strtotime($task['task_due_date'])):"Empty";?></p>
+                                            
+                                            <p><label>Status : </label> <?php echo (!empty($task['task_status']))?$task['task_status']:"Empty";?></p>
+                                             <hr>
+                                        <?php }}else{echo '<p>No Task Found!</p>';} ?>
                         </div>
                     </div>
 

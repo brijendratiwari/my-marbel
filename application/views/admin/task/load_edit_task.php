@@ -2,25 +2,23 @@
 
                     <div class="col-lg-12" >
 
-                        <div class="col-lg-12" >
-                        <div class="col-md-6 form-group">
+                        <div class="col-lg-12 form-group" >
+                    
                             <label>Task name : </label>
                            
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <input type="text" name="cd-taskname" class="form-control" placeholder="Task Name" value="<?php echo $tasks['task_name'];?>">
+                       
+                            <input type="text" name="cd-taskname" class="form-control" placeholder="Task Name -What to do" value="<?php echo $tasks['task_name'];?>">
                             <span id="cd-taskname" class="text-danger"><?php echo form_error('cd-taskname'); ?></span>
                             
                         </div>
-                        </div>
-                        <div class="col-lg-12" >
-                        <div class="col-md-6 form-group">
-                            <label>Category : </label>
+                       
+                        <div class="col-lg-12 form-group" >
+                       
+                            <label>Category  </label>
 
                           
 
-                        </div>
-                        <div class="col-md-6 form-group">
+                        
                              <select  name="cd-category" class="form-control select_input" >
                                 <option value="">Select Category</option>
                                 <?php if ($category) {
@@ -38,80 +36,78 @@
                             </select>
                              <span id="cd-category" class="text-danger"><?php echo form_error('cd-category'); ?></span>
                         </div>
-                        </div>
-                        <div class="col-lg-12" >
-                        <div class="col-md-6 form-group">
-                            <label>Assignee name : </label>
+                       
+                        <div class="col-lg-12 form-group" >
+                      
+                            <label>Assignee name  </label><small><b> - who should Do this task</b></small>
 
                            
-                        </div>
-                        <div class="col-md-6 form-group">
+                       
                              
                             <select  name="cd-assignee" class="form-control select_input">
                                 <option value="">Select Assignee</option>
                                 <?php if ($assignee) {
                                     foreach ($assignee as $name) {
 
-                                        //if($name['id']!=$this->session->userdata['marbel_user']['user_id']){
+                                         if($name['id']==$this->session->userdata['marbel_user']['user_id']){
                                         ?>
 
-                                        <option value="<?php echo $name['id']; ?>" <?php if (strcmp($tasks['task_assign_to'], $name['id']) == 0) {
+                                <option value="<?php echo $name['id']; ?>" <?php if (strcmp($tasks['task_assign_to'], $name['id']) == 0) {
                 echo 'selected="selected"';
-            } ?>><?php echo $name['first_name'] . ' ' . $name['last_name'] . '(' . $name['user_role_type'] . ')'; ?></option>
-                                  <?php //}
-                                  } }?>
+            } ?>>Self - I will do it</option>
+                                  <?php }else{ ?>
+                                  
+                                <option value="<?php echo $name['id']; ?>" <?php if (strcmp($tasks['task_assign_to'], $name['id']) == 0) {
+                echo 'selected="selected"';
+            } ?>><?php echo ucwords($name['first_name'] . ' ' . $name['last_name']) . '(' . $name['user_role_type'] . ')'; ?></option>
+                                  <?php    } } }?>
 
                             </select>
                             <span id="cd-assignee" class="text-danger"><?php echo form_error('cd-assignee'); ?></span>
                            
                         </div>
-                        </div>
-                        <div class="col-lg-12" >
-                        <div class="col-md-6 form-group">
+                       
+                        <div class="col-lg-12 form-group" >
+                       
 
-                            <label> Due date : </label>
+                            <label> Due date  </label>
 
                             
-                        </div>
-                        <div class="col-md-6 form-group">
+                        
                             <input type="text" name="cd-duedate"  class="form-control duedate" placeholder="Due Date" readonly="readonly" value=" <?php echo (($tasks['task_due_date']!='' && $tasks['task_due_date']!='0000-00-00')? date('m/d/Y', strtotime($tasks['task_due_date'])):'');?>">
                             <span id="cd-duedate" class="text-danger"><?php echo form_error('cd-duedate'); ?></span>
                            
+                        
                         </div>
-                        </div>
-<!--                        <div class="col-lg-12" >
-                        <div class="col-md-6 form-group">
 
-                            <label> Completed date : </label>
-
-                            
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <?php echo (($tasks['task_completed_date']!='' && $tasks['task_completed_date']!='0000-00-00')? date('m/d/Y', strtotime($tasks['task_completed_date'])):'Not Completed');?>
-                        </div>
-                        </div>-->
-                        <div class="col-lg-12" >
-                        <div class="col-md-6 form-group">
-
-                            <label> Regarding : </label>
+                        <div class="col-lg-12 form-group" >
+                        
+                            <label> Regarding  </label>
 
                             
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <input type="text" name="cd-regarding"  class="form-control" placeholder="Regarding" id="cd-regarding" value="<?php echo (!empty($tasks['task_regarding']))?$tasks['task_regarding']:"";?>">
+                       
+                             <select  name="cd-regarding" class="form-control select_input">
+                                <option value="">User name - who is this task about</option>
+                                <?php if ($regarding) {
+                                    foreach ($regarding as $name) {?>
+                                <option value="<?php echo $name['id']; ?>" <?php if (strcmp($tasks['task_regarding'], $name['id']) == 0) {
+                echo 'selected="selected"';
+            } ?>><?php echo ucwords($name['first_name'] . ' ' . $name['last_name']) . '(' . $name['user_role_type'] . ')'; ?></option>
+                                  <?php     } }?>
+
+                            </select>
                             <span id="cd-regarding" class="text-danger"><?php echo form_error('cd-regarding'); ?></span>
                             
                         </div>
-                        </div>
+                       
                         
-                        <div class="col-lg-12" >
-                        <div class="col-md-6 form-group">
+                        <div class="col-lg-12 form-group" >
+                       
 
-                            <label> Effort : </label>
+                            <label> Effort </label><small><b> -  How difficult is this task</b></small>(1 = easy / 100 = full attention)
 
                             
-                        </div>
-                        <div class="col-md-6 form-group">
+                      
                           
                             <select  name="cd-effort" class="form-control select_input">
                                <option value="">Effort</option>
@@ -135,15 +131,13 @@
                             <span id="cd-effort" class="text-danger"><?php echo form_error('cd-effort'); ?></span>
                            
                         </div>
-                        </div>
-                        <div class="col-lg-12" >
-                        <div class="col-md-6 form-group">
-
-                            <label> Value : </label>
+                       
+                        <div class="col-lg-12 form-group" >
+                      
+                            <label> Value  </label><small><b> - How important is this task</b></small>(100 = low / 1000 = high)
 
                             
-                        </div>
-                        <div class="col-md-6 form-group">
+                        
                              <select  name="cd-value" class="form-control select_input">
                                <option value="">Value</option>
                                 <option value="100" <?php if (strcmp($tasks['task_value'], '100') == 0) {
@@ -180,13 +174,11 @@
                             </select>
                             <span id="cd-value" class="text-danger"><?php echo form_error('cd-value'); ?></span>
                         </div>
-                        </div>
-                        <div class="col-lg-12" >
+                      
+                        <div class="col-lg-12" form-group>
                        
-                            <div class="col-md-6 form-group">  
+                         
                            <label> Status : </label>
-                            </div> 
-                            <div class="col-md-6 form-group ">  
                             
                            <select  name="cd-status" class="form-control select_input">
                                <option value="To Do" <?php if (strcmp($tasks['task_status'], 'To Do') == 0) {
@@ -202,7 +194,17 @@
                 echo 'selected="selected"';
             } ?>>Finished</option>
                             </select>
-                          </div> 
+                         
+                        </div>
+                        <div class="col-lg-12 form-group" >
+                       
+                           
+                           <label> Details : </label>
+                           
+                              <textarea style="width: 510px; height: 197px;" placeholder="The specifics about this task...if any" class="form-control" name="cd-details"><?php echo (!empty($tasks['task_details']))?$tasks['task_details']:"";?></textarea>
+                         
+                           
+                        
                         </div>
 
                     </div>

@@ -305,7 +305,7 @@ class Customers extends CI_Controller {
         $this->data['title'] = 'User Profile';
         $this->data['page'] = 'User Profile';
         if ($id != '') {
-
+            $this->data['regarding_task'] = $this->Customer->getUsersTasks($id);
             $this->data['user_info'] = $this->Customer->getCustomerInfo($id);
             $this->data['user_orders'] = $this->Services->getOrders($id);
         }

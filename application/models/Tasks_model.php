@@ -40,7 +40,20 @@ class Tasks_model extends CI_Model {
             return false;
         }
     }
+    
+    public function getTaskRegarding() {
+        
+        $this->db->select('m_users.id,m_users.first_name,m_users.last_name,m_users.type,m_users.parent_type,m_users_level.user_role_type')->from('m_users');
+        $this->db->join('m_users_level', 'm_users.type=m_users_level.id', 'left');
+        $this->db->order_by('m_users_level.user_role_type', 'asc');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
 
+            return $query->result_array();
+        } else {
+            return false;
+        }
+    }
     public function getTasks($id_to = false, $id_by = false, $status = false) {
 
         $this->db->select('*')->from('m_tasks');
@@ -59,7 +72,7 @@ class Tasks_model extends CI_Model {
             $task = $query->result_array();
             $i = 0;
             foreach ($task as $result) {
-
+                $task[$i]['regarding_name'] = $this->getAssigneeNameById($result['task_regarding']);
                 $task[$i]['assign_to_name'] = $this->getAssigneeNameById($result['task_assign_to']);
                 $task[$i]['assign_by_name'] = $this->getAssigneeNameById($result['task_assign_by']);
                 $task[$i]['category_name'] = $this->getTaskCategory($result['task_cat_id']);
