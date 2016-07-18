@@ -322,8 +322,8 @@ class Appsignin extends CI_Controller {
     public function rides() {
         $returnValue = array();
         $returnValue["data"] = array();
-        $this->form_validation->set_rules('board_ID', 'Board id', 'numeric');
-       if ($this->form_validation->run() == FALSE) {
+        $this->form_validation->set_rules('board_ID', 'Board id', 'trim');
+        if ($this->form_validation->run() == FALSE) {
 
 
             $returnValue["status"] = "400";
@@ -388,23 +388,40 @@ class Appsignin extends CI_Controller {
     }
 
     public function ridespoints() {
-        
-        $ride_points = json_decode($this->input->get_post('ride_points'),1);
-       
-        if (is_array($ride_points) && count($ride_points) > 0) {
 
+        $ride_points = json_decode($this->input->get_post('ride_points'), 1);
+
+        if (is_array($ride_points) && count($ride_points) > 0) {
+            $i = 0;
             foreach ($ride_points as $key => $value) {
-                
-                if ($ride_points[$key]['board_id'] != '' && $ride_points[$key]['user_id'] != '' && $ride_points[$key]['ride_id'] != '') {
+              
+                if (isset($ride_points[$key]['ride_id']) && $ride_points[$key]['ride_id'] != '' ) {
                     $this->db->insert('m_ride_points', $value);
-                }
+                    $i = 1;
+                } 
             }
+            if ($i == 1) {
+                $returnValue["status"] = "200";
+                $returnValue["message"] = 'Ride points inserted successfully';
+                $returnValue["result"] = 'success';
+                echo json_encode($returnValue);
+                die;
+            } else {
+
+                $returnValue["status"] = "400";
+                $returnValue["message"] = 'Ride id can not be empty or Some thing went wrough! Please try again.';
+                $returnValue["result"] = 'failed';
+                echo json_encode($returnValue);
+                die;
+            }
+        } else {
+
+            $returnValue["status"] = "400";
+            $returnValue["message"] = 'Data format not valid! Please send valid format.';
+            $returnValue["result"] = 'failed';
+            echo json_encode($returnValue);
+            die;
         }
-        $returnValue["status"] = "200";
-        $returnValue["message"] = 'Ride points inserted successfully';
-        $returnValue["result"] = 'success';
-        echo json_encode($returnValue);
-        die;
     }
 
 }
