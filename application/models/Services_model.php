@@ -165,7 +165,7 @@ class Services_model extends CI_Model {
                         'issue'=>$this->input->post('issue'),
                         'suggested_response'=>$this->input->post('response'),
                         'suggested_response_admin_id'=>$this->input->post('admin_id'),
-                        'due_date'=>'NOW()',
+                        'date'=>date('Y-m-d h:i:s'),
                         
                     );        
                     $this->db->insert('m_services',$insert_services);     

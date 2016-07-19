@@ -109,9 +109,9 @@ class Services extends CI_Controller {
             $service_url = '';
      
             if ($status == 'finished') {
-                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), date('M j, Y', $val['qa_date']), $val['tracking_out'], ucwords($val['status']), '<a href="' . base_url('edit_service/' . $val['id'] . '/fn') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), ($val['qa_date']!='' && $val['qa_date']!=0)?date('M j, Y', $val['qa_date']):"", $val['tracking_out'], ucwords($val['status']), '<a href="' . base_url('edit_service/' . $val['id'] . '/fn') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             } else if ($status == 'inhouse') {
-                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), date('M j, Y', strtotime($val['date'])), $val['priority'], Date('M j, Y', strtotime($val['due_date'])), ucwords($val['status']), '<a href="' . base_url('edit_service/' . $val['id'] . '/in') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), date('M j, Y', strtotime($val['date'])), $val['priority'], ($val['due_date']!='')?Date('M j, Y', strtotime($val['due_date'])):"", ucwords($val['status']), '<a href="' . base_url('edit_service/' . $val['id'] . '/in') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             } elseif ($status == 'pending') {
                 if($val['user_id']=='')
                 $user_id=0;

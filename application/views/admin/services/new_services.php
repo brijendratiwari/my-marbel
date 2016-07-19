@@ -88,7 +88,7 @@
 						</select>
 					</div>
 					<div class="col-md-3 form-group">
-						<input type="date" id="due_date" name="due_date" placeholder="Due Date" <?php if (isset($service)) { echo ' value="'.date('Y-m-d',$service['due_date']).'"'; } ?> class="form-control"/>
+						<input type="text" id="due_date" name="due_date" placeholder="Due Date" <?php if (isset($service) && $service['due_date']!='') { echo ' value="'.date('Y-m-d',$service['due_date']).'"'; } ?> class="form-control"/>
 					</div>
 				</div>
 				<div class="col-md-12">

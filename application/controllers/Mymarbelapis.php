@@ -46,7 +46,7 @@ class Mymarbelapis extends CI_Controller {
                 } else {
 
                     $returnValue["message"] = "Incorrect Password.";
-                    $returnValue["result"] = "Failed";
+                    $returnValue["result"] = "failed";
                     echo json_encode($returnValue);
                     die;
                 }
@@ -153,6 +153,7 @@ class Mymarbelapis extends CI_Controller {
         } else {
 
             $ride = array(
+                'userID' => ($this->input->get_post('userID')) ? $this->input->get_post('userID') : "",
                 'board_ID' => ($this->input->get_post('board_ID')) ? $this->input->get_post('board_ID') : "",
                 'trip_distance' => ($this->input->get_post("trip_distance")) ? $this->input->get_post("trip_distance") : "",
                 'trip_duration' => ($this->input->get_post("trip_duration")) ? $this->input->get_post("trip_duration") : "",

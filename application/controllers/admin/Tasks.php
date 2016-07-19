@@ -65,7 +65,7 @@ class Tasks extends CI_Controller {
                     'task_cat_id' => $this->input->post('cd-category'),
                     'task_assign_to' => $assignee,
                     'task_assign_by' => $assign_by_id,
-                    'task_due_date' => date('Y-m-d', strtotime($this->input->post('cd-duedate'))),
+                    'task_due_date' => ($this->input->post('cd-duedate'))?date('Y-m-d', strtotime($this->input->post('cd-duedate'))):"",
                     'task_regarding' => $this->input->post('cd-regarding'),
                     'task_status' => 'To Do',
                     'task_effort' => $this->input->post('cd-effort'),
@@ -133,7 +133,7 @@ class Tasks extends CI_Controller {
                 die;
             }
             else{
-                
+                #echo $this->input->post('cd-duedate'); die;
                 if ($this->input->post('cd-status') == 'Finished') {
                     $complete_date = date('Y-m-d');
                 } else {
@@ -151,13 +151,14 @@ class Tasks extends CI_Controller {
                     $assignee = $this->session->userdata['marbel_user']['user_id'];
                     $assign_by_id = 0;
                 }
+          
                 $effort_division_value = $this->input->post('cd-value') / $this->input->post('cd-effort');
                 $task = array(
                     'task_name' => $this->input->post('cd-taskname'),
                     'task_cat_id' => $this->input->post('cd-category'),
                     'task_assign_to' => $assignee,
                     'task_assign_by' => $assign_by_id,
-                    'task_due_date' => date('Y-m-d', strtotime($this->input->post('cd-duedate'))),
+                    'task_due_date' =>(trim($this->input->post('cd-duedate'))!='')?date('Y-m-d', strtotime($this->input->post('cd-duedate'))):"",
                     'task_regarding' => $this->input->post('cd-regarding'),
                     'task_effort' => $this->input->post('cd-effort'),
                     'task_value' => $this->input->post('cd-value'),
@@ -166,6 +167,7 @@ class Tasks extends CI_Controller {
                     'task_status' => $this->input->post('cd-status'),
                     'task_details' => $this->input->post('cd-details')
                 );
+                #print_r($task); die;
                 $this->db->where('task_id', $task_id);
                 $this->db->update('m_tasks', $task);
                 #echo $this->db->last_query(); die;
@@ -260,7 +262,7 @@ class Tasks extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['task_id'], '<span style="color: #00aeef;"><i class="fa fa-circle"></i></span> ' . $val['cat_name'], $val['task_name'], $val['fullname'], $val['task_status'], $val['task_effort'], $val['task_value'], (($val['task_due_date'] != '' && $val['task_due_date'] != '0000-00-00') ? date('m/d/Y', strtotime($val['task_due_date'])) : ''), ' <a class="btn btn-xs btn-success edit-task" href="#" data-id="' . $val['task_id'] . '" data-toggle="modal" data-target="#editTaskModal"><i class="fa fa-eye"></i> View</a>');
+            $output['aaData'][] = array("DT_RowId" => $val['task_id'], '<span style="color: #00aeef;"><i class="fa fa-circle"></i></span> ' . $val['cat_name'], $val['task_name'], $val['fullname'], $val['task_status'], $val['task_effort'], $val['task_value'], ($val['task_due_date'] != '' && $val['task_due_date'] != '0000-00-00') ? date('m/d/Y', strtotime($val['task_due_date'])) : '', ' <a class="btn btn-xs btn-success edit-task" href="#" data-id="' . $val['task_id'] . '" data-toggle="modal" data-target="#editTaskModal"><i class="fa fa-eye"></i> View</a>');
         }
 
         echo json_encode($output);
