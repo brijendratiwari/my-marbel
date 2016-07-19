@@ -14,7 +14,7 @@ class Mymarbelapis extends CI_Controller {
         $this->load->model('users_model', 'Users');
         $this->load->model('webapi_model', 'Webapi');
     }
-
+    //webservice use for signin
     public function index() {
         $returnValue = array();
         $returnValue['data'] = array();
@@ -59,10 +59,11 @@ class Mymarbelapis extends CI_Controller {
             }
         }
     }
-
+    //webservice for user signup
     public function users_signup() {
         $returnValue = array();
         $returnValue["data"] = array();
+        $filename = '';
         $this->form_validation->set_rules('userEmail', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('userPassword', 'Password', 'trim|required');
         $this->form_validation->set_rules('userFirstName', 'First Name', 'trim|required');
@@ -75,19 +76,17 @@ class Mymarbelapis extends CI_Controller {
             echo json_encode($returnValue);
             die;
         } else {
-             if ($this->input->get_post('userProfilePicture')) {
-
-                $filename = $this->updateProfilePicture($this->input->get_post('userProfilePicture'),$this->input->get_post('userFirstName'));
-            } else {
-                $filename = $this->Users->getUserImage($user_id);
-            }
             if ($this->input->get_post('userId')) {
                 $user_id = $this->input->get_post('userId');
                 $check_email = $this->Users->checkUserEmailForUpdate($this->input->get_post('userEmail'), $user_id);
                 if ($check_email == false) {
-
-                    $response = $this->Webapi->userUpdateInfos($user_id,$filename);
-                 
+                    if ($this->input->get_post('userProfilePicture')) {
+                        $image = $this->input->get_post('userProfilePicture');
+                        $filename = $this->updateProfilePicture($image, $this->input->get_post('userFirstName'));
+                    } else {
+                        $filename = $this->Users->getUserImage($this->input->get_post('userId'));
+                    }
+                    $response = $this->Webapi->userUpdateInfos($user_id, $filename);
                     if ($response) {
                         $returnValue["data"]['userId'] = $user_id;
                         $returnValue["status"] = "200";
@@ -101,8 +100,6 @@ class Mymarbelapis extends CI_Controller {
                         die;
                     }
                 } else {
-
-
                     $returnValue["message"] = "Email already exist.Please try with other email";
                     $returnValue["result"] = 'failed';
                     echo json_encode($returnValue);
@@ -111,6 +108,10 @@ class Mymarbelapis extends CI_Controller {
             } else {
                 $check_email = $this->Users->checkUserEmail($_REQUEST["userEmail"]);
                 if ($check_email == '') {
+                    if ($this->input->get_post('userProfilePicture')) {
+                        $image = $this->input->get_post('userProfilePicture');
+                        $filename = $this->updateProfilePicture($image, $this->input->get_post('userFirstName'));
+                    }
                     $response = $this->Webapi->saveUserInfo($filename);
                     if ($response) {
                         $returnValue["data"]['userId'] = $response;
@@ -136,7 +137,7 @@ class Mymarbelapis extends CI_Controller {
             }
         }
     }
-
+    //webservices for save ride
     public function rides() {
         $returnValue = array();
         $returnValue["data"] = array();
@@ -144,7 +145,7 @@ class Mymarbelapis extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
 
 
-           
+
             $returnValue["message"] = $this->form_validation->error_array();
             $returnValue["result"] = 'Validation Error!';
             echo json_encode($returnValue);
@@ -178,7 +179,7 @@ class Mymarbelapis extends CI_Controller {
                     die;
                 } else {
 
-                   
+
                     $returnValue["message"] = 'Ride id does not exist!';
                     $returnValue["result"] = 'failed';
                     echo json_encode($returnValue);
@@ -195,7 +196,7 @@ class Mymarbelapis extends CI_Controller {
                     die;
                 } else {
 
-                   
+
                     $returnValue["message"] = 'Some thing went wrough ! please try again.';
                     $returnValue["result"] = 'failed';
                     echo json_encode($returnValue);
@@ -204,7 +205,7 @@ class Mymarbelapis extends CI_Controller {
             }
         }
     }
-
+    //web services for save rides point
     public function ridespoints() {
 
         $ride_points = json_decode($this->input->get_post('ride_points'), 1);
@@ -226,7 +227,7 @@ class Mymarbelapis extends CI_Controller {
                 die;
             } else {
 
-                
+
                 $returnValue["message"] = 'Ride id can not be empty or Some thing went wrough! Please try again.';
                 $returnValue["result"] = 'failed';
                 echo json_encode($returnValue);
@@ -234,27 +235,27 @@ class Mymarbelapis extends CI_Controller {
             }
         } else {
 
-           
+
             $returnValue["message"] = 'Data format not valid! Please send valid format.';
             $returnValue["result"] = 'failed';
             echo json_encode($returnValue);
             die;
         }
     }
+    //Convet image base64 and upload
     public function updateProfilePicture($image = false, $userName = false) {
-
-        if ($image) {
-
-            $data = $image;
+     if ($image) {
+            $data = trim($image);
             $img = str_replace('data:image/jpeg;base64,', '', $data);
             $img = str_replace(' ', '+', $img);
             $data = base64_decode($img);
-            $file = CONTACT_UPLOADS_DIRECTORY_IMAGE.$image . '_' . uniqid() . '.jpeg';
-            $filename = $userName . '_' . uniqid() . '.jpeg';
+            $filename=$userName . '-' . uniqid() . '.jpeg';
+            $file = APPPATH . '../assets/profile-imgs/' .$filename;
             @file_put_contents($file, $data);
             return $filename;
         } else {
             return false;
         }
     }
+
 }

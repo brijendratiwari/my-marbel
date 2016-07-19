@@ -86,6 +86,7 @@
             <div class="modal-footer">
                   <?php if($event->event_type!=11){?> 
                 <?php if($event->event_created_by== $this->session->userdata['marbel_user']['user_id']){?>
+                <a href="<?php echo base_url('delete_event/'.$event->id);?>" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-danger pull-left">Delete</a>
                 <button type="button" data-event="<?php echo $event->id; ?>" id="edit-event" class="btn btn-custom">Edit</button>
                   <?php }  }?>
             </div>

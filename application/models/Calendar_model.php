@@ -116,7 +116,7 @@ class Calendar_model extends CI_Model {
 
     public function getEventById($event_id) {
         $table = 'm_calendar';
-        $this->db->select('m_calendar.*,m_users.first_name,m_users.last_name,m_users.id as user_id,m_users.user_profile_pic')->from('m_calendar')->where('m_calendar.id', $event_id)->join('m_users','m_users.id = m_calendar.event_created_by','LEFT');
+        $this->db->select('m_calendar.*,m_users.first_name,m_users.last_name,m_users.id as user_id,m_users.user_profile_pic')->from('m_calendar')->where('m_calendar.id', $event_id)->join('m_users', 'm_users.id = m_calendar.event_created_by', 'LEFT');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $getRecord = $query->row();
@@ -136,5 +136,7 @@ class Calendar_model extends CI_Model {
             return FALSE;
         }
     }
+
+   
 
 }
