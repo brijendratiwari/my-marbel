@@ -117,9 +117,9 @@
                     $user_type = $this->session->userdata['marbel_user']['type'];
                     if ($user_type === 'customer') {
                         ?>
-                        <a class="navbar-brand" href="<?php echo base_url('customer_profile'); ?>"><img src="<?php echo base_url(); ?>/assets/img/logo.png"></a>
+                        <a class="navbar-brand" href="javascript:;"><img src="<?php echo base_url(); ?>/assets/img/logo.jpg"></a>
                     <?php } else { ?>
-                        <a class="navbar-brand" href="<?php echo base_url('profile'); ?>"><img src="<?php echo base_url(); ?>/assets/img/logo.jpg"></a>
+                        <a class="navbar-brand" href="javascript:;"><img src="<?php echo base_url(); ?>/assets/img/logo.jpg"></a>
 <?php } ?> <button type="button" class="bugger-icon bar" style="display:block"> 
                         <span class="fa fa-bars fa-lg"></span>
                     </button>
@@ -142,10 +142,10 @@
                         <ul class="dropdown-menu dropdown-user">
                             <li>
                                 <?php if ($user_type === 'customer') { ?>
-                                    <a href="<?php echo base_url('customer_profile'); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                                <?php } else { ?>
+<!--                                    <a href="<?php echo base_url('customer_profile'); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>-->
+                                <?php } if ($user_type === 'admin') { ?>
                                     <a href="<?php echo base_url('profile'); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
-<?php } ?>
+<?ph                                <?php } ?>
                             </li>
                             <li><a data-target="#resetPasswordUserModal" href="#" data-toggle="modal"><i class="fa fa-key fa-fw"></i> Reset Password</a></li>
                             <li><a href="<?php echo base_url('login/logout'); ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

@@ -504,5 +504,18 @@ class Tasks extends CI_Controller {
         echo json_encode($output);
         die;
     }
+    function delete_tasks($id=false){
+        
+        $response=$this->Tasks->deleteTasks($id);
+        if($response){
+            $this->session->set_flashdata('success','Task deleted successfully');
+            redirect('tasks');
+            
+        }else{
+            $this->session->set_flashdata('error','Some thing wrough ! please try again');
+            redirect('tasks'); 
+        }
+        
+    }
 
 }

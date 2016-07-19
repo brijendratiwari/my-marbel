@@ -117,5 +117,20 @@ class Tasks_model extends CI_Model {
             return false;
         }
     }
+    public function deleteTasks($id=false){
+        
+        $this->db->where('task_id',$id);
+        $this->db->delete('m_tasks');
+        $this->db->where('task_id',$id);
+        $this->db->delete('m_calendar');
+        if($this->db->affected_rows()){
+            
+            return true;
+            
+        }else{
+            
+            return false;
+        }
+    }
 
 }

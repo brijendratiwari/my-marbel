@@ -211,6 +211,7 @@
                     <div class="clearfix"></div>
                     <div class="modal-footer">
                         <input type="hidden" name="task_id" value="<?php echo $tasks['task_id'];?>">
+                        <a href="<?php echo base_url('delete_tasks/'.$tasks['task_id'])?>" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-danger pull-left">Delete</a>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" id="add-row" class="btn btn-success">Update</button>
                     </div>

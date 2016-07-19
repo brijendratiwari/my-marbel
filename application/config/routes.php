@@ -138,12 +138,13 @@ $route['get_task_assign_to_me']='admin/tasks/get_task_assign_to_me';
 $route['get_task_assign_by_me']='admin/tasks/get_task_assign_by_me';
 $route['get_task_completed_to_me']='admin/tasks/get_task_completed_to_me';
 $route['get_completed_task_assign_by_me']='admin/tasks/get_completed_task_assign_by_me';
+$route['delete_tasks/(:num)']='admin/tasks/delete_tasks/$1';
 
 /*api  */
-$route['saveuserinformation']='appsignin/save_user_information';
-$route['updateuserinformation']='appsignin/update_user_information';
-$route['rides']='appsignin/rides';
-$route['ridespoints']='appsignin/ridespoints';
+$route['appsignin']='mymarbelapis/index';
+$route['appsignup']='mymarbelapis/users_signup';
+$route['rides']='mymarbelapis/rides';
+$route['ridespoints']='mymarbelapis/ridespoints';
 
 
 /*....api*/
