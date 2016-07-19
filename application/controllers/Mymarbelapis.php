@@ -38,8 +38,8 @@ class Mymarbelapis extends CI_Controller {
                 if ($userSecuredPassword == $userPassword) {
                     $user_info = $this->Webapi->getUserInfo($userDetails['user_id']);
                     $returnValue["status"] = "200";
-                    $returnValue["message"] = "success";
-                    $returnValue["result"] = "User Information.";
+                    $returnValue["message"] = "User Information.";
+                    $returnValue["result"] = "success";
                     $returnValue['data'] = $user_info;
                     echo json_encode($returnValue);
                     die;
@@ -52,7 +52,7 @@ class Mymarbelapis extends CI_Controller {
                 }
             } else {
 
-                $returnValue["message"] = "No Information found.";
+                $returnValue["message"] = "Email does not exist.";
                 $returnValue["result"] = "failed";
                 echo json_encode($returnValue);
                 die;
