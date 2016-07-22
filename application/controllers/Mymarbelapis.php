@@ -21,7 +21,7 @@ class Mymarbelapis extends CI_Controller {
         $this->form_validation->set_rules('userEmail', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('userPassword', 'Password', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
-
+            $returnValue["status"] =false;
             $returnValue["message"] = $this->form_validation->error_array();
             $returnValue["result"] = 'failed';
             echo json_encode($returnValue);
@@ -37,21 +37,21 @@ class Mymarbelapis extends CI_Controller {
                 $userPassword = hash('sha512', $userPassword . $userSalt);
                 if ($userSecuredPassword == $userPassword) {
                     $user_info = $this->Webapi->getUserInfo($userDetails['user_id']);
-                    $returnValue["status"] = "200";
+                    $returnValue["status"] = true;
                     $returnValue["message"] = "User Information.";
                     $returnValue["result"] = "success";
                     $returnValue['data'] = $user_info;
                     echo json_encode($returnValue);
                     die;
                 } else {
-
+                    $returnValue["status"] =false;
                     $returnValue["message"] = "Incorrect Password.";
                     $returnValue["result"] = "failed";
                     echo json_encode($returnValue);
                     die;
                 }
             } else {
-
+                $returnValue["status"] =false;
                 $returnValue["message"] = "Email does not exist.";
                 $returnValue["result"] = "failed";
                 echo json_encode($returnValue);
@@ -70,7 +70,7 @@ class Mymarbelapis extends CI_Controller {
         $this->form_validation->set_rules('userLastName', 'Last Name', 'trim|required');
         $this->form_validation->set_rules('userType', 'User type', 'trim|required|numeric');
         if ($this->form_validation->run() == FALSE) {
-
+            $returnValue["status"] =false;
             $returnValue["message"] = $this->form_validation->error_array();
             $returnValue["result"] = 'failed';
             echo json_encode($returnValue);
@@ -88,18 +88,22 @@ class Mymarbelapis extends CI_Controller {
                     }
                     $response = $this->Webapi->userUpdateInfos($user_id, $filename);
                     if ($response) {
-                        $returnValue["data"]['userId'] = $user_id;
-                        $returnValue["status"] = "200";
+                        
+                        $returnValue["status"] = true;
                         $returnValue["message"] = "User informatiom updated successfully .";
+                        $returnValue["result"] = 'success';
+                        $returnValue["data"]['userId'] = $user_id;
                         echo json_encode($returnValue);
                         die;
                     } else {
+                        $returnValue["status"] =false;
                         $returnValue["message"] = "Some thing went wrong ! Please try again.";
                         $returnValue["result"] = 'failed';
                         echo json_encode($returnValue);
                         die;
                     }
                 } else {
+                    $returnValue["status"] =false;
                     $returnValue["message"] = "Email already exist.Please try with other email";
                     $returnValue["result"] = 'failed';
                     echo json_encode($returnValue);
@@ -114,13 +118,14 @@ class Mymarbelapis extends CI_Controller {
                     }
                     $response = $this->Webapi->saveUserInfo($filename);
                     if ($response) {
-                        $returnValue["data"]['userId'] = $response;
-                        $returnValue["status"] = "200";
+                        $returnValue["status"] = true;
                         $returnValue["message"] = "User informatiom added successfully.";
+                        $returnValue["result"] = 'success';
+                        $returnValue["data"]['userId'] = $response;
                         echo json_encode($returnValue);
                         die;
                     } else {
-
+                        $returnValue["status"] =false;
                         $returnValue["message"] = "Some thing went wrong ! Please try again.";
                         $returnValue["result"] = 'failed';
                         echo json_encode($returnValue);
@@ -128,7 +133,7 @@ class Mymarbelapis extends CI_Controller {
                     }
                 } else {
 
-
+                    $returnValue["status"] =false;
                     $returnValue["message"] = "Email already exist.Please try with other email";
                     $returnValue["result"] = 'failed';
                     echo json_encode($returnValue);
@@ -143,11 +148,9 @@ class Mymarbelapis extends CI_Controller {
         $returnValue["data"] = array();
         $this->form_validation->set_rules('board_ID', 'Board id', 'trim');
         if ($this->form_validation->run() == FALSE) {
-
-
-
+            $returnValue["status"] =false;
             $returnValue["message"] = $this->form_validation->error_array();
-            $returnValue["result"] = 'Validation Error!';
+            $returnValue["result"] = 'failed';
             echo json_encode($returnValue);
             die;
         } else {
@@ -173,14 +176,14 @@ class Mymarbelapis extends CI_Controller {
 
 
                     $returnValue["data"]['ride_ID'] = $this->input->get_post('ride_ID');
-                    $returnValue["status"] = "200";
+                    $returnValue["status"] =true;
                     $returnValue["message"] = 'Ride updated successfully';
                     $returnValue["result"] = 'success';
                     echo json_encode($returnValue);
                     die;
                 } else {
 
-
+                    $returnValue["status"] =false;
                     $returnValue["message"] = 'Ride id does not exist!';
                     $returnValue["result"] = 'failed';
                     echo json_encode($returnValue);
@@ -190,15 +193,15 @@ class Mymarbelapis extends CI_Controller {
                 $this->db->insert('m_rides', $ride);
                 if ($this->db->insert_id() > 0) {
                     $returnValue["data"]['ride_ID'] = $this->db->insert_id();
-                    $returnValue["status"] = "200";
+                    $returnValue["status"] = true;
                     $returnValue["message"] = 'Ride inserted successfully';
                     $returnValue["result"] = 'success';
                     echo json_encode($returnValue);
                     die;
                 } else {
 
-
-                    $returnValue["message"] = 'Some thing went wrough ! please try again.';
+                    $returnValue["status"] =false;
+                    $returnValue["message"] = 'Some thing went wrong ! please try again.';
                     $returnValue["result"] = 'failed';
                     echo json_encode($returnValue);
                     die;
@@ -221,22 +224,22 @@ class Mymarbelapis extends CI_Controller {
                 }
             }
             if ($i == 1) {
-                $returnValue["status"] = "200";
+                $returnValue["status"] = true;
                 $returnValue["message"] = 'Ride points inserted successfully';
                 $returnValue["result"] = 'success';
                 echo json_encode($returnValue);
                 die;
             } else {
 
-
-                $returnValue["message"] = 'Ride id can not be empty or Some thing went wrough! Please try again.';
+                $returnValue["status"] =false;
+                $returnValue["message"] = 'Ride id can not be empty or Some thing went wrong! Please try again.';
                 $returnValue["result"] = 'failed';
                 echo json_encode($returnValue);
                 die;
             }
         } else {
 
-
+            $returnValue["status"] =false;
             $returnValue["message"] = 'Data format not valid! Please send valid format.';
             $returnValue["result"] = 'failed';
             echo json_encode($returnValue);

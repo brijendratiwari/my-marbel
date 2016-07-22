@@ -45,8 +45,9 @@
  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script>
   $(document).ready(function(){
-    $('#loader').css('display', 'none', 'important');
     $("#login__update__password").click(function(){
+     $('#login__update__password').val('loading...');
+    $('#login__update__password').attr('disabled','disabled');   
      var password1=$("#login_password").val();
      var password2=$("#login_password_2").val();
      var resetKey=$("#reset_key").val();
@@ -54,16 +55,19 @@
     if (password1=='') {
          $("#error").fadeIn("slow");
          $('#error').addClass('error');
-         $('#loader').css('display', 'none', 'important');
+        
          $("#error_text").html("New password is required");
+          $('#login__update__password').val('Update Password');
+            $('input[type="submit"]').removeAttr('disabled','disabled');
          setTimeout(function() { $("#error").fadeOut("slow"); }, 5000); 
          return false;
       }
       else if(password2==''){
          $("#error").fadeIn("slow");
          $('#error').addClass('error');
-         $('#loader').css('display', 'none', 'important');
          $("#error_text").html("Confirm password is required");
+         $('#login__update__password').val('Update Password');
+         $('input[type="submit"]').removeAttr('disabled','disabled');
          setTimeout(function() { $("#error").fadeOut("slow"); }, 5000); 
          return false;
       }
@@ -73,8 +77,9 @@
         if (password1 != password2) {
             $("#error").fadeIn("slow");
             $('#error').addClass('error');
-            $('#loader').css('display', 'none', 'important');
             $("#error_text").html("Your passwords do not match");
+            $('#login__update__password').val('Update Password');
+            $('input[type="submit"]').removeAttr('disabled','disabled');
             setTimeout(function() { $("#error").fadeOut("slow"); }, 5000); 
             return false;
          }
@@ -89,13 +94,15 @@
           if (html==1||html==2) {
             $("#error").fadeIn("slow");
             $('#error').addClass('error');
-            $('#loader').css('display', 'none', 'important');
+            $('#login__update__password').val('Update Password');
+            $('input[type="submit"]').removeAttr('disabled','disabled');
             $("#error_text").html("Invalid reset key, please check the link in your email again");
             setTimeout(function() { $("#error").fadeOut("slow"); }, 5000); 
           } else {
             $("#error").fadeIn("slow");
             $('#error').addClass('error');
-            $('#loader').css('display', 'none', 'important');
+             $('#login__update__password').val('Update Password');
+            $('input[type="submit"]').removeAttr('disabled','disabled');
             $("#error_text").html("Your password has been updated");
             setTimeout(function() { $("#error").fadeOut("slow"); 
             window.location='<?php echo base_url();?>'; }, 5000); 

@@ -40,8 +40,10 @@
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script>
   $(document).ready(function(){
-    $('#loader').css('display', 'none', 'important');
+   
     $("#login__submit").click(function(){
+    $('#login__submit').val('loading...');
+    $('input[type="submit"]').attr('disabled','disabled');
      var email=$("#login__email").val();
       $.ajax({
         type: "POST",
@@ -53,11 +55,14 @@
             $('#error').addClass('error');
             $('#loader').css('display', 'none', 'important');
             $("#error_text").html("Email not found");
+            $('#login__submit').val('Request Reset');
+            $('input[type="submit"]').removeAttr('disabled','disabled');
             setTimeout(function() { $("#error").fadeOut("slow"); }, 5000); 
           } else {
             $("#error").fadeIn("slow");
             $('#error').addClass('error');
-            $('#loader').css('display', 'none', 'important');
+            $('#login__submit').val('Request Reset');
+            $('input[type="submit"]').removeAttr('disabled','disabled');
             $("#error_text").html("Please check your email for a password reset link");
             setTimeout(function() { $("#error").fadeOut("slow"); }, 5000); 
           }

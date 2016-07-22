@@ -111,6 +111,8 @@ class Customers_model extends CI_Model {
             'note_services'=>$this->input->post('cd-note-services'),
             'note_tasks'=>$this->input->post('cd-note-task'),
             'note_support_ticket'=>$this->input->post('cd-support-tickets'),
+            'type'=>$this->input->post('cd-type'),
+            'parent_type'=>$this->input->post('cd-parent'),
            
              );
              $this->db->where('id',$id);

@@ -57,7 +57,8 @@ $route['logout'] = 'login/logout';
 
 $route['admin'] = 'admin/customers';
 
-
+$route['resetPassword'] = 'login/reset_password';
+$route['resetPassword/(:any)'] = 'login/reset_password/$1';
 $route['resetPassword/(:any)/(:any)'] = 'login/reset_password/$1/$2';
 
 
