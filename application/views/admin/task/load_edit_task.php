@@ -41,11 +41,11 @@
                       
                             <label>Assignee name  </label><small><b> - who should Do this task</b></small>
 
-                           
+                            <input type="hidden" name="cd-assign_by" value="<?php echo $tasks['task_assign_by'];?>">
                        
                              
                             <select  name="cd-assignee" class="form-control select_input">
-                                <option value="">Select Assignee</option>
+<!--                                <option value="">Select Assignee</option>-->
                                 <?php if ($assignee) {
                                     foreach ($assignee as $name) {
 

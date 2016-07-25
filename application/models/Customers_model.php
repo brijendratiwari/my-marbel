@@ -275,4 +275,18 @@ class Customers_model extends CI_Model {
            return false;
        }
    }
+   
+   function checkUserPassword($id=false){
+       
+       $this->db->select('user_id')->from('m_user_auth');
+       $this->db->where('user_id',$id);
+       $query=$this->db->get();
+       if($query->num_rows()>0){
+          
+           return $query->row_array();
+       }else{
+           
+           return false;
+       }
+   }
 }

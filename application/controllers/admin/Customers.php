@@ -162,15 +162,14 @@ class Customers extends CI_Controller {
                 $instagram_handle = $this->input->post('cd-instagram-handle');
                 $reddit_handle = $this->input->post('cd-reddit-handle');
                 $notes = $this->input->post('cd-notes');
-                $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
-                $password = hash('sha512', $password . $random_salt);
+//                $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+//                $password = hash('sha512', $password . $random_salt);
                 $data_insert = array(
                     'email' => $this->input->post('cd-email'),
                     'first_name' => $this->input->post('cd-first'),
                     'last_name' => $last_name,
                     'parent_type' => $parent_type,
                     'type' => $type,
-                    'parent_type' => $phone,
                     'email_secondary' => $email_second,
                     'bio' => $bio,
                     'height' => $height,
@@ -311,7 +310,16 @@ class Customers extends CI_Controller {
         }
         $this->load->template('admin/customer/load_customer_info', $this->data);
     }
-
+    public function get_customer_info_new($id = fasle) {
+        $this->data['title'] = 'User Profile';
+        $this->data['page'] = 'User Profile';
+        if ($id != '') {
+            $this->data['regarding_task'] = $this->Customer->getUsersTasks($id);
+            $this->data['user_info'] = $this->Customer->getCustomerInfo($id);
+            $this->data['user_orders'] = $this->Services->getOrders($id);
+        }
+        $this->load->template('admin/customer/customer_info_new', $this->data);
+    }
     public function reset_password_users() {
         $id = $this->input->post('id');
         $password = $this->input->post('cd-password');
@@ -330,16 +338,25 @@ class Customers extends CI_Controller {
             } else {
 
                 if ($password != '') {
-
-                    $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
-                    $password = hash('sha512', $password . $random_salt);
-                    $user_auth = array('password' => $password, 'salt' => $random_salt);
-                    $this->db->where('user_id', $id);
-                    $this->db->update('m_user_auth', $user_auth);
-                    $result['result'] = TRUE;
-                    $result['success'] = 'Password reset Successfully';
-                    echo json_encode($result);
-                    die;
+                    $check_exist=$this->Customer->checkUserPassword($id);
+                        if($check_exist){
+                        $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+                        $password = hash('sha512', $password . $random_salt);
+                        $user_auth = array('password' => $password, 'salt' => $random_salt);
+                        $this->db->where('user_id', $id);
+                        $this->db->update('m_user_auth', $user_auth);
+                       
+                    }else{
+                        
+                        $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+                        $password = hash('sha512', $password . $random_salt);
+                        $user_auth = array('user_id'=>$id,'password' => $password, 'salt' => $random_salt);
+                        $this->db->insert('m_user_auth', $user_auth);
+                    }
+                     $result['result'] = TRUE;
+                        $result['success'] = 'Password reset Successfully';
+                        echo json_encode($result);
+                        die;
                 }
             }
         } else {

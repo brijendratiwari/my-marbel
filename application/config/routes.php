@@ -71,6 +71,7 @@ $route['edit_customer'] = 'admin/customers/edit_customer';
 $route['edit_customer/(:num)'] = 'admin/customers/edit_customer/$1';
 $route['deleteCustomer/(:num)'] = 'admin/customers/delete_customer/$1';
 $route['get_customer_info/(:num)'] = 'admin/customers/get_customer_info/$1';
+$route['get_customer_info_new/(:num)'] = 'admin/customers/get_customer_info_new/$1';
 $route['reset_password_users'] = 'admin/customers/reset_password_users';
 $route['send_password_email/(:num)'] = 'admin/customers/send_password_email/$1';
 $route['send_password_email_profile/(:num)'] = 'admin/customers/send_password_email_profile/$1';
