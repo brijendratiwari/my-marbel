@@ -459,7 +459,7 @@ if ($user_orders) {
 
                            
                     </div>
-                    <div class="col-md-12">
+<!--                    <div class="col-md-12">
                           <div class="col-md-6 form-group">
                                 <label>Note of order</label>
                                 <textarea name="cd-notes-order" class="form-control" placeholder="Write here note of order....." style="max-height: 90px; height: 90px;"><?php echo (!empty($user_info['note_orders'])) ? $user_info['note_orders'] : ""; ?></textarea>
@@ -473,8 +473,8 @@ if ($user_orders) {
 
 
                            
-                    </div>
-                    <div class="col-md-12">
+                    </div>-->
+<!--                    <div class="col-md-12">
                           <div class="col-md-6 form-group">
                                 <label>Note of tasks regarding</label>
                                 <textarea name="cd-note-task" class="form-control" placeholder="Write here note of tasks regarding....." style="max-height: 90px; height: 90px;"><?php echo (!empty($user_info['note_tasks'])) ? $user_info['note_tasks'] : ""; ?></textarea>
@@ -488,7 +488,15 @@ if ($user_orders) {
 
 
                            
-                    </div>
+                    </div>-->
+                    <div class="col-md-12">
+                          <div class="col-md-12 form-group">
+                                <label>Comments</label>
+                                <textarea name="cd-comments" class="form-control" placeholder="Write here comments....." style="max-height: 90px; height: 90px;"><?php echo (!empty($user_info['comments'])) ? $user_info['comments'] : ""; ?></textarea>
+
+                            </div>
+                            
+</div>
                     <div class="col-md-12">
                            
 

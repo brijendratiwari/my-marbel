@@ -44,7 +44,7 @@ class Customers_model extends CI_Model {
        }
    }
    function getCustomers($id){
-        $this->db->select('mu.id, mu.email, mu.first_name, mu.last_name, mu.type, mu.parent_type, mu.register_date, mu.last_activity, mu.phone, mu.notes, muli.ip,mu.email_secondary,mu.bio,mu.height,mu.weight,mu.terrain,mu.company,mu.address_one,mu.address_two,mu.city,mu.state_or_region,mu.postal_code,mu.country,mu.accepts,mu.alias,mu.privacy_setting,mu.units,mu.range_alarm,mu.notifications,mu.primary_riding_style,mu.safety_brake,mu.preferred_braking_force,mu.reverse_turned,mu.locked_settings,mu.user_profile_pic,mu.reddit_handle,mu.instagram_handle,mu.linkedin_handle,mu.twitter_handle,mu.parental_lock,mu.note_orders,mu.note_services,mu.note_tasks,mu.note_support_ticket')->from('m_users mu');
+        $this->db->select('mu.id, mu.email, mu.first_name, mu.last_name, mu.type, mu.parent_type, mu.register_date, mu.last_activity, mu.phone, mu.notes, muli.ip,mu.email_secondary,mu.bio,mu.height,mu.weight,mu.terrain,mu.company,mu.address_one,mu.address_two,mu.city,mu.state_or_region,mu.postal_code,mu.country,mu.accepts,mu.alias,mu.privacy_setting,mu.units,mu.range_alarm,mu.notifications,mu.primary_riding_style,mu.safety_brake,mu.preferred_braking_force,mu.reverse_turned,mu.locked_settings,mu.user_profile_pic,mu.reddit_handle,mu.instagram_handle,mu.linkedin_handle,mu.twitter_handle,mu.parental_lock,mu.comments')->from('m_users mu');
         $this->db->join('m_user_login_ip muli','muli.user_id = mu.id AND muli.time = mu.last_activity','left');
         $this->db->where('mu.id',$id);
         $this->db->order_by('mu.id ASC');
@@ -107,10 +107,10 @@ class Customers_model extends CI_Model {
             'linkedin_handle'=>$this->input->post('cd-linkedin-handle'),
             'instagram_handle'=>$this->input->post('cd-instagram-handle'),
             'reddit_handle'=>$this->input->post('cd-reddit-handle'),
-            'note_orders'=>$this->input->post('cd-note-order'),
-            'note_services'=>$this->input->post('cd-note-services'),
-            'note_tasks'=>$this->input->post('cd-note-task'),
-            'note_support_ticket'=>$this->input->post('cd-support-tickets'),
+//            'note_orders'=>$this->input->post('cd-note-order'),
+//            'note_services'=>$this->input->post('cd-note-services'),
+//            'note_tasks'=>$this->input->post('cd-note-task'),
+            'comments'=>$this->input->post('cd-comments'),
             'type'=>$this->input->post('cd-type'),
             'parent_type'=>$this->input->post('cd-parent'),
            
@@ -180,10 +180,11 @@ class Customers_model extends CI_Model {
                 'locked_settings' => $this->input->post('cd-locked-settings'),
                 'parental_lock' => $this->input->post('cd-parental-lock'),
                 'terrain' => $this->input->post('cd-terrain'),
-                'note_support_ticket' => $this->input->post('cd-support-ticket'),
-                'note_tasks' => $this->input->post('cd-note-task'),
-                'note_services' => $this->input->post('cd-note-services'),
-                'note_orders' => $this->input->post('cd-notes-order'),
+//                'note_support_ticket' => $this->input->post('cd-support-ticket'),
+//                'note_tasks' => $this->input->post('cd-note-task'),
+//                'note_services' => $this->input->post('cd-note-services'),
+//                'note_orders' => $this->input->post('cd-notes-order'),
+                'comments' => $this->input->post('cd-comments'),
                 'user_profile_pic' => $profile,
                 'last_activity' => time()
                 

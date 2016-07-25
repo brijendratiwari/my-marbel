@@ -93,6 +93,7 @@ class Tasks extends CI_Controller {
     }
 
     public function edit_task($task_id = false) {
+       
         if ($task_id != '') {
             $this->data["style_to_load"] = array("assets/css/chosen/chosen.min.css");
             $this->data['scripts_to_load'] = array("assets/js/chosen/chosen.jquery.min.js");
@@ -421,7 +422,7 @@ class Tasks extends CI_Controller {
             $temp = $_GET['sSortDir_0'] === 'asc' ? 'asc' : 'desc';
             $order_by = $col_sort[$index];
         }
-        $this->Tasks->db->select("m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date,CONCAT_WS(' ', m_users.first_name, m_users.last_name) AS assign_to_name,m_tasks.task_completed_date,m_tasks.task_status,concat(m_users.first_name,' ',m_users.last_name) as fullname");
+        $this->Tasks->db->select("m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date,CONCAT_WS(' ', m_users.first_name, m_users.last_name) AS assign_to_name,m_tasks.task_completed_date,m_tasks.task_status,concat(m_users.first_name,' ',m_users.last_name) as fullname,m_tasks.task_assign_to,m_tasks.task_assign_by");
 
         if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
             $words = $_GET['sSearch'];
@@ -451,7 +452,7 @@ class Tasks extends CI_Controller {
             $records = $this->Tasks->db->get("m_tasks");
         }
         #echo $this->db->last_query(); die;
-        $this->db->select("m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date,CONCAT_WS(' ', m_users.first_name, m_users.last_name) AS assign_to_name,m_tasks.task_completed_date,m_tasks.task_status,concat(m_users.first_name,' ',m_users.last_name) as fullname");
+        $this->db->select("m_tasks.task_id,m_task_category.cat_name,m_tasks.task_name,m_tasks.task_regarding,m_tasks.task_due_date,CONCAT_WS(' ', m_users.first_name, m_users.last_name) AS assign_to_name,m_tasks.task_completed_date,m_tasks.task_status,concat(m_users.first_name,' ',m_users.last_name) as fullname,m_tasks.task_assign_to,m_tasks.task_assign_by");
         $this->db->from('m_tasks');
         $this->db->join('m_task_category', 'm_task_category.cat_id=m_tasks.task_cat_id', 'left');
         $this->db->join('m_users', 'm_users.id=m_tasks.task_assign_to', 'left');
@@ -479,10 +480,10 @@ class Tasks extends CI_Controller {
         $i = 0;
         $final = array();
         foreach ($result as $val) {
-
-            $output['aaData'][] = array("DT_RowId" => $val['task_id'], '<span><i class="fa fa-check"></i></span> ' . $val['cat_name'], $val['task_name'], $val['fullname'], $val['task_status'], (!empty($val['task_completed_date']) && $val['task_completed_date'] != '0000-00-00') ? date('m/d/Y', strtotime($val['task_completed_date'])) : '', $val['assign_to_name'], ' <a class="btn btn-xs btn-success edit-task" href="#" data-id="' . $val['task_id'] . '" data-toggle="modal" data-target="#editTaskModal"><i class="fa fa-eye"></i> View</a>');
+            if ($val['task_assign_to'] != $val['task_assign_by']) {
+                $output['aaData'][] = array("DT_RowId" => $val['task_id'], '<span><i class="fa fa-check"></i></span> ' . $val['cat_name'], $val['task_name'], $val['fullname'], $val['task_status'], (!empty($val['task_completed_date']) && $val['task_completed_date'] != '0000-00-00') ? date('m/d/Y', strtotime($val['task_completed_date'])) : '', $val['assign_to_name'], ' <a class="btn btn-xs btn-success edit-task" href="#" data-id="' . $val['task_id'] . '" data-toggle="modal" data-target="#editTaskModal"><i class="fa fa-eye"></i> View</a>');
+            }
         }
-
         echo json_encode($output);
         die;
     }

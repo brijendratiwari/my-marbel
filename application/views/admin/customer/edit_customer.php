@@ -187,8 +187,14 @@
                                         
                                     </div>
                                 </div>
+                            <div class="col-md-12 form-group">
+                                  <div class="col-md-12">
+                                          <label>Comments</label>
+                                           <textarea name="cd-comments" class="form-control" placeholder="Write here comment....." style="max-height: 90px; height: 90px;"><?php echo $customer['comments']?></textarea>
+                                   
+                                  </div></div>
                                 
-                              <div class="col-md-12 form-group">
+<!--                              <div class="col-md-12 form-group">
                                   <div class="col-md-12">
                                           <label>Note of order</label>
                                            <textarea name="cd-note-order" class="form-control" placeholder="Write here note of order....." style="max-height: 90px; height: 90px;"><?php echo $customer['note_orders']?></textarea>
@@ -208,7 +214,7 @@
                                     <label>Note of Open Support Tickets</label>
                                    <textarea name="cd-support-tickets" class="form-control" placeholder="Write here note of open support tickets" style="max-height: 90px; height: 90px;"><?php echo $customer['note_support_ticket']?></textarea>
                                   </div>
-                                </div>
+                                </div>-->
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <label>Accepts Marketing : </label>

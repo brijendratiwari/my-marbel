@@ -91,7 +91,7 @@ class Customers extends CI_Controller {
         $final = array();
         foreach ($result as $val) {
 
-            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['id'], '<a href="' . base_url('get_customer_info/' . $val['id']) . '" title="View user information"  class="btn btn-xs btn-info userRow"><i class="fa fa-eye"></i></a>', $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'],  '  <a href="edit_customer/' . $val['id'] . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>');
+            $output['aaData'][] = array("DT_RowId" => $val['id'], $val['id'], '<a href="' . base_url('get_customer_info/' . $val['id']) . '" title="View user information"  class="btn btn-xs btn-info userRow"><i class="fa fa-eye"></i></a>', $val['email'], $val['first_name'], $val['last_name'], date('M j, Y', $val['last_activity']), $val['phone'], '  <a href="edit_customer/' . $val['id'] . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>');
         }
 
         echo json_encode($output);
@@ -198,10 +198,11 @@ class Customers extends CI_Controller {
                     'linkedin_handle' => $linkedin_handle,
                     'instagram_handle' => $instagram_handle,
                     'reddit_handle' => $reddit_handle,
-                    'note_orders' => $this->input->post('cd-notes-order'),
-                    'note_services' => $this->input->post('cd-note-services'),
-                    'note_tasks' => $this->input->post('cd-note-task'),
-                    'note_support_ticket' => $this->input->post('cd-support-ticket'),
+//                    'note_orders' => $this->input->post('cd-notes-order'),
+//                    'note_services' => $this->input->post('cd-note-services'),
+//                    'note_tasks' => $this->input->post('cd-note-task'),
+//                    'note_support_ticket' => $this->input->post('cd-support-ticket'),
+                     'comments' => $this->input->post('cd-comments'),
                     'phone' => $phone,
                     'last_activity' => time(),
                     'register_date' => time()
@@ -249,11 +250,11 @@ class Customers extends CI_Controller {
                 if ($this->form_validation->run() == TRUE) {
                     $first_name = $this->input->post('cd-first_name');
                     $last_name = $this->input->post('cd-last_name');
-                    
-                   
-                        $this->Customer->updateCustomer($id);
-                        $this->session->set_flashdata('success', 'User ' . $first_name . ' ' . $last_name . ' has been updated');
-                        redirect('edit_customer/' . $id);
+
+
+                    $this->Customer->updateCustomer($id);
+                    $this->session->set_flashdata('success', 'User ' . $first_name . ' ' . $last_name . ' has been updated');
+                    redirect('edit_customer/' . $id);
                 }
             }
             $this->data['customer'] = $this->Customer->getCustomers($id);
@@ -283,7 +284,7 @@ class Customers extends CI_Controller {
         $this->form_validation->set_rules('cd-first', 'FirstName', 'trim|required');
         $this->form_validation->set_rules('cd-last', 'LastName', 'trim|required');
         $this->form_validation->set_rules('cd-profile', 'profile', 'callback_image_validate');
-        
+
         #$this->form_validation->set_rules('cd-password', 'Password', 'trim|required');
         //run validation on form input
         if ($this->form_validation->run() == FALSE) {
@@ -310,6 +311,7 @@ class Customers extends CI_Controller {
         }
         $this->load->template('admin/customer/load_customer_info', $this->data);
     }
+
     public function get_customer_info_new($id = fasle) {
         $this->data['title'] = 'User Profile';
         $this->data['page'] = 'User Profile';
@@ -320,6 +322,7 @@ class Customers extends CI_Controller {
         }
         $this->load->template('admin/customer/customer_info_new', $this->data);
     }
+
     public function reset_password_users() {
         $id = $this->input->post('id');
         $password = $this->input->post('cd-password');
@@ -338,25 +341,24 @@ class Customers extends CI_Controller {
             } else {
 
                 if ($password != '') {
-                    $check_exist=$this->Customer->checkUserPassword($id);
-                        if($check_exist){
+                    $check_exist = $this->Customer->checkUserPassword($id);
+                    if ($check_exist) {
                         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
                         $password = hash('sha512', $password . $random_salt);
                         $user_auth = array('password' => $password, 'salt' => $random_salt);
                         $this->db->where('user_id', $id);
                         $this->db->update('m_user_auth', $user_auth);
-                       
-                    }else{
-                        
+                    } else {
+
                         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
                         $password = hash('sha512', $password . $random_salt);
-                        $user_auth = array('user_id'=>$id,'password' => $password, 'salt' => $random_salt);
+                        $user_auth = array('user_id' => $id, 'password' => $password, 'salt' => $random_salt);
                         $this->db->insert('m_user_auth', $user_auth);
                     }
-                     $result['result'] = TRUE;
-                        $result['success'] = 'Password reset Successfully';
-                        echo json_encode($result);
-                        die;
+                    $result['result'] = TRUE;
+                    $result['success'] = 'Password reset Successfully';
+                    echo json_encode($result);
+                    die;
                 }
             }
         } else {
@@ -367,13 +369,14 @@ class Customers extends CI_Controller {
             die;
         }
     }
-     public function email_check() {
-         if($this->input->post('cd-user_id')){
+
+    public function email_check() {
+        if ($this->input->post('cd-user_id')) {
             $isExist = $this->Customer->checkEmail($this->input->post('cd-email'), $this->input->post('cd-user_id'));
-         }else{
-             
-              $isExist = $this->Customer->checkEmail($this->input->post('cd-email'), $this->session->userdata['marbel_user']['user_id']);
-         }
+        } else {
+
+            $isExist = $this->Customer->checkEmail($this->input->post('cd-email'), $this->session->userdata['marbel_user']['user_id']);
+        }
         if ($isExist) {
             $this->form_validation->set_message('email_check', 'This email is already exist, try with different email address.');
             return FALSE;
@@ -381,41 +384,47 @@ class Customers extends CI_Controller {
             return TRUE;
         }
     }
-    public function send_password_email($id=false){
-     if ($id) {
-            $email = $this->Customer->getEmailByUserId($id);
-            if($email!=''){
-            $this->Users->sendPasswordResetEmail($email);
-            $this->session->set_flashdata('success','Send password in mail successfully.');
-            redirect('edit_customer/'.$id);
-            }
-        }else{
-            $this->session->set_flashdata('error','Some thing went wrough! please try again.');
-            redirect('edit_customer/'.$id);
-        } 
-    }
-     public function send_password_email_profile($id=false){
-     if ($id) {
-            $email = $this->Customer->getEmailByUserId($id);
-            $this->Users->sendPasswordResetEmail($email);
-            $this->session->set_flashdata('success','Send password in mail successfully.');
-            redirect('get_customer_info/'.$id);
-        }else{
-            $this->session->set_flashdata('error','Some thing went wrough! please try again.');
-            redirect('get_customer_info/'.$id);
-        } 
-    }
-    public function image_validate() {
-        if (($_FILES['cd-profile']['size'] > 0)) {
 
-            if ($_FILES['cd-profile']['type'] == 'image/jpeg' || $_FILES['cd-profile']['type'] == 'image/png' || $_FILES['cd-profile']['type'] == 'image/jpg') {
-                return true;
-            } else {
-                $this->form_validation->set_message('image_validate', 'Profile image must be jpeg,png or jpg ');
-                return false;
+    public function send_password_email($id = false) {
+        if ($id) {
+            $email = $this->Customer->getEmailByUserId($id);
+            if ($email != '') {
+                $this->Users->sendPasswordResetEmail($email);
+                $this->session->set_flashdata('success', 'Send password in mail successfully.');
+                redirect('edit_customer/' . $id);
             }
         } else {
-            return TRUE;
+            $this->session->set_flashdata('error', 'Some thing went wrough! please try again.');
+            redirect('edit_customer/' . $id);
         }
     }
+
+    public function send_password_email_profile($id = false) {
+        if ($id) {
+            $email = $this->Customer->getEmailByUserId($id);
+            $this->Users->sendPasswordResetEmail($email);
+            $this->session->set_flashdata('success', 'Send password in mail successfully.');
+            redirect('get_customer_info/' . $id);
+        } else {
+            $this->session->set_flashdata('error', 'Some thing went wrough! please try again.');
+            redirect('get_customer_info/' . $id);
+        }
+    }
+
+    public function image_validate() {
+        
+            if (( isset($_FILES['cd-profile']) && $_FILES['cd-profile']['size'] > 0)) {
+
+                if ($_FILES['cd-profile']['type'] == 'image/jpeg' || $_FILES['cd-profile']['type'] == 'image/png' || $_FILES['cd-profile']['type'] == 'image/jpg') {
+                    return true;
+                } else {
+                    $this->form_validation->set_message('image_validate', 'Profile image must be jpeg,png or jpg ');
+                    return false;
+                }
+            } else {
+                return TRUE;
+            }
+        }
+  
+
 }

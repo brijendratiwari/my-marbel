@@ -192,7 +192,7 @@
                 </div>
               <!--end here new changes-->
       
-                <div class="col-md-12 form-group"> 
+<!--                <div class="col-md-12 form-group"> 
                     <label>Note of order</label>
                   <textarea name="cd-notes-order" class="form-control" placeholder="Write here note of order....." style="max-height: 90px; height: 90px;"></textarea>
                 </div>
@@ -207,8 +207,11 @@
                <div class="col-md-12 form-group"> 
                     <label>Note of open support tickets</label>
                   <textarea name="cd-support-ticket" class="form-control" placeholder="Write here note of open support tickets" style="max-height: 90px; height: 90px;"></textarea>
-                </div>  
-            
+                </div>  -->
+            <div class="col-md-12 form-group"> 
+                    <label>Comments</label>
+                  <textarea name="cd-comments" class="form-control" placeholder="Write here comments" style="max-height: 90px; height: 90px;"></textarea>
+                </div>
           </div>
             <div class="clearfix"></div>
           <div class="modal-footer">
