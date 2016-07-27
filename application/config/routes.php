@@ -75,7 +75,8 @@ $route['get_customer_info_new/(:num)'] = 'admin/customers/get_customer_info_new/
 $route['reset_password_users'] = 'admin/customers/reset_password_users';
 $route['send_password_email/(:num)'] = 'admin/customers/send_password_email/$1';
 $route['send_password_email_profile/(:num)'] = 'admin/customers/send_password_email_profile/$1';
-
+$route['add_notes'] = 'admin/customers/add_notes';
+$route['add_comments'] = 'admin/customers/add_comments';
 
 $route['get_child_user_level'] = 'admin/customers/get_child_user_level';
 
@@ -119,6 +120,7 @@ $route['delete_event/(:num)']='admin/calendar/event_delete/$1';
 
 $route['email']='admin/email';
 $route['send_email']='admin/email/send_email';
+
 
 $route['customer'] = 'customer/dashboard';
 $route['customer_profile'] = 'customer/profile';

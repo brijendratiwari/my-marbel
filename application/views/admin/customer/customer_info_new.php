@@ -1,177 +1,262 @@
  <!-- Page Content -->
         <div id="page-wrapper">
-            <div class="row" >
-                <div class="col-lg-12">
-                <div class="col-lg-6" style="margin-top: 2%;">
-                    <a href="<?php echo base_url('customers');?>" class="btn btn-sm btn-default">Go Back</a>&nbsp;&nbsp;&nbsp; 
-                 </div>   
-                     <?php
-                    if ( $this->session->flashdata('success')) {
-                        echo '<div class="alert alert-success pull-left message" style="margin-top: 1%;">'.$this->session->flashdata('success').'</div>';
-                    }
-                    ?>
-                    <?php
-                    if ( $this->session->flashdata('error')) {
-                        echo '<div class="alert alert-danger pull-left message" style="margin-top: 1%;">'.$this->session->flashdata('error').'</div>';
-                    }
-                    ?>
-                    <div id="resetPasswordSuccess" class="pull-left alert alert-success hidden message"></div>        
-                    <div class="pull-left alert alert-danger hidden message" id="resetPasswordError"></div>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+            
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">User Information</h1>
-                        
-                        
                         <!--user info page-->
-                          <div class="col-md-offset-1 user-info">
-                            <div class="col-md-6">
-                            <div class="col-md-12">
-                                <?php if(empty($user_info['user_profile_pic'])){ ?>
-                             <img alt="140x140" class="img-circle" data-src="holder.js/140x140" style="width: 140px; height: 140px; float: left;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTUzYTg2ZDE2MyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NTNhODZkMTYzIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQzLjUiIHk9Ijc0LjgiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
-                                <?php }else{ ?>
-                             <img alt="140x140" class="img-circle" data-src="holder.js/140x140" style="width: 140px; height: 140px; float: left;" src="<?php echo base_url('assets/profile-imgs/'.$user_info['user_profile_pic'].''); ?>" data-holder-rendered="true">
-                                <?php } ?>
+                          <div class="user-info">
+                            <div class="col-md-8">
+                            <div class="row">
+                            <div class="col-md-12 user-details">
+                                  <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <?php if(empty($user_info['user_profile_pic'])){ ?>
+                                         <img alt="140x140" class="img-circle img-responsive" data-src="holder.js/140x140" style="width: 140px; float: left;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTUzYTg2ZDE2MyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NTNhODZkMTYzIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQzLjUiIHk9Ijc0LjgiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+                                            <?php }else{ ?>
+                                         <img alt="140x140" class="img-circle" data-src="holder.js/140x140" style="width: 140px; height: 140px; float: left;" src="<?php echo base_url('assets/profile-imgs/'.$user_info['user_profile_pic'].''); ?>" data-holder-rendered="true">
+                                            <?php } ?>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12 full-width768-980">
+                                      <h1>Nidhi Barve</h1>
+                                        <p><b>Marbel One Pro</b> w/ firmware 1.9.4
+                                        Odometer: 210.3 miles
+                                        # of recent rides: 30</p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12 full-width768-980">
+                                      <div class="round-box first">
+                                         214.7
+                                         <small>miles</small>
+                                      </div>
+                                      <div class="round-box">
+                                         13.5
+                                         <small>hours</small>
+                                      </div>
+                                      <div class="round-box last">
+                                         82%
+                                         <small>e-score</small>
+                                      </div>
+                                    </div>
+                             </div>
                              </div>
                                 <div class='clearfix'></div>
-                            <div class="col-md-12 text-left">
-                                <h3><?php echo (!empty($user_info['first_name']))?$user_info['first_name']." ".$user_info['last_name']:"Empty";?></h3></div>
 
                               <div class="clearfix"></div>
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">Orders</div>
+                                    <div class="panel-heading">Orders <span class="blue pull-right small-btn">+ order</span></div>
                                     <div class="panel-body">
-                                        
-                                          <?php if($user_orders){ foreach ($user_orders as $user_order){?>
-                                            <p><label>Order Date : </label> <?php echo (!empty($user_order['order_date']))?date('M j, Y', $user_order['order_date']):"";?></p>
-                                            <p><label>Order Number : </label> <?php echo (!empty($user_order['order_number']))?$user_order['order_number']:"";?></p>
-                                            <p><label>Product : </label> <?php echo (!empty($user_order['product']))?$user_order['product']:"";?></p>
-                                            <p><label>Status : </label> <?php echo (!empty($user_order['order_friendly_status']))?$user_order['order_friendly_status']:"";?></p>
-                                             <p><label>Total : </label> <?php echo (!empty($user_order['order_total']))?'$'.$user_order['order_total']:"";?></p>
-                                             <hr>
-                                        <?php }}else{echo '<p>No Order Found!</p>';} ?>
+                                                                                             
+                                        <table width="100%" class="profile-tbl">
+                                            <tr>
+                                                <td><span class="blue">#1015662261</span></td>
+                                                <td>Sep 16, 2014</td>
+                                                <td>Marbel Board</td>
+                                                <td>Electric Blue</td>
+                                                <td>76</td>
+                                                <td>Website</td>
+                                                <td align="center">Shipped</td>
+                                                <td align="right">$1299.00</td>
+                                            </tr>
+                                        </table>
                                             
                                     </div>
                                 </div>
-
+                                                                                
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">Service</div>
+                                    <div class="panel-heading">Service Records <span class="blue pull-right small-btn">+ service</span></div>
                                     <div class="panel-body">
-                                        <?php if($user_orders){ foreach ($user_orders as $user_order){
-                                            $services=getServices($user_order['id']);
-                                            if(!empty($services)){
-                                            foreach($services as $service){?>
-                                                
-                                                <p><label>Date:</label> <?php echo (!empty($service['date']))?date('M j, Y', strtotime($service['date'])):"";?></p>
-                                                <p><label>Status : </label> <?php echo (!empty($service['status']))?ucwords($service['status']):"";?></p>
-                                                <p><label>Type : </label> <?php echo (!empty($service['type']))?ucwords($service['type']):"";?></p>
-                                                <p><label>Issue : </label> <?php echo (!empty($service['issue']))?$service['issue']:"";?></p>
-                                                <p><label>Diagnostic Response : </label> <?php echo (!empty($service['diagnostic_response']))?$service['diagnostic_response']:"";?></p>
-                                                <p><label>Included Parts : </label> <?php echo (!empty($service['included_parts']))?$service['included_parts']:"";?></p>
-                                                <p><label>Notes : </label> <?php echo (!empty($service['notes']))? $service['notes']:"";?></p>
-                                                <hr>
-                                           <?php }
-                                            }else{
-                                                echo "<p>No Services Found!</p>";
-                                            }
-                                            ?>
-                                            
-                                        <?php }}else{
-                                                echo "<p>No Services Found!</p>";
-                                            } ?>
+                                     
+                                      <table width="100%" class="profile-tbl">
+                                            <tr>
+                                                <td><span class="blue">#298</span></td>
+                                                <td align="center"><i>On Hold: July 20, 2016</i></td>
+                                                <td>by: Zane</td>
+                                                <td>“blank”</td>
+                                                <td align="center">Warranty</td>
+                                                <td align="center"><span class="blue">“blank”</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="blue">#155</span></td>
+                                                <td align="center"><i>Finished: April 6, 2016</i></td>
+                                                <td>by: Zane</td>
+                                                <td>“blank”</td>
+                                                <td align="center">Warranty</td>
+                                                <td align="center"><span class="blue">1ZX1F6859098913179</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="blue">#91</span></td>
+                                                <td align="center"><i>Finished: March 7, 2016</i></td>
+                                                <td>by: Zane</td>
+                                                <td>Battery Sytem Replaced</td>
+                                                <td align="center">Warranty</td>
+                                                <td align="center"><span class="blue">1ZX1F6859094411870</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="blue">#4</span></td>
+                                                <td align="center"><i>Finished: Feb 9, 2016</i></td>
+                                                <td>by: Zane</td>
+                                                <td>“blank”</td>
+                                                <td align="center">Warranty</td>
+                                                <td align="center"><span class="blue">“blank”</span></td>
+                                            </tr>
+                                        </table>
+
                                     </div>
                                 </div>
 
+
+                                                                                  
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">Tasks</div>
+                                    <div class="panel-heading">Tasks <span class="blue pull-right small-btn">+task regarding Nidhi</span></div>
                                     <div class="panel-body">
-                                         <?php if($regarding_task){ foreach ($regarding_task as $task){?>
-                                            <p><label>Name : </label> <?php echo (!empty($task['task_name']))?$task['task_name']:"Empty";?></p>
-                                            <p><label>Details : </label> <?php echo (!empty($task['task_details']))?$task['task_details']:"Empty";?></p>
-                                            <p><label>Due Date : </label> <?php echo (!empty($task['task_due_date']))?date('M j, Y', strtotime($task['task_due_date'])):"Empty";?></p>
-                                            
-                                            <p><label>Status : </label> <?php echo (!empty($task['task_status']))?$task['task_status']:"Empty";?></p>
-                                             <hr>
-                                        <?php }}else{echo '<p>No Task Found!</p>';} ?>
+                                         <table width="100%" class="profile-tbl">
+                                            <tr>
+                                                <td><span class="blue">Matt :</span><span> Finish/Fit</span></td>
+                                                <td align="center">Order Wet Sanding Con...</td>
+                                                <td align="center">In Progress</td>
+                                                <td align="right">Due: 7/17/16</td>
+                                            </tr>
+                                        </table> 
                                     </div>
                                 </div>
 
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">Note</div>
-                                    <div class="panel-body">
-                                        <p><label>Orders : </label> <?php echo (!empty($user_info['note_orders']))?$user_info['note_orders']:"Empty";?></p>
-                                        <p><label>Services : </label> <?php echo (!empty($user_info['note_services']))?$user_info['note_services']:"Empty";?></p>
-                                        <p><label>Tasks : </label> <?php echo (!empty($user_info['note_tasks']))?$user_info['note_tasks']:"Empty";?></p>
-                                        <p><label>Support Tickets : </label> <?php echo (!empty($user_info['note_support_ticket']))?ucwords($user_info['note_support_ticket']):"Empty";?></p>
-                                    </div>
+                                <div class="panel shadow-none">
+                                    <div class="panel-heading">Timeline</div>
+                                      <div class="notes">
+                                        <textarea name="" placeholder="Leave a note..."></textarea>
+                                         <div class="actions">
+                                          <a href="#"><img src="http://mymarbel.com//assets/img/smily.png" alt="" /></a>
+                                          <a href="#"><img src="http://mymarbel.com//assets/img/@.png" alt="" /></a>
+                                          <a href="#"><img src="http://mymarbel.com//assets/img/tag.png" alt="" /></a>
+                                          <a href="#"><img src="http://mymarbel.com//assets/img/attach.png" alt="" /></a>
+                                         <button class="btn btn-default">POST</button></div>
+                                      </div>
+                                         <p class="notes-msg"><span class="pull-right">Only you and other staff members can see notes</span></p>
                                 </div>
+
+                               <div class="col-md-12">
+                                <div class="row">
+                                 <ul class="comment-list">
+                                   <li>
+                                       <div class="col-md-9 col-sm-9 col-xs-12">
+                                         <p>Matt Belcher created a <span class="blue">Task</span> regarding  Nidhi:  Order Wet Sanding Console</p>
+                                       </div>
+                                       <div class="col-md-3 col-sm-3 col-xs-12">
+                                         <p class="text-right date-posted">July 16, 2016 at 7:54 pm</p>
+                                       </div>
+                                   </li>
+
+                                   <li>
+                                       <div class="col-md-9 col-sm-9 col-xs-12">
+                                         <p>Service Record <span class="blue">#155</span> Finished.</p>
+                                       </div>
+                                       <div class="col-md-3 col-sm-3 col-xs-12">
+                                         <p class="text-right date-posted">July 16, 2016 at 7:54 pm</p>
+                                       </div>
+                                   </li>
+
+                                   <li>
+                                       <div class="col-md-9 col-sm-9 col-xs-12">
+                                         <p>Service Record <span class="blue">#155</span> Finished.</p>
+                                       </div>
+                                       <div class="col-md-3 col-sm-3 col-xs-12">
+                                         <p class="text-right date-posted">July 16, 2016 at 7:54 pm</p>
+                                       </div>
+                                   </li>
+
+                                   <li>
+                                       <div class="col-md-9 col-sm-9 col-xs-12">
+                                         <p>Service Record <span class="blue">#155</span> Finished.</p>
+                                       </div>
+                                       <div class="col-md-3 col-sm-3 col-xs-12">
+                                         <p class="text-right date-posted">July 16, 2016 at 7:54 pm</p>
+                                       </div>
+                                       <div class="reply-comment-box">
+                                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it. <a href="#" class="r-readmore">READ MORE</a> </p>
+                                             <p class="text-center comment-count"><span style="color:#ddd">1 comment</span></p>
+
+                                              <div class="reply-to-reply">
+                                                <ul>
+                                                   <li>
+                                                     <div class="col-md-8 col-sm-8 col-xs-12 border-left">
+                                                       <p><small>you commented</small></p>
+                                                       <p>Lorem Ipsum is simply dummy text. 
+                                                         <br><br>
+                                                       Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </p>
+                                                       </div>
+                                                       <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
+                                                         <p class="text-right date-posted">July 16, 2016 at 7:54 pm</p>
+                                                     </div>
+                                                   </li>
+                                                </ul>
+                                              </div>
+                                        </div>
+                                   </li>
+
+                                   <li>
+                                       <div class="col-md-9 col-sm-9 col-xs-12">
+                                         <p>Service Record <span class="blue">#155</span> Finished.</p>
+                                       </div>
+                                       <div class="col-md-3 col-sm-3 col-xs-12">
+                                         <p class="text-right date-posted">July 16, 2016 at 7:54 pm</p>
+                                       </div>
+                                   </li>
+                                 </ul>
+                                </div>
+                               </div>
+
+<div class="clearfix"></div>
                               <a data-target="#resetPasswordModal" data-toggle="modal" class="btn btn-custom btn-lg">Reset Password</a>
                             </div>
-                            <div class="col-md-6 right-info-section">
+                            <div class="col-md-4 right-info-section">
 
                             <div class="panel panel-default">
-                                    <div class="panel-heading">Active</div>
+                                    <div class="panel-heading">Details <span class="blue pull-right small-btn">edit</span></div>
                                     <div class="panel-body">
-                                        <p><label>Phone : </label> <?php echo (!empty($user_info['notes']))?$user_info['phone']:"Empty";?></p>
-                                        <p><label>Email : </label> <?php echo (!empty($user_info['email']))?$user_info['email']:"Empty";?></p>
-                                        <p><label>Email Secondary : </label> <?php echo (!empty($user_info['email_secondary']))?$user_info['email_secondary']:"Empty";?></p>
-                                        <p><label>Accept marketing : </label> <?php echo (!empty($user_info['accepts']))?ucwords($user_info['accepts']):"Empty";?></p>
+                                        <p>
+                                             <span class="blue">euphoriatek2010@gmail.com</span><br>
+                                              <span class="blue">euphoriatek2010@gmail.com</span><br>
+                                              1-317-213-0221<br><br>
+
+                                              4650 Eagle Falls Place<br>
+                                              Unit 1B<br>
+                                              Tampa, FL 33619<br>
+                                              United States<br><br>
+
+                                              Company: Ignis IT Solutions Pvt.Ltd.<br><br>
+
+                                                <div style="font-style:italic">  AKA: <span class="blue">Ignis</span><br>
+                                                  Twitter: <span class="blue">@Ignis</span><br>
+                                                  Instagram: <span class="blue">Ignis_IT</span><br>
+                                                  LinkedIn: <span class="blue">Nidhi Bavre</span><br>
+                                                  Reddit: <span class="blue">NidhiBavre</span><br>
+                                                  Other: SnapChat <span class="blue">@IgnisNT</span><br><br>
+                                                </div>
+
+                                              Last Login:  Jul 21, 2016 at 8::56pm<br>
+                                              # of Recent Logins:  8
+                                        </p>
+
+                                        <div class="panel-heading" style="border-bottom:solid 1px #ddd;margin: 15px 0;padding:0">Comments</div>
+                                        <p>Nidhi is our rockstar developer helping with MyMarbel and the App. She works with Dheerendra and is about 9 hours ahead of us. She has a weekly limit of 60hrs on Upwork. </p>
                                     </div>
                                 </div>
-
-
-                                    <div class="aka">
-                                        A.K.A.
-                                    </div>
 
 
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">Default Address</div>
-                                    <div class="panel-body">
-                                        
-                                        <?php 
-                                        if(empty($user_info['country']) && empty($user_info['city'])&& empty($user_info['state_or_region'])){
-                                        if(!empty($user_orders)){?>
-                                        <p><label>City : </label> <?php echo (!empty($user_orders[0]['city']))?$user_orders[0]['city']:"Empty";?></p>
-                                        <p><label>State : </label> <?php echo (!empty($user_orders[0]['state']))?$user_orders[0]['state']:"Empty";?></p>
-                                        <p><label>Zip : </label> <?php echo (!empty($user_orders[0]['zip']))?$user_orders[0]['zip']:"Empty";?></p>
-                                        <p><label>Address : </label> <?php echo (!empty($user_orders[0]['delivery_address']))?ucwords($user_orders[0]['delivery_address']):"Empty";?></p>
-                                        <p><label>Address Secondary : </label> <?php echo (!empty($user_orders[0]['delivery_address_2']))?ucwords($user_orders[0]['delivery_address_2']):"Empty";?></p>
-                                        <p><label>Country : </label> <?php echo (!empty($user_orders[0]['country']))?ucwords($user_orders[0]['country']):"Empty";?></p>
-                                        <?php } else{ echo "Empty";} }else{?>
-                                            
-                                         <p><label>City : </label> <?php echo (!empty($user_info['city']))?$user_info['city']:"Empty";?></p>
-                                        <p><label>State : </label> <?php echo (!empty($user_info['state_or_region']))?$user_info['state_or_region']:"Empty";?></p>
-                                        <p><label>Zip : </label> <?php echo (!empty($user_info['postal_code']))?$user_info['postal_code']:"Empty";?></p>
-                                        <p><label>Address : </label> <?php echo (!empty($user_info['address_one']))?ucwords($user_info['address_one']):"Empty";?></p>
-                                        <p><label>Address Secondary : </label> <?php echo (!empty($user_info['address_two']))?ucwords($user_info['address_two']):"Empty";?></p>
-                                        <p><label>Country : </label> <?php echo (!empty($user_info['country']))?ucwords($user_info['country']):"Empty";?></p>
-                                       <?php  }?>
+                                    <div class="panel-heading">Ride Settings</div>
+                                    <div class="panel-body rides">
+                                       <p><b>Units: </b> <span class="btn btn-primary btn-blue btn-xs">empty</span></p>
+                                       <p><b>Notifications Rides: </b> <span class="btn btn-primary btn-blue btn-xs">on</span></p>
+                                       <p><b>Safety Brake: </b> <span class="btn btn-primary btn-blue btn-xs">on</span></p>
+                                       <p><b>Reverse Turned: </b> <span class="btn btn-primary btn-blue btn-xs">on</span></p>
+                                       <p><b>Lock: </b> <span class="btn btn-primary btn-blue btn-xs">on</span></p>
+                                       <p><b>Privacy Settings: </b> <span class="btn btn-primary btn-blue btn-xs">on</span></p>
+                                       <p><b>Range Alarm: </b> <span class="btn btn-primary btn-blue btn-xs">10%</span></p>
+                                       <p><b>Primary Riding Style: </b> <span class="btn btn-primary btn-blue btn-xs">Commute To Work</span></p>
+                                       <p><b>Preffered Breaking Force: </b> <span class="btn btn-primary btn-blue btn-xs">100%</span></p>
+                                       <p><b>Terrain: </b> <span class="btn btn-primary btn-blue btn-xs">Flat</span></p>
+                                       <p><b>Parental Lock: </b> <span class="btn btn-primary btn-blue btn-xs">on</span></p>
                                     </div>
                                 </div>
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">Last Login</div>
-                                    <div class="panel-body">
-                                        <?php echo (!empty($user_info['last_activity']))?date('M j, Y',$user_info['last_activity']):"Empty";?>
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">Support Requests</div>
-                                    <div class="panel-body">
-                                        Empty
-                                    </div>
-                                </div>
-
-                                <div class="aka">
-                                    <div class="social"><label>TWITTER : </label>  <?php echo (!empty($user_info['twitter_handle']))?$user_info['twitter_handle']:"Empty";?></div>
-                                    <div class="social"><label>LINKED IN: </label> <?php echo (!empty($user_info['linkedin_handle']))?$user_info['linkedin_handle']:"Empty";?></div>
-                                </div>
-
-                                 
                             </div>
                              
                           </div>

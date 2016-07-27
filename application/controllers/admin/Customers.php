@@ -202,7 +202,7 @@ class Customers extends CI_Controller {
 //                    'note_services' => $this->input->post('cd-note-services'),
 //                    'note_tasks' => $this->input->post('cd-note-task'),
 //                    'note_support_ticket' => $this->input->post('cd-support-ticket'),
-                     'comments' => $this->input->post('cd-comments'),
+                    'comments' => $this->input->post('cd-comments'),
                     'phone' => $phone,
                     'last_activity' => time(),
                     'register_date' => time()
@@ -301,24 +301,29 @@ class Customers extends CI_Controller {
         }
     }
 
-    public function get_customer_info($id = fasle) {
+    public function get_customer_info($id = false) {
         $this->data['title'] = 'User Profile';
         $this->data['page'] = 'User Profile';
         if ($id != '') {
             $this->data['regarding_task'] = $this->Customer->getUsersTasks($id);
             $this->data['user_info'] = $this->Customer->getCustomerInfo($id);
             $this->data['user_orders'] = $this->Services->getOrders($id);
+            $this->data['user_rides'] = $this->Customer->getRideDetailByUserId($id);
+            $this->data['user_notes'] = $this->Customer->getNotes($id);
+            #echo "<pre>"; print_r( $this->data['user_notes']); die;
         }
         $this->load->template('admin/customer/load_customer_info', $this->data);
     }
 
-    public function get_customer_info_new($id = fasle) {
+    public function get_customer_info_new($id = false) {
         $this->data['title'] = 'User Profile';
         $this->data['page'] = 'User Profile';
         if ($id != '') {
             $this->data['regarding_task'] = $this->Customer->getUsersTasks($id);
             $this->data['user_info'] = $this->Customer->getCustomerInfo($id);
             $this->data['user_orders'] = $this->Services->getOrders($id);
+            $this->data['user_rides'] = $this->Customer->getRideDetailByUserId($id);
+            
         }
         $this->load->template('admin/customer/customer_info_new', $this->data);
     }
@@ -412,19 +417,85 @@ class Customers extends CI_Controller {
     }
 
     public function image_validate() {
-        
-            if (( isset($_FILES['cd-profile']) && $_FILES['cd-profile']['size'] > 0)) {
 
-                if ($_FILES['cd-profile']['type'] == 'image/jpeg' || $_FILES['cd-profile']['type'] == 'image/png' || $_FILES['cd-profile']['type'] == 'image/jpg') {
-                    return true;
-                } else {
-                    $this->form_validation->set_message('image_validate', 'Profile image must be jpeg,png or jpg ');
-                    return false;
-                }
+        if (( isset($_FILES['cd-profile']) && $_FILES['cd-profile']['size'] > 0)) {
+
+            if ($_FILES['cd-profile']['type'] == 'image/jpeg' || $_FILES['cd-profile']['type'] == 'image/png' || $_FILES['cd-profile']['type'] == 'image/jpg') {
+                return true;
             } else {
-                return TRUE;
+                $this->form_validation->set_message('image_validate', 'Profile image must be jpeg,png or jpg ');
+                return false;
+            }
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function add_notes() {
+
+        if ($this->input->post()) {
+
+            $note = array(
+                'notes' => $this->input->post('notes'),
+                'created_by' => $this->input->post('created_by'),
+                'created_to' => $this->input->post('created_to'),
+            );
+            $this->db->insert('m_notes', $note);
+            if ($this->db->affected_rows()) {
+                $notes = $this->Customer->getNotesById($this->db->insert_id());
+
+                echo '<li><div class="col-md-9 col-sm-9 col-xs-12">
+                      <p>' . $notes["notes"] . '</p>
+                       </div>
+                       <div class="col-md-3 col-sm-3 col-xs-12">
+                       <p class="text-right date-posted">' . date("M j, Y", strtotime($notes['created_at'])) .' at '.date("H:i A", strtotime($notes['created_at'])). '</p>
+                       </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                          <span class="comment" style="cursor: pointer; color: black;"><i class="fa fa-comment-o"> Comment</i></span>
+                                     </div>
+                         <div class="clearfix"></div>            
+                         <div data-note="'.$notes['note_id'].'" class="add-comment-box"></div>
+                         <div class="reply-comment-box">
+                          <p class="text-center comment-count"><span style="color:#ddd"><count class="total-comment">0</count> comment</span></p>    
+                        <div class="reply-comment-box-comment"></div>
+                        </div>
+                       </li>';
             }
         }
-  
+    }
+
+    public function add_comments() {
+
+        if ($this->input->post('comment')) {
+
+            $comment = array(
+                'comment' => $this->input->post('comment'),
+                'noteID' => $this->input->post('note_id'),
+                'created_by' => $this->session->userdata['marbel_user']['user_id']
+            );
+            $this->db->insert('m_notes_comment', $comment);
+            if ($this->db->affected_rows()) {
+                $comments = $this->Customer->getCommentsById($this->db->insert_id());
+               if($comments['created_by']==$this->session->userdata['marbel_user']['user_id']){
+                   $commented_by='commented by you';
+               }else{
+                   $commented_by='commented by '.getUserName($comments['created_by']);
+               }
+                echo '<div class="reply-to-reply">
+                                            <ul>
+                                                <li>
+                                                    <div class="col-md-8 col-sm-8 col-xs-12 border-left">
+                                                    <p><small>'.$commented_by.'</small></p>
+                                                    <p>' . $comments["comment"] . '</p>
+                                                        </div>
+                                                    <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
+                                                        <p class="text-right date-posted">' . date("M j, Y", strtotime($comments["created_at"])) .' at '.date("H:i A", strtotime($comments["created_at"])) .'</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>';
+            }
+        }
+    }
 
 }

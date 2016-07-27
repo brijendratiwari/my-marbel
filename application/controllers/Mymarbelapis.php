@@ -164,7 +164,8 @@ class Mymarbelapis extends CI_Controller {
                 'est_finish_st' => ($this->input->get_post("est_finish_st")) ? $this->input->get_post("est_finish_st") : "",
                 'temp_f' => ($this->input->get_post("temp_f")) ? $this->input->get_post("temp_f") : "",
                 'humidity' => ($this->input->get_post("humidity")) ? $this->input->get_post("humidity") : "",
-                'ride_name' => ($this->input->get_post('ride_name')) ? $this->input->get_post('ride_name') : ""
+                'ride_name' => ($this->input->get_post('ride_name')) ? $this->input->get_post('ride_name') : "",
+                'efficiency' => ($this->input->get_post('efficiency')) ? $this->input->get_post('efficiency') : ""
             );
 
             if ($this->input->get_post('ride_ID')) {

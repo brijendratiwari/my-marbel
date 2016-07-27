@@ -25,3 +25,14 @@ function getUserImages($id) {
         return $image->user_profile_pic;
     }
 }
+
+function getUserName($id) {
+        $CI = & get_instance();
+        $CI->db->select('first_name,last_name')->from('m_users');
+        $CI->db->where('id', $id);
+        $query = $CI->db->get();
+        if ($query->num_rows() > 0) {
+            $nameassignee = $query->row_array();
+            return $nameassignee['first_name'] . ' ' . $nameassignee['last_name'];
+        }
+    }

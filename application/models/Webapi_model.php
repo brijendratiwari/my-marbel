@@ -18,7 +18,7 @@ class Webapi_model extends CI_Model {
 
     function getUserInfo($user_id = false) {
 
-        $this->db->select('mu.id as user_id, mu.email, mu.first_name, mu.last_name, mu.type, mu.register_date, mu.last_activity, mu.phone, mu.notes, mu.email_secondary,mu.bio,mu.height,mu.weight,mu.terrain,mu.company,mu.address_one,mu.address_two,mu.city,mu.state_or_region,mu.postal_code,mu.country,mu.accepts,mu.alias,mu.privacy_setting,mu.units,mu.range_alarm,mu.notifications,mu.primary_riding_style,mu.safety_brake,mu.preferred_braking_force,mu.reverse_turned,mu.locked_settings,mu.parental_lock,mu.user_profile_pic,mu.twitter_handle,mu.linkedin_handle,mu.instagram_handle,mu.reddit_handle,mu.note_orders,mu.note_services,mu.note_tasks,mu.note_support_ticket, mua.password as db_password, mua.salt');
+        $this->db->select('mu.id as user_id, mu.email, mu.first_name, mu.last_name, mu.type, mu.register_date, mu.last_activity, mu.phone, mu.notes, mu.email_secondary,mu.bio,mu.height,mu.weight,mu.terrain,mu.company,mu.address_one,mu.address_two,mu.city,mu.state_or_region,mu.postal_code,mu.country,mu.accepts,mu.alias,mu.privacy_setting,mu.units,mu.range_alarm,mu.notifications,mu.primary_riding_style,mu.safety_brake,mu.preferred_braking_force,mu.reverse_turned,mu.locked_settings,mu.parental_lock,mu.user_profile_pic,mu.twitter_handle,mu.linkedin_handle,mu.instagram_handle,mu.reddit_handle,mu.comments, mua.password as db_password, mua.salt');
 
         $this->db->from('m_users as mu');
         $this->db->join('m_user_auth as mua', 'mua.user_id = mu.id', 'LEFT');
@@ -67,10 +67,7 @@ class Webapi_model extends CI_Model {
             $returnValue["linkedinHandle"] = $userDetails["linkedin_handle"];
             $returnValue["instagramHandle"] = $userDetails["instagram_handle"];
             $returnValue["redditHandle"] = $userDetails["reddit_handle"];
-            $returnValue["noteOrders"] = $userDetails["note_orders"];
-            $returnValue["noteServices"] = $userDetails["note_services"];
-            $returnValue["noteTasks"] = $userDetails["note_tasks"];
-            $returnValue["noteSupportTicket"] = $userDetails["note_support_ticket"];
+            $returnValue["userComments"] = $userDetails["comments"];
             $returnValue["userProfilePicture"] = $user_profile;
 
             return $returnValue;
