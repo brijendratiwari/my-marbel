@@ -19,7 +19,7 @@
             <form class="cd-form floating-labels" style="max-width: 100%; width: 100%;margin: 0px;" method="POST" action="">
                 <fieldset>
                     <input type="hidden" name="cd-order_number" value="<?php echo $order[0]['order_number']; ?>" />
-                    <input type="hidden" name="cd-userid" value="<?php echo $order[0]['user_id']; ?>" />
+                    <input type="hidden" name="cd-userid" value="<?php echo $this->session->userdata['marbel_user']['user_id']; ?>" />
                    
                     <div class="col-md-12">
                     <div class="col-md-12">

@@ -158,7 +158,7 @@
                                             <td><a href="<?php echo base_url('tasks');?>"<span class="blue"><?php echo (!empty($task['task_name'])) ? $task['task_name'] : ""; ?> :</span></a><span> <?php echo (!empty($task['cat_name'])) ? $task['cat_name'] : ""; ?></span></td>
                                             <td width="350" align="center"><?php echo (!empty($task['task_details'])) ? $task['task_details'] : ""; ?>.</td>
                                             <td align="center"><?php echo (!empty($task['task_status'])) ? $task['task_status'] : ""; ?></td>
-                                            <td width="200" align="right">Due: <?php echo (!empty($task['task_due_date']) && $task['task_due_date']='0000-00-00') ? date('m/d/Y', strtotime($task['task_due_date'])) : ""; ?></td>
+                                            <?php if(!empty($task['task_due_date']) && $task['task_due_date']!='0000-00-00') {?><td width="200" align="right">Due: <?php echo  date('m/d/Y', strtotime($task['task_due_date'])); ?></td><?php } ?>
                                         </tr>
     <?php }
 } else {

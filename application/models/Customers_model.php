@@ -259,6 +259,7 @@ class Customers_model extends CI_Model {
         $this->db->join('m_users', 'm_users.id=m_tasks.task_regarding');
         $this->db->join('m_task_category', 'm_task_category.cat_id=m_tasks.task_cat_id');
         $this->db->where('m_tasks.task_regarding', $id);
+        $this->db->where('m_tasks.task_status !=', 'Finished');
         $this->db->order_by('m_tasks.task_id', 'Desc');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
