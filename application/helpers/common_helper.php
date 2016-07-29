@@ -36,3 +36,15 @@ function getUserName($id) {
             return $nameassignee['first_name'] . ' ' . $nameassignee['last_name'];
         }
     }
+function textLimit($x, $length)
+{
+  if(strlen($x)<=$length)
+  {
+    echo $x;
+  }
+  else
+  {
+    $y=substr($x,0,$length) . '...';
+    return $y;
+  }
+}

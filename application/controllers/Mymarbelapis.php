@@ -262,5 +262,33 @@ class Mymarbelapis extends CI_Controller {
             return false;
         }
     }
+    //web services for save board deatil and update
+    public function boards(){
+        $returnValue = array();
+        $returnValue["data"] = array();
+        $this->form_validation->set_rules('board_id', 'Board id', 'trim|required');
+        if ($this->form_validation->run() == FALSE) {
+            $returnValue["status"] =false;
+            $returnValue["message"] = $this->form_validation->error_array();
+            $returnValue["result"] = 'failed';
+            echo json_encode($returnValue);
+            die;
+        } else {
+            $response=$this->Webapi->saveBoardDetails();
+            if($response){
+            $returnValue["status"] = true;
+                $returnValue["message"] = $response;
+                $returnValue["result"] = 'success';
+                echo json_encode($returnValue);
+                die;
+            }else{
+                $returnValue["status"] =false;
+                $returnValue["message"] = 'Data format not valid! Please send valid format.';
+                $returnValue["result"] = 'failed';
+                echo json_encode($returnValue);
+                die;
+            }
+        }
+    }
 
 }

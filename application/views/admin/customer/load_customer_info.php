@@ -85,10 +85,7 @@
     <?php }
 } else { ?> 
 
-                                    <tr>
-                                        <td colspan="7"> No Order Found!</td>
-
-                                    </tr>
+                                     No Order Found!
 
 <?php } ?>  
                             </table>
@@ -155,10 +152,11 @@
                                 <?php if ($regarding_task) {
                                     foreach ($regarding_task as $task) { ?>
                                         <tr>
-                                            <td><a href="<?php echo base_url('tasks');?>"<span class="blue"><?php echo (!empty($task['task_name'])) ? $task['task_name'] : ""; ?> :</span></a><span> <?php echo (!empty($task['cat_name'])) ? $task['cat_name'] : ""; ?></span></td>
-                                            <td width="350" align="center"><?php echo (!empty($task['task_details'])) ? $task['task_details'] : ""; ?>.</td>
-                                            <td align="center"><?php echo (!empty($task['task_status'])) ? $task['task_status'] : ""; ?></td>
-                                            <?php if(!empty($task['task_due_date']) && $task['task_due_date']!='0000-00-00') {?><td width="200" align="right">Due: <?php echo  date('m/d/Y', strtotime($task['task_due_date'])); ?></td><?php } ?>
+                                            <td><a href="<?php echo base_url('tasks');?>"<span class="blue"><?php echo (!empty($task['task_name'])) ? $task['task_name'] : ""; ?> </span></a></td>
+                                           <td ><span> <?php echo (!empty($task['cat_name'])) ? $task['cat_name'] : ""; ?></span></td>
+                                            <td width="200" align="center"><?php echo (!empty($task['task_details'])) ? textLimit($task['task_details'],20) : ""; ?>.</td>
+                                            <td width="200" align="center"><?php echo (!empty($task['task_status'])) ? $task['task_status'] : ""; ?></td>
+                                           <td width="150" align="right"> <?php if(!empty($task['task_due_date']) && $task['task_due_date']!='0000-00-00') {?>Due: <?php echo  date('m/d/Y', strtotime($task['task_due_date'])); ?><?php } ?></td>
                                         </tr>
     <?php }
 } else {
@@ -240,10 +238,11 @@
                         <div class="panel-heading">Details <a href="<?php echo base_url('edit_customer/'.$user_info['id'])?>"><span class="blue pull-right small-btn">edit</span></a></div>
                         <div class="panel-body">
                             <p>
+<a href="mailto:" target="_top"></a>
 
-
-                                <?php echo (!empty($user_info['email'])) ? '<span class="blue">'.$user_info['email'].'</span><br>' : ""; ?>
-                               <?php echo (!empty($user_info['email_secondary'])) ? ' <span class="blue">'.$user_info['email_secondary'].'</span><br>' : ""; ?>
+                                <?php echo (!empty($user_info['email'])) ? '<span class="blue"><a href="mailto:'.$user_info['email'].'" target="_top">'.$user_info['email'].'</a>
+</span><br>' : ""; ?>
+                               <?php echo (!empty($user_info['email_secondary'])) ? ' <span class="blue"><span class="blue"><a href="mailto:'.$user_info['email_secondary'].'" target="_top">'.$user_info['email_secondary'].'</a></span><br>' : ""; ?>
                                 <?php echo (!empty($user_info['phone'])) ? $user_info['phone'].'<br><br>' : ""; ?>
 
                                 <?php

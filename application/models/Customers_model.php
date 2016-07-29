@@ -298,7 +298,7 @@ class Customers_model extends CI_Model {
             $results = $query->row_array();
             $result['trip_duration'] = round($results['tripduration'] / 3600, 1);
             $result['trip_distance'] = round($results['tripdistance'], 1);
-            $result['efficiencys'] = round($results['efficiency']);
+            $result['efficiencys'] = round(($results['efficiency']/100)*30);
             $result['odometers'] = $this->getRidesPointsDetail($results['ride_ID']);
 
             return $result;

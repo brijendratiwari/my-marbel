@@ -22,7 +22,6 @@ class Support extends CI_Controller {
         
         $this->data['page']="Support";
         $this->data['title']="Support";
-      
         $this->load->customer('customer/support',$this->data);
     }
     public function upload(){
@@ -75,7 +74,7 @@ class Support extends CI_Controller {
                         } else {
                             die('Message has been sent');
                         }
-                    } else {
+                    } else{
                         die('Error uploading file!');
                     }    
         } else if ($this->input->post('cd-notes')) {

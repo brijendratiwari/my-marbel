@@ -149,6 +149,7 @@ $route['appsignin']='mymarbelapis/index';
 $route['appsignup']='mymarbelapis/users_signup';
 $route['rides']='mymarbelapis/rides';
 $route['ridespoints']='mymarbelapis/ridespoints';
+$route['boards']='mymarbelapis/boards';
 
 
 /*....api*/
