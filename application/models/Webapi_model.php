@@ -79,34 +79,34 @@ class Webapi_model extends CI_Model {
     public function saveUserInfo($filename) {
 
         $data = array(
-            'first_name' => ($this->input->get_post('userFirstName')) ? $this->input->get_post('userFirstName') : '',
-            'last_name' => ($this->input->get_post('userLastName')) ? $this->input->get_post('userLastName') : '',
-            'email' => ($this->input->get_post('userEmail')) ? $this->input->get_post('userEmail') : '',
-            'type' => ($this->input->get_post('userType')) ? $this->input->get_post('userType') : '',
-            'notes' => ($this->input->get_post('message')) ? $this->input->get_post('message') : '',
-            'email_secondary' => ($this->input->get_post('email_secondary'))? : '',
-            'bio' => ($this->input->get_post('bio')) ? $this->input->get_post('bio') : '',
-            'height' => ($this->input->get_post('height')) ? $this->input->get_post('height') : '',
-            'weight' => ($this->input->get_post('weight')) ? $this->input->get_post('weight') : '',
-            'terrain' => ($this->input->get_post('terrain')) ? $this->input->get_post('terrain') : '',
-            'company' => ($this->input->get_post('company')) ? $this->input->get_post('company') : '',
-            'address_one' => ($this->input->get_post('addressOne')) ? $this->input->get_post('addressOne') : '',
-            'address_two' => ($this->input->get_post('addressTwo')) ? $this->input->get_post('addressTwo') : '',
-            'city' => ($this->input->get_post('city')) ? $this->input->get_post('city') : '',
-            'state_or_region' => ($this->input->get_post('stateRegion')) ? $this->input->get_post('stateRegion') : '',
-            'postal_code' => ($this->input->get_post('postalCode')) ? $this->input->get_post('postalCode') : '',
-            'country' => ($this->input->get_post('country')) ? $this->input->get_post('country') : '',
-            'privacy_setting' => ($this->input->get_post('privacySetting')) ? $this->input->get_post('privacySetting') : '',
-            'units' => ($this->input->get_post('units')) ? $this->input->get_post('units') : '',
-            'range_alarm' => ($this->input->get_post('rangeAlarm')) ? $this->input->get_post('rangeAlarm') : '',
-            'notifications' => ($this->input->get_post('notifications')) ? $this->input->get_post('notifications') : '',
-            'primary_riding_style' => ($this->input->get_post('primaryRidingStyle')) ? $this->input->get_post('primaryRidingStyle') : '',
-            'safety_brake' => ($this->input->get_post('safetyBrake')) ? $this->input->get_post('safetyBrake') : '',
-            'preferred_braking_force' => ($this->input->get_post('preferredBrakingForce')) ? $this->input->get_post('preferredBrakingForce') : '',
-            'reverse_turned' => ($this->input->get_post('reverseTurned')) ? $this->input->get_post('reverseTurned') : '',
-            'locked_settings' => ($this->input->get_post('lockedSettings')) ? $this->input->get_post('lockedSettings') : '',
-            'register_date' => time(),
-            'user_profile_pic' => $filename
+            'first_name'                => ($this->input->get_post('userFirstName')) ? $this->input->get_post('userFirstName') : '',
+            'last_name'                 => ($this->input->get_post('userLastName')) ? $this->input->get_post('userLastName') : '',
+            'email'                     => ($this->input->get_post('userEmail')) ? $this->input->get_post('userEmail') : '',
+            'type'                      => ($this->input->get_post('userType')) ? $this->input->get_post('userType') : '',
+            'notes'                     => ($this->input->get_post('message')) ? $this->input->get_post('message') : '',
+            'email_secondary'           => ($this->input->get_post('email_secondary'))?$this->input->get_post('email_secondary') : '',
+            'bio'                       => ($this->input->get_post('bio')) ? $this->input->get_post('bio') : '',
+            'height'                    => ($this->input->get_post('height')) ? $this->input->get_post('height') : '',
+            'weight'                    => ($this->input->get_post('weight')) ? $this->input->get_post('weight') : '',
+            'terrain'                   => ($this->input->get_post('terrain')) ? $this->input->get_post('terrain') : '',
+            'company'                   => ($this->input->get_post('company')) ? $this->input->get_post('company') : '',
+            'address_one'               => ($this->input->get_post('addressOne')) ? $this->input->get_post('addressOne') : '',
+            'address_two'               => ($this->input->get_post('addressTwo')) ? $this->input->get_post('addressTwo') : '',
+            'city'                      => ($this->input->get_post('city')) ? $this->input->get_post('city') : '',
+            'state_or_region'           => ($this->input->get_post('stateRegion')) ? $this->input->get_post('stateRegion') : '',
+            'postal_code'               => ($this->input->get_post('postalCode')) ? $this->input->get_post('postalCode') : '',
+            'country'                   => ($this->input->get_post('country')) ? $this->input->get_post('country') : '',
+            'privacy_setting'           => ($this->input->get_post('privacySetting')) ? $this->input->get_post('privacySetting') : '',
+            'units'                     => ($this->input->get_post('units')) ? $this->input->get_post('units') : '',
+            'range_alarm'               => ($this->input->get_post('rangeAlarm')) ? $this->input->get_post('rangeAlarm') : '',
+            'notifications'             => ($this->input->get_post('notifications')) ? $this->input->get_post('notifications') : '',
+            'primary_riding_style'      => ($this->input->get_post('primaryRidingStyle')) ? $this->input->get_post('primaryRidingStyle') : '',
+            'safety_brake'              => ($this->input->get_post('safetyBrake')) ? $this->input->get_post('safetyBrake') : '',
+            'preferred_braking_force'   => ($this->input->get_post('preferredBrakingForce')) ? $this->input->get_post('preferredBrakingForce') : '',
+            'reverse_turned'            => ($this->input->get_post('reverseTurned')) ? $this->input->get_post('reverseTurned') : '',
+            'locked_settings'           => ($this->input->get_post('lockedSettings')) ? $this->input->get_post('lockedSettings') : '',
+            'register_date'             => time(),
+            'user_profile_pic'          => $filename
         );
 
 
@@ -133,33 +133,33 @@ class Webapi_model extends CI_Model {
 
 
         $data = array(
-            'first_name' => ($this->input->get_post('userFirstName')) ? $this->input->get_post('userFirstName') : '',
-            'last_name' => ($this->input->get_post('userLastName')) ? $this->input->get_post('userLastName') : '',
-            'email' => ($this->input->get_post('userEmail')) ? $this->input->get_post('userEmail') : '',
-            'type' => ($this->input->get_post('userType')) ? $this->input->get_post('userType') : '',
-            'notes' => ($this->input->get_post('message')) ? $this->input->get_post('message') : '',
-            'email_secondary' => ($this->input->get_post('email_secondary'))? : '',
-            'bio' => ($this->input->get_post('bio')) ? $this->input->get_post('bio') : '',
-            'height' => ($this->input->get_post('height')) ? $this->input->get_post('height') : '',
-            'weight' => ($this->input->get_post('weight')) ? $this->input->get_post('weight') : '',
-            'terrain' => ($this->input->get_post('terrain')) ? $this->input->get_post('terrain') : '',
-            'company' => ($this->input->get_post('company')) ? $this->input->get_post('company') : '',
-            'address_one' => ($this->input->get_post('addressOne')) ? $this->input->get_post('addressOne') : '',
-            'address_two' => ($this->input->get_post('addressTwo')) ? $this->input->get_post('addressTwo') : '',
-            'city' => ($this->input->get_post('city')) ? $this->input->get_post('city') : '',
-            'state_or_region' => ($this->input->get_post('stateRegion')) ? $this->input->get_post('stateRegion') : '',
-            'postal_code' => ($this->input->get_post('postalCode')) ? $this->input->get_post('postalCode') : '',
-            'country' => ($this->input->get_post('country')) ? $this->input->get_post('country') : '',
-            'privacy_setting' => ($this->input->get_post('privacySetting')) ? $this->input->get_post('privacySetting') : '',
-            'units' => ($this->input->get_post('units')) ? $this->input->get_post('units') : '',
-            'range_alarm' => ($this->input->get_post('rangeAlarm')) ? $this->input->get_post('rangeAlarm') : '',
-            'notifications' => ($this->input->get_post('notifications')) ? $this->input->get_post('notifications') : '',
-            'primary_riding_style' => ($this->input->get_post('primaryRidingStyle')) ? $this->input->get_post('primaryRidingStyle') : '',
-            'safety_brake' => ($this->input->get_post('safetyBrake')) ? $this->input->get_post('safetyBrake') : '',
-            'preferred_braking_force' => ($this->input->get_post('preferredBrakingForce')) ? $this->input->get_post('preferredBrakingForce') : '',
-            'reverse_turned' => ($this->input->get_post('reverseTurned')) ? $this->input->get_post('reverseTurned') : '',
-            'locked_settings' => ($this->input->get_post('lockedSettings')) ? $this->input->get_post('lockedSettings') : '',
-            'user_profile_pic' => $filename
+            'first_name'                    => ($this->input->get_post('userFirstName')) ? $this->input->get_post('userFirstName') : '',
+            'last_name'                     => ($this->input->get_post('userLastName')) ? $this->input->get_post('userLastName') : '',
+            'email'                         => ($this->input->get_post('userEmail')) ? $this->input->get_post('userEmail') : '',
+            'type'                          => ($this->input->get_post('userType')) ? $this->input->get_post('userType') : '',
+            'notes'                         => ($this->input->get_post('message')) ? $this->input->get_post('message') : '',
+            'email_secondary'               => ($this->input->get_post('email_secondary'))? $this->input->get_post('email_secondary'): '',
+            'bio'                           => ($this->input->get_post('bio')) ? $this->input->get_post('bio') : '',
+            'height'                        => ($this->input->get_post('height')) ? $this->input->get_post('height') : '',
+            'weight'                        => ($this->input->get_post('weight')) ? $this->input->get_post('weight') : '',
+            'terrain'                       => ($this->input->get_post('terrain')) ? $this->input->get_post('terrain') : '',
+            'company'                       => ($this->input->get_post('company')) ? $this->input->get_post('company') : '',
+            'address_one'                   => ($this->input->get_post('addressOne')) ? $this->input->get_post('addressOne') : '',
+            'address_two'                   => ($this->input->get_post('addressTwo')) ? $this->input->get_post('addressTwo') : '',
+            'city'                          => ($this->input->get_post('city')) ? $this->input->get_post('city') : '',
+            'state_or_region'               => ($this->input->get_post('stateRegion')) ? $this->input->get_post('stateRegion') : '',
+            'postal_code'                   => ($this->input->get_post('postalCode')) ? $this->input->get_post('postalCode') : '',
+            'country'                       => ($this->input->get_post('country')) ? $this->input->get_post('country') : '',
+            'privacy_setting'               => ($this->input->get_post('privacySetting')) ? $this->input->get_post('privacySetting') : '',
+            'units'                         => ($this->input->get_post('units')) ? $this->input->get_post('units') : '',
+            'range_alarm'                   => ($this->input->get_post('rangeAlarm')) ? $this->input->get_post('rangeAlarm') : '',
+            'notifications'                 => ($this->input->get_post('notifications')) ? $this->input->get_post('notifications') : '',
+            'primary_riding_style'          => ($this->input->get_post('primaryRidingStyle')) ? $this->input->get_post('primaryRidingStyle') : '',
+            'safety_brake'                  => ($this->input->get_post('safetyBrake')) ? $this->input->get_post('safetyBrake') : '',
+            'preferred_braking_force'       => ($this->input->get_post('preferredBrakingForce')) ? $this->input->get_post('preferredBrakingForce') : '',
+            'reverse_turned'                => ($this->input->get_post('reverseTurned')) ? $this->input->get_post('reverseTurned') : '',
+            'locked_settings'               => ($this->input->get_post('lockedSettings')) ? $this->input->get_post('lockedSettings') : '',
+            'user_profile_pic'              => $filename
         );
         $this->db->where('id', $user_id);
         $this->db->update('m_users', $data);
@@ -179,35 +179,35 @@ class Webapi_model extends CI_Model {
         if ($this->input->get_post('board_id')) {
 
             $board = array(
-                'board_id' => $this->input->get_post('board_id'),
-                'board_name' => $this->input->get_post('board_name'),
-                'user_id' => $this->input->get_post('user_id'),
-                'serial_number' => $this->input->get_post('serial_number'),
-                'firmware_version' => $this->input->get_post('firmware_version'),
-                'wheel_size' => $this->input->get_post('wheel_size'),
-                'odometer' => $this->input->get_post('odometer'),
-                'ride_count' => $this->input->get_post('ride_count'),
-                'batt_charge_count' => $this->input->get_post('batt_charge_count'),
-                'lock_status' => $this->input->get_post('lock_status'),
-                'parent_lock_status' => $this->input->get_post('parent_lock_status'),
-                'user_email' => $this->input->get_post('user_email'),
-                'batt_serial_number' => $this->input->get_post('batt_serial_number'),
-                'motor_version' => $this->input->get_post('motor_version'),
-                'aio_circuit_version' => $this->input->get_post('aio_circuit_version'),
-                'deck_version' => $this->input->get_post('deck_version'),
-                'production_date' => $this->input->get_post('production_date')
+                'board_id'              => ($this->input->get_post('board_id'))?$this->input->get_post('board_id'):"",
+                'board_name'            => ($this->input->get_post('board_name'))?$this->input->get_post('board_name'):"",
+                'user_id'               => ($this->input->get_post('user_id'))?$this->input->get_post('user_id'):"",
+                'serial_number'         => ($this->input->get_post('serial_number'))?$this->input->get_post('serial_number'):"",
+                'firmware_version'      => ($this->input->get_post('firmware_version'))?$this->input->get_post('firmware_version'):"",
+                'wheel_size'            => ($this->input->get_post('wheel_size'))?$this->input->get_post('wheel_size'):"",
+                'odometer'              => ($this->input->get_post('odometer'))?$this->input->get_post('odometer'):"",
+                'ride_count'            => ($this->input->get_post('ride_count'))?$this->input->get_post('ride_count'):"",
+                'batt_charge_count'     => ($this->input->get_post('batt_charge_count'))?$this->input->get_post('batt_charge_count'):"",
+                'lock_status'           => ($this->input->get_post('lock_status'))?$this->input->get_post('lock_status'):"",
+                'parent_lock_status'    => ($this->input->get_post('parent_lock_status'))?$this->input->get_post('parent_lock_status'):"",
+                'user_email'            => ($this->input->get_post('user_email'))?$this->input->get_post('user_email'):"",
+                'batt_serial_number'    => ($this->input->get_post('batt_serial_number'))?$this->input->get_post('batt_serial_number'):"",
+                'motor_version'         => ($this->input->get_post('motor_version'))?$this->input->get_post('motor_version'):"",
+                'aio_circuit_version'   => ($this->input->get_post('aio_circuit_version'))?$this->input->get_post('aio_circuit_version'):"",
+                'deck_version'          => ($this->input->get_post('deck_version'))?$this->input->get_post('deck_version'):"",
+                'production_date'       => ($this->input->get_post('production_date'))?$this->input->get_post('production_date'):""
             );
             $checkBoardId = $this->checkBoardId($this->input->get_post('board_id'));
             if ($checkBoardId) {
                 $this->db->where('board_id', $this->input->get_post('board_id'));
                 $this->db->update('m_boards', $board);
-                return 'Board detail updated successfully';
+                return 'Board details updated successfully';
             } else {
 
                 $this->db->insert('m_boards', $board);
                 if ($this->db->insert_id()) {
 
-                    return 'Board detail save successfully';
+                    return 'Board details save successfully';
                 }
             }
         }

@@ -38,7 +38,7 @@
                                 <h1><?php echo (!empty($user_info['first_name'])) ? $user_info['first_name'] . " " . $user_info['last_name'] : ""; ?></h1>
                                 <p><b>Marbel One Pro</b> w/ firmware 1.9.4
                                     Odometer:<?php echo (!empty($user_rides['odometers']))?$user_rides['odometers']:"00.0";?> miles
-                                    # of recent rides: 30</p>
+                                    # of recent rides: <?php echo (!empty($user_rides['total_rides']))?$user_rides['total_rides']:"0";?></p>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12 full-width768-980">
                                    
@@ -64,7 +64,7 @@
 
                     <div class="clearfix"></div>
                     <div class="panel panel-default">
-                        <div class="panel-heading">Orders <span class="blue pull-right small-btn">+ Order</span></div>
+                        <div class="panel-heading">Orders <a href="<?php echo base_url('orders');?>"><span class="blue pull-right small-btn">+ Order</span></a></div>
                         <div class="panel-body">
                             <table width="100%" class="profile-tbl">
                                 <?php if (!empty($user_orders)) {
@@ -93,7 +93,7 @@
                     </div>
 
                     <div class="panel panel-default">
-                        <div class="panel-heading">Service Records <span class="blue pull-right small-btn">+ Service</span></div>
+                        <div class="panel-heading">Service Records <a href="<?php echo base_url('services?status=pending')?>"><span class="blue pull-right small-btn">+ Service</span></a></div>
                         <div class="panel-body">
 
                             <table width="100%" class="profile-tbl">
@@ -145,7 +145,7 @@
 
 
                     <div class="panel panel-default">
-                        <div class="panel-heading">Tasks <span class="blue pull-right small-btn">+Task Regarding <?php echo (!empty($user_info['first_name'])) ? $user_info['first_name'] : ""; ?></span></div>
+                        <div class="panel-heading">Tasks <a href="<?php echo base_url('tasks');?>"><span class="blue pull-right small-btn">+Task Regarding <?php echo (!empty($user_info['first_name'])) ? $user_info['first_name'] : ""; ?></span></a></div>
                         <div class="panel-body">
                             <table width="100%" class="profile-tbl">
 
@@ -238,7 +238,7 @@
                         <div class="panel-heading">Details <a href="<?php echo base_url('edit_customer/'.$user_info['id'])?>"><span class="blue pull-right small-btn">edit</span></a></div>
                         <div class="panel-body">
                             <p>
-<a href="mailto:" target="_top"></a>
+
 
                                 <?php echo (!empty($user_info['email'])) ? '<span class="blue"><a href="mailto:'.$user_info['email'].'" target="_top">'.$user_info['email'].'</a>
 </span><br>' : ""; ?>
@@ -276,7 +276,7 @@
                                     
                                 </div>
 
-                                Last Login:  <?php echo (!empty($user_info['last_activity'])) ? date('M j, Y  H:i a', $user_info['last_activity']) : ""; ?><br>
+                                Last Login:  <?php echo (!empty($user_info['last_activity'])) ? date('M j, Y', $user_info['last_activity']).' at '.date('H:i a', $user_info['last_activity']) : ""; ?><br>
                                 # of Recent Logins:  8
                                 </p>
 
