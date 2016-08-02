@@ -276,7 +276,7 @@
                                     
                                 </div>
 
-                                Last Login:  <?php echo (!empty($user_info['last_activity'])) ? date('M j, Y', $user_info['last_activity']).' at '.date('H:i a', $user_info['last_activity']) : ""; ?><br>
+                                Last Login:  <?php echo (!empty($user_info['last_activity'])) ? date('M j, Y', $user_info['last_activity']).' at '.date('H:i A', $user_info['last_activity']) : ""; ?><br>
                                 # of Recent Logins:  8
                                 </p>
 

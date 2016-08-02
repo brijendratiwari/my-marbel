@@ -19,9 +19,10 @@
                         <li>
                             <a href="<?php echo base_url('orders');?>"><i class="fa fa-bar-chart-o fa-fw"></i> Orders</a>
                         </li>
-<!--                         <li>
-                            <a href="<?php echo base_url('update_orders');?>"><i class="fa fa-bar-chart-o fa-fw"></i>Update Orders</a>
-                        </li>-->
+                        
+                         <li>
+                            <a href="<?php echo base_url('Customers_rides');?>"><i class="glyphicon glyphicon-road"></i> Rides</a>
+                        </li>
                         <li>
                             <a href="<?php echo base_url('shipping');?>"><i class="fa fa-shopping-cart fa-fw"></i> Shipping</a>
                         </li>
@@ -53,9 +54,9 @@
                         <li>
                             <a title="Orders" href="<?php echo base_url('orders');?>"><i class="fa fa-bar-chart-o fa-fw"></i></a>
                         </li>
-<!--                         <li>
-                            <a href="<?php echo base_url('update_orders');?>"><i class="fa fa-bar-chart-o fa-fw"></i>Update Orders</a>
-                        </li>-->
+                         <li>
+                            <a title="Rides" href="<?php echo base_url('customers_rides');?>"><i class="fa fa-bar-chart-o fa-fw"></i></a>
+                        </li>
                         <li>
                             <a title="Shipping" href="<?php echo base_url('shipping');?>"><i class="fa fa-shopping-cart fa-fw"></i></a>
                         </li>

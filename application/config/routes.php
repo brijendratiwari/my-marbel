@@ -77,7 +77,6 @@ $route['send_password_email/(:num)'] = 'admin/customers/send_password_email/$1';
 $route['send_password_email_profile/(:num)'] = 'admin/customers/send_password_email_profile/$1';
 $route['add_notes'] = 'admin/customers/add_notes';
 $route['add_comments'] = 'admin/customers/add_comments';
-
 $route['get_child_user_level'] = 'admin/customers/get_child_user_level';
 
 
@@ -164,3 +163,8 @@ $route['inventory/view/(:num)']='admin/inventory/view_part/$1';
 $route['inventory/edit/(:num)']='admin/inventory/edit_part/$1';
 $route['inventory/update_image']='admin/inventory/update_image';
 $route['inventory/autoreorder']='admin/inventory/createEventCron';
+
+//Customer Rides
+$route['Customers_rides']='admin/customersrides';
+$route['rides_list']='admin/customersrides/rides_list';
+$route['ride_details/(:num)']='admin/customersrides/ride_details/$1';

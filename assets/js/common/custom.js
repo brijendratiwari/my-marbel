@@ -326,7 +326,35 @@ $(document).ready(function(){
            
             
         ]});
+        /* Rides list datatable... */
     
+     $("#rides-data").dataTable({
+              "oLanguage": {
+            "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
+//         "ordering": false,
+        "bProcessing": true,
+        "bServerSide": true,
+        "sAjaxSource": base_url + "rides_list", "bDeferRender": true,
+        "aLengthMenu": [[10,20,50, 100, -1], [10,20,50, 100,'All', $("#sAll").val()]],
+        "sPaginationType": "numbers",
+        "iDisplayLength": 50,
+        "bDestroy": true, //!!!--- for remove data table warning.
+        "aoColumnDefs": [
+            {"aTargets": [0],"sClass": "hidden"},
+            {"sClass": " aligncenter", "aTargets": [1],"bSortable": false},
+            {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
+            {"sClass": "hidden-phone", "aTargets": [3]},
+            {"sClass": "hidden-phone", "aTargets": [4]},
+            {"sClass": "hidden-phone", "aTargets": [5]},
+            {"sClass": "hidden-phone", "aTargets": [6]},
+            {"sClass": "hidden-phone", "aTargets": [7]},
+            {"sClass": "hidden-phone text-center", "aTargets": [8]},
+            {"sClass": "hidden-phone text-center", "aTargets": [9]},
+            
+        ]}
+        );
+
+//serach activr tab for part
        $('.category-search').click( function() { 
            $('.category-search').removeClass('tab-active');
            $(this).addClass('tab-active');

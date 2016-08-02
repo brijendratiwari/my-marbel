@@ -224,18 +224,18 @@
                                     <div class="col-md-6">
                                         <label>Privacy Setting : </label>
                                         
-                                         <span class='label label-info'><?php echo (!empty($customer['privacy_setting']))?$customer['privacy_setting']:"Empty";?></span>
+                                         <span class='label label-info'><?php echo (!empty($customer['privacy_setting']))?$customer['privacy_setting']:"";?></span>
                                         
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                           <label>Units : </label>
-                                        <span class='label label-info'><?php echo (!empty($customer['units']))?$customer['units']:"Empty";?></span>
+                                        <span class='label label-info'><?php echo (!empty($customer['units']))?$customer['units']:"";?></span>
                                     </div>
                                     <div class="col-md-6">
                                          <label>Range Alarm : </label>
-                                         <span class='label label-info'><?php echo (!empty( $customer['range_alarm']))? $customer['range_alarm'].'%':"Empty";?></span>
+                                         <span class='label label-info'><?php echo (!empty( $customer['range_alarm']))? $customer['range_alarm'].'%':"";?></span>
                                        
                                         
                                     </div>
@@ -243,12 +243,12 @@
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <label>Notifications Rides : </label>
-                                        <span class='label label-info'><?php echo (!empty($customer['notifications']))? $customer['notifications']:"Empty";?></span>
+                                        <span class='label label-info'><?php echo (!empty($customer['notifications']))? $customer['notifications']:"";?></span>
                                        
                                     </div>
                                     <div class="col-md-6">
                                         <label>Primary Riding Style : </label>
-                                        <span class='label label-info'><?php echo (!empty($customer['primary_riding_style']))? $customer['primary_riding_style']:"Empty";?></span>
+                                        <span class='label label-info'><?php echo (!empty($customer['primary_riding_style']))? $customer['primary_riding_style']:"";?></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-group">
@@ -259,7 +259,7 @@
                                     </div>
                                     <div class="col-md-6">
                                          <label>Preferred Braking Force : </label>
-                                         <span class='label label-info'><?php echo (!empty($customer['preferred_braking_force']))? $customer['preferred_braking_force'].'%':"Empty";?></span>
+                                         <span class='label label-info'><?php echo (!empty($customer['preferred_braking_force']))? $customer['preferred_braking_force'].'%':"";?></span>
                                        
                                         
                                     </div>
@@ -267,24 +267,24 @@
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <label>Reverse Turned : </label>
-                                         <span class='label label-info'><?php echo (!empty( $customer['reverse_turned']))?  $customer['reverse_turned']:"Empty";?></span>
+                                         <span class='label label-info'><?php echo (!empty( $customer['reverse_turned']))?  $customer['reverse_turned']:"";?></span>
                                        
                                     </div>
                                      <div class="col-md-6">
                                           <label>Terrain : </label>
-                                          <span class='label label-info'><?php echo (!empty( $customer['terrain']))?  $customer['terrain']:"Empty";?></span>
+                                          <span class='label label-info'><?php echo (!empty( $customer['terrain']))?  $customer['terrain']:"";?></span>
                                        
                                     </div>
                                 </div>
                                  <div class="col-md-12 form-group">
                                     <div class="col-md-6">
                                         <label>Lock : </label>
-                                         <span class='label label-info'><?php echo (!empty( $customer['locked_settings']))?  $customer['locked_settings']:"Empty";?></span>
+                                         <span class='label label-info'><?php echo (!empty( $customer['locked_settings']))?  $customer['locked_settings']:"";?></span>
                                        
                                     </div>
                                      <div class="col-md-6">
                                           <label>Parental lock : </label>
-                                          <span class='label label-info'><?php echo (!empty( $customer['parental_lock']))?  $customer['parental_lock']:"Empty";?></span>
+                                          <span class='label label-info'><?php echo (!empty( $customer['parental_lock']))?  $customer['parental_lock']:"";?></span>
                                        
                                     </div>
                                 </div>

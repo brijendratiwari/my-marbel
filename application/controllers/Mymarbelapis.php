@@ -265,8 +265,8 @@ class Mymarbelapis extends CI_Controller {
     //web services for save board deatil and update
     public function boards(){
         $returnValue = array();
-        $returnValue["data"] = array();
-        $this->form_validation->set_rules('board_id', 'Board id', 'trim|required');
+        #$returnValue["data"] = array();
+        $this->form_validation->set_rules('serial_number', 'Serial number', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
             $returnValue["status"] =false;
             $returnValue["message"] = $this->form_validation->error_array();
