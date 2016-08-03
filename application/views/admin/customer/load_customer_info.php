@@ -35,10 +35,11 @@
                                 <?php } ?>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12 full-width768-980">
-                                <h1><?php echo (!empty($user_info['first_name'])) ? $user_info['first_name'] . " " . $user_info['last_name'] : ""; ?></h1>
-                                <p><b>Marbel One Pro</b> w/ firmware 1.9.4
-                                    Odometer:<?php echo (!empty($user_rides['odometers']))?$user_rides['odometers']:"00.0";?> miles
-                                    # of recent rides: <?php echo (!empty($user_rides['total_rides']))?$user_rides['total_rides']:"0";?></p>
+                                <h1><?php echo (!empty($user_info['first_name'])) ? $user_info['first_name'] . " " . $user_info['last_name'] : ""; ?></h1>                           <?php if($user_board_detail){?>
+                                <p><b><?php echo $user_board_detail['board_name'];?><?php echo !empty($user_board_detail['firmware_version'])?'</b> w/ firmware '.$user_board_detail['firmware_version']:""; ?>
+                                    Odometer:<?php echo (!empty($user_board_detail['odometer']))?$user_board_detail['odometer']:"00.0";?> miles
+                                    # of recent rides: <?php echo (!empty($user_board_detail['ride_count']))?$user_board_detail['ride_count']:"0";?></p>
+                                <?php } ?>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12 full-width768-980">
                                    
@@ -269,15 +270,15 @@
 
                                 <div style="font-style:italic">  
                                     <?php if(!empty($user_info['company'])) { ?>AKA: <span class="blue"><?php echo  ucwords($user_info['company']) ; ?></span><br><?php } ?>
-                                   <?php if(!empty($user_info['twitter_handle'])) { ?> Twitter: <span class="blue"><?php echo (!empty($user_info['twitter_handle'])) ? ucwords($user_info['twitter_handle']) : ""; ?></span><br><?php } ?>
-                                    <?php if(!empty($user_info['linkedin_handle'])) { ?> Instagram: <span class="blue"><?php echo (!empty($user_info['linkedin_handle'])) ? ucwords($user_info['linkedin_handle']) : ""; ?></span><br><?php } ?>
-                                    <?php if(!empty($user_info['instagram_handle'])) { ?>LinkedIn: <span class="blue"><?php echo (!empty($user_info['instagram_handle'])) ? ucwords($user_info['instagram_handle']) : ""; ?></span><br><?php } ?>
+                                   <?php if(!empty($user_info['twitter_handle'])) { ?> Twitter: <a href="https://twitter.com/<?php echo $user_info['twitter_handle']; ?>" target="_blank"><span class="blue"><?php echo (!empty($user_info['twitter_handle'])) ? ucwords($user_info['twitter_handle']) : ""; ?></span><a></a><br><?php } ?>
+                                    <?php if(!empty($user_info['linkedin_handle'])) { ?> Instagram: <a href="https://www.linkedin.com/<?php echo $user_info['linkedin_handle']; ?>" target="_blank"><span class="blue"><?php echo (!empty($user_info['linkedin_handle'])) ? ucwords($user_info['linkedin_handle']) : ""; ?></span></a><br><?php } ?>
+                                    <?php if(!empty($user_info['instagram_handle'])) { ?>LinkedIn: <a href="https://www.instagram.com/<?php echo $user_info['instagram_handle']; ?>" target="_blank"><span class="blue"><?php echo (!empty($user_info['instagram_handle'])) ? ucwords($user_info['instagram_handle']) : ""; ?></span></a><br><?php } ?>
                                    <?php if(!empty($user_info['reddit_handle'])) { ?> Reddit: <span class="blue"><?php echo (!empty($user_info['reddit_handle'])) ? ucwords($user_info['reddit_handle']) : ""; ?></span><br><br><br><?php } ?>
                                     
                                 </div>
 
                                 Last Login:  <?php echo (!empty($user_info['last_activity'])) ? date('M j, Y', $user_info['last_activity']).' at '.date('H:i A', $user_info['last_activity']) : ""; ?><br>
-                                # of Recent Logins:  8
+                                # of Recent Logins:  <?php echo !empty($user_total_login['total'])?$user_total_login['total']:"0";?>
                                 </p>
 
                                 <?php if(!empty($user_info['comments'])){ ?><div class="panel-heading" style="border-bottom:solid 1px #ddd;margin: 15px 0;padding:0">Comments</div>

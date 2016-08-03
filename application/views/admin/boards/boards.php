@@ -29,24 +29,33 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Rides List
+                            Boards List
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-hover" id="rides-data" style="width:100% !important;">
+                                <table class="table table-striped table-bordered table-hover table-responsive" id="boards-data">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>View Detail</th>
+                                            <th>views</th>
+                                            <th>Odometer</th>
+                                            <th># of rides</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
-                                            <th>Date Time</th>
-                                            <th>Distance(miles)</th>
-                                            <th>Max Speed(MPH)</th>
-                                            <th>Average Speed(MPH)</th>
-                                            <th>Time Length(Minutes/Second)</th>
-                                            <th>E-Score</th>
+                                            <th>SN</th>
+                                            <th>firmware version</th>
+                                            <th>Updated</th>
+                                            <th>Wheel</th>
+                                            <th>Charge Count</th>
+                                            <th>Lock</th>
+                                            <th>Parent Lock</th>
+                                            <th>Batt SN </th>
+                                            <th>Motor Version</th>
+                                            <th>AIO Version</th>
+                                            <th>Deck Version</th>
+                                            <th>Production</th>
+                                        
                                             
                                         </tr>
                                     </thead>
@@ -85,4 +94,5 @@
   }
 </script>
     
+
 

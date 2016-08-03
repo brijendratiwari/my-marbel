@@ -10,9 +10,9 @@ class Rides_model extends CI_Model{
             $results=$query->result_array();
             if($results){
             foreach($results as $key=>$value){
-                if($value['latitude']!='unknown' && $value['latitude']!='' && $value['longitude']!='unknown' && $value['longitude']!=''){
+                
                 $results['polyline'][$key]=$value['latitude']." ,".$value['longitude'];
-                }
+             
                 }
             }
             return $results;

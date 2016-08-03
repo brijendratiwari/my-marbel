@@ -168,3 +168,7 @@ $route['inventory/autoreorder']='admin/inventory/createEventCron';
 $route['Customers_rides']='admin/customersrides';
 $route['rides_list']='admin/customersrides/rides_list';
 $route['ride_details/(:num)']='admin/customersrides/ride_details/$1';
+
+//Board 
+$route['board']='admin/boards';
+$route['boards_list']='admin/boards/boards_list';

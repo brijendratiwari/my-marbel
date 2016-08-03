@@ -40,7 +40,7 @@ class CustomersRides extends CI_Controller {
 
         if (isset($_GET['iSortCol_0'])) {
             $index = $_GET['iSortCol_0'];
-            $temp = $_GET['sSortDir_0'] === 'asc' ? 'asc' : 'desc';
+            $temp = $_GET['sSortDir_0'] === 'desc' ? 'desc' : 'asc';
             $order_by = $col_sort[$index];
         }
         $this->Rides->db->select("m_rides.ride_ID,m_users.first_name,m_users.last_name,m_rides.start_time,round(m_rides.trip_distance,2) as trip_distance,max(m_ride_points.speed) as maxspeed,round(AVG(m_ride_points.speed),2) as averagespeed, round((m_rides.trip_duration/60),2) AS trip_duration,round(m_rides.efficiency,2) as efficiency");
@@ -110,7 +110,8 @@ class CustomersRides extends CI_Controller {
         $this->load->library('googlemaps');
         $this->data['rides_points'] = $ride_points = $this->Rides->getRidesPointsDetails($id);
 
-        #echo "<pre>"; print_r($this->data['rides_points']);
+        #echo "<pre>"; print_r($this->data['rides_points']); 
+        #echo  reset($ride_points['polyline']); die;
         if (!empty($ride_points['polyline']) && $ride_points['polyline']!='') {
         $config['center'] = !empty($ride_points['polyline']) ? reset($ride_points['polyline']) : '';
         $config['zoom'] = 'auto';

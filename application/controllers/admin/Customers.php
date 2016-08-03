@@ -310,7 +310,9 @@ class Customers extends CI_Controller {
             $this->data['user_orders'] = $this->Services->getOrders($id);
             $this->data['user_rides'] = $this->Customer->getRideDetailByUserId($id);
             $this->data['user_notes'] = $this->Customer->getNotes($id);
-            #echo "<pre>"; print_r( $this->data['user_notes']); die;
+            $this->data['user_total_login'] = $this->Customer->getTotalUserLoginCount($id);
+            $this->data['user_board_detail'] = $this->Customer->getUserBoardDetail($id);
+            #echo "<pre>"; print_r($this->data['user_total_login']); die;
         }
         $this->load->template('admin/customer/load_customer_info', $this->data);
     }

@@ -298,9 +298,9 @@ class Customers_model extends CI_Model {
             $results = $query->row_array();
             $result['trip_duration'] = round($results['tripduration'] / 3600, 1);
             $result['trip_distance'] = round($results['tripdistance'], 1);
-            $result['efficiencys'] = round(($results['efficiency']/100)*30);
-            $result['odometers'] = $this->getRidesPointsDetail($results['ride_ID']);
-            $result['total_rides'] = $this->getTotalRides($id);
+            $result['efficiencys'] = round(($results['efficiency'] / 100) * 30);
+            #$result['odometers'] = $this->getRidesPointsDetail($results['ride_ID']);
+            #$result['total_rides'] = $this->getTotalRides($id);
 
             return $result;
         } else {
@@ -319,7 +319,7 @@ class Customers_model extends CI_Model {
         if ($query->num_rows() > 0) {
             $result = array();
             $results = $query->row_array();
-            return  round($results['odometer'], 1);
+            return round($results['odometer'], 1);
         } else {
 
             return false;
@@ -403,8 +403,9 @@ class Customers_model extends CI_Model {
             return false;
         }
     }
-function getTotalRides($id=false){
-    
+
+    function getTotalRides($id = false) {
+
         $this->db->select('ride_ID')->from('m_rides');
         $this->db->where('userID', $id);
         $this->db->order_by('ride_ID', 'desc');
@@ -412,12 +413,46 @@ function getTotalRides($id=false){
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
-            
-           return $query->num_rows();
-        }else{
-            
+
+            return $query->num_rows();
+        } else {
+
             return false;
         }
-    
-}
+    }
+
+    function getTotalUserLoginCount($id = false) {
+
+        $this->db->select('count(user_id) total,time')->from('m_user_login_ip');
+        $this->db->where('user_id', $id);
+        $this->db->where('FROM_UNIXTIME(`time`)>=DATE_SUB(CURDATE(), INTERVAL 1 MONTH)');
+        $this->db->order_by('id','desc');
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+
+            
+            return $query->row_array();
+        } else {
+
+            return false;
+        }
+    }
+    function getUserBoardDetail($id = false) {
+
+        $this->db->select('*')->from('m_boards');
+        $this->db->where('user_id', $id);
+        $this->db->order_by('brd_id','desc');
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+
+            
+            return $query->row_array();
+        } else {
+
+            return false;
+        }
+    }
 }

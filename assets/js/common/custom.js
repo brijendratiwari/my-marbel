@@ -331,7 +331,7 @@ $(document).ready(function(){
      $("#rides-data").dataTable({
               "oLanguage": {
             "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
-//         "ordering": false,
+         "ordering": true,
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": base_url + "rides_list", "bDeferRender": true,
@@ -352,6 +352,41 @@ $(document).ready(function(){
             {"sClass": "hidden-phone text-center", "aTargets": [9]},
             
         ]}
+        );
+ /* board list datatable... */
+    
+     $("#boards-data").dataTable({
+              "oLanguage": {
+            "sProcessing": "<img width='80px' src='"+base_url+"assets/images/chekout-loading.gif'>"},
+//         "ordering": false,
+        "bProcessing": true,
+        "bServerSide": true,
+        "sAjaxSource": base_url + "boards_list", "bDeferRender": true,
+        "aLengthMenu": [[10,20,50, 100, -1], [10,20,50, 100,'All', $("#sAll").val()]],
+        "sPaginationType": "numbers",
+        "iDisplayLength": 50,
+        "bDestroy": true, //!!!--- for remove data table warning.
+        "aoColumnDefs": [
+            {"aTargets": [0],"sClass": "hidden"},
+            {"sClass": " aligncenter", "aTargets": [1],"bSortable": false},
+            {"sClass": "eamil_conform aligncenter", "aTargets": [2]},
+            {"sClass": "hidden-phone", "aTargets": [3]},
+            {"sClass": "hidden-phone", "aTargets": [4]},
+            {"sClass": "hidden-phone", "aTargets": [5]},
+            {"sClass": "hidden-phone", "aTargets": [6]},
+            {"sClass": "hidden-phone", "aTargets": [7]},
+            {"sClass": "hidden-phone text-center", "aTargets": [8]},
+            {"sClass": "hidden-phone text-center", "aTargets": [9]},
+            {"sClass": "hidden-phone text-center", "aTargets": [10]},
+            {"sClass": "hidden-phone text-center", "aTargets": [11]},
+            {"sClass": "hidden-phone text-center", "aTargets": [12]},
+            {"sClass": "hidden-phone text-center", "aTargets": [13]},
+            {"sClass": "hidden-phone text-center", "aTargets": [14]},
+            {"sClass": "hidden-phone text-center", "aTargets": [15]},
+            {"sClass": "hidden-phone text-center", "aTargets": [16]},
+            {"sClass": "hidden-phone text-center", "aTargets": [17]},
+   
+           ]}
         );
 
 //serach activr tab for part

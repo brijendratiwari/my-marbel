@@ -176,7 +176,7 @@ class Webapi_model extends CI_Model {
 
     function saveBoardDetails() {
 
-        if ($this->input->get_post('serial_number')) {
+        if ($this->input->get_post('board_id')) {
 
             $board = array(
                 'board_id'              => ($this->input->get_post('board_id'))?$this->input->get_post('board_id'):"",
@@ -197,9 +197,9 @@ class Webapi_model extends CI_Model {
                 'deck_version'          => ($this->input->get_post('deck_version'))?$this->input->get_post('deck_version'):"",
                 'production_date'       => ($this->input->get_post('production_date'))?$this->input->get_post('production_date'):""
             );
-            $checkBoardId = $this->checkBoardId($this->input->get_post('serial_number'));
+            $checkBoardId = $this->checkBoardId($this->input->get_post('board_id'));
             if ($checkBoardId) {
-                $this->db->where('serial_number', $this->input->get_post('serial_number'));
+                $this->db->where('board_id', $this->input->get_post('board_id'));
                 $this->db->update('m_boards', $board);
                 return 'Board details updated successfully';
             } else {
@@ -215,8 +215,8 @@ class Webapi_model extends CI_Model {
 
     function checkBoardId($id = false) {
         if ($id != false) {
-            $this->db->select('serial_number')->from('m_boards');
-            $this->db->where('serial_number', $id);
+            $this->db->select('board_id')->from('m_boards');
+            $this->db->where('board_id', $id);
             $query = $this->db->get();
             if ($query->num_rows() > 0) {
 
