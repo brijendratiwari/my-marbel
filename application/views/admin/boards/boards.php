@@ -26,7 +26,7 @@
             </div>
             <!-- /.row -->
             <div class="row" style="margin-top: 5%;">
-                <div class="col-lg-12">
+                <div class="col-lg-12 scrollable-table">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Boards List
@@ -96,3 +96,8 @@
     
 
 
+<style>
+    .scrollable-table #boards-data_wrapper {
+    overflow-x: scroll;
+}
+    </style>

@@ -105,44 +105,17 @@ class CustomersRides extends CI_Controller {
     }
 
     public function ride_details($id = false) {
+        if($id!=''){
         $this->data['page'] = 'Ride Details';
         $this->data['title'] = 'Ride Details';
-        $this->load->library('googlemaps');
-        $this->data['rides_points'] = $ride_points = $this->Rides->getRidesPointsDetails($id);
-
-        #echo "<pre>"; print_r($this->data['rides_points']); 
-        #echo  reset($ride_points['polyline']); die;
-        if (!empty($ride_points['polyline']) && $ride_points['polyline']!='') {
-        $config['center'] = !empty($ride_points['polyline']) ? reset($ride_points['polyline']) : '';
-        $config['zoom'] = 'auto';
-        $config['styles'] = array(
-            array("name" => "Red Parks", "definition" => array(
-                    array("featureType" => "all", "stylers" => array(array("saturation" => "-30"))),
-                    array("featureType" => "poi.park", "stylers" => array(array("saturation" => "10"), array("hue" => "#990000")))
-                )),
-            array("name" => "Black Roads", "definition" => array(
-                    array("featureType" => "all", "stylers" => array(array("saturation" => "-70"))),
-                    array("featureType" => "road.arterial", "elementType" => "geometry", "stylers" => array(array("hue" => "#000000")))
-                )),
-            array("name" => "No Businesses", "definition" => array(
-                    array("featureType" => "poi.business", "elementType" => "labels", "stylers" => array(array("visibility" => "off")))
-                ))
-        );
-        $config['stylesAsMapTypes'] = true;
-        $config['stylesAsMapTypesDefault'] = "Black Roads";
-        $this->googlemaps->initialize($config);
-        
-            $polyline = array();
-            $polyline['points'] = array_values($ride_points['polyline']);
-            $polyline['strokeColor'] = '#00aeef';
-            $polyline['strokeOpacity'] = '1.0';
-            $polyline['strokeWeight'] = '10';
-            $polyline['strokeBorder'] = 'red';
-            $this->googlemaps->add_polyline($polyline);
-     
-        $this->data['map'] = $this->googlemaps->create_map();
-   }
+        $this->data['rides_points'] =  $this->Rides->getRidesPointsDetails($id);
+        $this->data['rides']=$this->Rides->getRideById($id);
+        $this->data['rides_points_calculation']=$this->Rides->getRidePontsByRideId($id);
         $this->load->template('admin/rides/ride_details', $this->data);
+        }else{
+            
+            redirect(base_url('Customers_rides'));
+        }
     }
 
 }
