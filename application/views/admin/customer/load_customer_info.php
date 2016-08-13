@@ -290,13 +290,13 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Ride Settings</div>
                             <div class="panel-body rides">
-                                <?php echo (!empty($user_info['units'])) ? '</b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['units'].'</span></p>' : ""; ?>
+                                <?php echo (!empty($user_info['units'])) ? '<p><b>Units: </b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['units'].'</span></p>' : ""; ?>
                                 <?php echo (!empty($user_info['notifications'])) ? '<p><b>Notifications Rides: </b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['notifications'].'</span></p>' : ""; ?>
                                 <?php echo (!empty($user_info['safety_brake'])) ? '<p><b>Safety Brake: </b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['safety_brake'].'</span></p>' : ""; ?>
                                 <?php echo (!empty($user_info['reverse_turned'])) ? '<p><b>Reverse Turned: </b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['reverse_turned'].'</span></p>': ""; ?>
                                 <?php echo (!empty($user_info['locked_settings'])) ?'<p><b>Lock: </b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['locked_settings'].'</span></p>' : ""; ?>
                                 <?php echo (!empty($user_info['privacy_setting'])) ? '<p><b>Privacy Settings: </b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['privacy_setting'].'</span></p>': ""; ?>
-                                <?php echo (!empty($user_info['range_alarm'])) ? '<p><b>Range Alarm: </b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['range_alarm'].'%</span></p>' : ""; ?>
+                                <?php echo (!empty($user_info['range_alarm'])) ? '<p><b>Range Alarm: </b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['range_alarm'].'</span></p>' : ""; ?>
                                <?php echo (!empty($user_info['primary_riding_style'])) ? ' <p><b>Primary Riding Style: </b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['primary_riding_style'].'</span></p>' : ""; ?>
                                <?php echo (!empty($user_info['preferred_braking_force'])) ? ' <p><b>Preffered Breaking Force: </b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['preferred_braking_force'].'%</span></p>': ""; ?>
                                 <?php echo (!empty($user_info['terrain'])) ? '<p><b>Terrain: </b> <span class="btn btn-primary btn-blue btn-xs">'.$user_info['terrain'].'</span></p>': ""; ?>
