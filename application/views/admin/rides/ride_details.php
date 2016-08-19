@@ -1,4 +1,6 @@
-<?php #echo "<pre>"; print_r($rides_points['graph_data']); die;    ?>
+<?php #echo "<pre>"; print_r($rides_points);   die;   
+       #echo json_encode($rides_points['graph_data'],TRUE); 
+?>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12" style="border:solid 1px #ddd;margin-top:25px;">
@@ -15,7 +17,7 @@
                             </div>
                             <div class="col-md-7 col-sm-7 col-xs-12 full-width768-980">
                                 <h1><?php echo!empty($rides['est_start_st']) ? $rides['est_start_st'] : ""; ?> To <?php echo!empty($rides['est_finish_st']) ? $rides['est_finish_st'] : ""; ?></h1>
-                                <p>Ridden By <a href="<?php echo base_url('get_customer_info/' . $rides['userID']); ?>" class="blue"><?php echo!empty($rides['first_name']) ? $rides['first_name'] . ' ' . $rides['last_name'] : ""; ?></a> at <?php echo date('H:i A', strtotime($rides['start_time'])); ?> on <?php echo date('D', strtotime($rides['start_time'])) . ' day'; ?>, <?php echo date('m/d/Y', strtotime($rides['start_time'])); ?></p>
+                                <p>Ridden By <a href="<?php echo base_url('get_customer_info/' . $rides['userID']); ?>" class="blue"><?php echo!empty($rides['first_name']) ? $rides['first_name'] . ' ' . $rides['last_name'] : ""; ?></a> at <?php echo date('h:i A', strtotime($rides['start_time'])); ?> on <?php echo date('D', strtotime($rides['start_time'])) . ' day'; ?>, <?php echo date('m/d/Y', strtotime($rides['start_time'])); ?></p>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-12 full-width768-980">
                                 <div class="round-box rb2 pull-right">
@@ -50,21 +52,21 @@
                                     <div class="tab-pane fade in active" id="tab1default">
 
                                         <table width="100%">
-                                            <tr>
+<!--                                            <tr>
                                                 <td>Time</td>
                                                 <td>05:00:13</td>
-                                            </tr>
+                                            </tr>-->
                                             <tr>
                                                 <td>Elapsed</td>
-                                                <td>06:36:24</td>
+                                                <td><?php echo !empty($rides['trip_duration'])? (round($rides['trip_duration']/60,2))." Minutes":"0";?></td>
                                             </tr>
                                             <tr>
                                                 <td>Max Speed</td>
-                                                <td><?php echo!empty($rides_points_calculation['maxspeed']) ? $rides_points_calculation['maxspeed'] : "00.0"; ?>km/h</td>
+                                                <td><?php echo!empty($rides_points['maxspeed']) ? $rides_points['maxspeed'] : "00.0"; ?>km/h</td>
                                             </tr>
                                             <tr>
                                                 <td>Avg Speed</td>
-                                                <td><?php echo!empty($rides_points_calculation['avgspeed']) ? $rides_points_calculation['avgspeed'] : "00.0"; ?>km/h</td>
+                                                <td><?php echo!empty($rides_points['avgspeed']) ? $rides_points['avgspeed'] : "00.0"; ?>km/h</td>
                                             </tr>
                                             <tr>
                                                 <td>Device</td>
@@ -365,10 +367,10 @@
     </div>
 
 </div>
-<script src="<?php echo base_url();?>assets/js/amChart/amcharts.js"></script>
-<script src="<?php echo base_url();?>assets/js/amChart/serial.js"></script>
-<script src="<?php echo base_url();?>assets/js/amChart/light.js"></script>
-<script src="<?php echo base_url();?>assets/js/amChart/autoOffsetAxis.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/amChart/amcharts.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/amChart/serial.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/amChart/light.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/amChart/autoOffsetAxis.min.js"></script>
 <script type="text/javascript">
 
     /**
@@ -458,29 +460,31 @@
 
     chart.addListener("dataUpdated", zoomChart);
     zoomChart();
-
-// generate some random data, quite different range
     function generateChartData() {
         var chartData = [];
 
         var graph_data = $.parseJSON('<?php echo json_encode($rides_points['graph_data']); ?>');
+        console.log(graph_data);
+        if (graph_data !== null) {
+            for (var i = 0; i < graph_data.length; i++) {
+                var newDate = new Date(graph_data[i].time_stamp);
+                newDate.setSeconds(newDate.getSeconds());
 
-        for (var i = 0; i < graph_data.length; i++) {
-            var newDate = new Date(graph_data[i].time_stamp);
-            newDate.setSeconds(newDate.getSeconds() - 100);
-
-            chartData.push({
-                date: newDate,
-                speed: graph_data[i].speed,
-                elevation: graph_data[i].elevation,
-                power: graph_data[i].power
-            });
+                chartData.push({
+                    date: newDate,
+                    speed: graph_data[i].speed,
+                    elevation: graph_data[i].elevation,
+                    power: graph_data[i].power
+                });
+            }
+            return chartData;
         }
-        return chartData;
     }
 
     function zoomChart() {
-        chart.zoomToIndexes(chart.dataProvider.length - 1000, chart.dataProvider.length - 1);
+       
+            chart.zoomToIndexes(chart.dataProvider.length - 1000, chart.dataProvider.length - 1);
+        
     }
 </script>
 
@@ -515,7 +519,7 @@
                         {visibility: 'off'}
                     ]
                 }, {
-                    featureType: '"poi.park',
+                    featureType: 'poi.park',
                     elementType: 'labels',
                     stylers: [
                         {hue: '#990000'},
