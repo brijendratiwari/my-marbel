@@ -337,7 +337,7 @@ $(document).ready(function(){
         "sAjaxSource": base_url + "rides_list", "bDeferRender": true,
         "aLengthMenu": [[10,20,50, 100, -1], [10,20,50, 100,'All', $("#sAll").val()]],
         "sPaginationType": "numbers",
-        "iDisplayLength": 50,
+        "iDisplayLength": 20,
         "bDestroy": true, //!!!--- for remove data table warning.
         "aoColumnDefs": [
             {"aTargets": [0],"sClass": "hidden"},

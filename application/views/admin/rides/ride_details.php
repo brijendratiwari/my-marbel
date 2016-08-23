@@ -1,5 +1,5 @@
-<?php #echo "<pre>"; print_r($rides_points);   die;   
-       #echo json_encode($rides_points['graph_data'],TRUE); 
+<?php #echo "<pre>"; print_r($rides_points);     
+      #echo json_encode($rides_points['graph_data']); die; 
 ?>
 <div id="page-wrapper">
     <div class="row">
@@ -58,7 +58,7 @@
                                             </tr>-->
                                             <tr>
                                                 <td>Elapsed</td>
-                                                <td><?php echo !empty($rides['trip_duration'])? (round($rides['trip_duration']/60,2))." Minutes":"0";?></td>
+                                                <td><?php echo !empty($rides['trip_duration'])? (round($rides['trip_duration']/60,2)):"0";?> Minutes</td>
                                             </tr>
                                             <tr>
                                                 <td>Max Speed</td>
@@ -109,10 +109,12 @@
         <div class="clearfix"></div>
 
         <div class="col-md-12" style="margin-top:50px">
+             <?php if(json_encode($rides_points['graph_data'])!='null') {?>
             <h2>Details</h2>
             <div class="row">
-                <div id="chartdiv" style="height: 400px; width: 100%;">
-                </div>
+               
+              <div id="chartdiv" style="height: 400px; width: 100%;"></div>
+            
             </div>
             <!--<div class="col-md-3">
                                         <ul class="radio-ul-li">
@@ -364,6 +366,7 @@
                             </ul>
                         </div>-->
         </div>
+             <?php } ?>
     </div>
 
 </div>
@@ -464,7 +467,7 @@
         var chartData = [];
 
         var graph_data = $.parseJSON('<?php echo json_encode($rides_points['graph_data']); ?>');
-        console.log(graph_data);
+       
         if (graph_data !== null) {
             for (var i = 0; i < graph_data.length; i++) {
                 var newDate = new Date(graph_data[i].time_stamp);

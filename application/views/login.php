@@ -58,6 +58,7 @@
     $("#login__submit").click(function(){
       var email=$("#login__email").val();
       var password=$("#login__password").val();
+      if(email!=''){
       $.ajax({
         type: "POST",
         url: "<?php echo base_url();?>/login/ajax_login",
@@ -89,6 +90,14 @@
           $("#error").fadeIn("slow");
         }
       });
+      }else{
+        
+            $("#error").fadeIn("slow");
+            $('#error').addClass('error');
+            $('#loader').css('display', 'none', 'important');
+            $("#error_text").html("Can not be empty username or password");
+             setTimeout(function() { $("#error").fadeOut("slow"); }, 5000);
+      }
 return false;
 });
 });

@@ -29,7 +29,7 @@ class CustomersRides extends CI_Controller {
     public function rides_list() {
 
         $sLimit = "";
-        $lenght = 50;
+        $lenght = 20;
         $str_point = 0;
 
 

@@ -56,7 +56,7 @@ class Rides_model extends CI_Model {
 
     public function getRidePontsByRideId($id = false) {
 
-        $this->db->select('round(MAX(speed),1) as maxspeed,round(AVG(speed),1) as avgspeed,round(MAX(current),1) as maxcurrent,round(AVG(current),1) as avgcurrent,round(MAX(wh),1) as maxpowes,round(AVG(wh),1) as avgpower, MAX(elevation) as max_elevation')->from('m_ride_points');
+        $this->db->select('round(MAX(speed),1) as maxspeed,round(AVG(speed),1) as avgspeed,round(MAX(current),1) as maxcurrent,round(AVG(current),1) as avgcurrent,round(MAX(board_batt),1) as maxpowes,round(AVG(board_batt),1) as avgpower, MAX(elevation) as max_elevation')->from('m_ride_points');
         $this->db->where('ride_id', $id);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
