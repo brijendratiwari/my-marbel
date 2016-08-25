@@ -1,5 +1,7 @@
-<?php #echo "<pre>"; print_r($rides_points);     
-      #echo json_encode($rides_points['graph_data']); die; 
+<?php 
+        #echo "<pre>"; print_r($rides_points);    die; 
+      #echo json_encode($rides_points['graph_data']);
+     #die; 
 ?>
 <div id="page-wrapper">
     <div class="row">
@@ -21,7 +23,7 @@
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-12 full-width768-980">
                                 <div class="round-box rb2 pull-right">
-                                    <?php echo!empty($rides['efficiency']) ? round($rides['est_start_st']) : "0"; ?>%
+                                    <?php echo !empty($rides['efficiency']) ? round($rides['efficiency'],2) : "0"; ?>%
                                     <small>e-score</small>
                                 </div>
                             </div>
@@ -42,9 +44,9 @@
                             <div class="panel-heading" style="padding:0">
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href="#tab1default" data-toggle="tab">Summery</a></li>
-                                    <li><a href="#tab2default" data-toggle="tab"></a></li>
+<!--                                    <li><a href="#tab2default" data-toggle="tab"></a></li>
                                     <li><a href="#tab3default" data-toggle="tab"></a></li>
-                                    <li><a href="#tab4default" data-toggle="tab"></a></li>
+                                    <li><a href="#tab4default" data-toggle="tab"></a></li>-->
                                 </ul>
                             </div>
                             <div class="panel-body">
@@ -52,21 +54,21 @@
                                     <div class="tab-pane fade in active" id="tab1default">
 
                                         <table width="100%">
-<!--                                            <tr>
+                                            <!--<tr>
                                                 <td>Time</td>
                                                 <td>05:00:13</td>
-                                            </tr>-->
+                                                </tr>-->
                                             <tr>
                                                 <td>Elapsed</td>
                                                 <td><?php echo !empty($rides['trip_duration'])? (round($rides['trip_duration']/60,2)):"0";?> Minutes</td>
                                             </tr>
                                             <tr>
                                                 <td>Max Speed</td>
-                                                <td><?php echo!empty($rides_points['maxspeed']) ? $rides_points['maxspeed'] : "00.0"; ?>km/h</td>
+                                                <td><?php echo !empty($rides_points['maxspeed']) ? $rides_points['maxspeed'] : "00.0"; ?>MPH</td>
                                             </tr>
                                             <tr>
                                                 <td>Avg Speed</td>
-                                                <td><?php echo!empty($rides_points['avgspeed']) ? $rides_points['avgspeed'] : "00.0"; ?>km/h</td>
+                                                <td><?php echo !empty($rides_points['avgspeed']) ? $rides_points['avgspeed'] : "00.0"; ?>MPH</td>
                                             </tr>
                                             <tr>
                                                 <td>Device</td>
@@ -74,23 +76,23 @@
                                             </tr>
                                             <tr>
                                                 <td>Max Incline</td>
-                                                <td><?php echo (!empty($rides_points_calculation['max_elevation'])) ? $rides_points_calculation['max_elevation'] : "00.0"; ?>%</td>
+                                                <td><?php echo (!empty($rides_points['maxincline'])) ? $rides_points['maxincline'] : "00.0"; ?>%</td>
                                             </tr>
                                             <tr>
                                                 <td>Max Power</td>
-                                                <td><?php echo!empty($rides_points_calculation['maxpowes']) ? $rides_points_calculation['maxpowes'] : "00.0"; ?> Watts</td>
+                                                <td><?php echo !empty($rides_points['maxpowes']) ? $rides_points['maxpowes'] : "00.0"; ?> Watts</td>
                                             </tr>
                                             <tr>
                                                 <td>Avg Power</td>
-                                                <td><?php echo!empty($rides_points_calculation['avgpower']) ? $rides_points_calculation['avgpower'] : "00.0"; ?> Watts</td>
+                                                <td><?php echo !empty($rides_points['avgpower']) ? $rides_points['avgpower'] : "00.0"; ?> Watts</td>
                                             </tr>
                                             <tr>
                                                 <td>Max Current</td>
-                                                <td><?php echo!empty($rides_points_calculation['maxcurrent']) ? $rides_points_calculation['maxcurrent'] : "00.0"; ?> Amps</td>
+                                                <td><?php echo !empty($rides_points_calculation['maxcurrent']) ? $rides_points_calculation['maxcurrent'] : "00.0"; ?> Amps</td>
                                             </tr>
                                             <tr>
                                                 <td>Avg Current</td>
-                                                <td><?php echo!empty($rides_points_calculation['avgcurrent']) ? $rides_points_calculation['avgcurrent'] : "00.0"; ?> Amps</td>
+                                                <td><?php echo !empty($rides_points_calculation['avgcurrent']) ? $rides_points_calculation['avgcurrent'] : "00.0"; ?> Amps</td>
                                             </tr>
                                         </table>
 
@@ -109,14 +111,14 @@
         <div class="clearfix"></div>
 
         <div class="col-md-12" style="margin-top:50px">
-             <?php if(json_encode($rides_points['graph_data'])!='null') {?>
+             <?php if($rides_points['graph_data']) {?>
             <h2>Details</h2>
             <div class="row">
                
               <div id="chartdiv" style="height: 400px; width: 100%;"></div>
             
             </div>
-            <!--<div class="col-md-3">
+<!--            <div class="col-md-3">
                                         <ul class="radio-ul-li">
                                 <li>
                                     <div class="radio radio-primary"> 
@@ -311,8 +313,7 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
-            
+                        </div> 
                         <div class="col-md-3">
                             <ul class="radio-ul-li">
                                 <li>
@@ -415,14 +416,69 @@
                 "position": "left",
                 "tickLength": 0,
                 "autoOffset": true
-            }],
+            }, {
+                "id": "v4",
+                "axisColor": "#ff00ff",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            }, {
+                "id": "v5",
+                "axisColor": "#374321",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            }, {
+                "id": "v6",
+                "axisColor": "#0f48a5",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            }, {
+                "id": "v7",
+                "axisColor": "#57a50f",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            }, {
+                "id": "v8",
+                "axisColor": "#ffbf00",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            }, {
+                "id": "v9",
+                "axisColor": "#C390D4",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            }
+        ],
         "graphs": [{
                 "valueAxis": "v1",
-                "lineColor": "#FF6600",
+                "lineColor": "#379876",
                 "bullet": "round",
                 "bulletBorderThickness": 1,
                 "hideBulletsCount": 30,
-                "title": "Speed",
+                "title": "Speed(MPH)",
                 "valueField": "speed",
                 "fillAlphas": 0
             }, {
@@ -431,7 +487,7 @@
                 "bullet": "round",
                 "bulletBorderThickness": 1,
                 "hideBulletsCount": 30,
-                "title": "Elevation",
+                "title": "Elevation(feet)",
                 "valueField": "elevation",
                 "fillAlphas": 0
             }, {
@@ -440,8 +496,62 @@
                 "bullet": "round",
                 "bulletBorderThickness": 1,
                 "hideBulletsCount": 30,
-                "title": "Power",
+                "title": "Battery %",
+                "valueField": "battery",
+                "fillAlphas": 0
+            }, {
+                "valueAxis": "v4",
+                "lineColor": "#ff00ff",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Remote Battery %",
+                "valueField": "remote_batt",
+                "fillAlphas": 0
+            }, {
+                "valueAxis": "v5",
+                "lineColor": "#374321",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Hill Incline %",
+                "valueField": "hill_incline",
+                "fillAlphas": 0
+            }, {
+                "valueAxis": "v6",
+                "lineColor": "#0f48a5",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Trip Distance(Mi)",
+                "valueField": "trip_distance",
+                "fillAlphas": 0
+            }, {
+                "valueAxis": "v7",
+                "lineColor": "#57a50f",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Power(Watts)",
                 "valueField": "power",
+                "fillAlphas": 0
+            }, {
+                "valueAxis": "v8",
+                "lineColor": "#ffbf00",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "E-scop %",
+                "valueField": "efficiency_score",
+                "fillAlphas": 0
+            }, {
+                "valueAxis": "v9",
+                "lineColor": "#C390D4",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Energy(Wh)",
+                "valueField": "energy",
                 "fillAlphas": 0
             }],
         "chartScrollbar": {},
@@ -467,7 +577,7 @@
         var chartData = [];
 
         var graph_data = $.parseJSON('<?php echo json_encode($rides_points['graph_data']); ?>');
-       
+        //console.log(graph_data);
         if (graph_data !== null) {
             for (var i = 0; i < graph_data.length; i++) {
                 var newDate = new Date(graph_data[i].time_stamp);
@@ -477,7 +587,13 @@
                     date: newDate,
                     speed: graph_data[i].speed,
                     elevation: graph_data[i].elevation,
-                    power: graph_data[i].power
+                    battery: graph_data[i].battery,
+                    remote_batt: graph_data[i].remote_batt,
+                    hill_incline: graph_data[i].hill_incline,
+                    trip_distance:graph_data[i].trip_distance,
+                    power:graph_data[i].power,
+                    efficiency_score:graph_data[i].efficiency_score,
+                    energy:graph_data[i].energy
                 });
             }
             return chartData;
