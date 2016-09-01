@@ -258,6 +258,7 @@ $(document).ready(function(){
             success: function (data) {
                 var err = $.parseJSON(data);
                 if (err.result == false) {
+                     
                     $('body').find('#ordersModal #form_loader').addClass('hidden');
                     $(err.error).each(function (index, value) {
                         $.each(value, function (index2, msg) {
@@ -268,6 +269,7 @@ $(document).ready(function(){
                 }
                 else {
                     $('body').find('#ordersModal #form_loader').addClass('hidden');
+                   
                     if (err.success) {
 
                         $('body').find('#ordersModal input select').each(function () {
@@ -282,10 +284,11 @@ $(document).ready(function(){
                         }, 1000)
                   }
                     else {
+                        
                         $('body').find('#ordersModal input select').each(function () {
                             $(this).siblings('.text-danger').addClass('hidden');
                         })
-                         $("#orderError").text(err.success);
+                         $("#orderError").text(err.failed);
                         $("#orderError").removeClass('hidden');
                         setTimeout(function () {
                             $('body').find('#ordersModal').modal('hide');

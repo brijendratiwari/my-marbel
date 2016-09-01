@@ -1,6 +1,6 @@
 <?php 
-        #echo "<pre>"; print_r($rides_points);    die; 
-      #echo json_encode($rides_points['graph_data']);
+      # echo "<pre>"; print_r($rides['ride_ID']);    die; 
+    //echo '<pre>';print_r($rides_points['graph_data']);die;
      #die; 
 ?>
 <div id="page-wrapper">
@@ -113,11 +113,16 @@
         <div class="col-md-12" style="margin-top:50px">
              <?php if($rides_points['graph_data']) {?>
             <h2>Details</h2>
-            <div class="row">
-               
-              <div id="chartdiv" style="height: 400px; width: 100%;"></div>
-            
+            <div class="row" id="default_graph">    
+              <div id="chartdiv" style="height: 659px; width: 100%;"></div>
             </div>
+            
+<!--             <div class="row" id="load_graph" style="display:none;">-->
+               
+             
+            
+<!--              <button type="button" id="load_more" class="btn btn-success" name="load_more">Load More</button>     -->
+<!--            </div>-->
 <!--            <div class="col-md-3">
                                         <ul class="radio-ul-li">
                                 <li>
@@ -380,25 +385,45 @@
     /**
      * Create a chart
      */
-    $('body').find('.amcharts-chart-div a').css('display', 'none');
-    var chartData = generateChartData();
+    $("#load_more").click(function(){
+        $("#chartdiv").css("display","none");
+         $("#chartdiv1").css("display","block");
+         $("#load_more").css("display","none");
+         $("#back").css("display","block");
+        
+    });
+     $("#back").click(function(){
+        $("#chartdiv").css("display","block");
+         $("#chartdiv1").css("display","none"); 
+         $("#back").css("display","none");
+         $("#load_more").css("display","block");
+        
+    });
+   
+
+
+var chartData = generateChartData();
     var chart = AmCharts.makeChart("chartdiv", {
+      
         "type": "serial",
         "theme": "light",
-        "legend": {
-            "useGraphSettings": true
-        },
+        
+         "legend": {
+    "useGraphSettings": true,
+    "clickMarker": handleLegendClick,
+    "clickLabel": handleLegendClick
+  },
         "dataProvider": chartData,
         "valueAxes": [{
                 "id": "v1",
                 "axisColor": "#FF6600",
-                "axisThickness": 2,
+                "axisThickness": 2, 
                 "gridAlpha": 0,
                 "axisAlpha": 1,
                 "position": "left",
                 "tickLength": 0,
                 "autoOffset": true
-            }, {
+                }, {
                 "id": "v2",
                 "axisColor": "#04D215",
                 "axisThickness": 2,
@@ -470,17 +495,278 @@
                 "position": "right",
                 "tickLength": 0,
                 "autoOffset": true
+            },
+            {
+                "id": "v10",
+                "axisColor": "#5E1B36",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v11",
+                "axisColor": "#5E3D1B",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v12",
+                "axisColor": "#445E1B",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            },
+            {
+                "id": "v13",
+                "axisColor": "#2383A1",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            },
+            {
+                "id": "v14",
+                "axisColor": "#1C4BD9",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                
+             "id": "v15",
+                "axisColor": "#771CD9",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+           }
+            ,
+            {
+                "id": "v16",
+                "axisColor": "#D91CC9",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
             }
+            ,{
+                "id": "v17",
+                "axisColor": "#D91C35",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            }
+            ,{
+                "id": "v18",
+                "axisColor": "#1CD9C0",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            }
+            ,{
+                "id": "v19",
+                "axisColor": "#636E62",
+                "axisThickness": 2, 
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            }
+            ,{
+                "id": "v20",
+                "axisColor": "#6FA9D1",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            },
+             {
+                "id": "v21",
+                "axisColor": "#17E324",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            },
+            {
+                "id": "v22",
+                "axisColor": "#0AB8F2",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            },
+            {
+                "id": "v23",
+                "axisColor": "#A01DAD",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v24",
+                "axisColor": "#990890",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v25",
+                "axisColor": "#E08E26",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v26",
+                "axisColor": "#D11944",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v27",
+                "axisColor": "#22F2C2",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v28",
+                "axisColor": "#D1667F",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v29",
+                "axisColor": "#5A22F2",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v30",
+                "axisColor": "#B1E81E",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            },
+            {
+                "id": "v31",
+                "axisColor": "#7D88DB",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v32",
+                "axisColor": "#F07AC3",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            },
+            {
+                "id": "v33",
+                "axisColor": "#58E88F",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v34",
+                "axisColor": "#604575",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v35",
+                "axisColor": "#FA760A",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "right",
+                "tickLength": 0,
+                "autoOffset": true
+            },{
+                "id": "v36",
+                "axisColor": "#85ACCC",
+                "axisThickness": 2,
+                "gridAlpha": 0,
+                "axisAlpha": 1,
+                "position": "left",
+                "tickLength": 0,
+                "autoOffset": true
+            }
+
         ],
         "graphs": [{
                 "valueAxis": "v1",
-                "lineColor": "#379876",
+                "lineColor": "#FF6600",
                 "bullet": "round",
                 "bulletBorderThickness": 1,
                 "hideBulletsCount": 30,
                 "title": "Speed(MPH)",
                 "valueField": "speed",
                 "fillAlphas": 0
+                
+                
             }, {
                 "valueAxis": "v2",
                 "lineColor": "#04D215",
@@ -508,6 +794,7 @@
                 "title": "Remote Battery %",
                 "valueField": "remote_batt",
                 "fillAlphas": 0
+                
             }, {
                 "valueAxis": "v5",
                 "lineColor": "#374321",
@@ -553,7 +840,299 @@
                 "title": "Energy(Wh)",
                 "valueField": "energy",
                 "fillAlphas": 0
-            }],
+            }, {
+                "valueAxis": "v10",
+                "lineColor": "#5E1B36",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Voltage",
+                "valueField": "voltage",
+                "fillAlphas": 0
+            }, {
+                "valueAxis": "v11",
+                "lineColor": "#5E3D1B",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Voltage1",
+                "valueField": "voltage1",
+                "fillAlphas": 0
+                //"hidden":true
+            }, {
+                "valueAxis": "v12",
+                "lineColor": "#445E1B",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Voltage2",
+                "valueField": "voltage2",
+                "fillAlphas": 0,
+                "hidden":true
+            }, {
+                "valueAxis": "v13",
+                "lineColor": "#2383A1",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Voltage3",
+                "valueField": "voltage3",
+                "fillAlphas": 0,
+                "hidden":true
+            }, {
+                "valueAxis": "v14",
+                "lineColor": "#1C4BD9",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Voltage4",
+                "valueField": "voltage4",
+                "fillAlphas": 0,
+                "hidden":true
+            },{
+                "valueAxis": "v15",
+                "lineColor": "#771CD9",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Voltage5",
+                "valueField": "voltage5",
+                "fillAlphas": 0,
+                "hidden":true
+            }
+            , {
+                "valueAxis": "v16",
+                "lineColor": "#D91CC9",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Voltage6",
+                "valueField": "voltage6",
+                "fillAlphas": 0,
+                "hidden":true
+            }
+            , {
+                "valueAxis": "v17",
+                "lineColor": "#D91C35",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Voltage7",
+                "valueField": "voltage7",
+                "fillAlphas": 0,
+                "hidden":true
+            }
+            , {
+                "valueAxis": "v18",
+                "lineColor": "#1CD9C0",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Voltage8",
+                "valueField": "voltage8",
+                "fillAlphas": 0,
+                "hidden":true
+            }
+            , {
+                "valueAxis": "v19",
+                "lineColor": "#636E62",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Voltage9",
+                "valueField": "voltage9",
+                "fillAlphas": 0,
+                "hidden":true
+            }
+            , {
+                "valueAxis": "v20",
+                "lineColor": "#6FA9D1",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Voltage10",
+                "valueField": "voltage10",
+                "fillAlphas": 0,
+                "hidden":true
+            }
+            , {
+                "valueAxis": "v21",
+                "lineColor": "#A01DAD",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Rpm1",
+                "valueField": "rpm1",
+                "fillAlphas": 0,
+                "hidden":true
+            }
+             , {
+                "valueAxis": "v22",
+                "lineColor": "#0AB8F2",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Motor direction1",
+                "valueField": "motor_direction1",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v23",
+                "lineColor": "#17E324",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Motor amps1",
+                "valueField": "motor_amps1",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v24",
+                "lineColor": "#990890",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Motor volts1",
+                "valueField": "motor_volts1",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v25",
+                "lineColor": "#E08E26",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Esc1",
+                "valueField": "esc1",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v26",
+                "lineColor": "#D11944",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Rpm2",
+                "valueField": "rpm2",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v27",
+                "lineColor": "#22F2C2",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Motor direction2",
+                "valueField": "motor_direction2",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v28",
+                "lineColor": "#D1667F",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Motor amps2",
+                "valueField": "motor_amps2",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v29",
+                "lineColor": "#5A22F2",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Motor volts2",
+                "valueField": "motor_volts2",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v30",
+                "lineColor": "#B1E81E",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Esc2",
+                "valueField": "esc2",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v31",
+                "lineColor": "#7D88DB",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Wh",
+                "valueField": "wh",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v32",
+                "lineColor": "#F07AC3",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Odometer",
+                "valueField": "odometer",
+                "fillAlphas": 0,
+                "hidden":true
+            }
+            , {
+                "valueAxis": "v33",
+                "lineColor": "#58E88F",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Remote BLEConnection",
+                "valueField": "remoteBLEConnection",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v34",
+                "lineColor": "#604575",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Internal Temperature",
+                "valueField": "internalTemperature",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v35",
+                "lineColor": "#FA760A",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Throttle",
+                "valueField": "throttle",
+                "fillAlphas": 0,
+                "hidden":true
+            },
+            {
+                "valueAxis": "v36",
+                "lineColor": "#85ACCC",
+                "bullet": "round",
+                "bulletBorderThickness": 1,
+                "hideBulletsCount": 30,
+                "title": "Ble conn strength",
+                "valueField": "ble_conn_strength",
+                "fillAlphas": 0,
+                "hidden":true
+            }
+            
+        ],
         "chartScrollbar": {},
         "chartCursor": {
             "cursorPosition": "mouse"
@@ -570,14 +1149,15 @@
             "position": "bottom-right"
         }
     });
-
+  
+    
     chart.addListener("dataUpdated", zoomChart);
     zoomChart();
+  
+
     function generateChartData() {
         var chartData = [];
-
         var graph_data = $.parseJSON('<?php echo json_encode($rides_points['graph_data']); ?>');
-        //console.log(graph_data);
         if (graph_data !== null) {
             for (var i = 0; i < graph_data.length; i++) {
                 var newDate = new Date(graph_data[i].time_stamp);
@@ -593,18 +1173,81 @@
                     trip_distance:graph_data[i].trip_distance,
                     power:graph_data[i].power,
                     efficiency_score:graph_data[i].efficiency_score,
-                    energy:graph_data[i].energy
+                    energy:graph_data[i].energy,
+                    voltage:graph_data[i].voltage,
+                    voltage1:graph_data[i].voltage1,
+                    voltage2:graph_data[i].voltage2,
+                    voltage3:graph_data[i].voltage3,
+                    voltage4:graph_data[i].voltage4,
+                    voltage5:graph_data[i].voltage5,
+                    voltage6:graph_data[i].voltage6,
+                    voltage7:graph_data[i].voltage7,
+                    voltage8:graph_data[i].voltage8,
+                    voltage9:graph_data[i].voltage9, 
+                    voltage10:graph_data[i].voltage10,
+                    rpm1:graph_data[i].rpm1,
+                    motor_direction1:graph_data[i].motor_direction1, 
+                    motor_amps1:graph_data[i].motor_amps1,
+                    motor_volts1:graph_data[i].motor_volts1,
+                    esc1:graph_data[i].esc1,
+                    rpm2:graph_data[i].rpm2,
+                    motor_direction2:graph_data[i].motor_direction2,
+                    motor_amps2:graph_data[i].motor_amps2,
+                    motor_volts2:graph_data[i].motor_volts2,
+                    esc2:graph_data[i].esc2,
+                    wh:graph_data[i].wh,
+                    odometer:graph_data[i].odometer,
+                    remoteBLEConnection:graph_data[i].remoteBLEConnection,
+                    internalTemperature:graph_data[i].internalTemperature,
+                    throttle:graph_data[i].throttle,
+                    ble_conn_strength:graph_data[i].ble_conn_strength
                 });
+             
             }
             return chartData;
         }
     }
+    
+    // check condition of how many data are show on graph
+    function handleLegendClick(graph) {
+         var chart = graph.chart;
+         var count = 0;
+         var ids = [];
+
+         var selGraph = null;
+
+         for( var i = 0; i < chart.graphs.length; i++ ) {
+             if(chart.graphs[i].hidden == false) {
+                 ids.push(chart.graphs[i].id);
+                 count++;
+             }
+             if (graph.id === chart.graphs[i].id) {
+                 selGraph = chart.graphs[i];
+             }
+         }
+         if (selGraph != null) {
+             if (ids.indexOf(graph.id) != -1) {
+                 //alert(selGraph);
+                 chart.hideGraph(selGraph);
+                  //console.log(chart.graphs[i]);
+             }
+             else {
+                 if (count < 11) {
+                     chart.showGraph(selGraph);
+                 }
+             }
+         }
+         return false;
+    }
+    // check condition of how many data are show on graph
+
 
     function zoomChart() {
        
             chart.zoomToIndexes(chart.dataProvider.length - 1000, chart.dataProvider.length - 1);
         
     }
+ 
 </script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzddLs98Y66TgM0dTVTbYHvdtD7NbkmW4&callback=initMap"></script>

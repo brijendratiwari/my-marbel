@@ -25,7 +25,7 @@
                             <a href="<?php echo base_url('shipping');?>"><i class="fa fa-shopping-cart fa-fw"></i> Shipping</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('services?status=pending')?>"><i class="fa fa-bank fa-fw"></i> Service</a>
+                            <a href="<?php echo base_url('services?status=inhouse')?>"><i class="fa fa-bank fa-fw"></i> Service</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url('inventory')?>"><i class="fa fa-newspaper-o fa-fw"></i> Inventory</a>
@@ -63,7 +63,7 @@
                             <a title="Shipping" href="<?php echo base_url('shipping');?>"><i class="fa fa-shopping-cart fa-fw"></i></a>
                         </li>
                         <li>
-                            <a title="Service" href="<?php echo base_url('services?status=pending')?>"><i class="fa fa-bank fa-fw"></i></a>
+                            <a title="Service" href="<?php echo base_url('services?status=inhouse')?>"><i class="fa fa-bank fa-fw"></i></a>
                         </li>
                         <li>
                             <a title="Inventory" href="<?php echo base_url('inventory')?>"><i class="fa fa-newspaper-o fa-fw"></i></a>

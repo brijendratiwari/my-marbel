@@ -18,8 +18,8 @@ if ($this->input->get('status', TRUE)) {
     <?php } ?>
                  </div>   
                     <div  class="col-lg-4 page-header pull-right">
+                       <a href="?status=inhouse" class="btn btn-custom <?php if($this->input->get('status') == 'inhouse'){ echo 'tab-active';} ?>">In House</a>
                         <a href="?status=pending" class="btn btn-custom <?php if($this->input->get('status') == 'pending'){ echo 'tab-active';} ?>">Pending</a>
-			<a href="?status=inhouse" class="btn btn-custom <?php if($this->input->get('status') == 'inhouse'){ echo 'tab-active';} ?>">In House</a>
 			<a href="?status=finished" class="btn btn-custom <?php if($this->input->get('status') == 'finished'){ echo 'tab-active';} ?>">Finished</a>
                   </div>
                 </div>

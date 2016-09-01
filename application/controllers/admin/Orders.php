@@ -102,7 +102,7 @@ class Orders extends CI_Controller {
 
     public function add_order() {
 
-
+        
         $this->form_validation->set_rules('cd-email', 'Email', 'trim|required');
         $this->form_validation->set_rules('cd-address', 'Address', 'trim|required');
         $this->form_validation->set_rules('cd-city', 'City', 'trim|required');
@@ -156,13 +156,13 @@ class Orders extends CI_Controller {
             }
             if ($response == 1) {
                 $result['result'] = FALSE;
-                $result['failed'] = 'Email address not found!!';
+                $result['error'] = array("cd-email"=>'Email address not exist');
                 echo json_encode($result);
                 die;
             }
 
             if ($response == 2) {
-                $result['result'] = FALSE;
+                $result['result'] = TRUE;
                 $result['failed'] = 'Order number exist!!';
                 echo json_encode($result);
                 die;

@@ -15,7 +15,7 @@ class Services extends CI_Controller {
         if ($this->Users->auth_check() == false) {
             redirect('/login');
         }
-         if($this->session->userdata['marbel_user']['type']!='admin'){
+        if ($this->session->userdata['marbel_user']['type'] != 'admin') {
             redirect('logout');
         }
     }
@@ -48,8 +48,10 @@ class Services extends CI_Controller {
         } elseif ($status == 'pending') {
             $col_sort = array("m_users.first_name", "m_users.last_name", "m_services.date", "m_services.suggested_response", "m_services.tracking_in");
         }
-        $order_by = "m_services.id";
-        $temp = 'asc';
+
+            $order_by = "m_services.id";
+            $temp = 'asc';
+
         if (isset($_GET['iSortCol_0'])) {
             $index = $_GET['iSortCol_0'];
             $temp = $_GET['sSortDir_0'] === 'asc' ? 'asc' : 'desc';
@@ -103,27 +105,27 @@ class Services extends CI_Controller {
         $i = 0;
         $final = array();
         foreach ($result as $val) {
-           #echo  'service_id:'.$val['id'].'/ user_id :'.$val['user_id']; die;
-            
+            #echo  'service_id:'.$val['id'].'/ user_id :'.$val['user_id']; die;
+
             $user_url = '';
             $service_url = '';
-     
+
             if ($status == 'finished') {
-                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), ($val['qa_date']!='' && $val['qa_date']!=0)?date('M j, Y', $val['qa_date']):"", $val['tracking_out'], ucwords($val['status']), '<a href="' . base_url('edit_service/' . $val['id'] . '/fn') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), ($val['qa_date'] != '' && $val['qa_date'] != 0) ? date('M j, Y', $val['qa_date']) : "", $val['tracking_out'], ucwords($val['status']), '<a href="' . base_url('edit_service/' . $val['id'] . '/fn') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             } else if ($status == 'inhouse') {
-                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), date('M j, Y', strtotime($val['date'])), $val['priority'], ($val['due_date']!='')?Date('M j, Y', strtotime($val['due_date'])):"", ucwords($val['status']), '<a href="' . base_url('edit_service/' . $val['id'] . '/in') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), date('M j, Y', strtotime($val['date'])), $val['priority'], ($val['due_date'] != '') ? Date('M j, Y', strtotime($val['due_date'])) : "", ucwords($val['status']), '<a href="' . base_url('edit_service/' . $val['id'] . '/in') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             } elseif ($status == 'pending') {
-                if($val['user_id']=='')
-                $user_id=0;
-                    else
-                 $user_id=$val['user_id'];
-                    
-                if($val['id']=='')
-                    $service_id=0;
-                    else
-                    $service_id=$val['id'];
-                    
-                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), date('M j, Y', strtotime($val['date'])), $val['suggested_response'], $val['tracking_in'], '<a href="' . base_url('new_services/'.$service_id.'/'.$user_id.'') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
+                if ($val['user_id'] == '')
+                    $user_id = 0;
+                else
+                    $user_id = $val['user_id'];
+
+                if ($val['id'] == '')
+                    $service_id = 0;
+                else
+                    $service_id = $val['id'];
+
+                $output['aaData'][] = array("DT_RowId" => $val['id'], ucwords($val['first_name']), ucwords($val['last_name']), date('M j, Y', strtotime($val['date'])), $val['suggested_response'], $val['tracking_in'], '<a href="' . base_url('new_services/' . $service_id . '/' . $user_id . '') . '" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a> ');
             }
         }
 
@@ -131,7 +133,7 @@ class Services extends CI_Controller {
         die;
     }
 
-    public function new_services($service_id = false,$id = FALSE) {
+    public function new_services($service_id = false, $id = FALSE) {
 
 
         if ($service_id) {
@@ -140,12 +142,12 @@ class Services extends CI_Controller {
         if ($id) {
             $user_id = $id;
         }
-        if($user_id==0){
+        if ($user_id == 0) {
             $this->session->set_flashdata('error', 'A customer id needs to be specified to add a service record');
             redirect('services?status=pending');
         }
-        
-        
+
+
         $this->data['page'] = "New Services";
         $tis->data['title'] = "New Services";
         $this->data['customer'] = $customer = $this->Customer->getCustomers($user_id);
@@ -167,7 +169,7 @@ class Services extends CI_Controller {
                 $this->Services->insertService();
             }
             $this->session->set_flashdata('success', 'Service Record has been added for order #' . $this->input->post('order_number'));
-            redirect('new_services/'.$service_id.'/'.$user_id.'');
+            redirect('new_services/' . $service_id . '/' . $user_id . '');
         }
         if ($customer == '') {
             $this->session->set_flashdata('error', 'A customer id needs to be specified to add a service record');
@@ -175,12 +177,12 @@ class Services extends CI_Controller {
         }
 
         $this->load->template('admin/services/new_services', $this->data);
-        }
-        
-    public function new_order_service($user_id = false,$order_id = FALSE) {
+    }
 
-     
-      
+    public function new_order_service($user_id = false, $order_id = FALSE) {
+
+
+
         $this->data['page'] = "New Services";
         $tis->data['title'] = "New Services";
         $this->data['customer'] = $customer = $this->Customer->getCustomers($user_id);
@@ -189,13 +191,13 @@ class Services extends CI_Controller {
         $this->data['admins'] = $this->Services->getAdmins();
         $this->data['orderId'] = $order_id;
 
-        
+
         if ($this->input->post()) {
 
 
             $this->Services->insertService();
             $this->session->set_flashdata('success', 'Service Record has been added for order #' . $this->input->post('order_number'));
-            redirect('order_service/'.$user_id.'/'.$order_id.'');
+            redirect('order_service/' . $user_id . '/' . $order_id . '');
         }
         if ($customer == '') {
             $this->session->set_flashdata('error', 'A customer id needs to be specified to add a service record');
@@ -203,11 +205,11 @@ class Services extends CI_Controller {
         }
 
         $this->load->template('admin/services/new_services', $this->data);
-        }
+    }
 
-        public function new_cust_services($id = FALSE) {
+    public function new_cust_services($id = FALSE) {
 
-             if ($id) {
+        if ($id) {
             $user_id = $id;
         }
         $this->data['page'] = "New Services";
@@ -224,7 +226,7 @@ class Services extends CI_Controller {
 
             $this->Services->insertService();
             $this->session->set_flashdata('success', 'Service Record has been added for order #' . $this->input->post('order_number'));
-            redirect('new_services/'.$user_id.'');
+            redirect('new_services/' . $user_id . '');
         }
         if ($customer == '') {
             $this->session->set_flashdata('error', 'A customer id needs to be specified to add a service record');

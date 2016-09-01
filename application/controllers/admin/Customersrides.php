@@ -33,7 +33,7 @@ class CustomersRides extends CI_Controller {
         $str_point = 0;
 
 
-        $col_sort = array("m_rides.ride_ID", "m_rides.ride_ID", "m_users.first_name", "m_users.last_name", "m_rides.start_time", "m_rides.trip_distance", "maxspeed", "averagespeed", "m_rides.trip_duration", "m_rides.efficiency");
+        $col_sort = array("m_rides.ride_ID", "m_rides.ride_ID", "m_users.first_name", "m_users.last_name", "m_rides.start_time", "m_rides.trip_distance", "m_rides.ride_ID", "m_rides.ride_ID", "m_rides.trip_duration", "m_rides.efficiency");
 
         $order_by = "m_rides.ride_ID";
         $temp = 'asc';
@@ -48,8 +48,8 @@ class CustomersRides extends CI_Controller {
         if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
             $words = $_GET['sSearch'];
             for ($i = 0; $i < count($col_sort); $i++) {
-                if ($col_sort[$i] == 'averagespeed' || $col_sort[$i] == 'maxspeed')
-                    $col_sort[$i] = 'speed';
+                #if ($col_sort[$i] == 'averagespeed' || $col_sort[$i] == 'maxspeed')
+                    #$col_sort[$i] = 'speed';
                 $this->Rides->db->or_like($col_sort[$i], $words, "both");
             }
         }
@@ -107,8 +107,8 @@ class CustomersRides extends CI_Controller {
         if($id!=''){
         $this->data['page'] = 'Ride Details';
         $this->data['title'] = 'Ride Details';
-        $this->data['rides_points'] =  $this->Rides->getRidesPointsDetails($id);
         $this->data['rides']=$this->Rides->getRideById($id);
+        $this->data['rides_points'] =  $this->Rides->getRidesPointsDetails($id);
         $this->data['rides_points_calculation']=$this->Rides->getRidePontsByRideId($id);
         $this->load->template('admin/rides/ride_details', $this->data);
         }else{
@@ -116,5 +116,6 @@ class CustomersRides extends CI_Controller {
             redirect(base_url('Customers_rides'));
         }
     }
+    
 
 }

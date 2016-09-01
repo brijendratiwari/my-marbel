@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Quantity *</label>
-                                            <input placeholder="Quantity" value="<?php echo set_value('part_quantity'); ?>" class="form-control number_only" name="part_quantity"  id="part_quantity">
+                                            <input placeholder="Quantity" value="<?php echo set_value('part_quantity'); ?>" class="form-control" name="part_quantity"  id="part_quantity">
                                              <?php echo form_error('part_quantity');?>
                                         </div>
                                         <div class="form-group">

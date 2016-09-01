@@ -165,9 +165,9 @@ $(document).ready(function(){
             {"sClass": "hidden-phone", "aTargets": [4]},
             {"sClass": "hidden-phone", "aTargets": [5]},
             {"sClass": "hidden-phone text-center", "aTargets": [6],"bSortable": false },
-            
-            
-        ]}); 
+                   ],
+       "aaSorting": [[ 5, "asc" ],[ 4, "asc" ]]   
+     }); 
     /* pending list datatable... */
      $("#pending-data").dataTable({
         "oLanguage": {
