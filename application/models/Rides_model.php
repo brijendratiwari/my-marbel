@@ -30,7 +30,7 @@ class Rides_model extends CI_Model {
                     $power = $this->CalculatePower($result[$i]['voltage'], $result[$i]['current']);
                     $e_scop = $this->CalculateEscop($result[$i]['board_batt'], $distance);
                     $results['polyline'][$i] = array('lat' => $result[$i]['latitude'], 'lng' => $result[$i]['longitude']);
-                    $results['graph_data'][$i] = array('speed' => round($result[$i]['location_speed'], 2), 'elevation' => $result[$i]['elevation'], 'time_stamp' => $result[$i]['time_stamp'] * 1000, 'battery' => $result[$i]['board_batt'], 'remote_batt' => $result[$i]['remote_batt'], 'hill_incline' => str_replace('NAN',0,$hill_incline), 'trip_distance' => str_replace('NAN',0,round($distance, 2)) , 'energy' => str_replace('NAN' ,0,$energy), 'power' => str_replace('NAN',0,$power), 'efficiency_score' =>str_replace('NAN',0, $e_scop),'voltage'=>$result[$i]['voltage'],'current'=>$result[$i]['current'],'voltage1'=>$result[$i]['voltage1'],'voltage2'=>$result[$i]['voltage2'],'voltage3'=>$result[$i]['voltage3'],'voltage4'=>$result[$i]['voltage4'],'voltage5'=>$result[$i]['voltage5'],'voltage6'=>$result[$i]['voltage6'],'voltage7'=>$result[$i]['voltage7'],'voltage8'=>$result[$i]['voltage8'],'voltage9'=>$result[$i]['voltage9'],'voltage10'=>$result[$i]['voltage10'],'rpm1'=>$result[$i]['rpm1'],'motor_direction1'=>str_replace('unknown',0,$result[$i]['motor_direction1']),'motor_amps1'=>$result[$i]['motor_amps1'],'motor_volts1'=>$result[$i]['motor_volts1'],'esc1'=>$result[$i]['esc1'],'rpm2'=>$result[$i]['rpm2'],'motor_direction2'=>str_replace('unknown',0,$result[$i]['motor_direction2']),'motor_amps2'=>$result[$i]['motor_amps2'],'motor_volts2'=>$result[$i]['motor_volts2'],'esc2'=>$result[$i]['esc2'],'wh'=>$result[$i]['wh'],'odometer'=>$result[$i]['odometer'],'remoteBLEConnection'=>$result[$i]['remoteBLEConnection'],'internalTemperature'=>$result[$i]['internalTemperature'],'throttle'=>$result[$i]['throttle'],'ble_conn_strength'=>$result[$i]['ble_conn_strength'],'board_state'=>$result[$i]['board_state']);
+                    $results['graph_data'][$i] = array('speed' => round($result[$i]['location_speed'], 2), 'elevation' => $result[$i]['elevation'], 'time_stamp' => $result[$i]['time_stamp'] * 1000, 'battery' => $result[$i]['board_batt'], 'remote_batt' => $result[$i]['remote_batt'], 'hill_incline' => str_replace('NAN', 0, $hill_incline), 'trip_distance' => str_replace('NAN', 0, round($distance, 2)), 'energy' => str_replace('NAN', 0, $energy), 'power' => str_replace('NAN', 0, $power), 'efficiency_score' => str_replace('NAN', 0, $e_scop), 'voltage' => $result[$i]['voltage'], 'current' => $result[$i]['current'], 'voltage1' => $result[$i]['voltage1'], 'voltage2' => $result[$i]['voltage2'], 'voltage3' => $result[$i]['voltage3'], 'voltage4' => $result[$i]['voltage4'], 'voltage5' => $result[$i]['voltage5'], 'voltage6' => $result[$i]['voltage6'], 'voltage7' => $result[$i]['voltage7'], 'voltage8' => $result[$i]['voltage8'], 'voltage9' => $result[$i]['voltage9'], 'voltage10' => $result[$i]['voltage10'], 'rpm1' => $result[$i]['rpm1'], 'motor_direction1' => str_replace('unknown', 0, $result[$i]['motor_direction1']), 'motor_amps1' => $result[$i]['motor_amps1'], 'motor_volts1' => $result[$i]['motor_volts1'], 'esc1' => $result[$i]['esc1'], 'rpm2' => $result[$i]['rpm2'], 'motor_direction2' => str_replace('unknown', 0, $result[$i]['motor_direction2']), 'motor_amps2' => $result[$i]['motor_amps2'], 'motor_volts2' => $result[$i]['motor_volts2'], 'esc2' => $result[$i]['esc2'], 'wh' => $result[$i]['wh'], 'odometer' => $result[$i]['odometer'], 'remoteBLEConnection' => $result[$i]['remoteBLEConnection'], 'internalTemperature' => $result[$i]['internalTemperature'], 'throttle' => $result[$i]['throttle'], 'ble_conn_strength' => $result[$i]['ble_conn_strength'], 'board_state' => $result[$i]['board_state']);
                     if ($results['graph_data'][$i]['speed'] > $max) {
                         $max = $results['graph_data'][$i]['speed'];
                         $max_speed = $results['graph_data'][$i]['speed'];
@@ -103,32 +103,52 @@ class Rides_model extends CI_Model {
         return $distance;
     }
 
+//    public function getRidesPointsMaxSpeed($id = false) {
+//
+//        $this->db->select('location_speed')->from('m_ride_points');
+//        $this->db->where('ride_id', $id);
+//        $query = $this->db->get();
+//        if ($query->num_rows() > 0) {
+//            $results = array();
+//            $result = $query->result_array();
+//            if ($result) {
+//
+//                $max = -9999999; //will hold max val
+//                $found_item = null; //will hold item with max val;
+//                $total = 0;
+//                $speed = 0;
+//                for ($i = 0; $i < count($result); $i++) {
+//
+//
+//                    $results['graph_data'][$i] = array('speed' => $result[$i]['location_speed']);
+//                    if ($results['graph_data'][$i]['speed'] > $max) {
+//                        $max = $results['graph_data'][$i]['speed'];
+//                        $found_item = $results['graph_data'][$i]['speed'];
+//                    }
+//                    $total = $total + $results['graph_data'][$i]['speed'];
+//                }
+//                $results['maxspeed'] = round($found_item, 2);
+//                $results['avgspeed'] = (round($total / count($result), 2));
+//            }
+//
+//            return $results;
+//        } else {
+//
+//            return false;
+//        }
+//    }
     public function getRidesPointsMaxSpeed($id = false) {
 
-        $this->db->select('*')->from('m_ride_points');
+        $this->db->select('max(location_speed) as maxspeed, avg(location_speed) as avgspeed')->from('m_ride_points');
         $this->db->where('ride_id', $id);
         $query = $this->db->get();
+        #echo $this->db->last_query(); die;
         if ($query->num_rows() > 0) {
             $results = array();
-            $result = $query->result_array();
+            $result = $query->row_array();
             if ($result) {
-
-                $max = -9999999; //will hold max val
-                $found_item = null; //will hold item with max val;
-                $total = 0;
-                $speed = 0;
-                for ($i = 0; $i < count($result); $i++) {
-
-
-                    $results['graph_data'][$i] = array('speed' => $result[$i]['location_speed']);
-                    if ($results['graph_data'][$i]['speed'] > $max) {
-                        $max = $results['graph_data'][$i]['speed'];
-                        $found_item = $results['graph_data'][$i]['speed'];
-                    }
-                    $total = $total + $results['graph_data'][$i]['speed'];
-                }
-                $results['maxspeed'] = round($found_item, 2);
-                $results['avgspeed'] = (round($total / count($result), 2));
+                $results['maxspeed'] = round($result['maxspeed'], 2);
+                $results['avgspeed'] = (round($result['avgspeed'], 2));
             }
 
             return $results;
@@ -144,11 +164,10 @@ class Rides_model extends CI_Model {
         if ($elevation1 > 0 && $elevation2 > 0) {
             $deffrence_numbers = abs($elevation1 - $elevation2);
             if ($deffrence_numbers > 0) {
-                $hill_incline = ($deffrence_numbers / ($distance * 1609.344)/100) * 100;
-                 return round($hill_incline);
+                $hill_incline = ($deffrence_numbers / ($distance * 1609.344) / 100) * 100;
+                return round($hill_incline);
             }
         }
-       
     }
 
     public function CalculateEnergy($battry, $battry2) {
@@ -158,9 +177,8 @@ class Rides_model extends CI_Model {
         if ($deffrence_numbers > 0) {
             $energy = ($deffrence_numbers * 181.3);
             $energy = number_format(($energy), 0);
-             return $energy;
+            return $energy;
         }
-       
     }
 
     public function CalculatePower($voltage, $current) {

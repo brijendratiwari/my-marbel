@@ -93,16 +93,43 @@ class Users_model extends CI_Model {
         return $ipaddress;
     }
 
+//    function checkbrute($user_id) {
+//        $this->db->select('time')->from('m_user_login_attempts');
+//        $this->db->where('user_id', $user_id);
+//        $this->db->where('time > ', 'UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 3 MINUTE)');
+//        $query = $this->db->get();
+//        echo $this->db->last_query(); die;
+//        if ($query->num_rows() > 5) {
+//            return true;
+//        } else {
+//
+//            return false;
+//        }
+//    }
     function checkbrute($user_id) {
         $this->db->select('time')->from('m_user_login_attempts');
         $this->db->where('user_id', $user_id);
-        $this->db->where('time > ', 'UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 2 HOUR)');
         $query = $this->db->get();
         if ($query->num_rows() > 5) {
-            return true;
+             $this->db->select('time')->from('m_user_login_attempts');
+             $this->db->where('user_id', $user_id);
+             $this->db->order_by('id','DESC');
+             $this->db->limit(1);
+             $query1=$this->db->get();
+             $attempt=$query1->row();
+             $to_time = $attempt->time;
+             $from_time = time();
+            if(round(abs($to_time - $from_time) / 60) >= 120){
+                $this->db->where('user_id', $user_id);
+                $this->db->delete('m_user_login_attempts');
+                return FALSE;
+            }else{
+                return TRUE;
+            }
+            
         } else {
 
-            return false;
+            return FALSE;
         }
     }
 

@@ -173,3 +173,6 @@ $route['ride_details/(:num)']='admin/customersrides/ride_details/$1';
 //Board 
 $route['board']='admin/boards';
 $route['boards_list']='admin/boards/boards_list';
+
+//cron job
+$route['cronjob_speed']='login/cronjob_speed';
