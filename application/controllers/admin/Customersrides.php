@@ -27,7 +27,7 @@ class CustomersRides extends CI_Controller {
     }
 
     public function rides_list() {
-
+       
         $sLimit = "";
         $lenght = 20;
         $str_point = 0;
@@ -90,9 +90,7 @@ class CustomersRides extends CI_Controller {
         );
 
         $result = $records->result_array();
-        $i = 0;
-        $final = array();
-        $speed = 0;
+       
         foreach ($result as $val) {
            
             $output['aaData'][] = array("DT_RowId" => $val['ride_ID'], $val['ride_ID'], '<a href="' . base_url('ride_details/' . $val['ride_ID']) . '" title="View ride information"  class="btn btn-xs btn-info userRow"><i class="fa fa-eye"></i></a>', $val['first_name'], $val['last_name'], date('M j, Y h:i A', strtotime($val['start_time'])), $val['trip_distance'], $val['ride_maxspeed'], $val['ride_avgspeed'], $val['trip_duration'], $val['efficiency']);
@@ -100,6 +98,7 @@ class CustomersRides extends CI_Controller {
 
         echo json_encode($output);
         die;
+
     }
 
     public function ride_details($id = false) {

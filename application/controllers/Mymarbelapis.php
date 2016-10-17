@@ -166,6 +166,7 @@ class Mymarbelapis extends CI_Controller {
                 'humidity' => ($this->input->get_post("humidity")) ? $this->input->get_post("humidity") : "",
                 'ride_name' => ($this->input->get_post('ride_name')) ? $this->input->get_post('ride_name') : "",
                 'efficiency' => ($this->input->get_post('efficiency')) ? $this->input->get_post('efficiency') : ""
+                
             );
 
             if ($this->input->get_post('ride_ID')) {
@@ -191,6 +192,7 @@ class Mymarbelapis extends CI_Controller {
                     die;
                 }
             } else {
+                $ride['start_time']=date('Y-m-d h:i:s');
                 $this->db->insert('m_rides', $ride);
                 if ($this->db->insert_id() > 0) {
                     $returnValue["data"]['ride_ID'] = $this->db->insert_id();
